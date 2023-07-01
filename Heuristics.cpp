@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,6 +26,19 @@
 #include "Utilities.h"
 
 using namespace std;
+
+// The Problem Solving Process - Psychology For Dummies - Page 104
+// 1. Recognize that a problem exists
+// 2. Constructing a representation ofthe situation that includes the initial state of the problem and the eventual goal (a solution)
+// 2a. Would would the solution look like?
+// 3. Generating and evaluating possible solutions
+// 4. Selecting a solution to attempt (hopefully there is wisdom available to narrow the list of solutions to test)
+// 5. Executing the solution and determining if it actually works (verification)
+
+// Problem solving Techniques - Psychology For Dummies - Page 104
+// Means-end Analysis: This strategy involves breaking the problem down into smaller sub-problems to solve to get to the end result
+// Working Backwards: This way to solve a problem is like taking something apart and putting it back together again in order to figure out how the object (or problem) is built.
+// Analogies and Metaphors: These strategies involve using a parallel or similar problem that has already beem solved to solve a previously unrelated problem. The Cuban Missile Crisis was like a nuclear powered game of chicken, and whoever flinched, blinked, or chickened out first was the was the loser. I Guess President Kennedy was pretty good at playing chicken.
 
 // Heuristic Trade-Offs and Evaluations
 // The trade-off criteria for deciding whether to use a heuristic for solving a given problem include the following:

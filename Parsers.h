@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,3 +19,23 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
+
+class _Parsers
+{
+public:
+    static void FederalLawParser();
+    static void HTMLParser(string html_file);
+    static void XMLParser(string xml_file);
+
+    class _News
+    {
+    public:
+        static void GoogleNewsScraper();
+        static void Politico();
+        static void MSNBC();
+        static void NBC();
+        static void FoxNews();
+        static void CNN();
+        static void BBC();
+    };
+};

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,15 +19,28 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
+//using namespace cv;
+//using namespace cv::dnn;
 
 class _Vision
 {
 public:
     static void VisionRawCamera1();
     static void VisionRawCamera2();
+    static void Vision();
+    static string** ObjectDetection(string image_path);
+    static void TextIdentification();
     static void MySQLVisionRAWCamera1();
     static void MySQLVisionRAWCamera2();
-    static void Vision();
-    static void ObjectDetection();
-    static void TextIdentification();
+    //static void draw_label(Mat& input_image, string label, int left, int top);
+    //static vector<Mat> pre_process(Mat& input_image, Net& net);
+    //static Mat post_process(Mat& input_image, vector<Mat>& outputs, const vector<string>& class_name);
 };
+
+//
+//struct Detection
+//{
+//    int class_id;
+//    float confidence;
+//    cv::Rect box;
+//};

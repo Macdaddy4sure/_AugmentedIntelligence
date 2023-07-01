@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 */
 
 #include "AugmentedIntelligence.h"
+#include "CUDA.h"
 
 using namespace std;
 
@@ -30,3 +31,9 @@ using namespace std;
         a. If the reservation size is greater than the number of requested CUDA cores; return the error to the _AI server application
     6. Save a log of executed CUDA threads in MySQL
 */
+
+//string* __global__ _CUDA::getWordTypes(string word)
+//{
+//
+//}
+

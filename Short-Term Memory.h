@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -48,10 +48,10 @@ static string stm_vision_actions_image_path[1000][2];                   // 51840
 static string stm_vision_objects_text[1000][2];                // 5184000 lines for 24 hours
 static string stm_vision_analysis_text[1000][2];               // 5184000 lines for 24 hours
 static string stm_typing_text[1000][2];                      // 11404800 lines of dialogue per 24 hours
-static string stm__Reference_pos_gps_north[1000][2];
-static string stm__Reference_pos_gps_west[1000][2];
-static string stm__Reference_pos_gps_elevation[1000][2];
-static string stm__Reference_pos_gps_image[1000][2];
+static string stm_Reference_pos_gps_north[1000][2];
+static string stm_Reference_pos_gps_west[1000][2];
+static string stm_Reference_pos_gps_elevation[1000][2];
+static string stm_Reference_pos_gps_image[1000][2];
 static string stm_pos_gps_north_text[1000][2];
 static string stm_pos_gps_west_text[1000][2];
 static string stm_pos_gps_elevation_text[1000][2];

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -38,4 +38,5 @@ using namespace std;
 //      b. Use while the user is in that particular state
 // 3. Get federal law
 
-
+// The Golden Rule
+// 1. Treat other people the way you want to be treated...
