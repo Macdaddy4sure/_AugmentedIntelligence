@@ -15,12 +15,42 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Writing.h"
+#include "Qualitative Reasoning.h"
+#include "Actions.h"
+#include "Analysis.h"
+#include "Awareness.h"
+#include "Bias.h"
+#include "Computers.h"
+#include "CUDA.h"
+#include "Database Functions.h"
+#include "Directories.h"
+#include "Executive Functions.h"
+#include "Fallacies.h"
+#include "Feel.h"
+#include "Gaming.h"
+#include "Heuristics.h"
+#include "Home Database.h"
+#include "Kinesthetics.h"
+#include "Learning.h"
+#include "Mathematics.h"
+#include "Needs.h"
+#include "NetworkingClient.h"
+#include "NLP.h"
+#include "Prediction.h"
+#include "Reading.h"
+#include "Smart Phone.h"
+#include "Smell.h"
+#include "Social.h"
+#include "Sound.h"
+#include "Speaking.h"
+#include "Speech Recognition.h"
+#include "Sports.h"
+#include "Tensorflow.h"
+#include "Time.h"
+#include "Vision.h"
 #include "Working-Memory.h"
 #include "Short-Term Memory.h"
 #include "Long-Term Memory.h"
-#include "NLP.h"
-#include "NLU.h"
 #include "Reference.h"
 #include "Variables.h"
 #include "Settings.h"
@@ -28,10 +58,6 @@
 
 using namespace std;
 
-// This function would be executed for writing, this will be a generalized heuristic for research writing and conveying ideas
-//      TODO: Get keywords to call this function
-//            Get vision data to call this function
-void _NLP::Writing()
-{
-    // This one is quite challenging
-}
+/* 
+    Qualitative Reasoning
+*/

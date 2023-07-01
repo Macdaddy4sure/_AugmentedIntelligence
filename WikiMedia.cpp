@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -27,17 +27,4 @@
 
 using namespace std;
 
-// This file is intended to house all parsing regarding Wiki article retrieval from the databases
-// https://en.wikipedia.org/wiki/Help:Wikitext
-//
-// Parse Wikipedia articles coming in with Wikitext
-
-string* _NLP::ParseWikipedia(string* words)
-{
-
-}
-
-string* _NLP::ParseWikisimple(string* words)
-{
-
-}
+// Print a Wikipedia Article to the screen

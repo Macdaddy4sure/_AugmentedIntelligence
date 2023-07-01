@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@
 #include "Utilities.h"
 
 using namespace std;
+using namespace filesystem;
 
 // This function will update the MySQL database
 void _Utilities::UpdateMySQL()
@@ -97,6 +98,29 @@ void _Utilities::CreateReminder()
 //
 //    // 2. Compare to concepts related to reality or relevant information
 //}
+
+string _Utilities::FixArticle(string article)
+{
+    string temp;
+
+    for (int x = 0; x <= article.length(); x++)
+    {
+        if (x == 0)
+        {
+            temp = tolower(article[x]);
+        }
+        if (article[x] == ' ')
+        {
+            temp += "_";
+        }
+        else
+        {
+            temp += tolower(article[x]);
+        }
+    }
+
+    return temp;
+}
 
 // The following function will search short term memory for male and female names from the current date into the past
 void _LongTermMemory::LongTermMemoryNames()
@@ -437,6 +461,64 @@ void _Utilities::CleanUpImages(string object, string fileLocation, string start_
     }
 }
 
+string* _Utilities::ArrayOfStringsToLowercase(string* words)
+{
+    string* array_temp;
+    string temp;
+
+    for (int x = 0; x <= sizeof(words); x++)
+    {
+        temp = words[x];
+
+        for (int y = 0; y <= temp.length(); y++)
+        {
+            array_temp[x] += tolower(temp[y]);
+        }
+    }
+
+    return array_temp;
+}
+
+string _Utilities::fixQuoteFederal(string input)
+{
+    string temp;
+
+    for (int x = 0; x <= input.length(); x++)
+    {
+        if (input[x] == '&' && input[x + 1] == 'q' && input[x + 2] == 'u' && input[x + 3] == 'o' && input[x + 4] == 't' && input[x + 5] == ';')
+        {
+            temp += "\"";
+            x += 6;
+        }
+        else
+        {
+            temp += input[x];
+        }
+    }
+
+    return temp;
+}
+
+string** _Utilities::Create2DStringArray(unsigned int height, unsigned int width)
+{
+    string** array2D = 0;
+    array2D = new string*[height];
+
+    for (int h = 0; h < height; h++)
+    {
+        array2D[h] = new string[width];
+
+        for (int w = 0; w < width; w++)
+        {
+            // fill in some initial values
+            // (filling in zeros would be more logic, but this is just for the example)
+            array2D[h][w] = w + width * h;
+        }
+    }
+
+    return array2D;
+}
+
 string _Utilities::toLowerWord(string word)
 {
     string temp;
@@ -449,19 +531,39 @@ string _Utilities::toLowerWord(string word)
     return temp;
 }
 
-void _Utilities::fourPointsTransform(const Mat& frame, const Point2f vertices[], Mat& result)
+string _Utilities::FixWikiTableName(string title)
 {
-    const Size outputSize = Size(100, 32);
+    string temp = "";
 
-    Point2f targetVertices[4] = {
-        Point(0, outputSize.height - 1),
-        Point(0, 0), Point(outputSize.width - 1, 0),
-        Point(outputSize.width - 1, outputSize.height - 1)
-    };
-    Mat rotationMatrix = getPerspectiveTransform(vertices, targetVertices);
+    for (int x = 0; x <= title.length(); x++)
+    {
+        if (isspace(title[x]))
+        {
+            temp += '_';
+        }
+        else
+        {
+            temp += tolower(title[x]);
+        }
+    }
 
-    warpPerspective(frame, result, rotationMatrix, outputSize);
+    return temp;
 }
+
+//void _Utilities::fourPointsTransform(const Mat& frame, const Point2f vertices[], Mat& result)
+//{
+//    const Size outputSize = Size(100, 32);
+//
+//    Point2f targetVertices[4] = {
+//        Point(0, outputSize.height - 1),
+//        Point(0, 0), Point(outputSize.width - 1, 0),
+//        Point(outputSize.width - 1, outputSize.height - 1)
+//    };
+//
+//    Mat rotationMatrix = getPerspectiveTransform(vertices, targetVertices);
+//
+//    warpPerspective(frame, result, rotationMatrix, outputSize);
+//}
 
 string* _Utilities::sortLines(string outText, string* recognition)
 {
@@ -669,14 +771,15 @@ string _Utilities::DictionarySpellCheck(string word)
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    string mysql_database;
+    string mysql_hostname = _Settings::GetMySQLHostname();
+    string mysql_username = _Settings::GetMySQLUsername();
+    string mysql_password = _Settings::GetMySQLPassword();
     string table = "entries";
     string sql1;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -684,6 +787,41 @@ string _Utilities::DictionarySpellCheck(string word)
         mysql_query(conn, sql1.c_str());
         result = mysql_store_result(conn);
     }
+}
+
+//string _Utilities::fixQuoteFederal(string input)
+//{
+//    string temp;
+//
+//    for (int x = 0; x <= input.length(); x++)
+//    {
+//        if (input[x] == '&' && input[x + 1] == 'q' && input[x + 2] == 'u' && input[x + 3] == 'o' && input[x + 4] == 't' && input[x + 5] == ';')
+//        {
+//            temp += "\"";
+//            x += 6;
+//        }
+//        else
+//        {
+//            temp += input[x];
+//        }
+//    }
+//
+//    return temp;
+//}
+
+//  500 -> 00:05.000
+// 6000 -> 01:00.000
+string _Utilities::to_timestamp(int64_t t)
+{
+    int64_t sec = t / 100;
+    int64_t msec = t - sec * 100;
+    int64_t min = sec / 60;
+    sec = sec - min * 60;
+
+    char buf[32];
+    snprintf(buf, sizeof(buf), "%02d:%02d.%03d", (int)min, (int)sec, (int)msec);
+
+    return string(buf);
 }
 
 void _Utilities::PrintLicense()
@@ -1310,3 +1448,35 @@ void _Utilities::PrintLicense()
     cout << endl;
     cout << "END OF TERMS AND CONDITIONS" << endl;
 }
+
+//string _Utilities::getHash(string filename)
+//{
+//    /*ifstream fp(filename.c_str());
+//
+//    constexpr const std::size_t buffer_size{ 1 << 12 };
+//    char buffer[buffer_size];
+//
+//    unsigned char hash[SHA256_DIGEST_LENGTH] = { 0 };
+//
+//    SHA256_CTX ctx;
+//    SHA256_Init(&ctx);
+//
+//    while (fp.good())
+//    {
+//        fp.read(buffer, buffer_size);
+//        SHA256_Update(&ctx, buffer, fp.gcount());
+//    }
+//
+//    SHA256_Final(hash, &ctx);
+//    fp.close();
+//
+//    std::ostringstream os;
+//    os << std::hex << std::setfill('0');
+//
+//    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
+//    {
+//        os << std::setw(2) << static_cast<unsigned int>(hash[i]);
+//    }
+//
+//    return os.str();*/
+//}

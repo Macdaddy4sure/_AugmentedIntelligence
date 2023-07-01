@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -85,53 +85,58 @@ void _Reference::InitReference()
     _osi_model = _Reference::init_osi_model();
 }
 
-//string* _Reference::init_lists()
-//{
-//    MYSQL* lists;
-//    MYSQL_ROW row1;
-//    MYSQL_RES* result1;
-//    string query;
-//    string mysql_database = "lists";
-//    string mysql_username = _Settings::GetMySQLUsername();
-//    string mysql_password = _Settings::GetMySQLPassword();
-//
-//    lists = mysql_init(0);
-//    lists = mysql_real_connect(lists, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-//
-//    if (lists)
-//    {
-//        query = "SHOW TABLES;";
-//        mysql_query(lists, query.c_str());
-//        result1 = mysql_store_result(lists);
-//
-//        while ((row1 = mysql_fetch_row(result1)))
-//        {
-//            // Get an empty space in the fallaceis variable
-//            for (int x = 0; x <= 1000; x++)
-//            {
-//                if (lists_temp[x] == "")
-//                {
-//                    lists_temp[x] = row1[3];
-//                }
-//            }
-//        }
-//    }
-//    return lists_temp;
-//}
-
-string** _Reference::init_dictionary()
+string* _Reference::init_lists()
 {
-    MYSQL* dictionary;
+    MYSQL* lists;
     MYSQL_ROW row1;
     MYSQL_RES* result1;
     string query;
+    string mysql_database = "lists";
+    string mysql_hostname = _Settings::GetMySQLHostname();
+    string mysql_username = _Settings::GetMySQLUsername();
+    string mysql_password = _Settings::GetMySQLPassword();
+    string* lists_temp;
+
+    lists = mysql_init(0);
+    lists = mysql_real_connect(lists, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (lists)
+    {
+        query = "SHOW TABLES;";
+        mysql_query(lists, query.c_str());
+        result1 = mysql_store_result(lists);
+
+        while (row1 = mysql_fetch_row(result1))
+        {
+            // Get an empty space in the fallaceis variable
+            for (int x = 0; x <= 1000; x++)
+            {
+                if (lists_temp[x] == "")
+                {
+                    lists_temp[x] = row1[3];
+                }
+            }
+        }
+    }
+    return lists_temp;
+}
+
+// Purpose: Initialize Dictionary
+// 1.
+string** _Reference::init_dictionary()
+{
+    MYSQL* dictionary;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string query;
     string mysql_database = "dictionary";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     int count = 0;
 
     dictionary = mysql_init(0);
-    dictionary = mysql_real_connect(dictionary, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    dictionary = mysql_real_connect(dictionary, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (dictionary)
     {
@@ -139,17 +144,17 @@ string** _Reference::init_dictionary()
         mysql_query(dictionary, query.c_str());
         result1 = mysql_store_result(dictionary);
 
-        while ((row1 = mysql_fetch_row(result1)))
+        while (row = mysql_fetch_row(result1))
         {
             // Get an empty space in the dictionary entries variable
             for (int x = 0; x <= 10000; x++)
             {
                 if (_dictionary_terms[x][0] == "")
                 {
-                    _dictionary_terms[x][0] = row1[0];
-                    _dictionary_terms[x][1] = row1[1];
-                    _dictionary_terms[x][2] = row1[2];
-                    _dictionary_terms[x][3] = row1[3];
+                    _dictionary_terms[x][0] = row[0];
+                    _dictionary_terms[x][1] = row[1];
+                    _dictionary_terms[x][2] = row[2];
+                    _dictionary_terms[x][3] = row[3];
                     count++;
                 }
             }
@@ -165,14 +170,14 @@ string** _Reference::init_wikisimple_articles()
     MYSQL_ROW row1;
     MYSQL_RES* result1;
     string query;
- 
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string temp;
 
     wikisimple_articles = mysql_init(0);
-    wikisimple_articles = mysql_real_connect(wikisimple_articles, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    wikisimple_articles = mysql_real_connect(wikisimple_articles, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (wikisimple_articles)
     {
@@ -186,7 +191,6 @@ string** _Reference::init_wikisimple_articles()
             {
                 if (_wikisimple_articles[x][0] == "")
                 {
-                    //cout << row1[0] << endl;
                     _wikisimple_articles[x][0] = temp;
                 }
             }
@@ -203,11 +207,12 @@ string** _Reference::init_wikipedia_articles()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     wikipedia_articles = mysql_init(0);
-    wikipedia_articles = mysql_real_connect(wikipedia_articles, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    wikipedia_articles = mysql_real_connect(wikipedia_articles, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (wikipedia_articles)
     {
@@ -240,11 +245,12 @@ string** _Reference::init_rationalism()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     rationalism = mysql_init(0);
-    rationalism = mysql_real_connect(rationalism, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    rationalism = mysql_real_connect(rationalism, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (rationalism)
     {
@@ -275,11 +281,12 @@ string** _Reference::init_psychology()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     psychology = mysql_init(0);
-    psychology = mysql_real_connect(psychology, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    psychology = mysql_real_connect(psychology, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (psychology)
     {
@@ -310,11 +317,12 @@ string** _Reference::init_cognitive_psychology()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     psychology = mysql_init(0);
-    psychology = mysql_real_connect(psychology, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    psychology = mysql_real_connect(psychology, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (psychology)
     {
@@ -345,11 +353,12 @@ string** _Reference::init_anatomy()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     anatomy = mysql_init(0);
-    anatomy = mysql_real_connect(anatomy, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    anatomy = mysql_real_connect(anatomy, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (anatomy)
     {
@@ -380,11 +389,12 @@ string** _Reference::init_biology()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     biology = mysql_init(0);
-    biology = mysql_real_connect(biology, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    biology = mysql_real_connect(biology, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (biology)
     {
@@ -415,11 +425,12 @@ string** _Reference::init_biophysics()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     biophysics = mysql_init(0);
-    biophysics = mysql_real_connect(biophysics, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    biophysics = mysql_real_connect(biophysics, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (biophysics)
     {
@@ -449,11 +460,12 @@ string** _Reference::init_chemistry()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     chemistry = mysql_init(0);
-    chemistry = mysql_real_connect(chemistry, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    chemistry = mysql_real_connect(chemistry, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (chemistry)
     {
@@ -484,11 +496,12 @@ string** _Reference::init_geology()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     geology = mysql_init(0);
-    geology = mysql_real_connect(geology, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    geology = mysql_real_connect(geology, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (geology)
     {
@@ -519,11 +532,12 @@ string** _Reference::init_geography()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     geography = mysql_init(0);
-    geography = mysql_real_connect(geography, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    geography = mysql_real_connect(geography, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (geography)
     {
@@ -554,11 +568,12 @@ string** _Reference::init_health()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     health = mysql_init(0);
-    health = mysql_real_connect(health, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    health = mysql_real_connect(health, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (health)
     {
@@ -589,11 +604,12 @@ string** _Reference::init_philosophy()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     philosophy = mysql_init(0);
-    philosophy = mysql_real_connect(philosophy, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    philosophy = mysql_real_connect(philosophy, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (philosophy)
     {
@@ -624,11 +640,12 @@ string** _Reference::init_physics()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     physics = mysql_init(0);
-    physics = mysql_real_connect(physics, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    physics = mysql_real_connect(physics, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (physics)
     {
@@ -659,11 +676,12 @@ string** _Reference::init_basic_mathematics()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     basic_mathematics = mysql_init(0);
-    basic_mathematics = mysql_real_connect(basic_mathematics, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    basic_mathematics = mysql_real_connect(basic_mathematics, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (basic_mathematics)
     {
@@ -694,11 +712,12 @@ string** _Reference::init_algebra()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     algebra = mysql_init(0);
-    algebra = mysql_real_connect(algebra, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    algebra = mysql_real_connect(algebra, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (algebra)
     {
@@ -729,11 +748,12 @@ string** _Reference::init_calculus()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     calculus = mysql_init(0);
-    calculus = mysql_real_connect(calculus, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    calculus = mysql_real_connect(calculus, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (calculus)
     {
@@ -764,11 +784,12 @@ string** _Reference::init_geometry()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     geometry = mysql_init(0);
-    geometry = mysql_real_connect(geometry, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    geometry = mysql_real_connect(geometry, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (geometry)
     {
@@ -799,11 +820,12 @@ string** _Reference::init_trigonometry()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     trigonometry = mysql_init(0);
-    trigonometry = mysql_real_connect(trigonometry, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    trigonometry = mysql_real_connect(trigonometry, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (trigonometry)
     {
@@ -834,11 +856,12 @@ string** _Reference::init_combinatorics()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     combinatorics = mysql_init(0);
-    combinatorics = mysql_real_connect(combinatorics, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    combinatorics = mysql_real_connect(combinatorics, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (combinatorics)
     {
@@ -869,11 +892,12 @@ string** _Reference::init_logic()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     logic = mysql_init(0);
-    logic = mysql_real_connect(logic, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    logic = mysql_real_connect(logic, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (logic)
     {
@@ -904,11 +928,12 @@ string** _Reference::init_number_theory()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     number_theory = mysql_init(0);
-    number_theory = mysql_real_connect(number_theory, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    number_theory = mysql_real_connect(number_theory, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (number_theory)
     {
@@ -939,11 +964,12 @@ string** _Reference::init_differential_equations()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     differential_equations = mysql_init(0);
-    differential_equations = mysql_real_connect(differential_equations, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    differential_equations = mysql_real_connect(differential_equations, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (differential_equations)
     {
@@ -974,11 +1000,12 @@ string** _Reference::init_probability_and_statistics()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     probability_and_statistic = mysql_init(0);
-    probability_and_statistic = mysql_real_connect(probability_and_statistic, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    probability_and_statistic = mysql_real_connect(probability_and_statistic, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (probability_and_statistic)
     {
@@ -1009,11 +1036,12 @@ string** _Reference::init_game_theory()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     game_theory = mysql_init(0);
-    game_theory = mysql_real_connect(game_theory, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    game_theory = mysql_real_connect(game_theory, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (game_theory)
     {
@@ -1044,11 +1072,12 @@ string** _Reference::init_cpp()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     cpp = mysql_init(0);
-    cpp = mysql_real_connect(cpp, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    cpp = mysql_real_connect(cpp, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (cpp)
     {
@@ -1079,11 +1108,12 @@ string** _Reference::init_computer_software()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     computer_software = mysql_init(0);
-    computer_software = mysql_real_connect(computer_software, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    computer_software = mysql_real_connect(computer_software, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (computer_software)
     {
@@ -1114,11 +1144,12 @@ string** _Reference::init_networking()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     networking = mysql_init(0);
-    networking = mysql_real_connect(networking, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    networking = mysql_real_connect(networking, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (networking)
     {
@@ -1149,11 +1180,12 @@ string** _Reference::init_electrical_engineering()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     electrical_engineering = mysql_init(0);
-    electrical_engineering = mysql_real_connect(electrical_engineering, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    electrical_engineering = mysql_real_connect(electrical_engineering, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (electrical_engineering)
     {
@@ -1184,11 +1216,12 @@ string** _Reference::init_server_2022()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     server_2022 = mysql_init(0);
-    server_2022 = mysql_real_connect(server_2022, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2022 = mysql_real_connect(server_2022, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2022)
     {
@@ -1218,11 +1251,12 @@ string** _Reference::init_windows11()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows11 = mysql_init(0);
-    windows11 = mysql_real_connect(windows11, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows11 = mysql_real_connect(windows11, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows11)
     {
@@ -1252,11 +1286,12 @@ string** _Reference::init_server_2019()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     server_2019 = mysql_init(0);
-    server_2019 = mysql_real_connect(server_2019, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2019 = mysql_real_connect(server_2019, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2019)
     {
@@ -1286,11 +1321,12 @@ string** _Reference::init_windows10()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows10 = mysql_init(0);
-    windows10 = mysql_real_connect(windows10, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows10 = mysql_real_connect(windows10, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows10)
     {
@@ -1320,11 +1356,12 @@ string** _Reference::init_server_2016()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     server_2016 = mysql_init(0);
-    server_2016 = mysql_real_connect(server_2016, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2016 = mysql_real_connect(server_2016, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2016)
     {
@@ -1354,11 +1391,12 @@ string** _Reference::init_windows7()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows7 = mysql_init(0);
-    windows7 = mysql_real_connect(windows7, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows7 = mysql_real_connect(windows7, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows7)
     {
@@ -1388,11 +1426,12 @@ string** _Reference::init_server_2012()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     server_2012 = mysql_init(0);
-    server_2012 = mysql_real_connect(server_2012, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2012 = mysql_real_connect(server_2012, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2012)
     {
@@ -1422,11 +1461,12 @@ string** _Reference::init_server_2008()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     server_2008 = mysql_init(0);
-    server_2008 = mysql_real_connect(server_2008, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2008 = mysql_real_connect(server_2008, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2008)
     {
@@ -1457,11 +1497,12 @@ string** _Reference::init_windows_vista()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows_vista = mysql_init(0);
-    windows_vista = mysql_real_connect(windows_vista, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows_vista = mysql_real_connect(windows_vista, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows_vista)
     {
@@ -1492,11 +1533,12 @@ string** _Reference::init_server_2003()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     server_2003 = mysql_init(0);
-    server_2003 = mysql_real_connect(server_2003, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    server_2003 = mysql_real_connect(server_2003, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (server_2003)
     {
@@ -1527,11 +1569,12 @@ string** _Reference::init_windows_xp()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     windows_xp = mysql_init(0);
-    windows_xp = mysql_real_connect(windows_xp, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows_xp = mysql_real_connect(windows_xp, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows_xp)
     {
@@ -1562,11 +1605,12 @@ string** _Reference::init_windows_2000()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     windows_2000 = mysql_init(0);
-    windows_2000 = mysql_real_connect(windows_2000, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows_2000 = mysql_real_connect(windows_2000, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows_2000)
     {
@@ -1597,11 +1641,12 @@ string** _Reference::init_windows_98()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows_98 = mysql_init(0);
-    windows_98 = mysql_real_connect(windows_98, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows_98 = mysql_real_connect(windows_98, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows_98)
     {
@@ -1632,11 +1677,12 @@ string** _Reference::init_windows_95()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     windows_95 = mysql_init(0);
-    windows_95 = mysql_real_connect(windows_95, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    windows_95 = mysql_real_connect(windows_95, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (windows_95)
     {
@@ -1667,11 +1713,12 @@ string** _Reference::init_ms_dos()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     ms_dos = mysql_init(0);
-    ms_dos = mysql_real_connect(ms_dos, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    ms_dos = mysql_real_connect(ms_dos, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (ms_dos)
     {
@@ -1702,11 +1749,12 @@ string** _Reference::init_powershell()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     powershell = mysql_init(0);
-    powershell = mysql_real_connect(powershell, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    powershell = mysql_real_connect(powershell, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (powershell)
     {
@@ -1737,11 +1785,12 @@ string** _Reference::init_bash()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     bash = mysql_init(0);
-    bash = mysql_real_connect(bash, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    bash = mysql_real_connect(bash, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (bash)
     {
@@ -1772,11 +1821,12 @@ string** _Reference::init_ubuntu()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     ubuntu = mysql_init(0);
-    ubuntu = mysql_real_connect(ubuntu, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    ubuntu = mysql_real_connect(ubuntu, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (ubuntu)
     {
@@ -1807,11 +1857,12 @@ string** _Reference::init_yellow_dog()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     yellow_dog = mysql_init(0);
-    yellow_dog = mysql_real_connect(yellow_dog, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    yellow_dog = mysql_real_connect(yellow_dog, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (yellow_dog)
     {
@@ -1842,11 +1893,12 @@ string** _Reference::init_linux_mint()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     linux_mint = mysql_init(0);
-    linux_mint = mysql_real_connect(linux_mint, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    linux_mint = mysql_real_connect(linux_mint, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (linux_mint)
     {
@@ -1877,11 +1929,12 @@ string** _Reference::init_computer_science()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     computer_science = mysql_init(0);
-    computer_science = mysql_real_connect(computer_science, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    computer_science = mysql_real_connect(computer_science, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (computer_science)
     {
@@ -1912,11 +1965,12 @@ string** _Reference::init_formal_fallacies()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     formal_fallacies = mysql_init(0);
-    formal_fallacies = mysql_real_connect(formal_fallacies, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    formal_fallacies = mysql_real_connect(formal_fallacies, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (formal_fallacies)
     {
@@ -1947,11 +2001,12 @@ string** _Reference::init_informal_fallacies()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     informal_fallacies = mysql_init(0);
-    informal_fallacies = mysql_real_connect(informal_fallacies, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    informal_fallacies = mysql_real_connect(informal_fallacies, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (informal_fallacies)
     {
@@ -1982,11 +2037,12 @@ string** _Reference::init_science_articles()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     
     science_article = mysql_init(0);
-    science_article = mysql_real_connect(science_article, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    science_article = mysql_real_connect(science_article, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (science_article)
     {
@@ -2017,11 +2073,12 @@ string** _Reference::init_desktop_support()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     desktop_support = mysql_init(0);
-    desktop_support = mysql_real_connect(desktop_support, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    desktop_support = mysql_real_connect(desktop_support, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (desktop_support)
     {
@@ -2053,11 +2110,12 @@ string** _Reference::init_osi_model()
     MYSQL_RES* result1;
     string query;
     string mysql_database = "intitialization";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
 
     osi_model = mysql_init(0);
-    osi_model = mysql_real_connect(osi_model, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    osi_model = mysql_real_connect(osi_model, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (osi_model)
     {

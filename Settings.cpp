@@ -1,5 +1,5 @@
 /*
-	Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+	Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -15,6 +15,7 @@
 */
 
 #include "AugmentedIntelligence.h"
+#include "Database Functions.h"
 #include "Variables.h"
 #include "Settings.h"
 #include "Utilities.h"
@@ -116,7 +117,7 @@ void _Settings::Settings()
 		system("cls");
 
 		conn = mysql_init(0);
-		conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), NULL, 3306, NULL, 0);
+		conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), NULL, 3306, NULL, 0);
 
 		boolean2 = false;
 
@@ -186,115 +187,115 @@ void _Settings::Settings()
 		if (working_memory_enabled)
 			cout << "Working Memory: True" << endl;
 		else
-			cout << "Working Memory: False" << endl;
+			cout << "Working Memory: false" << endl;
 		if (short_term_memory_enabled)
 			cout << "Short Term Memory: True" << endl;
 		else
-			cout << "Short Term Memory: False" << endl;
+			cout << "Short Term Memory: false" << endl;
 		if (long_term_memory_enabled)
 			cout << "Long Term Memory: True" << endl;
 		else
-			cout << "Long Term Memory: False" << endl;
+			cout << "Long Term Memory: false" << endl;
 		if (visual_memory)
 			cout << "Visual Memory: True" << endl;
 		else
-			cout << "Visual Memory: False" << endl;
+			cout << "Visual Memory: false" << endl;
 		if (sound_memory)
 			cout << "Sound Memory: True" << endl;
 		else
-			cout << "Sound Memory: False" << endl;
+			cout << "Sound Memory: false" << endl;
 		if (speech_memory)
 			cout << "Speech Memory: True" << endl;
 		else
-			cout << "Speech Memory: False" << endl;
+			cout << "Speech Memory: false" << endl;
 		if (ethics_check_enabled)
 			cout << "Ethics Check: True" << endl;
 		else
-			cout << "Ethics Check: False" << endl;
+			cout << "Ethics Check: false" << endl;
 		if (cuda_accelleration)
 			cout << "CUDA Accelleration: True" << endl;
 		else
-			cout << "CUDA Accelleration: False" << endl;
+			cout << "CUDA Accelleration: false" << endl;
 		if (cuda_accelleration_remote_enabled)
 			cout << "CUDA Accelleration Remote: True" << endl;
 		else
-			cout << "CUDA Accelleration Remote: False" << endl;
+			cout << "CUDA Accelleration Remote: false" << endl;
 		if (tensor_accelleration)
 			cout << "Tensor Accelleration: True" << endl;
 		else
-			cout << "Tensor Accelleraton: False" << endl;
+			cout << "Tensor Accelleraton: false" << endl;
 		if (tensor_accelleration_remote_enabled)
 			cout << "Tensor Accelleration Remote: True" << endl;
 		else
-			cout << "Tensor Accelleration Remote: False" << endl;
+			cout << "Tensor Accelleration Remote: false" << endl;
 		if (vision_object_detection)
 			cout << "Visual Object Detection: True" << endl;
 		else
-			cout << "Visual Object Detection: False" << endl;
+			cout << "Visual Object Detection: false" << endl;
 		if (vision_object_detection_cuda)
 			cout << "Vision Object Detection CUDA: True" << endl;
 		else
-			cout << "Vision Object Detection CUDA: False" << endl;
+			cout << "Vision Object Detection CUDA: false" << endl;
 		if (vision_object_detection_remote_enabled)
 			cout << "Visual Object Detection Remote: True" << endl;
 		else
-			cout << "Visual Object Detection Remote: False" << endl;
+			cout << "Visual Object Detection Remote: false" << endl;
 		if (visual_reasoning)
 			cout << "Visual Reasoning: True" << endl;
 		else
-			cout << "Visual Reasoning: False" << endl;
+			cout << "Visual Reasoning: false" << endl;
 		if (sound_reasoning)
 			cout << "Sound Reasoning: True" << endl;
 		else
-			cout << "Sound Reasoning: False" << endl;
+			cout << "Sound Reasoning: false" << endl;
 		if (reading_reasoning)
 			cout << "Reading Reasoning: True" << endl;
 		else
-			cout << "Reading Reasoning: False" << endl;
+			cout << "Reading Reasoning: false" << endl;
 		if (speaking_reasoning)
 			cout << "Speaking Reasoing: True" << endl;
 		else
-			cout << "Speaking Reasoning: False" << endl;
+			cout << "Speaking Reasoning: false" << endl;
 		if (camera1_enabled)
 			cout << "Camera 1 Enabled: True" << endl;
 		else
-			cout << "Camera 1 Enabled: False" << endl;
+			cout << "Camera 1 Enabled: false" << endl;
 		if (camera2_enabled)
 			cout << "Camera 2 Enabled: True" << endl;
 		else
-			cout << "Camera 2 Enabled: False" << endl;
+			cout << "Camera 2 Enabled: false" << endl;
 		if (microphone1_enable)
 			cout << "Microphone 1 Enabled: True" << endl;
 		else
-			cout << "Microphone 1 Enabled: False" << endl;
+			cout << "Microphone 1 Enabled: false" << endl;
 		if (microphone2_enable)
 			cout << "Microphone 2 Enabled: True" << endl;
 		else
-			cout << "Microphone 2 Enabled: False" << endl;
+			cout << "Microphone 2 Enabled: false" << endl;
 		if (speech_recognition)
 			cout << "Speech Recognition: True" << endl;
 		else
-			cout << "Speech Recognition: False" << endl;
+			cout << "Speech Recognition: false" << endl;
 		if (computer_use)
 			cout << "Computer Use: True" << endl;
 		else
-			cout << "Computer Use: False" << endl;
+			cout << "Computer Use: false" << endl;
 		if (computer_monitor_recognition)
 			cout << "Computer Monitor Recognition: True" << endl;
 		else
-			cout << "Computer Monitor Recognition: False" << endl;
+			cout << "Computer Monitor Recognition: false" << endl;
 		if (computer_owned_recognition)
 			cout << "Computer Owned Recognition: True" << endl;
 		else
-			cout << "Computer Owned Recognition: False" << endl;
+			cout << "Computer Owned Recognition: false" << endl;
 		if (reading)
 			cout << "Reading: True" << endl;
 		else
-			cout << "Reading: False" << endl;
+			cout << "Reading: false" << endl;
 		if (reading_fallacy_check)
 			cout << "Fallacy Checking: True" << endl;
 		else
-			cout << "Fallacy Checking: False" << endl;
+			cout << "Fallacy Checking: false" << endl;
 		cout << "Visual Memory Location: " << vision_memory_directory << endl;
 		cout << "Sound Memory Location: " << sound_directory << endl;
 		cout << "Working Memory Limit: " << working_memory_limit << " MB" << endl;
@@ -321,15 +322,15 @@ void _Settings::Settings()
 		if (news_watching)
 			cout << "News Watching: True" << endl;
 		else
-			cout << "News Watching: False" << endl;
+			cout << "News Watching: false" << endl;
 		if (actions_watching)
 			cout << "Actions Watching: True" << endl;
 		else
-			cout << "Actions Watching: False" << endl;
+			cout << "Actions Watching: false" << endl;
 		if (needs_detection)
 			cout << "Needs Detection: True" << endl;
 		else
-			cout << "Needs Detection: False" << endl;
+			cout << "Needs Detection: false" << endl;
 		if (navigation_detection)
 			cout << "Navigation Detection: True" << endl;
 		else
@@ -337,7 +338,7 @@ void _Settings::Settings()
 		if (social_needs_detection)
 			cout << "Social Needs Detection: True" << endl;
 		else
-			cout << "Social Needs Detection: False" << endl;
+			cout << "Social Needs Detection: false" << endl;
 		cout << endl;
 		cout << "Your Selection: ";
 		getline(cin, input);
@@ -1121,6 +1122,7 @@ bool _Settings::GetTermsConditions()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1131,14 +1133,14 @@ bool _Settings::GetTermsConditions()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1151,7 +1153,7 @@ bool _Settings::GetTermsConditions()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "False" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1170,6 +1172,7 @@ bool _Settings::GetObjectDetectionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1180,14 +1183,14 @@ bool _Settings::GetObjectDetectionEnable()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1200,7 +1203,7 @@ bool _Settings::GetObjectDetectionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1219,6 +1222,7 @@ bool _Settings::GetVisualMemoryEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1229,14 +1233,14 @@ bool _Settings::GetVisualMemoryEnable()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1249,7 +1253,7 @@ bool _Settings::GetVisualMemoryEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1268,6 +1272,7 @@ bool _Settings::GetSoundMemoryEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1278,14 +1283,14 @@ bool _Settings::GetSoundMemoryEnable()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1298,7 +1303,7 @@ bool _Settings::GetSoundMemoryEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1317,6 +1322,7 @@ bool _Settings::GetSpeechRecognitionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1327,14 +1333,14 @@ bool _Settings::GetSpeechRecognitionEnable()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1347,7 +1353,7 @@ bool _Settings::GetSpeechRecognitionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1366,6 +1372,7 @@ bool _Settings::GetSpeechLieDetection()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1376,14 +1383,14 @@ bool _Settings::GetSpeechLieDetection()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1396,7 +1403,7 @@ bool _Settings::GetSpeechLieDetection()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1415,6 +1422,7 @@ bool _Settings::GetVisualReasoningEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1422,14 +1430,14 @@ bool _Settings::GetVisualReasoningEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1442,7 +1450,7 @@ bool _Settings::GetVisualReasoningEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1461,20 +1469,21 @@ bool _Settings::GetComputerUseEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1487,7 +1496,7 @@ bool _Settings::GetComputerUseEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1506,6 +1515,7 @@ bool _Settings::GetReadingFallacyCheckEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1513,14 +1523,14 @@ bool _Settings::GetReadingFallacyCheckEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1533,7 +1543,7 @@ bool _Settings::GetReadingFallacyCheckEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1552,6 +1562,7 @@ bool _Settings::GetEthicsCheckEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1559,14 +1570,14 @@ bool _Settings::GetEthicsCheckEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1579,7 +1590,7 @@ bool _Settings::GetEthicsCheckEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1598,6 +1609,7 @@ bool _Settings::GetGPUAccellerationEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1605,14 +1617,14 @@ bool _Settings::GetGPUAccellerationEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1625,7 +1637,7 @@ bool _Settings::GetGPUAccellerationEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1639,118 +1651,92 @@ bool _Settings::GetGPUAccellerationEnable()
 
 string _Settings::GetMySQLHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	string temp;
+	fstream mysql_hostname;
+	string input;
+	string hostname;
+	mysql_hostname.open("C:/settings.txt");
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "mysql_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 's' && input[x + 9] == 't' && input[x + 10] == 'n' && input[x + 11] == 'a' && input[x + 12] == 'm' && input[x + 13] == 'e')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							hostname += input[y];
+						}
+					}
+					return hostname;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return hostname;
 }
 
 string _Settings::GetMySQLUsername()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_username = "root";
-	string mysql_password = "Anaheim92801%";
-	string setting;
-	string value;
-	string temp;
+	fstream mysql_username;
+	string input;
+	string username;
+	mysql_username.open("C:/settings.txt");
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
-
-	if (conn)
+	if (mysql_username.is_open())
 	{
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_username, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "mysql_username")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'u' && input[x + 7] == 's' && input[x + 8] == 'e' && input[x + 9] == 'r' && input[x + 10] == 'n' && input[x + 11] == 'a' && input[x + 12] == 'm' && input[x + 13] == 'e')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							username += input[y];
+						}
+					}
+					return username;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return username;
 }
 
 string _Settings::GetMySQLPassword()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	//string mysql_username = _Settings::GetMySQLUsername();
-	//string mysql_password = _Settings::GetMySQLPassword();
-	string mysql_username = "root";
-	string mysql_password = "Anaheim92801%";
-	string setting;
-	string value;
-	string temp;
+	fstream mysql_password;
+	string input;
+	string password;
+	mysql_password.open("C:/settings.txt");
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
-
-	if (conn)
+	if (mysql_password.is_open())
 	{
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_password, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "mysql_password")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'p' && input[x + 7] == 'a' && input[x + 8] == 's' && input[x + 9] == 's' && input[x + 10] == 'w' && input[x + 11] == 'o' && input[x + 12] == 'r' && input[x + 13] == 'd')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							password += input[y];
+						}
+					}
+					return password;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return password;
 }
 
 string _Settings::GetCamera1()
@@ -1760,6 +1746,7 @@ string _Settings::GetCamera1()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1767,14 +1754,14 @@ string _Settings::GetCamera1()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1798,6 +1785,7 @@ bool _Settings::GetCamera1Enable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1805,14 +1793,14 @@ bool _Settings::GetCamera1Enable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1825,7 +1813,7 @@ bool _Settings::GetCamera1Enable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1844,6 +1832,7 @@ string _Settings::GetCamera2()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1851,14 +1840,14 @@ string _Settings::GetCamera2()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1882,6 +1871,7 @@ bool _Settings::GetCamera2Enable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1889,14 +1879,14 @@ bool _Settings::GetCamera2Enable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1909,7 +1899,7 @@ bool _Settings::GetCamera2Enable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -1928,6 +1918,7 @@ string _Settings::GetVisionDirectory()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1935,14 +1926,14 @@ string _Settings::GetVisionDirectory()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -1966,6 +1957,7 @@ string _Settings::GetSoundDirectory()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -1973,14 +1965,14 @@ string _Settings::GetSoundDirectory()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2004,6 +1996,7 @@ string _Settings::GetSpeechDirectory()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2011,14 +2004,14 @@ string _Settings::GetSpeechDirectory()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2042,6 +2035,7 @@ string _Settings::GetVideoFrameRate()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2049,14 +2043,14 @@ string _Settings::GetVideoFrameRate()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2080,6 +2074,7 @@ string _Settings::GetShortTermMemoryTime()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2087,14 +2082,14 @@ string _Settings::GetShortTermMemoryTime()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2172,7 +2167,7 @@ void _Settings::MemoryManagementSettings()
 		if (ftp_enabled)
 			cout << "FTP Enabled: True" << endl;
 		else
-			cout << "FTP Enabled: False" << endl;
+			cout << "FTP Enabled: false" << endl;
 		cout << "FTP Hostname: " << ftp_hostname << endl;
 		cout << "FTP Username: " << ftp_username << endl;
 		cout << "FTP Password: " << ftp_password << endl;
@@ -2320,6 +2315,7 @@ bool _Settings::GetFTPEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2327,14 +2323,14 @@ bool _Settings::GetFTPEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2347,7 +2343,7 @@ bool _Settings::GetFTPEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -2366,6 +2362,7 @@ string _Settings::GetFTPHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2373,14 +2370,14 @@ string _Settings::GetFTPHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2404,6 +2401,7 @@ string _Settings::GetFTPUsername()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2411,14 +2409,14 @@ string _Settings::GetFTPUsername()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2442,6 +2440,7 @@ string _Settings::GetFTPPassword()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2449,14 +2448,14 @@ string _Settings::GetFTPPassword()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2480,6 +2479,7 @@ string _Settings::GetVisionFTPDirectory()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2487,14 +2487,14 @@ string _Settings::GetVisionFTPDirectory()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2519,6 +2519,7 @@ string _Settings::GetSoundFTPDirectory()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2526,14 +2527,14 @@ string _Settings::GetSoundFTPDirectory()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2557,6 +2558,7 @@ string _Settings::GetVisionStorageLimit()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2564,14 +2566,14 @@ string _Settings::GetVisionStorageLimit()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2596,6 +2598,7 @@ string _Settings::GetSoundStorageLimit()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2603,14 +2606,14 @@ string _Settings::GetSoundStorageLimit()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -2701,7 +2704,6 @@ void _Settings::MySQLSettings()
 				{
 					mysql_username = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
 					_Settings::SaveSettings();
 				}
 			}
@@ -2883,7 +2885,7 @@ void _Settings::ComputerSettings()
 		if (private_computer)
 			cout << "Privately Owned: True" << endl;
 		else
-			cout << "Privately Owned: False" << endl;
+			cout << "Privately Owned: false" << endl;
 		cout << "Computer Hostname: " << computer_hostname << endl;
 		cout << "Computer Username: " << computer_username << endl;
 		cout << "Computer Password: " << computer_password << endl;
@@ -2975,6 +2977,7 @@ bool _Settings::GetSoundMemoryEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -2982,14 +2985,14 @@ bool _Settings::GetSoundMemoryEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3002,7 +3005,7 @@ bool _Settings::GetSoundMemoryEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3021,6 +3024,7 @@ string _Settings::GetCUDAAccellerationRemoteHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3028,14 +3032,14 @@ string _Settings::GetCUDAAccellerationRemoteHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3059,6 +3063,7 @@ string _Settings::GetWorkingMemoryLimit()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3066,14 +3071,14 @@ string _Settings::GetWorkingMemoryLimit()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3097,6 +3102,7 @@ string _Settings::GetShortTermMemoryLimit()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3104,14 +3110,14 @@ string _Settings::GetShortTermMemoryLimit()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3135,6 +3141,7 @@ bool _Settings::GetObjectDetectionRemoteEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3142,14 +3149,14 @@ bool _Settings::GetObjectDetectionRemoteEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3162,7 +3169,7 @@ bool _Settings::GetObjectDetectionRemoteEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3181,6 +3188,7 @@ string _Settings::GetObjectDetectionRemoteHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3188,14 +3196,14 @@ string _Settings::GetObjectDetectionRemoteHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3219,6 +3227,7 @@ string _Settings::GetCamera1FPS()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3226,14 +3235,14 @@ string _Settings::GetCamera1FPS()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3257,6 +3266,7 @@ string _Settings::GetCamera1Resolution()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3264,14 +3274,14 @@ string _Settings::GetCamera1Resolution()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3295,6 +3305,7 @@ string _Settings::GetCamera2FPS()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3302,14 +3313,14 @@ string _Settings::GetCamera2FPS()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3333,6 +3344,7 @@ string _Settings::GetCamera2Resolution()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3340,14 +3352,14 @@ string _Settings::GetCamera2Resolution()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3371,6 +3383,7 @@ bool _Settings::GetComputerUseEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3378,14 +3391,14 @@ bool _Settings::GetComputerUseEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3398,7 +3411,7 @@ bool _Settings::GetComputerUseEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3417,6 +3430,7 @@ bool _Settings::GetCUDAAccellerationEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3424,14 +3438,14 @@ bool _Settings::GetCUDAAccellerationEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3444,7 +3458,7 @@ bool _Settings::GetCUDAAccellerationEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3463,6 +3477,7 @@ bool _Settings::GetCUDAAccellerationRemoteEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3470,14 +3485,14 @@ bool _Settings::GetCUDAAccellerationRemoteEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3490,7 +3505,7 @@ bool _Settings::GetCUDAAccellerationRemoteEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3509,6 +3524,7 @@ string _Settings::GetGPUAccellerationRemoteHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3516,14 +3532,14 @@ string _Settings::GetGPUAccellerationRemoteHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3546,6 +3562,7 @@ bool _Settings::GetSpeechLieDetectionEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3553,14 +3570,14 @@ bool _Settings::GetSpeechLieDetectionEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3573,7 +3590,7 @@ bool _Settings::GetSpeechLieDetectionEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3592,6 +3609,7 @@ bool _Settings::GetComputerMonitorRecognitionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3599,14 +3617,14 @@ bool _Settings::GetComputerMonitorRecognitionEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3619,7 +3637,7 @@ bool _Settings::GetComputerMonitorRecognitionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3638,6 +3656,7 @@ bool _Settings::GetComputerOwnedRecognitionEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3645,14 +3664,14 @@ bool _Settings::GetComputerOwnedRecognitionEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3665,7 +3684,7 @@ bool _Settings::GetComputerOwnedRecognitionEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3684,6 +3703,7 @@ bool _Settings::GetMicrophone1Enable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3691,14 +3711,14 @@ bool _Settings::GetMicrophone1Enable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3711,7 +3731,7 @@ bool _Settings::GetMicrophone1Enable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3730,6 +3750,7 @@ string _Settings::GetMicrophone1Device()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3737,14 +3758,14 @@ string _Settings::GetMicrophone1Device()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3768,6 +3789,7 @@ bool _Settings::GetMicrophone2Enable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3775,14 +3797,14 @@ bool _Settings::GetMicrophone2Enable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3795,7 +3817,7 @@ bool _Settings::GetMicrophone2Enable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3814,6 +3836,7 @@ string _Settings::GetMicrophone2Device()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3821,14 +3844,14 @@ string _Settings::GetMicrophone2Device()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3852,6 +3875,7 @@ bool _Settings::GetCUDAAcellerationEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3859,14 +3883,14 @@ bool _Settings::GetCUDAAcellerationEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3879,7 +3903,7 @@ bool _Settings::GetCUDAAcellerationEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3930,6 +3954,7 @@ bool _Settings::GetLongTermMemoryEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3937,14 +3962,14 @@ bool _Settings::GetLongTermMemoryEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -3957,7 +3982,7 @@ bool _Settings::GetLongTermMemoryEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -3976,6 +4001,7 @@ string _Settings::GetLongTermMemoryLimit()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -3983,14 +4009,14 @@ string _Settings::GetLongTermMemoryLimit()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4014,6 +4040,7 @@ bool _Settings::GetReadingEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4021,14 +4048,14 @@ bool _Settings::GetReadingEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4041,7 +4068,7 @@ bool _Settings::GetReadingEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4060,6 +4087,7 @@ string _Settings::GetFFMpegLocation()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4067,14 +4095,14 @@ string _Settings::GetFFMpegLocation()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4098,6 +4126,7 @@ string _Settings::GetCUDAAccellerationRemoteCores()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4105,14 +4134,14 @@ string _Settings::GetCUDAAccellerationRemoteCores()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4136,6 +4165,7 @@ string _Settings::GetTenorAccellerationRemoteHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4143,14 +4173,14 @@ string _Settings::GetTenorAccellerationRemoteHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4175,6 +4205,7 @@ bool _Settings::GetComputerMonitorRecognitionEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4182,14 +4213,14 @@ bool _Settings::GetComputerMonitorRecognitionEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4202,7 +4233,7 @@ bool _Settings::GetComputerMonitorRecognitionEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4221,6 +4252,7 @@ bool _Settings::GetTensorAccelleration()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4228,14 +4260,14 @@ bool _Settings::GetTensorAccelleration()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4248,7 +4280,7 @@ bool _Settings::GetTensorAccelleration()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4267,6 +4299,7 @@ bool _Settings::GetTensorAccellerationRemoteEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4274,14 +4307,14 @@ bool _Settings::GetTensorAccellerationRemoteEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4294,7 +4327,7 @@ bool _Settings::GetTensorAccellerationRemoteEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4313,6 +4346,7 @@ string _Settings::GetTensorAccellerationRemoteHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4320,14 +4354,14 @@ string _Settings::GetTensorAccellerationRemoteHostname()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4351,6 +4385,7 @@ string _Settings::GetTensorAccellerationRemoteCores()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4359,14 +4394,14 @@ string _Settings::GetTensorAccellerationRemoteCores()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4390,6 +4425,7 @@ bool _Settings::GetWorkingMemoryEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4397,14 +4433,14 @@ bool _Settings::GetWorkingMemoryEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4417,7 +4453,7 @@ bool _Settings::GetWorkingMemoryEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4436,6 +4472,7 @@ bool _Settings::GetSpeechMemoryEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4443,14 +4480,14 @@ bool _Settings::GetSpeechMemoryEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4463,7 +4500,7 @@ bool _Settings::GetSpeechMemoryEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4490,7 +4527,7 @@ bool _Settings::GetSpeechMemoryEnabled()
 //	string temp;
 //
 //	conn = mysql_init(0);
-//	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+//	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 //
 //	sql1 = "SELECT * FROM settings;";
 //	mysql_query(conn, sql1.c_str());
@@ -4521,6 +4558,7 @@ bool _Settings::GetSmartphoneRecognitionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4528,14 +4566,14 @@ bool _Settings::GetSmartphoneRecognitionEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4548,7 +4586,7 @@ bool _Settings::GetSmartphoneRecognitionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4567,6 +4605,7 @@ bool _Settings::GetWorkingMemoryEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4574,14 +4613,14 @@ bool _Settings::GetWorkingMemoryEnable()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4594,7 +4633,7 @@ bool _Settings::GetWorkingMemoryEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4613,6 +4652,7 @@ bool _Settings::GetShortTermMemoryEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4620,14 +4660,14 @@ bool _Settings::GetShortTermMemoryEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4640,7 +4680,7 @@ bool _Settings::GetShortTermMemoryEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4659,6 +4699,7 @@ bool _Settings::GetEthicsCheckEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4666,14 +4707,14 @@ bool _Settings::GetEthicsCheckEnabled()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4686,7 +4727,7 @@ bool _Settings::GetEthicsCheckEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4705,6 +4746,7 @@ string _Settings::GetTensorRemoteCores()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4712,14 +4754,14 @@ string _Settings::GetTensorRemoteCores()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4743,6 +4785,7 @@ bool _Settings::GetObjectDetectionCUDAEnabled()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4753,14 +4796,14 @@ bool _Settings::GetObjectDetectionCUDAEnabled()
 	// cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4773,7 +4816,7 @@ bool _Settings::GetObjectDetectionCUDAEnabled()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -4792,6 +4835,7 @@ string _Settings::GetSoundCodec()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -4799,14 +4843,14 @@ string _Settings::GetSoundCodec()
 	string temp;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4831,20 +4875,21 @@ string _Settings::GetSoundBitrate()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4869,20 +4914,21 @@ string _Settings::GetMySQLVisionDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4907,20 +4953,21 @@ string _Settings::GetMySQLSoundDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4945,20 +4992,21 @@ string _Settings::GetMySQLSpeechDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -4983,20 +5031,21 @@ string _Settings::GetMySQLWorkingMemoryDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5021,20 +5070,21 @@ string _Settings::GetMySQLShortTermMemoryDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5059,6 +5109,7 @@ string _Settings::GetMySQLLongTermMemoryDatabase()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5066,14 +5117,14 @@ string _Settings::GetMySQLLongTermMemoryDatabase()
 	
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM mysql_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM mysql_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5098,6 +5149,7 @@ bool _Settings::GetPrivateComputer()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5108,14 +5160,14 @@ bool _Settings::GetPrivateComputer()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM computer_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM computer_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5128,7 +5180,7 @@ bool _Settings::GetPrivateComputer()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5147,6 +5199,7 @@ string _Settings::GetComputerHostname()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5154,14 +5207,14 @@ string _Settings::GetComputerHostname()
 	
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM computer_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM computer_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5186,20 +5239,21 @@ string _Settings::GetComputerUsername()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
 	string value;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM computer_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM computer_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5217,6 +5271,46 @@ string _Settings::GetComputerUsername()
 	return value;
 }
 
+string _Settings::GetComputerPassword()
+{
+	MYSQL* conn;
+	MYSQL_ROW row;
+	MYSQL_RES* result;
+	string sql1;
+	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
+	string mysql_username = _Settings::GetMySQLUsername();
+	string mysql_password = _Settings::GetMySQLPassword();
+	string setting;
+	string value;
+
+
+	conn = mysql_init(0);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+	if (conn)
+	{
+		sql1 = "SELECT * FROM computer_settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
+		while (row = mysql_fetch_row(result))
+		{
+			setting = row[0];
+			value = row[1];
+			//value_int = stoi(value.c_str());
+
+			if (setting == "computer_password")
+			{
+				mysql_close(conn);
+				return value;
+			}
+		}
+	}
+	mysql_close(conn);
+	return value;
+}
+
 bool _Settings::GetNewsWatchingEnable()
 {
 	MYSQL* conn;
@@ -5224,6 +5318,7 @@ bool _Settings::GetNewsWatchingEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5234,14 +5329,14 @@ bool _Settings::GetNewsWatchingEnable()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5254,7 +5349,7 @@ bool _Settings::GetNewsWatchingEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5273,6 +5368,7 @@ bool _Settings::GetActionWatchingEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5283,14 +5379,14 @@ bool _Settings::GetActionWatchingEnable()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5303,7 +5399,7 @@ bool _Settings::GetActionWatchingEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5322,6 +5418,7 @@ bool _Settings::GetNeedsWatchingEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5332,14 +5429,14 @@ bool _Settings::GetNeedsWatchingEnable()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5352,7 +5449,7 @@ bool _Settings::GetNeedsWatchingEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5371,6 +5468,7 @@ bool _Settings::GetNavigationDetectionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5381,14 +5479,14 @@ bool _Settings::GetNavigationDetectionEnable()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5401,7 +5499,7 @@ bool _Settings::GetNavigationDetectionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5420,6 +5518,7 @@ bool _Settings::GetSocialNeedsDetectionEnable()
 	MYSQL_RES* result;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string setting;
@@ -5430,14 +5529,14 @@ bool _Settings::GetSocialNeedsDetectionEnable()
    // cout << "mysql_password: " << mysql_password << endl;
 
 	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
+	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
 	if (conn)
 	{
+		sql1 = "SELECT * FROM settings;";
+		mysql_query(conn, sql1.c_str());
+		result = mysql_store_result(conn);
+
 		while (row = mysql_fetch_row(result))
 		{
 			setting = row[0];
@@ -5450,7 +5549,7 @@ bool _Settings::GetSocialNeedsDetectionEnable()
 					mysql_close(conn);
 					return true;
 				}
-				else if (value == "FALSE" || value == "False" || value == "false")
+				else if (value == "false" || value == "false" || value == "false")
 				{
 					mysql_close(conn);
 					return false;
@@ -5462,44 +5561,6 @@ bool _Settings::GetSocialNeedsDetectionEnable()
 	return false;
 }
 
-string _Settings::GetComputerPassword()
-{
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	sql1 = "SELECT * FROM computer_settings;";
-	mysql_query(conn, sql1.c_str());
-	result = mysql_store_result(conn);
-
-	if (conn)
-	{
-		while (row = mysql_fetch_row(result))
-		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "computer_password")
-			{
-				mysql_close(conn);
-				return value;
-			}
-		}
-	}
-	mysql_close(conn);
-	return value;
-}
 
 //bool _Settings::GetNeedsDetectionEnabled()
 //{
@@ -5518,753 +5579,970 @@ void _Settings::SaveSettings()
 	MYSQL* computer_settings;
 	string sql1;
 	string mysql_database = "ai_settings";
+	string mysql_hostname = _Settings::GetMySQLHostname();
 	string mysql_username = _Settings::GetMySQLUsername();
 	string mysql_password = _Settings::GetMySQLPassword();
 	string normal_settings_array[] = { "terms_conditions", "cuda_accelleration", "cuda_accelleration_remote_enabled", "cuda_accelleration_remote_hostname", "cuda_accelleration_remote_cores", "tensor_accelleration", "tensor_accelleration_remote_enabled", "tensor_accelleration_remote_hostname", "tensor_accelleration_remote_cores", "working_memory_enabled", "working_memory_limit", "short_term_memory_enabled", "short_term_memory_limit", "long_term_memory_enabled", "long_term_memory_limit", "speech_memory_enabled", "vision_object_detection", "vision_object_detection_cuda", "vision_object_detection_server", "vision_object_detection_server_hostname", "visual_reasoning", "visual_memory", "vision_memory_directory", "camera1", "camera1_enabled", "camera1_fps", "camera1_resolution", "camera2", "camera2_enabled", "camera2_fps", "camera2_resolution", "computer_use", "computer_monitor_recognition", "reading", "reading_fallacy_check", "sound_memory", "speech_memory", "speech_recognition", "ethics_check_enabled", "sound_directory", "sound_codec", "sound_bitrate", "speech_directory", "speech_recognition_enable", "speech_lie_detection", "short_term_memory_time", "sound_memory_enabled", "vision_object_detection_remote_enabled", "microphone1_enabled", "microphone1_device_name", "microphone2_enabled", "microphone2_device_name", "computer_owned_recognition", "ffmpeg_location", "microphone1_enable", "microphone1_device", "microphone2_enable", "microphone2_device", "sound_reasoning", "reading_reasoning", "speaking_reasoning", "working_memory_location", "short_term_memory_location", "long_term_memory_location", "news_watching", "actions_watching", "action_detection", "needs_detection", "navigation_detection", "social_needs_detection" };
 	string ftp_settings_array[] = { "ftp_enabled", "ftp_hostname", "ftp_username", "ftp_password", "ftp_vision_directory", "ftp_sound_directory", "ftp_vision_storage_limit", "ftp_sound_storage_limit" };
 	string mysql_settings_array[] = { "mysql_hostname", "mysql_username", "mysql_password", "mysql_vision_database", "mysql_sound_database", "mysql_speech_database", "mysql_working_memory_database", "mysql_short_term_memory_database", "mysql_long_term_memory_database" };
 	string computer_settings_array[] = { "private_computer", "computer_hostname", "computer_username", "computer_password" };
+	string rows[] = { "setting TEXT", "value TEXT" };
 	string setting;
 	string value;
 
-	normal_settings = mysql_init(0);
-	normal_settings = mysql_real_connect(normal_settings, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+	conn3 = mysql_init(0);
+	conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
-	if (normal_settings)
+	if (conn3)
 	{
-		sql1 = "DROP TABLE settings;";
-		mysql_query(normal_settings, sql1.c_str());
+		_DatabaseFunctions::DropTable(mysql_database, "settings");
+		_DatabaseFunctions::CreateTable(mysql_database, "settings", rows);
 
-		conn2 = mysql_init(0);
-		conn2 = mysql_real_connect(conn2, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn2)
+		for (int x = 0; x <= sizeof(normal_settings_array); x++)
 		{
-			sql1 = "CREATE TABLE settings(setting TEXT, value TEXT);";
-			mysql_query(conn2, sql1.c_str());
-			mysql_close(conn2);
-		}
-
-		conn3 = mysql_init(0);
-		conn3 = mysql_real_connect(conn3, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn3)
-		{
-			for (int x = 0; x <= 63; x++)
+			sql1 = "INSERT INTO settings(setting, value) VALUES(\"";
+			sql1 += normal_settings_array[x];
+			sql1 += "\", \"";
+				
+			if (x == 0)
 			{
-				sql1 = "INSERT INTO settings(setting, value) VALUES(\"";
-				sql1 += normal_settings_array[x];
-				sql1 += "\", \"";
-				if (x == 0)
-				{
-					if (terms_conditions)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 1)
-				{
-					if (cuda_accelleration)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 2)
-				{
-					if (cuda_accelleration_remote_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 3)
-				{
-					if (cuda_accelleration_remote_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += cuda_accelleration_remote_hostname;
-				}
-				else if (x == 4)
-				{
-					if (cuda_accelleration_remote_cores == "")
-						sql1 += "NULL";
-					else
-						sql1 += cuda_accelleration_remote_cores;
-				}
-				else if (x == 5)
-				{
-					if (tensor_accelleration)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 6)
-				{
-					if (tensor_accelleration_remote_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 7)
-				{
-					if (tensor_accelleration_remote_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += tensor_accelleration_remote_hostname;
-				}
-				else if (x == 8)
-				{
-					if (tensor_accelleration_remote_cores == "")
-						sql1 += "NULL";
-					else
-						sql1 += tensor_accelleration_remote_cores;
-				}
-				else if (x == 9)
-				{
-					if (working_memory_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 10)
-				{
-					if (working_memory_limit == "")
-						sql1 += "NULL";
-					else
-						sql1 += working_memory_limit;
-				}
-				else if (x == 11)
-				{
-					if (short_term_memory_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 12)
-				{
-					if (short_term_memory_limit == "")
-						sql1 += "NULL";
-					else
-						sql1 += short_term_memory_limit;
-				}
-				else if (x == 13)
-				{
-					if (long_term_memory_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 14)
-				{
-					if (long_term_memory_limit == "")
-						sql1 += "NULL";
-					else
-						sql1 += long_term_memory_limit;
-				}
-				else if (x == 15)
-				{
-					if (speech_memory_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 16)
-				{
-					if (vision_object_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 17)
-				{
-					if (vision_object_detection_cuda)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 18)
-				{
-					if (vision_object_detection_server)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 19)
-				{
-					if (vision_object_detection_server_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += vision_object_detection_server_hostname;
-				}
-				else if (x == 20)
-				{
-					if (visual_reasoning)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 21)
-				{
-					if (visual_memory)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 22)
-				{
-					if (vision_memory_directory == "")
-						sql1 += "NULL";
-					else
-						sql1 += vision_memory_directory;
-				}
-				else if (x == 23)
-				{
-					if (camera1 == "")
-						sql1 += "true";
-					else
-						sql1 += camera1;
-				}
-				else if (x == 24)
-				{
-					if (camera1_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 25)
-				{
-					if (camera1_fps == "")
-						sql1 += "NULL";
-					else
-						sql1 += camera1_fps;
-				}
-				else if (x == 26)
-				{
-					if (camera1_resolution == "")
-						sql1 += "NULL";
-					else
-						sql1 += camera1_resolution;
-				}
-				else if (x == 27)
-				{
-					if (camera2 == "")
-						sql1 += "NULL";
-					else
-						sql1 += camera2;
-				}
-				else if (x == 28)
-				{
-					if (camera2_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 29)
-				{
-					if (camera2_fps == "")
-						sql1 += "NULL";
-					else
-						sql1 += camera2_fps;
-				}
-				else if (x == 30)
-				{
-					if (camera2_resolution == "")
-						sql1 += "NULL";
-					else
-						sql1 += camera2_resolution;
-				}
-				else if (x == 31)
-				{
-					if (computer_use)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 32)
-				{
-					if (reading)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 33)
-				{
-					if (reading_fallacy_check)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 34)
-				{
-					if (sound_memory)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 35)
-				{
-					if (speech_memory)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 36)
-				{
-					if (speech_recognition)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 37)
-				{
-					if (ethics_check_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 38)
-				{
-					if (sound_directory == "")
-						sql1 += "NULL";
-					else
-						sql1 += sound_directory;
-				}
-				else if (x == 39)
-				{
-					if (sound_codec == "")
-						sql1 += "NULL";
-					else
-						sql1 += sound_codec;
-				}
-				else if (x == 40)
-				{
-					if (sound_bitrate == "")
-						sql1 += "NULL";
-					else
-						sql1 += sound_bitrate;
-				}
-				else if (x == 41)
-				{
-					if (speech_directory == "")
-						sql1 += "NULL";
-					else
-						sql1 += speech_directory;
-				}
-				else if (x == 42)
-				{
-					if (speech_recognition_enable)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 43)
-				{
-					if (speech_lie_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 44)
-				{
-					if (short_term_memory_time == "")
-						sql1 += "NULL";
-					else
-						sql1 += short_term_memory_time;
-				}
-				else if (x == 45)
-				{
-					if (sound_memory_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 46)
-				{
-					if (vision_object_detection_remote_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 47)
-				{
-					if (microphone1_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 48)
-				{
-					if (microphone1_device_name == "")
-						sql1 += "NULL";
-					else
-						sql1 += microphone1_device_name;
-				}
-				else if (x == 49)
-				{
-					if (microphone2_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 50)
-				{
-					if (microphone2_device_name == "")
-						sql1 += "NULL";
-					else
-						sql1 += microphone2_device_name;
-				}
-				else if (x == 51)
-				{
-					if (ffmpeg_location == "")
-						sql1 += "NULL";
-					else
-						sql1 += ffmpeg_location;
-				}
-				else if (x == 52)
-				{
-					if (sound_reasoning)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 53)
-				{
-					if (reading_reasoning)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 54)
-				{
-					if (speaking_reasoning)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 55)
-				{
-					if (working_memory_location == "")
-						sql1 += "NULL";
-					else
-						sql1 += working_memory_location;
-				}
-				else if (x == 56)
-				{
-					if (short_term_memory_location == "")
-						sql1 += "NULL";
-					else
-						sql1 += short_term_memory_location;
-				}
-				else if (x == 57)
-				{
-					if (long_term_memory_location == "")
-						sql1 += "NULL";
-					else
-						sql1 += long_term_memory_location;
-				}
-				else if (x == 58)
-				{
-					if (news_watching)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 59)
-				{
-					if (actions_watching)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 60)
-				{
-					if (action_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 61)
-				{
-					if (needs_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 62)
-				{
-					if (navigation_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
-				else if (x == 63)
-				{
-					if (social_needs_detection)
-						sql1 += "true";
-					else
-						sql1 += "false";
-				}
+				if (terms_conditions)
+					sql1 += "true";
+				else
+					sql1 += "false";
 
 				sql1 += "\");";
-				cout << "SQL1: " << sql1 << endl;
+				//cout << "SQL1: " << sql1 << endl;
 				mysql_query(conn3, sql1.c_str());
 			}
-			mysql_close(conn3);
+			else if (x == 1)
+			{
+				if (cuda_accelleration)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 2)
+			{
+				if (cuda_accelleration_remote_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 3)
+			{
+				if (cuda_accelleration_remote_hostname == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += cuda_accelleration_remote_hostname;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 4)
+			{
+				if (cuda_accelleration_remote_cores == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += cuda_accelleration_remote_cores;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 5)
+			{
+				if (tensor_accelleration)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 6)
+			{
+				if (tensor_accelleration_remote_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 7)
+			{
+				if (tensor_accelleration_remote_hostname == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += tensor_accelleration_remote_hostname;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 8)
+			{
+				if (tensor_accelleration_remote_cores == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += tensor_accelleration_remote_cores;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 9)
+			{
+				if (working_memory_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 10)
+			{
+				if (working_memory_limit == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += working_memory_limit;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 11)
+			{
+				if (short_term_memory_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 12)
+			{
+				if (short_term_memory_limit == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += short_term_memory_limit;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 13)
+			{
+				if (long_term_memory_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 14)
+			{
+				if (long_term_memory_limit == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += long_term_memory_limit;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 15)
+			{
+				if (speech_memory_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 16)
+			{
+				if (vision_object_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 17)
+			{
+				if (vision_object_detection_cuda)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 18)
+			{
+				if (vision_object_detection_server)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 19)
+			{
+				if (vision_object_detection_server_hostname == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += vision_object_detection_server_hostname;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 20)
+			{
+				if (visual_reasoning)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 21)
+			{
+				if (visual_memory)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 22)
+			{
+				if (vision_memory_directory == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += vision_memory_directory;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 23)
+			{
+				if (camera1 == "")
+					sql1 += "true";
+				else
+				{
+					sql1 += camera1;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 24)
+			{
+				if (camera1_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 25)
+			{
+				if (camera1_fps == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += camera1_fps;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 26)
+			{
+				if (camera1_resolution == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += camera1_resolution;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 27)
+			{
+				if (camera2 == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += camera2;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 28)
+			{
+				if (camera2_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 29)
+			{
+				if (camera2_fps == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += camera2_fps;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 30)
+			{
+				if (camera2_resolution == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += camera2_resolution;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 31)
+			{
+				if (computer_use)
+					sql1 += "true\'\n";
+				else
+					sql1 += "false\'\n";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 32)
+			{
+				if (reading)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 33)
+			{
+				if (reading_fallacy_check)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 34)
+			{
+				if (sound_memory)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 35)
+			{
+				if (speech_memory)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 36)
+			{
+				if (speech_recognition)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 37)
+			{
+				if (ethics_check_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 38)
+			{
+				if (sound_directory == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += sound_directory;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 39)
+			{
+				if (sound_codec == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += sound_codec;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 40)
+			{
+				if (sound_bitrate == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += sound_bitrate;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 41)
+			{
+				if (speech_directory == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += speech_directory;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 42)
+			{
+				if (speech_recognition_enable)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 43)
+			{
+				if (speech_lie_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 44)
+			{
+				if (short_term_memory_time == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += short_term_memory_time;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 45)
+			{
+				if (sound_memory_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 46)
+			{
+				if (vision_object_detection_remote_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 47)
+			{
+				if (microphone1_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 48)
+			{
+				if (microphone1_device_name == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += microphone1_device_name;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 49)
+			{
+				if (microphone2_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 50)
+			{
+				if (microphone2_device_name == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += microphone2_device_name;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 51)
+			{
+				if (ffmpeg_location == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ffmpeg_location;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 52)
+			{
+				if (sound_reasoning)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 53)
+			{
+				if (reading_reasoning)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 54)
+			{
+				if (speaking_reasoning)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 55)
+			{
+				if (working_memory_location == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += working_memory_location;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 56)
+			{
+				if (short_term_memory_location == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += short_term_memory_location;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 57)
+			{
+				if (long_term_memory_location == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += long_term_memory_location;
+				}
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 58)
+			{
+				if (news_watching)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 59)
+			{
+				if (actions_watching)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 60)
+			{
+				if (action_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 61)
+			{
+				if (needs_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 62)
+			{
+				if (navigation_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+			else if (x == 63)
+			{
+				if (social_needs_detection)
+					sql1 += "true";
+				else
+					sql1 += "false";
+				sql1 += "\");";
+				//cout << "SQL1: " << sql1 << endl;
+				mysql_query(conn3, sql1.c_str());
+			}
+		}
+		mysql_close(conn3);
+	}
+
+	conn3 = mysql_init(0);
+	conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+	if (conn3)
+	{
+		_DatabaseFunctions::DropTable(mysql_database, "ftp_settings");
+		_DatabaseFunctions::CreateTable(mysql_database, "ftp_settings", rows);
+
+		for (int x = 0; x <= 7; x++)
+		{
+			sql1 = "INSERT INTO ftp_settings(setting, value) VALUES(\"";
+			sql1 += ftp_settings_array[x];
+			sql1 += "\", \"";
+
+			if (x == 0)
+			{
+				if (ftp_enabled)
+					sql1 += "true";
+				else
+					sql1 += "false";
+			}
+			else if (x == 1)
+			{
+				if (ftp_hostname == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_hostname;
+				}
+			}
+			else if (x == 2)
+			{
+				if (ftp_username == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_username;
+				}
+			}
+			else if (x == 3)
+			{
+				if (ftp_password == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_password;
+				}
+			}
+			else if (x == 4)
+			{
+				if (ftp_vision_directory == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_vision_directory;
+				}
+			}
+			else if (x == 5)
+			{
+				if (ftp_sound_directory == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_sound_directory;
+				}
+			}
+			else if (x == 6)
+			{
+				if (ftp_vision_storage_limit == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_vision_storage_limit;
+				}
+			}
+			else if (x == 7)
+			{
+				if (ftp_sound_storage_limit == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += ftp_sound_storage_limit;
+				}
+			}
+
+			/*cout << "SQL1: " << sql1 << endl;*/
+			mysql_query(conn3, sql1.c_str());
 		}
 	}
 
-	ftp_settings = mysql_init(0);
-	ftp_settings = mysql_real_connect(ftp_settings, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+	conn3 = mysql_init(0);
+	conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
-	if (ftp_settings)
+	if (conn3)
 	{
-		sql1 = "DROP TABLE ftp_settings;";
-		mysql_query(ftp_settings, sql1.c_str());
-		//result = mysql_store_result(ftp_settings);
+		_DatabaseFunctions::DropTable(mysql_database, "mysql_settings");
+		_DatabaseFunctions::CreateTable(mysql_database, "mysql_settings", rows);
 
-		conn2 = mysql_init(0);
-		conn2 = mysql_real_connect(conn2, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn2)
+		for (int x = 0; x <= 8; x++)
 		{
-			sql1 = "CREATE TABLE ftp_settings(setting TEXT, value TEXT);";
-			mysql_query(conn2, sql1.c_str());
-			mysql_close(conn2);
-		}
+			sql1 = "INSERT INTO mysql_settings(setting, value) VALUES(\"";
+			sql1 += mysql_settings_array[x];
+			sql1 += "\", \"";
 
-		conn3 = mysql_init(0);
-		conn3 = mysql_real_connect(conn3, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn3)
-		{
-			for (int x = 0; x <= 7; x++)
+			if (x == 0)
 			{
-				sql1 = "INSERT INTO ftp_settings(setting, value) VALUES(\"";
-				sql1 += ftp_settings_array[x];
-				sql1 += "\", \"";
-				if (x == 0)
+				if (mysql_hostname == "")
+					sql1 += "NULL";
+				else
 				{
-					if (ftp_enabled)
-						sql1 += "true";
-					else
-						sql1 += "false";
+					sql1 += mysql_hostname;
 				}
-				else if (x == 1)
-				{
-					if (ftp_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_hostname;
-				}
-				else if (x == 2)
-				{
-					if (ftp_username == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_username;
-				}
-				else if (x == 3)
-				{
-					if (ftp_password == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_password;
-				}
-				else if (x == 4)
-				{
-					if (ftp_vision_directory == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_vision_directory;
-				}
-				else if (x == 5)
-				{
-					if (ftp_sound_directory == "")
-						sql1 += "NULL";
-				}
-				else if (x == 6)
-				{
-					if (ftp_vision_storage_limit == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_vision_storage_limit;
-				}
-				else if (x == 7)
-				{
-					if (ftp_sound_storage_limit == "")
-						sql1 += "NULL";
-					else
-						sql1 += ftp_sound_storage_limit;
-				}
-
-				sql1 += "\");";
-				cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
 			}
+			else if (x == 1)
+			{
+				if (mysql_username == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_username;
+				}
+			}
+			else if (x == 2)
+			{
+				if (mysql_password == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_password;
+				}
+			}
+			else if (x == 3)
+			{
+				if (mysql_vision_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_vision_database;
+				}
+			}
+			else if (x == 4)
+			{
+				if (mysql_sound_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_sound_database;
+				}
+			}
+			else if (x == 5)
+			{
+				if (mysql_speech_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_speech_database;
+				}
+			}
+			else if (x == 6)
+			{
+				if (mysql_working_memory_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_working_memory_database;
+				}
+			}
+			else if (x == 7)
+			{
+				if (mysql_short_term_memory_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_short_term_memory_database;
+				}
+			}
+			else if (x == 8)
+			{
+				if (mysql_long_term_memory_database == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += mysql_long_term_memory_database;
+				}
+			}
+			sql1 += "\");";
+			/*cout << "SQL1: " << sql1 << endl;*/
+			mysql_query(conn3, sql1.c_str());
 		}
 	}
 
-	mysql_settings = mysql_init(0);
-	mysql_settings = mysql_real_connect(mysql_settings, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+	conn3 = mysql_init(0);
+	conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
-	if (mysql_settings)
+	if (conn3)
 	{
-		sql1 = "DROP TABLE mysql_settings;";
-		mysql_query(mysql_settings, sql1.c_str());
-		//result = mysql_store_result(mysql_settings);
+		_DatabaseFunctions::DropTable(mysql_database, "mysql_settings");
+		_DatabaseFunctions::CreateTable(mysql_database, "mysql_settings", rows);
 
-		conn2 = mysql_init(0);
-		conn2 = mysql_real_connect(conn2, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn2)
+		for (int x = 0; x <= 4; x++)
 		{
-			sql1 = "CREATE TABLE mysql_settings(setting TEXT, value TEXT);";
-			mysql_query(conn2, sql1.c_str());
-			mysql_close(conn2);
-		}
+			sql1 = "INSERT INTO mysql_settings(setting, value) VALUES(\"";
+			sql1 += mysql_settings_array[x];
+			sql1 += "\", \"";
 
-		conn3 = mysql_init(0);
-		conn3 = mysql_real_connect(conn3, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn3)
-		{
-			for (int x = 0; x <= 8; x++)
+			if (x == 0)
 			{
-				sql1 = "INSERT INTO mysql_settings(setting, value) VALUES(\"";
-				sql1 += mysql_settings_array[x];
-				sql1 += "\", \"";
-				if (x == 0)
-				{
-					if (mysql_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_hostname;
-				}
-				else if (x == 1)
-				{
-					if (mysql_username == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_username;
-				}
-				else if (x == 2)
-				{
-					if (mysql_password == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_password;
-				}
-				else if (x == 3)
-				{
-					if (mysql_vision_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_vision_database;
-				}
-				else if (x == 4)
-				{
-					if (mysql_sound_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_sound_database;
-				}
-				else if (x == 5)
-				{
-					if (mysql_speech_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_speech_database;
-				}
-				else if (x == 6)
-				{
-					if (mysql_working_memory_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_working_memory_database;
-				}
-				else if (x == 7)
-				{
-					if (mysql_short_term_memory_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_short_term_memory_database;
-				}
-				else if (x == 8)
-				{
-					if (mysql_long_term_memory_database == "")
-						sql1 += "NULL";
-					else
-						sql1 += mysql_long_term_memory_database;
-				}
-
-				sql1 += "\");";
-				cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
+				if (private_computer)
+					sql1 += "true";
+				else
+					sql1 += "false";
 			}
-		}
-	}
-
-	computer_settings = mysql_init(0);
-	computer_settings = mysql_real_connect(computer_settings, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (computer_settings)
-	{
-		sql1 = "DROP TABLE computer_settings;";
-		mysql_query(computer_settings, sql1.c_str());
-		mysql_close(computer_settings);
-
-		conn2 = mysql_init(0);
-		conn2 = mysql_real_connect(conn2, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn2)
-		{
-			sql1 = "CREATE TABLE computer_settings(setting TEXT, value TEXT);";
-			mysql_query(conn2, sql1.c_str());
-			mysql_close(conn2);
-		}
-
-		conn3 = mysql_init(0);
-		conn3 = mysql_real_connect(conn3, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-		if (conn3)
-		{
-			for (int x = 0; x <= 4; x++)
+			else if (x == 1)
 			{
-				sql1 = "INSERT INTO computer_settings(setting, value) VALUES(\"";
-				sql1 += computer_settings_array[x];
-				sql1 += "\", \"";
-				if (x == 0)
+				if (computer_hostname == "")
+					sql1 += "NULL";
+				else
 				{
-					if (private_computer)
-						sql1 += "true";
-					else
-						sql1 += "false";
+					sql1 += computer_hostname;
 				}
-				else if (x == 1)
-				{
-					if (computer_hostname == "")
-						sql1 += "NULL";
-					else
-						sql1 += computer_hostname;
-				}
-				else if (x == 2)
-				{
-					if (computer_username == "")
-						sql1 += "NULL";
-					else
-						sql1 += computer_username;
-				}
-				else if (x == 3)
-				{
-					if (computer_password == "")
-						sql1 += "NULL";
-					else
-						sql1 += computer_password;
-				}
-
-				sql1 += "\");";
-				cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
 			}
+			else if (x == 2)
+			{
+				if (computer_username == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += computer_username;
+				}
+			}
+			else if (x == 3)
+			{
+				if (computer_password == "")
+					sql1 += "NULL";
+				else
+				{
+					sql1 += computer_password;
+				}
+			}
+
+			sql1 += "\");";
+			/*cout << "SQL1: " << sql1 << endl;*/
+			mysql_query(conn3, sql1.c_str());
 		}
 	}
 }

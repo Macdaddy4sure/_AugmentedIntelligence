@@ -15,23 +15,41 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Writing.h"
+#include "Reading.h"
 #include "Working-Memory.h"
 #include "Short-Term Memory.h"
 #include "Long-Term Memory.h"
+#include "Analysis.h"
+#include "Argument.h"
+#include "Database Functions.h"
+#include "Home Database.h"
+#include "Learning.h"
+#include "Ethics.h"
+#include "Fallacies.h"
+#include "Bias.h"
+#include "Mind.h"
+#include "Needs.h"
+#include "NetworkingClient.h"
+#include "Sound.h"
+#include "Vision.h"
+#include "Smell.h"
+#include "Social.h"
 #include "NLP.h"
 #include "NLU.h"
+#include "Prediction.h"
+#include "Qualitative Reasoning.h"
+#include "Quantitative Reasoning.h"
 #include "Reference.h"
-#include "Variables.h"
+#include "Pattern Recognition.h"
+#include "Server Functions.h"
 #include "Settings.h"
+#include "Smart Phone.h"
+#include "Speaking.h"
+#include "Sports.h"
+#include "Time.h"
 #include "Utilities.h"
+#include "Writing.h"
 
 using namespace std;
 
-// This function would be executed for writing, this will be a generalized heuristic for research writing and conveying ideas
-//      TODO: Get keywords to call this function
-//            Get vision data to call this function
-void _NLP::Writing()
-{
-    // This one is quite challenging
-}
+// Purpose: Map out logical devices and create new logic and use old and checked logic with memory, bias, and fallacy

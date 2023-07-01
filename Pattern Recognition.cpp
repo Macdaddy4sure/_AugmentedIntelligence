@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -20,8 +20,6 @@
 #include "Short-Term Memory.h"
 #include "Long-Term Memory.h"
 #include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
 #include "Variables.h"
 #include "Settings.h"
 #include "Utilities.h"

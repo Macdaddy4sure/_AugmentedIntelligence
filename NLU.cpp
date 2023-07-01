@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,13 +14,21 @@
     limitations under the License.
 */
 
-#include "WikiSupervised.h"
+#include "AugmentedIntelligence.h"
+#include "Fallacies.h"
+#include "Working-Memory.h"
+#include "Short-Term Memory.h"
+#include "Long-Term Memory.h"
+#include "Reference.h"
+#include "NLP.h"
+#include "NLU.h"
+#include "Variables.h"
 #include "Settings.h"
 #include "Utilities.h"
 
 using namespace std;
 
-// Oxford Logic Basic Logic terms
+// Oxford Logic Basic Logic Terms
 // 1. Inclusive disjunction: Where both disjuncts can be true at the same time
 // 2. Exclusive disjunction: Where both disjuncts cannot be true at the same time.
 // 3. Order of Operations: The order of handling logical operators within a truth statement: Functional proposition; it is a step - by - step method of generating a complete truth table.
@@ -99,37 +107,37 @@ using namespace std;
 // Glossary of Legal Terms
 // 1. 
 
-// Ambiguous, confusing, misleading, vague, unintelligible: the question is not clear and precise enough for the witness to properly answer.
-// Arguing the law: counsel is instructing the jury on the law.
-// Argumentative: the question makes an argument rather than asking a question.
-// Askedand answered: when the same attorney continues to ask the same questionand they have already received an answer.Usually seen after direct examination, but not always.
-// Asking a question unrelated to an intelligent exercise of a peremptory challenge or challenge for cause: if opposing counsel asks such a question during voir dire(i.e.the jury selection process).
-// Asks the jury to prejudge the evidence: the jury cannot promise to vote a certain way, even if certain facts are proved.
-// Assumes facts not in evidence: the question assumes something as true for which no evidence has been shown.
-// Badgering: counsel is antagonizing the witness to provoke a response, either by asking questions without giving the witness an opportunity to answer or by openly mocking the witness.
-// Best evidence rule: requires that the original source of evidence is required, if available; for example, rather than asking a witness about the contents of a document, the actual document should be entered into evidence.A full original document should be introduced into evidence instead of a copy, but judges often allow copies if there is no dispute about authenticity.Some documents are exempt from hearsay rules of evidence.[5]
-// Beyond the scope: A question asked during cross - examination must be within the scope of direct, and so on.
-// Calls for a conclusion: the question asks for an opinion rather than facts.
-// Calls for speculation: the question asks the witness to guess the answer rather than to rely on known facts.
-// Compound question: multiple questions asked together.
-// Counsel is testifying: this objection is sometimes used when counsel is "leading" or "argumentative" or "assumes facts not in evidence".
-// Foundation: the question relates to matters of which the witness's personal knowledge has not been established
-// Hearsay: An out of court statement used to prove the fact that the statement is being offered for.However, there are several exceptions to the rule against hearsay in most legal systems.[5]
-// Incompetent: the witness is not qualified to answer the question.
-// Inflammatory: the question is intended to cause prejudice.
-// Irrelevant or immaterial: the question is not about the issues in the trial.
-// Leading question(direct examination only): the question suggests the answer to the witness.Leading questions are permitted if the attorney conducting the examination has received permission to treat the witness as a hostile witness.Leading questions are also permitted on cross - examination, as witnesses called by the opposing party are presumed hostile.
-// Misstates evidence / misquotes witness / improper characterization of evidence: this objection is often overruled, but can be used to signal a problem to witness, judgeand jury.[6]
-// Narrative: the question asks the witness to relate a story rather than state specific facts.This objection is not always proper even when a question invites a narrative response, as narrative testimony may be required or preferred due to the circumstances of the case.
-// Privilege: the witness may be protected by law from answering the question.
-// Best evidence rule or hearsay evidence: requires that the original source of evidence is required, if available.However, some documents are self - authenticating under Rule 902, such as(1) domestic public documents under seal, (2) domestic public documents not under seal, but bearing a signature of a public officer, (3) foreign public documents, (4) certified copies of public records, (5) official publications, (6) newspapersand periodicals, (7) trade inscriptionsand the like, (8) acknowledged documents(i.e., by a notary public), (9) commercial paperand related documents, (10) presumptions under Acts of Congress, (11) certified domestic records of regularly conducted activity, (12) certified foreign records of regularly conducted activity.[5]
-// Fruit of the poisonous tree: the evidence was obtained illegally, or the investigative methods leading to its discovery were illegal.Can be circumvented; see inevitable discovery
-// Incomplete: opposing party only introducing part of the writing(conversation / act / declaration), taken out of context.Under the evidence rule providing for completeness, other parties can move to introduce additional parts.[8] If any documents are presented for review, the judgeand other party are entitled to a complete copy, not a partial copy, of the document.When a witness is presented with a surprise document, he should be able to take time to study it before he can answer any questions.
-// Lack of foundation: the evidence lacks testimony as to its authenticity or source.
-// More prejudicial than probative: Under Federal Rule of Evidence 403, a judge has the discretion to exclude evidence if "its probative value is substantially outweighed by the danger of unfair prejudice, confusion of the issues, or misleading the jury."
-// Narrative: the witness is relating a story in response to a question that does not call for one.Not all witnesses' answers are susceptible to this objection, as questions can and often do call for a narrative response, especially on direct examination.
-// Non - responsive: the witness's response constitutes an answer to a question other than the one that was asked, or no answer at all.
-// Nothing pending: the witness continues to speak on matters irrelevant to the question. For example, an attorney who asks, "Did your mother call?" and gets the answer, "Yes, she called at 3:00," can object to the latter part.Attorneys can use this objection selectively(to avoid annoying the court) when a witness adds out - of - order remarks to answers.
+ //Ambiguous, confusing, misleading, vague, unintelligible: the question is not clear and precise enough for the witness to properly answer.
+ //Arguing the law: counsel is instructing the jury on the law.
+ //Argumentative: the question makes an argument rather than asking a question.
+ //Asked and answered: when the same attorney continues to ask the same questionand they have already received an answer.Usually seen after direct examination, but not always.
+ //Asking a question unrelated to an intelligent exercise of a peremptory challenge or challenge for cause: if opposing counsel asks such a question during voir dire(i.e.the jury selection process).
+ //Asks the jury to prejudge the evidence: the jury cannot promise to vote a certain way, even if certain facts are proved.
+ //Assumes facts not in evidence: the question assumes something as true for which no evidence has been shown.
+ //Badgering: counsel is antagonizing the witness to provoke a response, either by asking questions without giving the witness an opportunity to answer or by openly mocking the witness.
+ //Best evidence rule: requires that the original source of evidence is required, if available; for example, rather than asking a witness about the contents of a document, the actual document should be entered into evidence.A full original document should be introduced into evidence instead of a copy, but judges often allow copies if there is no dispute about authenticity.Some documents are exempt from hearsay rules of evidence.[5]
+ //Beyond the scope: A question asked during cross - examination must be within the scope of direct, and so on.
+ //Calls for a conclusion: the question asks for an opinion rather than facts.
+ //Calls for speculation: the question asks the witness to guess the answer rather than to rely on known facts.
+ //Compound question: multiple questions asked together.
+ //Counsel is testifying: this objection is sometimes used when counsel is "leading" or "argumentative" or "assumes facts not in evidence".
+ //Foundation: the question relates to matters of which the witness's personal knowledge has not been established
+ //Hearsay: An out of court statement used to prove the fact that the statement is being offered for.However, there are several exceptions to the rule against hearsay in most legal systems.[5]
+ //Incompetent: the witness is not qualified to answer the question.
+ //Inflammatory: the question is intended to cause prejudice.
+ //Irrelevant or immaterial: the question is not about the issues in the trial.
+ //Leading question(direct examination only): the question suggests the answer to the witness.Leading questions are permitted if the attorney conducting the examination has received permission to treat the witness as a hostile witness.Leading questions are also permitted on cross - examination, as witnesses called by the opposing party are presumed hostile.
+ //Misstates evidence / misquotes witness / improper characterization of evidence: this objection is often overruled, but can be used to signal a problem to witness, judgeand jury.[6]
+ //Narrative: the question asks the witness to relate a story rather than state specific facts.This objection is not always proper even when a question invites a narrative response, as narrative testimony may be required or preferred due to the circumstances of the case.
+ //Privilege: the witness may be protected by law from answering the question.
+ //Best evidence rule or hearsay evidence: requires that the original source of evidence is required, if available.However, some documents are self - authenticating under Rule 902, such as(1) domestic public documents under seal, (2) domestic public documents not under seal, but bearing a signature of a public officer, (3) foreign public documents, (4) certified copies of public records, (5) official publications, (6) newspapersand periodicals, (7) trade inscriptionsand the like, (8) acknowledged documents(i.e., by a notary public), (9) commercial paperand related documents, (10) presumptions under Acts of Congress, (11) certified domestic records of regularly conducted activity, (12) certified foreign records of regularly conducted activity.[5]
+ //Fruit of the poisonous tree: the evidence was obtained illegally, or the investigative methods leading to its discovery were illegal.Can be circumvented; see inevitable discovery
+ //Incomplete: opposing party only introducing part of the writing(conversation / act / declaration), taken out of context.Under the evidence rule providing for completeness, other parties can move to introduce additional parts.[8] If any documents are presented for review, the judgeand other party are entitled to a complete copy, not a partial copy, of the document.When a witness is presented with a surprise document, he should be able to take time to study it before he can answer any questions.
+ //Lack of foundation: the evidence lacks testimony as to its authenticity or source.
+ //More prejudicial than probative: Under Federal Rule of Evidence 403, a judge has the discretion to exclude evidence if "its probative value is substantially outweighed by the danger of unfair prejudice, confusion of the issues, or misleading the jury."
+ //Narrative: the witness is relating a story in response to a question that does not call for one.Not all witnesses' answers are susceptible to this objection, as questions can and often do call for a narrative response, especially on direct examination.
+ //Non - responsive: the witness's response constitutes an answer to a question other than the one that was asked, or no answer at all.
+ //Nothing pending: the witness continues to speak on matters irrelevant to the question. For example, an attorney who asks, "Did your mother call?" and gets the answer, "Yes, she called at 3:00," can object to the latter part.Attorneys can use this objection selectively(to avoid annoying the court) when a witness adds out - of - order remarks to answers.
 
 // Title I – Scope of the FRCP
 // Rules 1 and 2.
@@ -249,7 +257,7 @@ double* _NLU::getDictionaryVector(string word)
     string vector;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -268,6 +276,11 @@ double* _NLU::getDictionaryVector(string word)
         }
     }
 }
+
+//__global__ double* _NLU::CUDA::getDictionaryVector(string word)
+//{
+//
+//}
 
 double* _NLU::getSentenceVectors(string sentence)
 {
@@ -302,6 +315,11 @@ double* _NLU::getSentenceVectors(string sentence)
     }
 }
 
+//__global__ double* _NLU::CUDA::getSentenceVectors(string sentence)
+//{
+//
+//}
+
 double* _NLU::getSentenceVectorsAdditive(string sentence)
 {
     MYSQL* conn;
@@ -334,6 +352,10 @@ double* _NLU::getSentenceVectorsAdditive(string sentence)
         }
     }
 }
+//__global__ double* _NLU::CUDA::getSentenceVectorsAdditive(string sentence)
+//{
+//
+//}
 
 double* _NLU::getAdditiveVector(string word)
 {
@@ -350,7 +372,7 @@ double* _NLU::getAdditiveVector(string word)
     string vector;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -369,6 +391,11 @@ double* _NLU::getAdditiveVector(string word)
     }
 }
 
+//__global__ double* _NLU::CUDA::getAdditiveVector(string word)
+//{
+//
+//}
+
 double* _NLU::getVectorAdditiveAverage(string word)
 {
     MYSQL* conn;
@@ -381,7 +408,7 @@ double* _NLU::getVectorAdditiveAverage(string word)
     string sql1;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -399,6 +426,11 @@ double* _NLU::getVectorAdditiveAverage(string word)
         }
     }
 }
+
+//__global__ double* _NLU::CUDA::getVectorAdditiveAverage(string word)
+//{
+//
+//}
 
 double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
 {
@@ -420,7 +452,7 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
     double* sentence_vector = new double[size];
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -444,6 +476,11 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
     }
 }
 
+//__global__ double* _NLU::CUDA::getSentenceVectorsAdditiveAverage(string sentence)
+//{
+//
+//}
+
 double* _NLU::getAverageVectorSentence(string sentence)
 {
     MYSQL* conn;
@@ -465,7 +502,7 @@ double* _NLU::getAverageVectorSentence(string sentence)
     double* sentence_average_vector = new double[300];
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -494,6 +531,11 @@ double* _NLU::getAverageVectorSentence(string sentence)
     }
 }
 
+//__global__ double* _NLU::CUDA::getAverageVectorSentence(string sentence)
+//{
+//
+//}
+
 double* _NLU::VectorAddition(double* vector1, double* vector2)
 {
     double total[300];
@@ -506,3 +548,56 @@ double* _NLU::VectorAddition(double* vector1, double* vector2)
     return total;
 }
 
+// Purpose: Open a POSTagged Wiki article from the database
+// words[10000][7]:
+//  words[x][0] = word
+//  words[x][1] = word_type
+//  words[x][2] = phrase_type
+//  words[x][3] = clause_type
+//  words[x][4] = sentence_type
+//  words[x][5] = direct_object
+//  words[x][6] = indirect_object
+//  words[x][7] = object_of_preposition
+string** getPOSTaggedArticle(string mysql_table, string mysql_database)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    string mysql_hostname = _Settings::GetMySQLHostname();
+    string mysql_username = _Settings::GetMySQLUsername();
+    string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string** words;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            for (int x = 0; x <= 10000; x++)
+            {
+                if (words[x][0] == "")
+                {
+                    words[x][0] = row[0];
+                    words[x][1] = row[1];
+                    words[x][2] = row[2];
+                    words[x][3] = row[3];
+                    words[x][4] = row[4];
+                    words[x][5] = row[5];
+                    words[x][6] = row[6];
+                    words[x][7] = row[7];
+                }
+            }
+        }
+
+        return words;
+    }
+}
