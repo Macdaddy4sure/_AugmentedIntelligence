@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -202,6 +202,9 @@ static bool action_detection;
 static bool needs_detection;
 static bool navigation_detection;
 static bool social_needs_detection;
+static bool vision_text_detection;
+static bool vision_text_recognition;
+static bool vision_face_recognition;
 
 // FTP Settings
 static bool ftp_enabled;
@@ -220,12 +223,12 @@ static string computer_username;
 static string computer_password;
 
 // MySQL Settings
-static string mysql_hostname;
-static string mysql_username;
-static string mysql_password;
-static string mysql_vision_database;
-static string mysql_sound_database;
-static string mysql_speech_database;
-static string mysql_working_memory_database;
-static string mysql_short_term_memory_database;
-static string mysql_long_term_memory_database;
+static string mysql_hostname = "MOON.CROCKETT.AI";
+static string mysql_username = "tyler";
+static string mysql_password = "Anaheim92801%";
+static string mysql_vision_database = "vision";
+static string mysql_sound_database = "sound";
+static string mysql_speech_database = "speech";
+static string mysql_working_memory_database = "working_memory";
+static string mysql_short_term_memory_database = "short_term_memory";
+static string mysql_long_term_memory_database = "long_term_memory";

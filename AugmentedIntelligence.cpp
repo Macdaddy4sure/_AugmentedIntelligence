@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -36,8 +36,8 @@
 #include "Mind.h"
 #include "Mods.h"
 #include "Needs.h"
-#include "Network Client.h"
-#include "Network Server.h"
+#include "NetworkingClient.h"
+#include "NetworkingServer.h"
 #include "NeuraLink.h"
 #include "NLP.h"
 #include "NLU.h"
@@ -63,182 +63,217 @@
 #include "Utilities.h"
 
 using namespace std;
-using namespace filesystem;
+//using namespace filesystem;
 
 /*
-  TODO: Create a way to backup and flash all of Short Term Memory
+    TODO: Create a way to backup and flash all of Short Term Memory
 */
+
+// Intelligence According to Psychology For Dummies - Page 110
+// 1. Crystalized Intelligence: Comprehensive and acquired knowledge
+// 2. Fluid Intelligence: Reason and problem-solving abilities
+// 3. Quantitative Reasoning: Quantitative and numerical abilities
+// 4. Reading and Writing ability: Reading and writting ability
+// 5. Short-term memory: Immediate memory
+// 6. Working memory: Temporary space for problem solving and other operations
+// 7. Long-term storage and retrieval: Long term memory
+// 8. Visual Processing: Analysis and use of information
+// 9. Auditory processing: Analysis and use of arbitrary information
+// 10. Processing speed: Thinking fast and automatically
+// 11. Decision and reaction speed: Coming to a decision and reacting swiftly
+// 12. Creativity?
+// 13. Street Smarts?
+
+// Theory of Multiple Intelligence
+// 1. Analytical Intelligence: The ability to analyze, evaluate, judge, decide, choose, compare, and contrast
+// 2. Creative Intelligence: The ability to generate novel or creative ways to deal with novel problems
+// 3. Practical Intelligence: The type of intelligence to solve problems and think about actions of everyday life. Like Einstein tying his shoes, opening up a jar of pickles, or figuring out how to log into a streaming service or how to send a group text.
+
+// Multiple Intelligences and Intelligence Attributes
+// 1. Bodily kinesthetic ability: Michael Jordan seems to posses a lot of this ability. People high in bodily kinesthetic ability have superior hand-eye coordination, a great sense of balance, and a keen understanding of and control over the bodies while engaged in physical activities
+// 2. Musical Abilities: If you can tap youyr foot and clap your hands in unison, then you got a little musical intelligence - a little. People high in musical intelligence possess he natural ability to read, write, and play music exceptionally well.
+// 3. Spatial Ability: Have you ever gotten lost in your backyard? If so, you probably don't have high in spacial intelligence. This intelligence involves the ability to navigate and move around in space and the ability tl picture three dimensional scenes in your mind
+// 4. Lingustic Ability: This is the traditional ability to read, write, and speak well. Poets, writers, and articulate speakers are high in this ability.
+// 5. Logical-mathematical ability: This intelligenceincludes basic and complex mathematical problem solving ability.
+// 6. Interpersonal ability: The gift of gab and the used-car salesman act are good indicators of interpersonal intelligence.
+// 7. Intrapersonal ability: How well do you know yourself? Intrapersonal intelligence involves the ability to understand your motives, emotions, and other aspects of your personality.
+
+// Types of Encoding Information in Intelligence
 
 int main()
 {
     string input;
 
+    _DatabaseFunctions::PrintWikipedia("NATO");
+
+    //MySQL Settings
+    mysql_hostname = _Settings::GetMySQLHostname();
+    cout << "MySQL Hostname Enabled: " << mysql_hostname << endl;
+    mysql_username = _Settings::GetMySQLUsername();
+    cout << "MySQL Username: " << mysql_username << endl;
+    mysql_password = _Settings::GetMySQLPassword();
+    cout << "MySQL Password: " << mysql_password << endl;
+    mysql_vision_database = _Settings::GetMySQLVisionDatabase();
+    cout << "MySQL Vision Database: " << mysql_vision_database << endl;
+    mysql_sound_database = _Settings::GetMySQLSoundDatabase();
+    cout << "MySQL Sound Database: " << mysql_sound_database << endl;
+    mysql_speech_database = _Settings::GetMySQLSpeechDatabase();
+    cout << "MySQL Speech Database: " << mysql_speech_database << endl;
+    mysql_working_memory_database = _Settings::GetMySQLWorkingMemoryDatabase();
+    cout << "MySQL Working Memory Database: " << mysql_working_memory_database << endl;
+    mysql_short_term_memory_database = _Settings::GetMySQLShortTermMemoryDatabase();
+    cout << "MySQL Short-Term Memory Database: " << mysql_short_term_memory_database << endl;
+    mysql_long_term_memory_database = _Settings::GetMySQLLongTermMemoryDatabase();
+    cout << "MySQL Long-Term Memory Database: " << mysql_long_term_memory_database << endl;
+
     // Settings
     terms_conditions = _Settings::GetTermsConditions();
-    //cout << "Terms Conditions: " << terms_conditions << endl;
+    cout << "Terms Conditions: " << terms_conditions << endl;
     working_memory_enabled = _Settings::GetWorkingMemoryEnabled();
-    //cout << "Working Memory Limit: " << working_memory_limit << endl;
+    cout << "Working Memory Limit: " << working_memory_limit << endl;
     working_memory_limit = _Settings::GetWorkingMemoryLimit();
-    //cout << "Short Term Memory: " << short_term_memory_enabled << endl;
+    cout << "Short Term Memory: " << short_term_memory_enabled << endl;
     short_term_memory_enabled = _Settings::GetShortTermMemoryEnabled();
-    //cout << "STM Time: " << short_term_memory_time << endl;
+    cout << "STM Time: " << short_term_memory_time << endl;
     short_term_memory_time = _Settings::GetShortTermMemoryTime();
-    //cout << "STM Enabled: " << short_term_memory_time << endl;
+    cout << "STM Enabled: " << short_term_memory_time << endl;
     long_term_memory_enabled = _Settings::GetLongTermMemoryEnabled();
-    //cout << "STM Time: " << long_term_memory_enabled << endl;
+    cout << "STM Time: " << long_term_memory_enabled << endl;
     long_term_memory_limit = _Settings::GetLongTermMemoryLimit();
-    //cout << "LTM Enabled: " << long_term_memory_limit << endl;
+    cout << "LTM Enabled: " << long_term_memory_limit << endl;
     sound_memory_enabled = _Settings::GetSoundMemoryEnabled();
-    //cout << "LTM Limit: " << sound_memory_enabled << endl;
+    cout << "LTM Limit: " << sound_memory_enabled << endl;
     speech_memory = _Settings::GetSpeechMemoryEnabled();
-    //cout << "Speech Memory: " << speech_memory << endl;
+    cout << "Speech Memory: " << speech_memory << endl;
     speech_recognition = _Settings::GetSpeechRecognitionEnable();
-    //cout << "SM Enabled: " << speech_recognition << endl;
+    cout << "SM Enabled: " << speech_recognition << endl;
     speech_lie_detection = _Settings::GetSpeechLieDetectionEnabled();
-    //cout << "Speech Recognition Enabled: " << speech_lie_detection << endl;
+    cout << "Speech Recognition Enabled: " << speech_lie_detection << endl;
     sound_directory = _Settings::GetSoundDirectory();
-    //cout << "Speech Lie Detection: " << sound_directory << endl;
+    cout << "Speech Lie Detection: " << sound_directory << endl;
     sound_codec = _Settings::GetSoundCodec();
-    //cout << "Sound Directory: " << sound_codec << endl;
+    cout << "Sound Directory: " << sound_codec << endl;
     sound_bitrate = _Settings::GetSoundBitrate();
-    //cout << "Sound Codec: " << sound_bitrate << endl;
+    cout << "Sound Codec: " << sound_bitrate << endl;
     speech_directory = _Settings::GetSpeechRecognitionEnable();
-    //cout << "Speech Directory: " << speech_directory << endl;
+    cout << "Speech Directory: " << speech_directory << endl;
     ethics_check_enabled = _Settings::GetEthicsCheckEnabled();
-    //cout << "Speech Directory: " << ethics_check_enabled << endl;
+    cout << "Speech Directory: " << ethics_check_enabled << endl;
     cuda_accelleration = _Settings::GetCUDAAccellerationEnable();
-    //cout << "Ethics Check Enabled: " << cuda_accelleration << endl;
+    cout << "Ethics Check Enabled: " << cuda_accelleration << endl;
     cuda_accelleration_remote_enabled = _Settings::GetCUDAAccellerationRemoteEnable();
-    //cout << "CUDA Accelleration: " << cuda_accelleration_remote_enabled << endl;
+    cout << "CUDA Accelleration: " << cuda_accelleration_remote_enabled << endl;
     cuda_accelleration_remote_hostname = _Settings::GetCUDAAccellerationRemoteHostname();
-    //cout << "CUDA Accelleration Remote Enabled: " << cuda_accelleration_remote_hostname << endl;
+    cout << "CUDA Accelleration Remote Enabled: " << cuda_accelleration_remote_hostname << endl;
     cuda_accelleration_remote_cores = _Settings::GetCUDAAccellerationRemoteCores();
-    //cout << "CUDA Accelleration Remote Hostname: " << cuda_accelleration_remote_cores << endl;
+    cout << "CUDA Accelleration Remote Hostname: " << cuda_accelleration_remote_cores << endl;
     tensor_accelleration = _Settings::GetTensorAccelleration();
-    //cout << "CUDA Accelleration Remote Cores: " << tensor_accelleration << endl;
+    cout << "CUDA Accelleration Remote Cores: " << tensor_accelleration << endl;
     tensor_accelleration_remote_enabled = _Settings::GetTensorAccellerationRemoteEnabled();
-    //cout << "Temsor Accelleration: " << tensor_accelleration_remote_enabled << endl;
+    cout << "Tensor Accelleration: " << tensor_accelleration_remote_enabled << endl;
     tensor_accelleration_remote_hostname = _Settings::GetTenorAccellerationRemoteHostname();
-    //cout << "Tensor Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
+    cout << "Tensor Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
     tensor_accelleration_remote_cores = _Settings::GetTensorAccellerationRemoteCores();
-    //cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
+    cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
     vision_object_detection = _Settings::GetObjectDetectionEnable();
-    //cout << "Visual Object Detection: " << vision_object_detection << endl;
+    cout << "Visual Object Detection: " << vision_object_detection << endl;
     vision_object_detection_cuda = _Settings::GetObjectDetectionCUDAEnabled();
-    //cout << "Vision Object Detection CUDA: " << vision_object_detection_cuda << endl;
+    cout << "Vision Object Detection CUDA: " << vision_object_detection_cuda << endl;
     vision_object_detection_remote_enabled = _Settings::GetObjectDetectionRemoteEnabled();
-    //cout << "Vision Object Detection Remote Enabled: " << vision_object_detection_remote_enabled << endl;
+    cout << "Vision Object Detection Remote Enabled: " << vision_object_detection_remote_enabled << endl;
     vision_object_detection_server_hostname = _Settings::GetObjectDetectionRemoteHostname();
-    //cout << "Vision Object Detection Server Hostname: " << vision_object_detection_server_hostname << endl;
+    cout << "Vision Object Detection Server Hostname: " << vision_object_detection_server_hostname << endl;
     visual_reasoning = _Settings::GetVisualReasoningEnable();
-    //cout << "Visual Reasoning: " << visual_reasoning << endl;
+    cout << "Visual Reasoning: " << visual_reasoning << endl;
     visual_memory = _Settings::GetVisualMemoryEnable();
-    //cout << "Visual Memory: " << visual_memory << endl;
+    cout << "Visual Memory: " << visual_memory << endl;
     vision_memory_directory = _Settings::GetVisionDirectory();
-    //cout << "Vision Memory Directory: " << vision_memory_directory << endl;
+    cout << "Vision Memory Directory: " << vision_memory_directory << endl;
     camera1_enabled = _Settings::GetCamera1Enable();
-    //cout << "Camera1 Enabled: " << camera1_enabled << endl;
+    cout << "Camera1 Enabled: " << camera1_enabled << endl;
     camera1 = _Settings::GetCamera1();
-    //cout << "Camera 1 Name: " << camera1 << endl;
+    cout << "Camera 1 Name: " << camera1 << endl;
     camera1_fps = _Settings::GetCamera1FPS();
-    //cout << "Camera1_fps: " << camera1_fps << endl;
+    cout << "Camera1_fps: " << camera1_fps << endl;
     camera1_resolution = _Settings::GetCamera1Resolution();
-    //cout << "Camera 1 Resolution: " << camera1_resolution << endl;
+    cout << "Camera 1 Resolution: " << camera1_resolution << endl;
     camera2_enabled = _Settings::GetCamera2Enable();
-    //cout << "Camera2 Enabled: " << camera2_enabled << endl;
+    cout << "Camera2 Enabled: " << camera2_enabled << endl;
     camera2 = _Settings::GetCamera2();
-    //cout << "Camera 2 Enabled: " << camera2 << endl;
+    cout << "Camera 2 Enabled: " << camera2 << endl;
     camera2_fps = _Settings::GetCamera2FPS();
-    //cout << "Camera 2 FPS : " << camera2_fps << endl;
+    cout << "Camera 2 FPS : " << camera2_fps << endl;
     camera2_resolution = _Settings::GetCamera2Resolution();
-    //cout << "Camera 2 Resolution: " << camera2_resolution << endl;
+    cout << "Camera 2 Resolution: " << camera2_resolution << endl;
     microphone1_enable = _Settings::GetMicrophone1Enable();
-    //cout << "Microphone Enabled: " << microphone1_enable << endl;
+    cout << "Microphone Enabled: " << microphone1_enable << endl;
     microphone1_device = _Settings::GetMicrophone1Device();
-    //cout << "Microphone 1 Device: " << microphone1_device << endl;
+    cout << "Microphone 1 Device: " << microphone1_device << endl;
     microphone2_enable = _Settings::GetMicrophone2Enable();
-    //cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
+    cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
     microphone2_device = _Settings::GetMicrophone2Device();
-    //cout << "Microphone 2 Device Name: " << microphone2_device << endl;
+    cout << "Microphone 2 Device Name: " << microphone2_device << endl;
     computer_use = _Settings::GetComputerUseEnabled();
-    //cout << "Computer Use: " << computer_use << endl;
+    cout << "Computer Use: " << computer_use << endl;
     computer_monitor_recognition = _Settings::GetComputerMonitorRecognitionEnabled();
-    //cout << "Computer Monitor Recognition: " << computer_monitor_recognition << endl;
+    cout << "Computer Monitor Recognition: " << computer_monitor_recognition << endl;
     computer_owned_recognition = _Settings::GetComputerOwnedRecognitionEnabled();
-    //cout << "Computer Owned Recognition: " << computer_owned_recognition << endl;
+    cout << "Computer Owned Recognition: " << computer_owned_recognition << endl;
     reading = _Settings::GetReadingEnable();
-    //cout << "Reading: " << reading << endl;
+    cout << "Reading: " << reading << endl;
     reading_fallacy_check = _Settings::GetReadingFallacyCheckEnable();
-    //cout << "Reading Fallacy Check: " << reading_fallacy_check << endl;
+    cout << "Reading Fallacy Check: " << reading_fallacy_check << endl;
     ffmpeg_location = _Settings::GetFFMpegLocation();
-    //cout << "FFMpeg Location: " << ffmpeg_location << endl;
+    cout << "FFMpeg Location: " << ffmpeg_location << endl;
     microphone1_enable = _Settings::GetMicrophone1Enable();
-    //cout << "Microphone 1 Enabled: " << microphone1_enable << endl;
+    cout << "Microphone 1 Enabled: " << microphone1_enable << endl;
     microphone1_device = _Settings::GetMicrophone1Device();
-    //cout << "Microphone 1 Name: " << microphone1_device << endl;
+    cout << "Microphone 1 Name: " << microphone1_device << endl;
     microphone2_enable = _Settings::GetMicrophone2Enable();
-    //cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
+    cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
     microphone2_device = _Settings::GetMicrophone2Device();
-    //cout << "Microphone 2 Name: " << microphone2_device << endl;
+    cout << "Microphone 2 Name: " << microphone2_device << endl;
     news_watching = _Settings::GetNewsWatchingEnable();
-    //cout << "News Watching: " << news_watching << endl;
+    cout << "News Watching: " << news_watching << endl;
     actions_watching = _Settings::GetActionWatchingEnable();
-    //cout << "Actions Detection: " << actions_watching << endl;
+    cout << "Actions Detection: " << actions_watching << endl;
     needs_detection = _Settings::GetNeedsWatchingEnable();
-    //cout << "Needs Detection: " << needs_detection << endl;
+    cout << "Needs Detection: " << needs_detection << endl;
     navigation_detection = _Settings::GetNavigationDetectionEnable();
-    //cout << "Navigation Detection: " << navigation_detection << endl;
+    cout << "Navigation Detection: " << navigation_detection << endl;
     social_needs_detection = _Settings::GetSocialNeedsDetectionEnable();
-    //cout << "Social Needs Detection: " << social_needs_detection << endl;
+    cout << "Social Needs Detection: " << social_needs_detection << endl;
 
-    // FTP Settings
+    //FTP Settings
     ftp_enabled = _Settings::GetFTPEnabled();
-    //cout << "FTP Enabled: " << ftp_enabled << endl;
+    cout << "FTP Enabled: " << ftp_enabled << endl;
     ftp_hostname = _Settings::GetFTPHostname();
-    //cout << "FTP Hostname: " << ftp_hostname << endl;
+    cout << "FTP Hostname: " << ftp_hostname << endl;
     ftp_username = _Settings::GetFTPUsername();
-    //cout << "FTP Username: " << ftp_username << endl;
+    cout << "FTP Username: " << ftp_username << endl;
     ftp_password = _Settings::GetFTPPassword();
-    //cout << "FTP Password: " << ftp_password << endl;
+    cout << "FTP Password: " << ftp_password << endl;
     ftp_vision_directory = _Settings::GetVisionFTPDirectory();
-    //cout << "FTP Vision Directory: " << ftp_vision_directory << endl;
+    cout << "FTP Vision Directory: " << ftp_vision_directory << endl;
     ftp_sound_directory = _Settings::GetSoundFTPDirectory();
-    //cout << "FTP Sound Directory: " << ftp_sound_directory << endl;
+    cout << "FTP Sound Directory: " << ftp_sound_directory << endl;
 
-    // MySQL Settings
-    mysql_hostname = _Settings::GetMySQLHostname();
-    //cout << "MySQL Hostname Enabled: " << mysql_hostname << endl;
-    mysql_username = _Settings::GetMySQLUsername();
-    //cout << "MySQL Username: " << mysql_username << endl;
-    mysql_password = _Settings::GetMySQLPassword();
-    //cout << "MySQL Password: " << mysql_password << endl;
-    mysql_vision_database = _Settings::GetMySQLVisionDatabase();
-    //cout << "MySQL Vision Database: " << mysql_vision_database << endl;
-    mysql_sound_database = _Settings::GetMySQLSoundDatabase();
-    //cout << "MySQL Sound Database: " << mysql_sound_database << endl;
-    mysql_speech_database = _Settings::GetMySQLSpeechDatabase();
-    //cout << "MySQL Speech Database: " << mysql_speech_database << endl;
-    mysql_working_memory_database = _Settings::GetMySQLWorkingMemoryDatabase();
-    //cout << "MySQL Working Memory Database: " << mysql_working_memory_database << endl;
-    mysql_short_term_memory_database = _Settings::GetMySQLShortTermMemoryDatabase();
-    //cout << "MySQL Short-Term Memory Database: " << mysql_short_term_memory_database << endl;
-    mysql_long_term_memory_database = _Settings::GetMySQLLongTermMemoryDatabase();
-    //cout << "MySQL Long-Term Memory Database: " << mysql_long_term_memory_database << endl;
-
-    // Computer Settings
+    //Computer Settings
     private_computer = _Settings::GetPrivateComputer();
-    //cout << "Private Computer: " << private_computer << endl;
+    cout << "Private Computer: " << private_computer << endl;
     computer_hostname = _Settings::GetComputerHostname();
-    //cout << "Computer Hostname: " << computer_hostname << endl;
+    cout << "Computer Hostname: " << computer_hostname << endl;
     computer_username = _Settings::GetComputerUsername();
-    //cout << "Computer Username: " << computer_username << endl;
+    cout << "Computer Username: " << computer_username << endl;
     computer_password = _Settings::GetComputerPassword();
-    //cout << "Computer Password: " << computer_password << endl;
+    cout << "Computer Password: " << computer_password << endl;
 
     //_AI::InitDatabases();
 
     while (!terms_conditions)
     {
+        system("cls");
+
         cout << endl;
         cout << "**RECORDING DISCLAIMER**" << endl;
         cout << endl;
@@ -311,7 +346,7 @@ int main()
         cout << "Wisconsin: One-Party" << endl;
         cout << "Wyoming: One-Party" << endl;
         cout << endl;
-        cout << "**Limitation of Liability**: The author of this program and Macdaddy4sure.com are not liable if this software is used illegally." << endl;
+        cout << "**Limitation of Liability**: The author of this program and Macdaddy4sure.com are not liable if this software is used illegally or to be the cause of illegal activity." << endl;
         cout << endl;
         cout << "Do you accept these terms? [y/n]: ";
         getline(cin, input);
@@ -543,37 +578,37 @@ int main()
 void _AI::InitThreads()
 {
     //thread CurrentAction(_Actions::GetCurrentAction);
-    //thread SettingsThread(_AI::Settings);
+    //thread SettingsThread(_Settings::Settings);
     /*_Reference::InitReference();*/
+    // InitLists
 
     if (sound_memory)
     {
-        //thread soundRAW(_AI::SoundRAW);
-        //soundRAW.join();
+        thread soundRAW(_Sound::SoundRAW);
+        soundRAW.join();
     }
     if (visual_memory)
     {
         if (camera1_enabled)
         {
-            //thread visionRAW1(_Vision::VisionRawCamera1);
-            //thread visionMySQL1(_Vision::MySQLVisionRAWCamera1);
-            //visionRAW1.join();
-            //visionMySQL1.join();
-
+            thread visionRAW1(_Vision::VisionRawCamera1);
+            thread visionMySQL1(_Vision::MySQLVisionRAWCamera1);
+            visionRAW1.join();
+            visionMySQL1.join();
         }
         if (camera2_enabled)
         {
-            //thread visionRAW2(_Vision::VisionRawCamera2);
-            //thread visionMySQL2(_Vision::MySQLVisionRAWCamera2);
-            //visionRAW2.join();
-            //visionMySQL2.join();
+            thread visionRAW2(_Vision::VisionRawCamera2);
+            thread visionMySQL2(_Vision::MySQLVisionRAWCamera2);
+            visionRAW2.join();
+            visionMySQL2.join();
         }
     }
     if (speech_recognition)
     {
         if (speech_lie_detection)
         {
-            //thread speech_recognition(_AI::Speec);
+            /*thread speech_recognition(_SpeechRecognition::SpeechRecognition);*/
             //thread lie_detection;
         }
         else
@@ -583,37 +618,45 @@ void _AI::InitThreads()
     }
     if (working_memory_enabled)
     {
-        //thread working_memory;
+        //thread working_memory(_WorkingMemory::WorkingMemory);
     }
     if (short_term_memory_enabled)
     {
-        //thread short_term_memory;
+        //thread short_term_memory(_ShortTermMemory::ShortTermMemory);
     }
     if (long_term_memory_enabled)
     {
-        //thread long_term_memory;
+        //thread long_term_memory(_LongTermMemory::LongTermMemory);
     }
     if (visual_reasoning)
     {
-        //thread visual_reasoning;
+        //thread visual_reasoning(_Vision::VisualReasoning);
     }
     if (sound_reasoning)
     {
-        //thread sound_reasoning;
+        //thread sound_reasoning(_Sound::SoundReasoning);
     }
     if (reading)
     {
+        //thread reading(_Reading::Reading);
+
         if (reading_fallacy_check)
         {
-            //thread reading(_Reading::Reading);
-            //thread reading_fallacy_check;
-        }
-        else
-        {
-            //thread reading;
+            //thread reading_fallacy_check();
         }
     }
-    
+    if (vision_text_detection)
+    {
+
+    }
+    if (vision_text_recognition)
+    {
+
+    }
+    if (vision_face_recognition)
+    {
+
+    }
     if (vision_object_detection)
     {
         if (vision_object_detection_cuda)
@@ -657,7 +700,6 @@ void _AI::InitThreads()
             //thread ethics_check;
             //thread visual_reasoning;
         }
-
         if (computer_use)
         {
             if (computer_monitor_recognition)

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -51,3 +51,27 @@ public:
     static void LongTermMemoryNames();
 };
 
+static string lt_vision_path_camera1[1000][2];                             // 60 frames per second = 5184000 frames per 24 hours
+static string lt_vision_path_camera2[1000][2];
+static string lt_sound_path[1000][2];                                    // 86400 seconds = 24 hours of recording for lt
+static string lt_speech_dialogue[1000][2];                  // 11404800 lines of dialogue per 24 hours
+static string lt_action1_text[1000][2];                       // 5184000 lines for 24 hours
+static string lt_action2_text[1000][2];                       // 5184000 lines for 24 hours
+static string lt_action3_text[1000][2];                       // 5184000 lines for 24 hours
+static string lt_reading_text[1000][2];                    // 11404800 lines of dialogue per 24 hours
+static string lt_reading_image[1000][2];
+static string lt_vision_objects_image_path[1000][2];                   // 5184000 lines for 24 hours
+static string lt_vision_actions_image_path[1000][2];                   // 5184000 lines for 24 hours
+static string lt_vision_objects_text[1000][2];                // 5184000 lines for 24 hours
+static string lt_vision_analysis_text[1000][2];               // 5184000 lines for 24 hours
+static string lt_typing_text[1000][2];                      // 11404800 lines of dialogue per 24 hours
+static string lt_Reference_pos_gps_north[1000][2];
+static string lt_Reference_pos_gps_west[1000][2];
+static string lt_Reference_pos_gps_elevation[1000][2];
+static string lt_Reference_pos_gps_image[1000][2];
+static string lt_pos_gps_north_text[1000][2];
+static string lt_pos_gps_west_text[1000][2];
+static string lt_pos_gps_elevation_text[1000][2];
+static string lt_pos_x[1000][2];
+static string lt_pos_y[1000][2];
+static string lt_pos_z[1000][2];

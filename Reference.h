@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ class _Reference
 {
 public:
     static void InitReference();
+    static string* init_lists();
     static string** init_dictionary();
     static string** init_wikisimple_articles();
     static string** init_wikipedia_articles();
@@ -80,7 +81,6 @@ public:
     static string** init_ubuntu();
     static string** init_yellow_dog();
     static string** init_linux_mint();
-    //static string* init_lists();
 };
 
 static string** _dictionary_terms = _Reference::init_dictionary();

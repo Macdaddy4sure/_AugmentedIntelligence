@@ -1,5 +1,5 @@
 /*
-	Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+	Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -99,7 +99,6 @@ using namespace std;
 		   - PowerPoint
 		   - OneNote
 		   - Word
-
 
 	2. Create database for where individual files are located
 	3. Commandline programs and concepts
@@ -259,10 +258,10 @@ void _Computers::GetMonitors()
 string _Computers::GetHostname()
 {
 	//char *hostname;
-	//int name_langth;
+	////int name_langth;
 
-	//gethostname(hostname, NULL);
-    return "true";
+	//string hostname = gethostname(hostname, NULL);
+    //return "true";
 }
 
 bool _Computers::isRemoteDesktop()
@@ -355,7 +354,7 @@ string _Computers::CurrentTask()
 	if (
 		(hStdout == INVALID_HANDLE_VALUE) ||
 		(hStdin == INVALID_HANDLE_VALUE)
-		)
+	)
 		ExitProcess(1);
 
 	// Send something to this process's stdout using printf.
@@ -380,6 +379,12 @@ string _Computers::CurrentTask()
 			break;
 	}
 	return 0;
+}
+
+// Use object detection with pytorch to track the taskbar, the start menu, the icons, the flyout icons, the clock, and the tool tip menu
+void _Computers::GetTaskbar()
+{
+
 }
 
 //bool _Computers::isWindows()
@@ -473,8 +478,6 @@ string _Computers::HWNDToString(HWND inputA)
 }
 
 // Create a function that sends commands from the client to a server computer
-
 // Create a function that can get which computer is being used
-
 // Create a function that sends screenshots of the server computer back to the AI client computer
-//  In the case more than one monitor is used, send screenshots of both monitors back to the client
+// In the case more than one monitor is used, send screenshots of both monitors back to the client

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -46,10 +46,10 @@ static string wm_vision_actions_image_path[1000][2];
 static string wm_vision_objects_text[1000][2];
 static string wm_vision_analysis_text[1000][2];
 static string wm_typing_text[1000][2];
-static string wm__Reference_pos_gps_north[1000][2];
-static string wm__Reference_pos_gps_west[1000][2];
-static string wm__Reference_pos_gps_elevation[1000][2];
-static string wm__Reference_pos_gps_image[1000][2];
+static string wm_Reference_pos_gps_north[1000][2];
+static string wm_Reference_pos_gps_west[1000][2];
+static string wm_Reference_pos_gps_elevation[1000][2];
+static string wm_Reference_pos_gps_image[1000][2];
 static string wm_pos_gps_north_text[1000][2];
 static string wm_pos_gps_west_text[1000][2];
 static string wm_pos_gps_elevation_text[1000][2];
