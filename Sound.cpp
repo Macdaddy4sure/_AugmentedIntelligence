@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -63,7 +63,7 @@
 using namespace std;
 
 // The following function will listen for voice commands from the speech recognition thread
-//  Function                                                  Possible Input                                                 Implamentation Difficulty
+//  Function                                                  Possible Input                                                 Implementation Difficulty
 //  BibleVerseSearch(string book, int chapter)              | Search for bible verse, John chapter three                   | Easy
 //  BibleVerseSearch(string book, int chapter, int verse)   | Search for bible verse, John chapter three verse sixteen     | Easy
 //  BibleVersePageNumber()                                  | Search for bible verse, page number visual trigger           | Intermediate (Requires OpenCV and TensorFlow)
@@ -173,6 +173,10 @@ void _Sound::SoundListener()
             {
                 _DatabaseFunctions::FindObject(words[j + 2]);
             }
+            else if (words[j] == "where" && words[j + 1] == "is" && words[j + 2] == "it")
+            {
+                // Do stuff
+            }
         }
     }
 }
@@ -184,8 +188,10 @@ void _Sound::SoundRAW()
 {
     string command;
     string filename;
-    string bitrate = "320kbps";
-    string codec = "libmp3lame";
+    microphone1_device_name = _Settings::GetMicrophone1Device();
+    sound_bitrate = _Settings::GetSoundBitrate();
+    sound_codec = _Settings::GetSoundCodec();
+    sound_directory = _Settings::GetSoundDirectory();
     ostringstream oss;
 
     while (true)
@@ -195,13 +201,19 @@ void _Sound::SoundRAW()
         oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
         auto date = oss.str();
 
-        command = "ffmpeg -f dshow -i audio=\"Microphone (HD Pro Webcam C920)\" -c:a libmp3lame -ar 44100 -b:a 320k -segment_time 300 -ac 1 ";
-        command += "C:\\MySQL_Data\\Sound\\";
+        command = "ffmpeg -f dshow -i audio=\"";
+        command += microphone1_device_name;
+        command += "\" -c:a \"";
+        command += sound_codec;
+        command += "\"-ar 44100 -b:a \"";
+        command += sound_bitrate;
+        command += "k\" -segment_time 300 -ac 1 \"";
+        command += sound_directory;
         command += date;
-        command += ".mp3";
+        command += ".mp3 ";
         filename = date;
         filename += ".mp3";
-        sound_directory = "C:\\MySQL_Data\\Sound\\";
+        sound_directory += date;
         sound_directory += filename;
 
         system(command.c_str());
@@ -238,7 +250,7 @@ void _Sound::MySQL_Sound()
     string table_name = current_date;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
     result = mysql_use_result(conn);
 
     query1 << "" << table_name;
@@ -310,7 +322,7 @@ void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int sea
         table_name = "SoundRAW";
 
         conn = mysql_init(0);
-        conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
         result = mysql_use_result(conn);
 
         if (conn)
@@ -342,7 +354,7 @@ void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int sea
         table_name = "SoundRecognition";
 
         conn = mysql_init(0);
-        conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
         result = mysql_use_result(conn);
 
         if (conn)
@@ -367,7 +379,7 @@ void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int sea
         table_name = "SoundRAW";
         
         conn = mysql_init(0);
-        conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
         result = mysql_use_result(conn);
 
         if (conn)
@@ -386,3 +398,4 @@ void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int sea
         }
     }
 }
+

@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -591,37 +591,37 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (wm__Reference_pos_gps_north[x][0] == "")
+            if (wm_Reference_pos_gps_north[x][0] == "")
             {
-                wm__Reference_pos_gps_north[x][0] = __Reference_pos_gps_north;
-                wm__Reference_pos_gps_north[x][1] = current_time.years + "-";
-                wm__Reference_pos_gps_north[x][1] += current_time.months + "-";
-                wm__Reference_pos_gps_north[x][1] += current_time.days + ":";
-                wm__Reference_pos_gps_north[x][1] += current_time.hours + "-";
-                wm__Reference_pos_gps_north[x][1] += current_time.minutes + "-";
-                wm__Reference_pos_gps_north[x][1] += current_time.seconds;
+                wm_Reference_pos_gps_north[x][0] = __Reference_pos_gps_north;
+                wm_Reference_pos_gps_north[x][1] = current_time.years + "-";
+                wm_Reference_pos_gps_north[x][1] += current_time.months + "-";
+                wm_Reference_pos_gps_north[x][1] += current_time.days + ":";
+                wm_Reference_pos_gps_north[x][1] += current_time.hours + "-";
+                wm_Reference_pos_gps_north[x][1] += current_time.minutes + "-";
+                wm_Reference_pos_gps_north[x][1] += current_time.seconds;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            wm__Reference_pos_gps_north[0][0].clear();
-            wm__Reference_pos_gps_north[0][1].clear();
+            wm_Reference_pos_gps_north[0][0].clear();
+            wm_Reference_pos_gps_north[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                wm__Reference_pos_gps_north[y][0] = wm__Reference_pos_gps_north[y + 1][0];
-                wm__Reference_pos_gps_north[y][1] = wm__Reference_pos_gps_north[y + 1][1];
+                wm_Reference_pos_gps_north[y][0] = wm_Reference_pos_gps_north[y + 1][0];
+                wm_Reference_pos_gps_north[y][1] = wm_Reference_pos_gps_north[y + 1][1];
             }
 
-            wm__Reference_pos_gps_north[1000][0] = __Reference_pos_gps_north;
-            wm__Reference_pos_gps_north[1000][1] = current_time.years + "-";
-            wm__Reference_pos_gps_north[1000][1] += current_time.months + "-";
-            wm__Reference_pos_gps_north[1000][1] += current_time.days + ":";
-            wm__Reference_pos_gps_north[1000][1] += current_time.hours + "-";
-            wm__Reference_pos_gps_north[1000][1] += current_time.minutes + "-";
-            wm__Reference_pos_gps_north[1000][1] += current_time.seconds;
+            wm_Reference_pos_gps_north[1000][0] = __Reference_pos_gps_north;
+            wm_Reference_pos_gps_north[1000][1] = current_time.years + "-";
+            wm_Reference_pos_gps_north[1000][1] += current_time.months + "-";
+            wm_Reference_pos_gps_north[1000][1] += current_time.days + ":";
+            wm_Reference_pos_gps_north[1000][1] += current_time.hours + "-";
+            wm_Reference_pos_gps_north[1000][1] += current_time.minutes + "-";
+            wm_Reference_pos_gps_north[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -629,37 +629,37 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (wm__Reference_pos_gps_west[x][0] == "")
+            if (wm_Reference_pos_gps_west[x][0] == "")
             {
-                wm__Reference_pos_gps_west[x][0] = __Reference_pos_gps_west;
-                wm__Reference_pos_gps_west[x][1] = current_time.years + "-";
-                wm__Reference_pos_gps_west[x][1] += current_time.months + "-";
-                wm__Reference_pos_gps_west[x][1] += current_time.days + ":";
-                wm__Reference_pos_gps_west[x][1] += current_time.hours + "-";
-                wm__Reference_pos_gps_west[x][1] += current_time.minutes + "-";
-                wm__Reference_pos_gps_west[x][1] += current_time.seconds;
+                wm_Reference_pos_gps_west[x][0] = __Reference_pos_gps_west;
+                wm_Reference_pos_gps_west[x][1] = current_time.years + "-";
+                wm_Reference_pos_gps_west[x][1] += current_time.months + "-";
+                wm_Reference_pos_gps_west[x][1] += current_time.days + ":";
+                wm_Reference_pos_gps_west[x][1] += current_time.hours + "-";
+                wm_Reference_pos_gps_west[x][1] += current_time.minutes + "-";
+                wm_Reference_pos_gps_west[x][1] += current_time.seconds;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            wm__Reference_pos_gps_west[0][0].clear();
-            wm__Reference_pos_gps_west[0][1].clear();
+            wm_Reference_pos_gps_west[0][0].clear();
+            wm_Reference_pos_gps_west[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                wm__Reference_pos_gps_west[y][0] = wm__Reference_pos_gps_west[y + 1][0];
-                wm__Reference_pos_gps_west[y][1] = wm__Reference_pos_gps_west[y + 1][1];
+                wm_Reference_pos_gps_west[y][0] = wm_Reference_pos_gps_west[y + 1][0];
+                wm_Reference_pos_gps_west[y][1] = wm_Reference_pos_gps_west[y + 1][1];
             }
 
-            wm__Reference_pos_gps_west[1000][0] = __Reference_pos_gps_west;
-            wm__Reference_pos_gps_west[1000][1] = current_time.years + "-";
-            wm__Reference_pos_gps_west[1000][1] += current_time.months + "-";
-            wm__Reference_pos_gps_west[1000][1] += current_time.days + ":";
-            wm__Reference_pos_gps_west[1000][1] += current_time.hours + "-";
-            wm__Reference_pos_gps_west[1000][1] += current_time.minutes + "-";
-            wm__Reference_pos_gps_west[1000][1] += current_time.seconds;
+            wm_Reference_pos_gps_west[1000][0] = __Reference_pos_gps_west;
+            wm_Reference_pos_gps_west[1000][1] = current_time.years + "-";
+            wm_Reference_pos_gps_west[1000][1] += current_time.months + "-";
+            wm_Reference_pos_gps_west[1000][1] += current_time.days + ":";
+            wm_Reference_pos_gps_west[1000][1] += current_time.hours + "-";
+            wm_Reference_pos_gps_west[1000][1] += current_time.minutes + "-";
+            wm_Reference_pos_gps_west[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -667,37 +667,37 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (wm__Reference_pos_gps_elevation[x][0] == "")
+            if (wm_Reference_pos_gps_elevation[x][0] == "")
             {
-                wm__Reference_pos_gps_elevation[x][0] = __Reference_pos_gps_elevation;
-                wm__Reference_pos_gps_elevation[x][1] = current_time.years + "-";
-                wm__Reference_pos_gps_elevation[x][1] += current_time.months + "-";
-                wm__Reference_pos_gps_elevation[x][1] += current_time.days + ":";
-                wm__Reference_pos_gps_elevation[x][1] += current_time.hours + "-";
-                wm__Reference_pos_gps_elevation[x][1] += current_time.minutes + "-";
-                wm__Reference_pos_gps_elevation[x][1] += current_time.seconds;
+                wm_Reference_pos_gps_elevation[x][0] = __Reference_pos_gps_elevation;
+                wm_Reference_pos_gps_elevation[x][1] = current_time.years + "-";
+                wm_Reference_pos_gps_elevation[x][1] += current_time.months + "-";
+                wm_Reference_pos_gps_elevation[x][1] += current_time.days + ":";
+                wm_Reference_pos_gps_elevation[x][1] += current_time.hours + "-";
+                wm_Reference_pos_gps_elevation[x][1] += current_time.minutes + "-";
+                wm_Reference_pos_gps_elevation[x][1] += current_time.seconds;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            wm__Reference_pos_gps_elevation[0][0].clear();
-            wm__Reference_pos_gps_elevation[0][1].clear();
+            wm_Reference_pos_gps_elevation[0][0].clear();
+            wm_Reference_pos_gps_elevation[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                wm__Reference_pos_gps_elevation[y][0] = wm__Reference_pos_gps_elevation[y + 1][0];
-                wm__Reference_pos_gps_elevation[y][1] = wm__Reference_pos_gps_elevation[y + 1][1];
+                wm_Reference_pos_gps_elevation[y][0] = wm_Reference_pos_gps_elevation[y + 1][0];
+                wm_Reference_pos_gps_elevation[y][1] = wm_Reference_pos_gps_elevation[y + 1][1];
             }
 
-            wm__Reference_pos_gps_elevation[1000][0] = __Reference_pos_gps_elevation;
-            wm__Reference_pos_gps_elevation[1000][1] = current_time.years + "-";
-            wm__Reference_pos_gps_elevation[1000][1] += current_time.months + "-";
-            wm__Reference_pos_gps_elevation[1000][1] += current_time.days + ":";
-            wm__Reference_pos_gps_elevation[1000][1] += current_time.hours + "-";
-            wm__Reference_pos_gps_elevation[1000][1] += current_time.minutes + "-";
-            wm__Reference_pos_gps_elevation[1000][1] += current_time.seconds;
+            wm_Reference_pos_gps_elevation[1000][0] = __Reference_pos_gps_elevation;
+            wm_Reference_pos_gps_elevation[1000][1] = current_time.years + "-";
+            wm_Reference_pos_gps_elevation[1000][1] += current_time.months + "-";
+            wm_Reference_pos_gps_elevation[1000][1] += current_time.days + ":";
+            wm_Reference_pos_gps_elevation[1000][1] += current_time.hours + "-";
+            wm_Reference_pos_gps_elevation[1000][1] += current_time.minutes + "-";
+            wm_Reference_pos_gps_elevation[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -705,37 +705,37 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (wm__Reference_pos_gps_image[x][0] == "")
+            if (wm_Reference_pos_gps_image[x][0] == "")
             {
-                wm__Reference_pos_gps_image[x][0] = __Reference_pos_gps_image;
-                wm__Reference_pos_gps_image[x][1] = current_time.years + "-";
-                wm__Reference_pos_gps_image[x][1] += current_time.months + "-";
-                wm__Reference_pos_gps_image[x][1] += current_time.days + ":";
-                wm__Reference_pos_gps_image[x][1] += current_time.hours + "-";
-                wm__Reference_pos_gps_image[x][1] += current_time.minutes + "-";
-                wm__Reference_pos_gps_image[x][1] += current_time.seconds;
+                wm_Reference_pos_gps_image[x][0] = __Reference_pos_gps_image;
+                wm_Reference_pos_gps_image[x][1] = current_time.years + "-";
+                wm_Reference_pos_gps_image[x][1] += current_time.months + "-";
+                wm_Reference_pos_gps_image[x][1] += current_time.days + ":";
+                wm_Reference_pos_gps_image[x][1] += current_time.hours + "-";
+                wm_Reference_pos_gps_image[x][1] += current_time.minutes + "-";
+                wm_Reference_pos_gps_image[x][1] += current_time.seconds;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            wm__Reference_pos_gps_image[0][0].clear();
-            wm__Reference_pos_gps_image[0][1].clear();
+            wm_Reference_pos_gps_image[0][0].clear();
+            wm_Reference_pos_gps_image[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                wm__Reference_pos_gps_image[y][0] = wm__Reference_pos_gps_image[y + 1][0];
-                wm__Reference_pos_gps_image[y][1] = wm__Reference_pos_gps_image[y + 1][1];
+                wm_Reference_pos_gps_image[y][0] = wm_Reference_pos_gps_image[y + 1][0];
+                wm_Reference_pos_gps_image[y][1] = wm_Reference_pos_gps_image[y + 1][1];
             }
 
-            wm__Reference_pos_gps_image[1000][0] = __Reference_pos_gps_image;
-            wm__Reference_pos_gps_image[1000][1] = current_time.years + "-";
-            wm__Reference_pos_gps_image[1000][1] += current_time.months + "-";
-            wm__Reference_pos_gps_image[1000][1] += current_time.days + ":";
-            wm__Reference_pos_gps_image[1000][1] += current_time.hours + "-";
-            wm__Reference_pos_gps_image[1000][1] += current_time.minutes + "-";
-            wm__Reference_pos_gps_image[1000][1] += current_time.seconds;
+            wm_Reference_pos_gps_image[1000][0] = __Reference_pos_gps_image;
+            wm_Reference_pos_gps_image[1000][1] = current_time.years + "-";
+            wm_Reference_pos_gps_image[1000][1] += current_time.months + "-";
+            wm_Reference_pos_gps_image[1000][1] += current_time.days + ":";
+            wm_Reference_pos_gps_image[1000][1] += current_time.hours + "-";
+            wm_Reference_pos_gps_image[1000][1] += current_time.minutes + "-";
+            wm_Reference_pos_gps_image[1000][1] += current_time.seconds;
             boolean = false;
         }
     }

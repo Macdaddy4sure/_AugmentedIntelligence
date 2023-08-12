@@ -15,23 +15,6 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Writing.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
 
 using namespace std;
 
-// This function would be executed for writing, this will be a generalized heuristic for research writing and conveying ideas
-//      TODO: Get keywords to call this function
-//            Get vision data to call this function
-void _NLP::Writing()
-{
-    // This one is quite challenging
-}

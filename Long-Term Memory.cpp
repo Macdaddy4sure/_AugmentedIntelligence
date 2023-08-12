@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -65,10 +65,10 @@ void _LongTermMemory::LongTermMemoryRawSearchBackward(string search)
     int num_fields;
     int num_fields3;
 
-    conn = mysql_real_connect(conn, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn2 = mysql_real_connect(conn2, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn3 = mysql_real_connect(conn3, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn4 = mysql_real_connect(conn4, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn2 = mysql_real_connect(conn2, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn4 = mysql_real_connect(conn4, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     mysql_query(conn, "SELECT data FROM analysis");
     mysql_query(conn2, "SELECT image_id FROM analysis");
@@ -208,10 +208,10 @@ void _LongTermMemory::LongTermMemoryRawSearchRight(string search)
     int num_fields3;
     int num_fields4;
 
-    conn = mysql_real_connect(conn, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn2 = mysql_real_connect(conn2, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn3 = mysql_real_connect(conn3, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn4 = mysql_real_connect(conn4, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn2 = mysql_real_connect(conn2, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn4 = mysql_real_connect(conn4, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     mysql_query(conn, "SELECT data FROM analysis");
     mysql_query(conn2, "SELECT image_id FROM analysis");
@@ -377,8 +377,8 @@ void _LongTermMemory::LongTermMemoryRawSearchwithDate(string search, int year, i
     int num_fields;
     int num_fields2;
 
-    conn = mysql_real_connect(conn, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn2 = mysql_real_connect(conn2, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn2 = mysql_real_connect(conn2, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     mysql_query(conn, "SELECT date FROM raw");
     mysql_query(conn2, "SELECT image_location FROM raw");
@@ -481,10 +481,10 @@ void _LongTermMemory::LongTermMemoryRawElapsed(int origin_year, int origin_month
     int num4 = 0;
     int num = 0;
 
-    conn = mysql_real_connect(conn, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn2 = mysql_real_connect(conn2, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn3 = mysql_real_connect(conn3, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn4 = mysql_real_connect(conn4, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn2 = mysql_real_connect(conn2, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn4 = mysql_real_connect(conn4, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     mysql_query(conn, "SELECT date FROM raw");
     mysql_query(conn2, "SELECT image_location FROM raw");
@@ -636,12 +636,12 @@ void _LongTermMemory::LongTermMemoryRawSearchTermDateElapsed(string search, int 
     int num5 = 0;
     int num6 = 0;
 
-    conn = mysql_real_connect(conn, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn2 = mysql_real_connect(conn2, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn3 = mysql_real_connect(conn3, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn4 = mysql_real_connect(conn4, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn5 = mysql_real_connect(conn5, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-    conn6 = mysql_real_connect(conn6, "localhost", mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn2 = mysql_real_connect(conn2, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn3 = mysql_real_connect(conn3, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn4 = mysql_real_connect(conn4, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn5 = mysql_real_connect(conn5, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn6 = mysql_real_connect(conn6, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     mysql_query(conn, "SELECT date FROM raw");
     mysql_query(conn2, "SELECT image_id FROM raw");

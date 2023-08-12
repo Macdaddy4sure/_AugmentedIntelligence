@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -121,7 +121,7 @@ void _Math::ArithmeticParse(string transcription)
     ostringstream query1;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database.c_str(), 3306, NULL, 0);
 
     // Search the transcription word by word and check with the MySQL Database for the particular word
     if (conn)
@@ -194,7 +194,7 @@ void _Math::ArithmeticParse(string transcription)
         ostringstream query2;
 
         conn2 = mysql_init(0);
-        conn2 = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database.c_str(), 3306, NULL, 0);
+        conn2 = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database.c_str(), 3306, NULL, 0);
 
         // Search the transcription word by word and check with the MySQL Database for the particular word
         if (conn2)
@@ -1259,7 +1259,7 @@ int _Math::NumberName(string text)
     int number;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
     result = mysql_use_result(conn);
 
     query1 << "SELECT number, phonetic_name FROM " << table_name;
@@ -1303,7 +1303,7 @@ void _Math::Math2MySQL(string table, string data, double number1, double number2
     auto date = oss.str();
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
     result1 = mysql_use_result(conn);
 
     query1 << "INSERT INTO " << table_name << "(date, data, number1, number2, operation, result) VALUES(" << date << ", " << data << ", " << number1 << ", " << number2 << ", " << operation << ", " << result << ");";

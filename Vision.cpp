@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
 
 /*
-    Copyright(c) 2022 TensorFlow
+    Copyright(C) 2023 TensorFlow
 
     https://github.com/tensorflow/tensorflow/blob/master/LICENSE
 
@@ -33,7 +33,7 @@
 */
 
 /*
-    Copyright(c) 2022 OpenCV
+    Copyright(C) 2023 OpenCV
 
     https://github.com/opencv/opencv/blob/master/LICENSE
 
@@ -78,81 +78,32 @@
 using namespace std;
 using namespace filesystem;
 using namespace chrono_literals;
+using namespace cv;
+using namespace cv::dnn;
+
+// Constants.
+const float INPUT_WIDTH = 640.0;
+const float INPUT_HEIGHT = 640.0;
+const float SCORE_THRESHOLD = 0.5;
+const float NMS_THRESHOLD = 0.45;
+const float CONFIDENCE_THRESHOLD = 0.45;
+
+// Text parameters.
+const float FONT_SCALE = 0.7;
+const int FONT_FACE = FONT_HERSHEY_SIMPLEX;
+const int THICKNESS = 1;
+
+// Colors.
+Scalar BLACK = Scalar(0, 0, 0);
+Scalar BLUE = Scalar(255, 178, 50);
+Scalar YELLOW = Scalar(0, 255, 255);
+Scalar RED = Scalar(0, 0, 255);
 
 // char* coco_classes[] = { "person","bicycle","car","motorcycle","airplane","bus","train","truck","boat","traffic light","fire hydrant","stop sign","parking meter","bench","bird","cat","dog","horse","sheep","cow","elephant","bear","zebra","giraffe","backpack","umbrella","handbag","tie","suitcase","frisbee","skis","snowboard","sports ball","kite","baseball bat","baseball glove","skateboard","surfboard","tennis racket","bottle","wine glass","cup","fork","knife","spoon","bowl","banana","apple","sandwich","orange","broccoli","carrot","hot dog","pizza","donut","cake","chair","couch","potted plant","bed","dining table","toilet","tv","laptop","mouse","remote","keyboard","cell phone","microwave","oven","toaster","sink","refrigerator","book","clock","vase","scissors","teddy bear","hair drier","toothbrush" };
 
 void _Vision::Vision()
 {
 
-}
-
-void _Vision::ObjectDetection()
-{
-    //PyObject* pName, * pModule, * pFunc;
-    //PyObject* pArgs, * pValue;
-    //int i;
-
-    //if (argc < 3)
-    //{
-    //    fprintf(stderr, "Usage: call pythonfile funcname [args]\n");
-    //    return 1;
-    //}
-
-    //Py_Initialize();
-    //pName = PyUnicode_DecodeFSDefault(argv[1]);
-    ///* Error checking of pName left out */
-
-    //pModule = PyImport_Import(pName);
-    //Py_DECREF(pName);
-
-    //if (pModule != NULL) {
-    //    pFunc = PyObject_GetAttrString(pModule, argv[2]);
-    //    /* pFunc is a new reference */
-
-    //    if (pFunc && PyCallable_Check(pFunc)) {
-    //        pArgs = PyTuple_New(argc - 3);
-    //        for (i = 0; i < argc - 3; ++i) {
-    //            pValue = PyLong_FromLong(atoi(argv[i + 3]));
-    //            if (!pValue) {
-    //                Py_DECREF(pArgs);
-    //                Py_DECREF(pModule);
-    //                fprintf(stderr, "Cannot convert argument\n");
-    //                return 1;
-    //            }
-    //            /* pValue reference stolen here: */
-    //            PyTuple_SetItem(pArgs, i, pValue);
-    //        }
-    //        pValue = PyObject_CallObject(pFunc, pArgs);
-    //        Py_DECREF(pArgs);
-    //        if (pValue != NULL) {
-    //            printf("Result of call: %ld\n", PyLong_AsLong(pValue));
-    //            Py_DECREF(pValue);
-    //        }
-    //        else {
-    //            Py_DECREF(pFunc);
-    //            Py_DECREF(pModule);
-    //            PyErr_Print();
-    //            fprintf(stderr, "Call failed\n");
-    //            return 1;
-    //        }
-    //    }
-    //    else {
-    //        if (PyErr_Occurred())
-    //            PyErr_Print();
-    //        fprintf(stderr, "Cannot find function \"%s\"\n", argv[2]);
-    //    }
-    //    Py_XDECREF(pFunc);
-    //    Py_DECREF(pModule);
-    //}
-    //else {
-    //    PyErr_Print();
-    //    fprintf(stderr, "Failed to load \"%s\"\n", argv[1]);
-    //    return 1;
-    //}
-    //if (Py_FinalizeEx() < 0) {
-    //    return 120;
-    //}
-    //return 0;
 }
 
 // The following function will initialize the webcam and record raw visual data to memory
@@ -164,19 +115,27 @@ void _Vision::VisionRawCamera1()
     string camera1_resolution = _Settings::GetCamera1Resolution();
     string camera1_fps = _Settings::GetCamera1FPS();
     string vision_directory = _Settings::GetVisionDirectory();
+    string current_time;
     ostringstream oss;
 
     while (camera1_enabled && visual_memory)
     {
-        command = ffmpeg_location;
-        command += "ffmpeg.exe -f dshow -video_size ";
+        auto entry = time(nullptr);
+        auto tm1 = *localtime(&entry);
+
+        oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
+        current_time = oss.str();
+
+        command = "ffmpeg -f dshow -video_size ";
         command += camera1_resolution;
         command += "-i video=\"";
         command += camera1;
         command += "\" -vf fps=";
         command += camera1_fps;
         command += " ";
-        command += "\\Camera1\\out%d.jpg";
+        command += vision_directory;
+        command += "\\camera1\\";
+        command += "\\image_camera1_%d.jpg";
         system(command.c_str());
     }
 }
@@ -190,19 +149,19 @@ void _Vision::VisionRawCamera2()
     string camera2_resolution = _Settings::GetCamera2Resolution();
     string camera2_fps = _Settings::GetCamera2FPS();
     string vision_directory = _Settings::GetVisionDirectory();
-    ostringstream oss;
 
     while (camera2_enabled && visual_memory)
     {
-        command = ffmpeg_location;
-        command += "ffmpeg.exe -f dshow -video_size ";
+        command = "ffmpeg -f dshow -video_size ";
         command += camera2_resolution;
         command += "-i video=\"";
         command += camera2;
         command += "\" -vf fps=";
         command += camera2_fps;
         command += " ";
-        command += "\\Camera2\\out%d.jpg";
+        command += vision_directory;
+        command += "\\camera2\\";
+        command += "image_camera2_%d.jpg";
         system(command.c_str());
     }
 }
@@ -210,22 +169,28 @@ void _Vision::VisionRawCamera2()
 void _Vision::MySQLVisionRAWCamera1()
 {
     MYSQL* conn;
-    string camera_vision_database = "";
+    string camera_vision_database = "ai_senses";
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string vision_directory = _Settings::GetVisionDirectory();
-    string table_name = "vision_raw_camera1";
-    vision_directory += ".\\Camera1\\";
+    string table_name = "ai_vision_camera1";
+    vision_directory += "\\Camera1\\";
     string framerate = _Settings::GetCamera1FPS();
     string resolution = _Settings::GetCamera1Resolution();
+    string object_class;
+    string object_x;
+    string object_y;
+    string object_xy;
+    string object_xz;
     string temp_path;
+    string image_hash;
     string current_date;
-    ostringstream query1;
+    //string previous_paths[30];
     ostringstream oss;
     string sql1;
     
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), camera_vision_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), camera_vision_database.c_str(), 3306, NULL, 0);
 
     while (visual_memory)
     {
@@ -234,6 +199,9 @@ void _Vision::MySQLVisionRAWCamera1()
             for (auto& p : directory_iterator(vision_directory.c_str()))
             {
                 temp_path = p.path().string();
+                string** object_detection_array = _Utilities::Create2DStringArray(100, 5);
+                object_detection_array = _Vision::ObjectDetection(temp_path);
+                /*image_hash = _Utilities::getHash(temp_path);*/
 
                 auto entry = time(nullptr);
                 auto tm1 = *localtime(&entry);
@@ -241,10 +209,27 @@ void _Vision::MySQLVisionRAWCamera1()
                 oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
                 current_date = oss.str();
 
-                query1 << "INSERT INTO " << table_name << "(date, fileLocation, framerate, resolution) VALUES(" << current_date << ", " << temp_path << ", " << framerate << ", " << resolution << ");";
-                sql1 = query1.str();
+                sql1 = "INSERT INTO ";
+                sql1 += table_name;
+                sql1 += "(image_time, image_path, object_number, object_class, object_x, object_y, object_xy, object_xz, image_hash) VALUES(\"";
+                sql1 += current_date.c_str();
+                sql1 += "\", \"";
+                sql1 += temp_path.c_str();
+                sql1 += "\", \"";
+                sql1 += object_class.c_str();
+                sql1 += "\", \"";
+                sql1 += object_x.c_str();
+                sql1 += "\", \"";
+                sql1 += object_y.c_str();
+                sql1 += "\", \"";
+                sql1 += object_xy.c_str();
+                sql1 += "\", \"";
+                sql1 += object_xz.c_str();
+                sql1 += "\", \"";
+                sql1 += image_hash.c_str();
+                sql1 += "\");";
                 mysql_query(conn, sql1.c_str());
-                //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                this_thread::sleep_for(chrono::milliseconds(40));
             }
         }
     }
@@ -255,22 +240,28 @@ void _Vision::MySQLVisionRAWCamera1()
 void _Vision::MySQLVisionRAWCamera2()
 {
     MYSQL* conn;
-    string camera_vision_database = "";
+    string camera_vision_database = "ai_senses";
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string vision_directory = _Settings::GetVisionDirectory();
-    string table_name = "vision_raw_camera2";
+    string table_name = "ai_vision_camera2";
     vision_directory += "\\Camera2\\";
     string framerate = _Settings::GetCamera2FPS();
     string resolution = _Settings::GetCamera2Resolution();
+    string object_class;
+    string object_x;
+    string object_y;
+    string object_xy;
+    string object_xz;
     string temp_path;
+    string previous_path;
     string current_date;
-    ostringstream query1;
     ostringstream oss;
     string sql1;
+    string image_hash;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), camera_vision_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), camera_vision_database.c_str(), 3306, NULL, 0);
 
     while (visual_memory)
     {
@@ -279,6 +270,9 @@ void _Vision::MySQLVisionRAWCamera2()
             for (auto& p : directory_iterator(vision_directory.c_str()))
             {
                 temp_path = p.path().string();
+                string** object_detection_array = _Utilities::Create2DStringArray(100, 5);
+                object_detection_array = _Vision::ObjectDetection(temp_path);
+                /*image_hash = _Utilities::getHash(temp_path);*/
 
                 auto entry = time(nullptr);
                 auto tm1 = *localtime(&entry);
@@ -286,13 +280,86 @@ void _Vision::MySQLVisionRAWCamera2()
                 oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
                 current_date = oss.str();
 
-                query1 << "INSERT INTO " << table_name << "(date, fileLocation, framerate, resolution) VALUES(" << current_date << ", " << temp_path << ", " << framerate << ", " << resolution << ");";
-                sql1 = query1.str();
+                sql1 = "INSERT INTO ";
+                sql1 += table_name;
+                sql1 += "(image_time, image_path, object_number, object_class, object_x, object_y, object_xy, object_xz, image_hash) VALUES(\"";
+                sql1 += current_date.c_str();
+                sql1 += "\", \"";
+                sql1 += temp_path.c_str();
+                sql1 += "\", \"";
+                sql1 += object_class.c_str();
+                sql1 += "\", \"";
+                sql1 += object_x.c_str();
+                sql1 += "\", \"";
+                sql1 += object_y.c_str();
+                sql1 += "\", \"";
+                sql1 += object_xy.c_str();
+                sql1 += "\", \"";
+                sql1 += object_xz.c_str();
+                sql1 += "\", \"";
+                sql1 += image_hash.c_str();
+                sql1 += "\");";
                 mysql_query(conn, sql1.c_str());
-                //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+                this_thread::sleep_for(chrono::milliseconds(40));
             }
         }
     }
 
     //terminate();
+}
+
+string** _Vision::ObjectDetection(string image_path)
+{
+    string** Object;
+
+    //auto net = readNet("yolov5s.onnx");
+    //vector<Mat> predictions;
+    //net.forward(predictions, net.getUnconnectedOutLayersNames());
+    //const Mat& output = predictions[0];
+
+    return Object;
+}
+
+void _Vision::TextDetection()
+{
+    //int rgb = IMREAD_COLOR; // This should be changed according to the model input requirement.
+    //Mat image = imread("path/to/text_rec_test.png", rgb);
+}
+
+void _Vision::TextRecognition()
+{
+    //int rgb = IMREAD_COLOR; // This should be changed according to the model input requirement.
+    //Mat image = imread("path/to/text_rec_test.png", rgb);
+
+    //// Load models weights
+    //TextRecognitionModel model("path/to/crnn_cs.onnx");
+    //// The decoding method
+    //// more methods will be supported in future
+    //model.setDecodeType("CTC-greedy");
+
+    //// Load vocabulary
+    //// vocabulary should be changed according to the text recognition model
+    //std::ifstream vocFile;
+    //vocFile.open("path/to/alphabet_94.txt");
+    //CV_Assert(vocFile.is_open());
+
+    //String vocLine;
+    //std::vector<String> vocabulary;
+
+    //while (std::getline(vocFile, vocLine))
+    //{
+    //    vocabulary.push_back(vocLine);
+    //}
+    //model.setVocabulary(vocabulary);
+
+    //// Normalization parameters
+    //double scale = 1.0 / 127.5;
+    //Scalar mean = Scalar(127.5, 127.5, 127.5);
+
+    //// The input shape
+    //Size inputSize = Size(100, 32);
+    //model.setInputParams(scale, inputSize, mean);
+
+    //std::string recognitionResult = recognizer.recognize(image);
+    //std::cout << "'" << recognitionResult << "'" << std::endl;
 }

@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -50,97 +50,64 @@
 #include "Utilities.h"
 
 using namespace std;
-//using namespace fst;
 
 //void _SpeechRecognition::SpeechRecognition()
 //{
-//    //typedef kaldi::int32 int32;
-//    //typedef OnlineFeInput<Mfcc> FeInput;
+//    //ps_decoder_t* decoder;
+//    //ps_config_t* config;
+//    //ps_endpointer_t* ep;
+//    //ad_rec_t* ad;
+//    //short* frame;
+//    //size_t frame_size;
 //
-//    //// Up to delta-delta derivative features are calculated (unless LDA is used)
-//    //const int32 kDeltaOrder = 2;
-//    //// Time out interval for the PortAudio source
-//    //const int32 kTimeout = 500; // half second
-//    //// Input sampling frequency is fixed to 16KHz
-//    //const int32 kSampleFreq = 16000;
-//    //// PortAudio's internal ring buffer size in bytes
-//    //const int32 kPaRingSize = 32768;
-//    //// Report interval for PortAudio buffer overflows in number of feat. batches
-//    //const int32 kPaReportInt = 4;
+//    //config = ps_config_init(NULL);
+//    //ps_default_search_args(config);
 //
-//    //const char* usage =
-//    //    "Decode speech, using microphone input(PortAudio)\n\n"
-//    //    "Utterance segmentation is done on-the-fly.\n"
-//    //    "Feature splicing/LDA transform is used, if the optional(last) argument "
-//    //    "is given.\n"
-//    //    "Otherwise delta/delta-delta(2-nd order) features are produced.\n\n"
-//    //    "Usage: online-gmm-decode-faster [options] <model-in>"
-//    //    "<fst-in> <word-symbol-table> <silence-phones> [<lda-matrix-in>]\n\n"
-//    //    "Example: online-gmm-decode-faster --rt-min=0.3 --rt-max=0.5 "
-//    //    "--max-active=4000 --beam=12.0 --acoustic-scale=0.0769 "
-//    //    "model HCLG.fst words.txt '1:2:3:4:5' lda-matrix";
-//    ////ParseOptions po(usage);
-//    //BaseFloat acoustic_scale = 0.1;
-//    //int32 cmn_window = 600, min_cmn_window = 100;
-//    //int32 right_context = 4, left_context = 4;
+//    //decoder = ps_init(config);
 //
-//    //kaldi::DeltaFeaturesOptions delta_opts;
-//    //delta_opts.Register(&po);
-//    //OnlineFasterDecoderOpts decoder_opts;
-//    //OnlineFeatureMatrixOptions feature_reading_opts;
-//    //decoder_opts.Register(&po, true);
-//    //feature_reading_opts.Register(&po);
+//    //// initialize the pocketsphinx decoder
+//    //ad = ad_open_dev("sysdefault", 192000);
+//    //// open default microphone at default samplerate
 //
-//    ////po.Register("left-context", &left_context, "Number of frames of left context");
-//    ////po.Register("right-context", &right_context, "Number of frames of right context");
-//    ////po.Register("acoustic-scale", &acoustic_scale,
-//    ////    "Scaling factor for acoustic likelihoods");
-//    ////po.Register("cmn-window", &cmn_window,
-//    ////    "Number of feat. vectors used in the running average CMN calculation");
-//    ////po.Register("min-cmn-window", &min_cmn_window,
-//    ////    "Minumum CMN window used at start of decoding (adds "
-//    ////    "latency only at start)");
-//
-//    ////po.Read(argc, argv);
-//    ////if (po.NumArgs() != 4 && po.NumArgs() != 5) {
-//    ////    po.PrintUsage();
-//    ////    return 1;
-//    ////}
-//
-//    //string model_rxfilename = po.GetArg(1),
-//    //    fst_rxfilename = po.GetArg(2),
-//    //    word_syms_filename = po.GetArg(3),
-//    //    silence_phones_str = po.GetArg(4),
-//    //    lda_mat_rspecifier = po.GetOptArg(5);
-//
-//    //Matrix<BaseFloat> lda_transform;
-//
-//    //if (lda_mat_rspecifier != "")
+//    //while (true)
 //    //{
-//    //    bool binary_in;
-//    //    Input ki(lda_mat_rspecifier, &binary_in);
-//    //    lda_transform.Read(ki.Stream(), binary_in);
+//    //    string decoded_speech = _SpeechRecognition::Recognize_From_Microphone(decoder, config, ep, ad);          // call the function to captureand decode speech
+//    //    cout << "Decoded Speech: " << decoded_speech << "\n" << endl;                     // send decoded speech to screen
 //    //}
 //
-//    //std::vector<int32> silence_phones;
-//    //if (!SplitStringToIntegers(silence_phones_str, ":", false, &silence_phones))
-//    //    KALDI_ERR << "Invalid silence-phones string " << silence_phones_str;
-//    //if (silence_phones.empty())
-//    //    KALDI_ERR << "No silence phones given!";
+//    //ad_close(ad);
+//}
 //
-//    //TransitionModel trans_model;
-//    //AmDiagGmm am_gmm;
+//string _SpeechRecognition::Recognize_From_Microphone(ps_decoder_t* decoder, ps_config_t* config, ps_endpointer_t* ep, ad_rec_t* ad)
+//{
+//    //uint8 utt_started, in_speech;
+//    //int16 adbuf[4096];
+//    //char const* hyp;
+//    //int32 k;                           // holds the number of frames in the audio buffer
+//
+//    //ad_start_rec(ad);                               // start recording
+//    //ps_start_utt(decoder);                               // mark the start of the utterance
+//    //utt_started = FALSE;                            // clear the utt_started flag
+//
+//    //while (true)
 //    //{
-//    //    bool binary;
-//    //    Input ki(model_rxfilename, &binary);
-//    //    trans_model.Read(ki.Stream(), binary);
-//    //    am_gmm.Read(ki.Stream(), binary);
+//    //    k = ad_read(ad, adbuf, 4096);               // capture the number of frames in the audio buffer
+//    //    ps_process_raw(decoder, adbuf, k, FALSE, FALSE); // send the audio buffer to the pocketsphinx decoder
+//
+//    //    in_speech = ps_get_in_speech(decoder);           // test to see if speech is being detected
+//
+//    //    if (in_speech && !utt_started)              // if speech has started and utt_started flag is false
+//    //    {
+//    //        utt_started = TRUE;                     // then set the flag
+//    //    }
+//
+//    //    if (!in_speech && utt_started)              // if speech has ended and the utt_started flag is true 
+//    //    {
+//    //        ps_end_utt(decoder);                          // then mark the end of the utterance
+//    //        ad_stop_rec(ad);                         // stop recording
+//    //        hyp = ps_get_hyp(decoder, NULL);             // query pocketsphinx for "hypothesis" of decoded statement
+//    //        return hyp;                              // the function returns the hypothesis
+//    //        break;                                   // exit the while loop and return to main
+//    //    }
 //    //}
-//
-//    //fst::SymbolTable* word_syms = NULL;
-//    //if (!(word_syms = fst::SymbolTable::ReadText(word_syms_filename)))
-//    //    KALDI_ERR << "Could not read symbol table from file "
-//    //    << word_syms_filename;
-//
-//    //fst::Fst<fst::StdArc>* decode_fst = ReadDecodeGraph(fst_rxfilename);
 //}

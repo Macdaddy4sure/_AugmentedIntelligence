@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,8 +15,8 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Network Client.h"
-#include "Network Server.h"
+#include "NetworkingClient.h"
+#include "NetworkingServer.h"
 #include "Working-Memory.h"
 #include "Short-Term Memory.h"
 #include "Long-Term Memory.h"

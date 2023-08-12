@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -546,6 +546,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_path_camera1[x][1] += current_time.hours + "-";
                 stm_vision_path_camera1[x][1] += current_time.minutes + "-";
                 stm_vision_path_camera1[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_path_camera1[x][0]: " << stm_vision_path_camera1[x][0] << endl;
+                cout << "stm_vision_path_camera1[x][1]: " << stm_vision_path_camera1[x][1] << endl;
                 boolean = true;
             }
         }
@@ -585,6 +589,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_path_camera2[x][1] += current_time.hours + "-";
                 stm_vision_path_camera2[x][1] += current_time.minutes + "-";
                 stm_vision_path_camera2[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_path_camera2[x][0]: " << stm_vision_path_camera2[x][0] << endl;
+                cout << "stm_vision_path_camera2[x][1]: " << stm_vision_path_camera2[x][1] << endl;
                 boolean = true;
             }
         }
@@ -624,6 +632,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_sound_path[x][1] += current_time.hours + "-";
                 stm_sound_path[x][1] += current_time.minutes + "-";
                 stm_sound_path[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_sound_path[x][0]: " << stm_sound_path[x][0] << endl;
+                cout << "stm_sound_path[x][1]: " << stm_sound_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -663,6 +675,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_speech_dialogue[x][1] += current_time.hours + "-";
                 stm_speech_dialogue[x][1] += current_time.minutes + "-";
                 stm_speech_dialogue[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_speech_dialogue[x][0]: " << stm_speech_dialogue[x][0] << endl;
+                cout << "stm_speech_dialogue[x][1]: " << stm_speech_dialogue[x][1] << endl;
                 boolean = true;
             }
         }
@@ -701,6 +717,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_reading_text[x][1] += current_time.hours + "-";
                 stm_reading_text[x][1] += current_time.minutes + "-";
                 stm_reading_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_reading_text[x][0]: " << stm_reading_text[x][0] << endl;
+                cout << "stm_reading_text[x][1]: " << stm_reading_text[x][1] << endl;
                 boolean = false;
             }
         }
@@ -739,6 +759,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_action1_text[x][1] += current_time.hours + "-";
                 stm_action1_text[x][1] += current_time.minutes + "-";
                 stm_action1_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_action1_text[x][0]: " << stm_action1_text[x][0] << endl;
+                cout << "stm_action1_text[x][1]: " << stm_action1_text[x][1] << endl;
                 boolean = true;
             }
         }
@@ -777,6 +801,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_action2_text[x][1] += current_time.hours + "-";
                 stm_action2_text[x][1] += current_time.minutes + "-";
                 stm_action2_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_action2_text[x][0]: " << stm_action2_text[x][0] << endl;
+                cout << "stm_action2_text[x][1]: " << stm_action2_text[x][1] << endl;
                 boolean = true;
             }
         }
@@ -815,6 +843,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_action3_text[x][1] += current_time.hours + "-";
                 stm_action3_text[x][1] += current_time.minutes + "-";
                 stm_action3_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_action3_text[x][0]: " << stm_action3_text[x][0] << endl;
+                cout << "stm_action3_text[x][1]: " << stm_action3_text[x][1] << endl;
                 boolean = true;
             }
         }
@@ -853,6 +885,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_objects_image_path[x][1] += current_time.hours + "-";
                 stm_vision_objects_image_path[x][1] += current_time.minutes + "-";
                 stm_vision_objects_image_path[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -891,6 +927,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_actions_image_path[x][1] += current_time.hours + "-";
                 stm_vision_actions_image_path[x][1] += current_time.minutes + "-";
                 stm_vision_actions_image_path[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -929,6 +969,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_objects_text[x][1] += current_time.hours + "-";
                 stm_vision_objects_text[x][1] += current_time.minutes + "-";
                 stm_vision_objects_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -967,6 +1011,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_vision_analysis_text[x][1] += current_time.hours + "-";
                 stm_vision_analysis_text[x][1] += current_time.minutes + "-";
                 stm_vision_analysis_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -1005,6 +1053,10 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
                 stm_typing_text[x][1] += current_time.hours + "-";
                 stm_typing_text[x][1] += current_time.minutes + "-";
                 stm_typing_text[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
@@ -1030,41 +1082,45 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
             boolean = false;
         }
     }
-    if (__Reference_pos_gps_north != "")
+    if (_Reference_pos_gps_north != "")
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (stm__Reference_pos_gps_north[x][0] == "")
+            if (stm_Reference_pos_gps_north[x][0] == "")
             {
-                stm__Reference_pos_gps_north[x][0] = __Reference_pos_gps_north;
-                stm__Reference_pos_gps_north[x][1] = current_time.years + "-";
-                stm__Reference_pos_gps_north[x][1] += current_time.months + "-";
-                stm__Reference_pos_gps_north[x][1] += current_time.days + ":";
-                stm__Reference_pos_gps_north[x][1] += current_time.hours + "-";
-                stm__Reference_pos_gps_north[x][1] += current_time.minutes + "-";
-                stm__Reference_pos_gps_north[x][1] += current_time.seconds;
+                stm_Reference_pos_gps_north[x][0] = __Reference_pos_gps_north;
+                stm_Reference_pos_gps_north[x][1] = current_time.years + "-";
+                stm_Reference_pos_gps_north[x][1] += current_time.months + "-";
+                stm_Reference_pos_gps_north[x][1] += current_time.days + ":";
+                stm_Reference_pos_gps_north[x][1] += current_time.hours + "-";
+                stm_Reference_pos_gps_north[x][1] += current_time.minutes + "-";
+                stm_Reference_pos_gps_north[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            stm__Reference_pos_gps_north[0][0].clear();
-            stm__Reference_pos_gps_north[0][1].clear();
+            stm_Reference_pos_gps_north[0][0].clear();
+            stm_Reference_pos_gps_north[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                stm__Reference_pos_gps_north[y][0] = stm__Reference_pos_gps_north[y + 1][0];
-                stm__Reference_pos_gps_north[y][1] = stm__Reference_pos_gps_north[y + 1][1];
+                stm_Reference_pos_gps_north[y][0] = stm_Reference_pos_gps_north[y + 1][0];
+                stm_Reference_pos_gps_north[y][1] = stm_Reference_pos_gps_north[y + 1][1];
             }
 
-            stm__Reference_pos_gps_north[1000][0] = __Reference_pos_gps_north;
-            stm__Reference_pos_gps_north[1000][1] = current_time.years + "-";
-            stm__Reference_pos_gps_north[1000][1] += current_time.months + "-";
-            stm__Reference_pos_gps_north[1000][1] += current_time.days + ":";
-            stm__Reference_pos_gps_north[1000][1] += current_time.hours + "-";
-            stm__Reference_pos_gps_north[1000][1] += current_time.minutes + "-";
-            stm__Reference_pos_gps_north[1000][1] += current_time.seconds;
+            stm_Reference_pos_gps_north[1000][0] = __Reference_pos_gps_north;
+            stm_Reference_pos_gps_north[1000][1] = current_time.years + "-";
+            stm_Reference_pos_gps_north[1000][1] += current_time.months + "-";
+            stm_Reference_pos_gps_north[1000][1] += current_time.days + ":";
+            stm_Reference_pos_gps_north[1000][1] += current_time.hours + "-";
+            stm_Reference_pos_gps_north[1000][1] += current_time.minutes + "-";
+            stm_Reference_pos_gps_north[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -1072,37 +1128,41 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (stm__Reference_pos_gps_west[x][0] == "")
+            if (stm_Reference_pos_gps_west[x][0] == "")
             {
-                stm__Reference_pos_gps_west[x][0] = __Reference_pos_gps_west;
-                stm__Reference_pos_gps_west[x][1] = current_time.years + "-";
-                stm__Reference_pos_gps_west[x][1] += current_time.months + "-";
-                stm__Reference_pos_gps_west[x][1] += current_time.days + ":";
-                stm__Reference_pos_gps_west[x][1] += current_time.hours + "-";
-                stm__Reference_pos_gps_west[x][1] += current_time.minutes + "-";
-                stm__Reference_pos_gps_west[x][1] += current_time.seconds;
+                stm_Reference_pos_gps_west[x][0] = __Reference_pos_gps_west;
+                stm_Reference_pos_gps_west[x][1] = current_time.years + "-";
+                stm_Reference_pos_gps_west[x][1] += current_time.months + "-";
+                stm_Reference_pos_gps_west[x][1] += current_time.days + ":";
+                stm_Reference_pos_gps_west[x][1] += current_time.hours + "-";
+                stm_Reference_pos_gps_west[x][1] += current_time.minutes + "-";
+                stm_Reference_pos_gps_west[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            stm__Reference_pos_gps_west[0][0].clear();
-            stm__Reference_pos_gps_west[0][1].clear();
+            stm_Reference_pos_gps_west[0][0].clear();
+            stm_Reference_pos_gps_west[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                stm__Reference_pos_gps_west[y][0] = stm__Reference_pos_gps_west[y + 1][0];
-                stm__Reference_pos_gps_west[y][1] = stm__Reference_pos_gps_west[y + 1][1];
+                stm_Reference_pos_gps_west[y][0] = stm_Reference_pos_gps_west[y + 1][0];
+                stm_Reference_pos_gps_west[y][1] = stm_Reference_pos_gps_west[y + 1][1];
             }
 
-            stm__Reference_pos_gps_west[1000][0] = __Reference_pos_gps_west;
-            stm__Reference_pos_gps_west[1000][1] = current_time.years + "-";
-            stm__Reference_pos_gps_west[1000][1] += current_time.months + "-";
-            stm__Reference_pos_gps_west[1000][1] += current_time.days + ":";
-            stm__Reference_pos_gps_west[1000][1] += current_time.hours + "-";
-            stm__Reference_pos_gps_west[1000][1] += current_time.minutes + "-";
-            stm__Reference_pos_gps_west[1000][1] += current_time.seconds;
+            stm_Reference_pos_gps_west[1000][0] = __Reference_pos_gps_west;
+            stm_Reference_pos_gps_west[1000][1] = current_time.years + "-";
+            stm_Reference_pos_gps_west[1000][1] += current_time.months + "-";
+            stm_Reference_pos_gps_west[1000][1] += current_time.days + ":";
+            stm_Reference_pos_gps_west[1000][1] += current_time.hours + "-";
+            stm_Reference_pos_gps_west[1000][1] += current_time.minutes + "-";
+            stm_Reference_pos_gps_west[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -1110,37 +1170,41 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (stm__Reference_pos_gps_elevation[x][0] == "")
+            if (stm_Reference_pos_gps_elevation[x][0] == "")
             {
-                stm__Reference_pos_gps_elevation[x][0] = __Reference_pos_gps_elevation;
-                stm__Reference_pos_gps_elevation[x][1] = current_time.years + "-";
-                stm__Reference_pos_gps_elevation[x][1] += current_time.months + "-";
-                stm__Reference_pos_gps_elevation[x][1] += current_time.days + ":";
-                stm__Reference_pos_gps_elevation[x][1] += current_time.hours + "-";
-                stm__Reference_pos_gps_elevation[x][1] += current_time.minutes + "-";
-                stm__Reference_pos_gps_elevation[x][1] += current_time.seconds;
+                stm_Reference_pos_gps_elevation[x][0] = __Reference_pos_gps_elevation;
+                stm_Reference_pos_gps_elevation[x][1] = current_time.years + "-";
+                stm_Reference_pos_gps_elevation[x][1] += current_time.months + "-";
+                stm_Reference_pos_gps_elevation[x][1] += current_time.days + ":";
+                stm_Reference_pos_gps_elevation[x][1] += current_time.hours + "-";
+                stm_Reference_pos_gps_elevation[x][1] += current_time.minutes + "-";
+                stm_Reference_pos_gps_elevation[x][1] += current_time.seconds;
+
+                // Debug
+                cout << "stm_vision_objects_image_path[x][0]: " << stm_vision_objects_image_path[x][0] << endl;
+                cout << "stm_vision_objects_image_path[x][1]: " << stm_vision_objects_image_path[x][1] << endl;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            stm__Reference_pos_gps_elevation[0][0].clear();
-            stm__Reference_pos_gps_elevation[0][1].clear();
+            stm_Reference_pos_gps_elevation[0][0].clear();
+            stm_Reference_pos_gps_elevation[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                stm__Reference_pos_gps_elevation[y][0] = stm__Reference_pos_gps_elevation[y + 1][0];
-                stm__Reference_pos_gps_elevation[y][1] = stm__Reference_pos_gps_elevation[y + 1][1];
+                stm_Reference_pos_gps_elevation[y][0] = stm_Reference_pos_gps_elevation[y + 1][0];
+                stm_Reference_pos_gps_elevation[y][1] = stm_Reference_pos_gps_elevation[y + 1][1];
             }
 
-            stm__Reference_pos_gps_elevation[1000][0] = __Reference_pos_gps_elevation;
-            stm__Reference_pos_gps_elevation[1000][1] = current_time.years + "-";
-            stm__Reference_pos_gps_elevation[1000][1] += current_time.months + "-";
-            stm__Reference_pos_gps_elevation[1000][1] += current_time.days + ":";
-            stm__Reference_pos_gps_elevation[1000][1] += current_time.hours + "-";
-            stm__Reference_pos_gps_elevation[1000][1] += current_time.minutes + "-";
-            stm__Reference_pos_gps_elevation[1000][1] += current_time.seconds;
+            stm_Reference_pos_gps_elevation[1000][0] = __Reference_pos_gps_elevation;
+            stm_Reference_pos_gps_elevation[1000][1] = current_time.years + "-";
+            stm_Reference_pos_gps_elevation[1000][1] += current_time.months + "-";
+            stm_Reference_pos_gps_elevation[1000][1] += current_time.days + ":";
+            stm_Reference_pos_gps_elevation[1000][1] += current_time.hours + "-";
+            stm_Reference_pos_gps_elevation[1000][1] += current_time.minutes + "-";
+            stm_Reference_pos_gps_elevation[1000][1] += current_time.seconds;
             boolean = false;
         }
     }
@@ -1148,37 +1212,37 @@ void _ShortTermMemory::AddShortTermMemory(string _vision_path_camera1, string _v
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (stm__Reference_pos_gps_image[x][0] == "")
+            if (stm_Reference_pos_gps_image[x][0] == "")
             {
-                stm__Reference_pos_gps_image[x][0] = __Reference_pos_gps_image;
-                stm__Reference_pos_gps_image[x][1] = current_time.years + "-";
-                stm__Reference_pos_gps_image[x][1] += current_time.months + "-";
-                stm__Reference_pos_gps_image[x][1] += current_time.days + ":";
-                stm__Reference_pos_gps_image[x][1] += current_time.hours + "-";
-                stm__Reference_pos_gps_image[x][1] += current_time.minutes + "-";
-                stm__Reference_pos_gps_image[x][1] += current_time.seconds;
+                stm_Reference_pos_gps_image[x][0] = __Reference_pos_gps_image;
+                stm_Reference_pos_gps_image[x][1] = current_time.years + "-";
+                stm_Reference_pos_gps_image[x][1] += current_time.months + "-";
+                stm_Reference_pos_gps_image[x][1] += current_time.days + ":";
+                stm_Reference_pos_gps_image[x][1] += current_time.hours + "-";
+                stm_Reference_pos_gps_image[x][1] += current_time.minutes + "-";
+                stm_Reference_pos_gps_image[x][1] += current_time.seconds;
                 boolean = true;
             }
         }
 
         if (boolean)
         {
-            stm__Reference_pos_gps_image[0][0].clear();
-            stm__Reference_pos_gps_image[0][1].clear();
+            stm_Reference_pos_gps_image[0][0].clear();
+            stm_Reference_pos_gps_image[0][1].clear();
 
             for (int y = 0; y < 1000; y++)
             {
-                stm__Reference_pos_gps_image[y][0] = stm__Reference_pos_gps_image[y + 1][0];
-                stm__Reference_pos_gps_image[y][1] = stm__Reference_pos_gps_image[y + 1][1];
+                stm_Reference_pos_gps_image[y][0] = stm_Reference_pos_gps_image[y + 1][0];
+                stm_Reference_pos_gps_image[y][1] = stm_Reference_pos_gps_image[y + 1][1];
             }
 
-            stm__Reference_pos_gps_image[1000][0] = __Reference_pos_gps_image;
-            stm__Reference_pos_gps_image[1000][1] = current_time.years + "-";
-            stm__Reference_pos_gps_image[1000][1] += current_time.months + "-";
-            stm__Reference_pos_gps_image[1000][1] += current_time.days + ":";
-            stm__Reference_pos_gps_image[1000][1] += current_time.hours + "-";
-            stm__Reference_pos_gps_image[1000][1] += current_time.minutes + "-";
-            stm__Reference_pos_gps_image[1000][1] += current_time.seconds;
+            stm_Reference_pos_gps_image[1000][0] = __Reference_pos_gps_image;
+            stm_Reference_pos_gps_image[1000][1] = current_time.years + "-";
+            stm_Reference_pos_gps_image[1000][1] += current_time.months + "-";
+            stm_Reference_pos_gps_image[1000][1] += current_time.days + ":";
+            stm_Reference_pos_gps_image[1000][1] += current_time.hours + "-";
+            stm_Reference_pos_gps_image[1000][1] += current_time.minutes + "-";
+            stm_Reference_pos_gps_image[1000][1] += current_time.seconds;
             boolean = false;
         }
     }

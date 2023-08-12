@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2022 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,6 +26,7 @@
 #include "Utilities.h"
 
 using namespace std;
+using namespace filesystem;
 
 // Store important objects to MySQL database
 void StoreObject()
@@ -62,7 +63,7 @@ void StoreObject()
     string date;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, "127.0.0.1", mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
 
     // Search the objects array for important objects
     while (true)
@@ -584,8 +585,7 @@ void _DatabaseFunctions::MemoryManagement()
     int vision_storage_limit_int;
     istringstream(vision_storage_limit) >> vision_storage_limit_int;
 
-    struct 
-        _slist* headerlist = NULL;
+    struct _slist* headerlist = NULL;
 
     curl_global_init(CURL_GLOBAL_ALL);
 
