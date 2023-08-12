@@ -20,8 +20,7 @@
 
 using namespace std;
 
-class _Scrapers
+class _Drawing
 {
-public:
-    static void NewsWatchingScraper();
+
 };

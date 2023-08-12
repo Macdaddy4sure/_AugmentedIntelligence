@@ -20,8 +20,8 @@
 
 using namespace std;
 
-class _Scrapers
+class _Citations
 {
 public:
-    static void NewsWatchingScraper();
+    static string WikiMediaCitation(string wiki_name, string article_name);
 };

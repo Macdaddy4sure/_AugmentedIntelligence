@@ -20,8 +20,8 @@
 
 using namespace std;
 
-class _Scrapers
+class _NetworkingClient
 {
 public:
-    static void NewsWatchingScraper();
+    static void StartNetworkingClient();
 };

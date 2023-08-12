@@ -17,11 +17,3 @@
 */
 
 #include "AugmentedIntelligence.h"
-
-using namespace std;
-
-class _Scrapers
-{
-public:
-    static void NewsWatchingScraper();
-};

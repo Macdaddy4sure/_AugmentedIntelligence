@@ -1,5 +1,7 @@
 #pragma once
 
+#pragma once
+
 /*
     Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
@@ -19,9 +21,3 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
-
-class _Scrapers
-{
-public:
-    static void NewsWatchingScraper();
-};
