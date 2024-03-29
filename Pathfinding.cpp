@@ -15,11 +15,3 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Awareness.h"
-
-using namespace std;
-
-void _Awareness::AwarenessGUI()
-{
-
-}

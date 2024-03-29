@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,38 +14,7 @@
     limitations under the License.
 */
 
-/*
-    Copyright(c) 1999 - 2016 Carnegie Mellon University.  All rights
-    reserved.
 
-    Redistribution and use in source and binary forms, with or without
-    modification, are permitted provided that the following conditions
-    are met:
-
-    1. Redistributions of source code must retain the above copyright
-    notice, this list of conditionsand the following disclaimer.
-
-    2. Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditionsand the following disclaimer in
-    the documentationand /or other materials provided with the
-    distribution.
-
-    This work was supported in part by funding from the Defense Advanced
-    Research Projects Agency and the National Science Foundation of the
-    United States of America, and the CMU Sphinx Speech Consortium.
-
-    THIS SOFTWARE IS PROVIDED BY CARNEGIE MELLON UNIVERSITY ``AS IS'' AND
-    ANY EXPRESSED OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO,
-    THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR
-    PURPOSE ARE DISCLAIMED.IN NO EVENT SHALL CARNEGIE MELLON UNIVERSITY
-    NOR ITS EMPLOYEES BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES(INCLUDING, BUT NOT
-    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-*/
 
 #include "AugmentedIntelligence.h"
 #include "Sound.h"
@@ -78,13 +47,17 @@ using namespace std;
 //  Writing()                                               | ??? Shoulkd be a visual trigger                              | Intermediate
 //  Computer()                                              | Using computer???, should be a visual trigger                | Intermediate to Challenging (Requires TensorFlow and/or OpenCV to know when a user is looking at a computer monitor)
 //  Gaming()                                                | Playing Fallout 4 on PS4, should be a visual trigger         | Intermediate to Challenging (Requires TensorFlow anmd/or OpenCV to know when a user is playing a game)
-//  HomeDatabaseSearch()                                              | Get fallacy for given string                                 | Intermediate to Challenging
+//  HomeDatabaseSearch()                                    | Get fallacy for given string                                 | Intermediate to Challenging
 //  BiasCheck()                                             | Get bias for given string and data                           | Challenging, (Requires TensorFlow and/or OpenCV to check the environment for cues relating to bias)
 //  CreateDeductiveArgument()                               | Create deductive syllogism / deductive argument from data    | Challenging
 //  CreateInductiveArgument()                               | Create inductive syllogism / inductive argument from data    | Challenging
 //  GetShortTermMemory()                                    | Dump short term sound memory                                 | Easy
 //  GetShortTermMemory()                                    | Dump short term visual memory                                | Easy
 //  CreateReminder()                                        | Create a reminder of x                                       | Easy
+//
+// Commands for transcription
+//  1. Can you repeat that please?
+//      a. Test if the transcription contains ords that were not caught by whispe. Also check if the person is looking at you and words are being missed.
 void _Sound::SoundListener()
 {
     string text;
@@ -143,11 +116,11 @@ void _Sound::SoundListener()
             }
             else if (words[j] == "create" && words[j + 1] == "deductive" && words[j + 2] == "argument")
             {
-                _NLP::CreateDeductiveArgument(text);
+                //_NLP::CreateDeductiveArgument(text);
             }
             else if (words[j] == "create" && words[j + 1] == "inductive" && words[j + 2] == "argument")
             {
-                _NLP::CreateInductiveArgument(text);
+                //_NLP::CreateInductiveArgument(text);
             }
             else if ((words[j] == "convert" && words[j + 1] == "units") || words[j] == "units" && words[j + 1] == "conversion")
             {
@@ -207,12 +180,12 @@ void _Sound::SoundRAW()
         command += sound_codec;
         command += "\"-ar 44100 -b:a \"";
         command += sound_bitrate;
-        command += "k\" -segment_time 300 -ac 1 \"";
+        command += "\" -segment_time 300 -ac 1 \"";
         command += sound_directory;
         command += date;
-        command += ".mp3 ";
+        command += ".wav ";
         filename = date;
-        filename += ".mp3";
+        filename += ".wav ";
         sound_directory += date;
         sound_directory += filename;
 
@@ -349,53 +322,214 @@ void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int sea
             }
         }
     }
-    else if (raw_recognition == "recognition")
-    {
-        table_name = "SoundRecognition";
-
-        conn = mysql_init(0);
-        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
-        result = mysql_use_result(conn);
-
-        if (conn)
-        {
-            query1 << "SELECT * FROM " << table_name;
-            sql1 = query1.str();
-            /*cout << "SQL1: " << sql1 << endl;*/
-            mysql_query(conn, sql1.c_str());
-            MYSQL_RES* result = mysql_store_result(conn);
-
-            // Get the file name
-            while (row = mysql_fetch_row(result))
-            {
-
-            }
-        }
-    }
-    else if (raw_recognition == "both")
-    {
-        // Get the text and the raw sound
-        string table_name1 = "SoundRecognition";
-        table_name = "SoundRAW";
-        
-        conn = mysql_init(0);
-        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
-        result = mysql_use_result(conn);
-
-        if (conn)
-        {
-            query1 << "SELECT * FROM " << table_name;
-            sql1 = query1.str();
-            /*cout << "SQL1: " << sql1 << endl;*/
-            mysql_query(conn, sql1.c_str());
-            MYSQL_RES* result = mysql_store_result(conn);
-
-            // Get the file name
-            while (row = mysql_fetch_row(result))
-            {
-
-            }
-        }
-    }
 }
 
+string* _Sound::SoundRecognition(string wav_location)
+{
+    string model_path = "D:/_test3_audio/saved_model"; // Make this into a setting...
+    string labelsPath = "D:/_test3_audio/saved_model/assets/labels.csv";
+
+    std::vector<float> audioSamples = _Sound::loadWavFile(wav_location);
+    int sampleRate = 44100;
+
+    TF_Tensor* audio_tensor = _Sound::ImportWaveformAsTensor(audioSamples, sampleRate);
+
+    // Initialize TensorFlow
+    TF_Status* status = TF_NewStatus();
+
+    //TF_Graph* graph = LoadGraph
+    TF_Graph* graph = TF_NewGraph();
+
+    // Get session options initialization
+    TF_SessionOptions* options = TF_NewSessionOptions();
+
+    TF_Buffer* run_opts = nullptr;
+
+    const char* tags = "serve";
+    TF_Session* session = TF_LoadSessionFromSavedModel(options, nullptr, model_path.c_str(), &tags, 1, graph, nullptr, status);
+
+    if (TF_GetCode(status) == TF_OK)
+    {
+        printf("Model loaded successfully\n");
+    }
+    else
+    {
+        printf("Error loading model\n");
+        return 0;
+    }
+
+    // Run object detection model DEBUG
+    //_Sound::RunSession(session, graph, status, options, audio_tensor, labelsPath);
+
+    // Define input operation
+    TF_Output input_op = { TF_GraphOperationByName(graph, "serving_default_waveform"), 0 };
+
+    // Define output operations
+    std::vector<TF_Output> output_ops {
+        { TF_GraphOperationByName(graph, "StatefulPartitionedCall"), 0 },
+        { TF_GraphOperationByName(graph, "StatefulPartitionedCall"), 1 },
+        { TF_GraphOperationByName(graph, "StatefulPartitionedCall"), 2 },
+    };
+
+    std::vector<TF_Tensor*> input_tensors = { audio_tensor };
+    TF_Tensor* outputTensors[3] = { nullptr, nullptr, nullptr };
+
+    if (TF_GetCode(status) != TF_OK)
+    {
+        fprintf(stderr, "Error: %s\n", TF_Message(status));
+        // Handle error appropriately
+    }
+
+    // Run the session
+    TF_SessionRun(session, nullptr,
+        &input_op, input_tensors.data(), input_tensors.size(),
+        output_ops.data(), outputTensors, output_ops.size(),
+        nullptr, 0, nullptr, status);
+
+    if (TF_GetCode(status) == TF_OK)
+    {
+        printf("Session run successfully\n");
+    }
+    else
+    {
+        fprintf(stderr, "Session run error: %s\n", TF_Message(status));
+    }
+
+    // Load the human readable labels into memory
+    std::string* classLabels = _Sound::LoadClassLabels(labelsPath);
+
+    // Process the output tensors to extract scores, and class IDs
+    // Assuming outputTensors[0] contains the scores tensor.
+    if (outputTensors[0] != nullptr)
+    {
+        float* scoresData = static_cast<float*>(TF_TensorData(outputTensors[0]));
+        auto numFrames = TF_Dim(outputTensors[0], 0);
+        auto numClasses = TF_Dim(outputTensors[0], 1);
+
+        for (int i = 0; i < numFrames; ++i)
+        {
+            float maxScore = scoresData[i * numClasses]; // Initialize with the score of the first class
+            int maxScoreIndex = 0;
+
+            for (int j = 0; j < numClasses; ++j)
+            {
+                float score = scoresData[i * numClasses + j];
+
+                // Process score, e.g., by checking if it's above a threshold.
+                if (score > maxScore)
+                {
+                    maxScore = score;
+                    maxScoreIndex = j;
+                }
+            }
+
+            std::cout << "Frame " << i << ": Most probable class = " << classLabels[maxScoreIndex]
+                << ", Score = " << maxScore << std::endl;
+        }
+    }
+    // Assuming outputTensors[1] contains the embeddings tensor.
+    if (outputTensors[1] != nullptr)
+    {
+        float* embeddingsData = static_cast<float*>(TF_TensorData(outputTensors[1]));
+        auto numFrames = TF_Dim(outputTensors[1], 0);
+        const int embeddingSize = 1024; // Typically 1024 for YAMNet
+
+        for (int i = 0; i < numFrames; ++i)
+        {
+            std::vector<float> embedding(embeddingSize);
+
+            for (int j = 0; j < embeddingSize; ++j)
+            {
+                embedding[j] = embeddingsData[i * embeddingSize + j];
+            }
+            // Now `embedding` contains the 1024-dimensional vector for frame `i`.
+            // Further processing can be done here.
+        }
+    }
+    // Assuming outputTensors[2] contains the spectrogram tensor.
+    if (outputTensors[2] != nullptr)
+    {
+        float* spectrogramData = static_cast<float*>(TF_TensorData(outputTensors[2]));
+        auto numFrames = TF_Dim(outputTensors[2], 0);
+        auto numBins = TF_Dim(outputTensors[2], 1);
+
+        for (int i = 0; i < numFrames; ++i)
+        {
+            for (int j = 0; j < numBins; ++j)
+            {
+                float binValue = spectrogramData[i * numBins + j];
+                // Process binValue, e.g., for visualization or analysis.
+            }
+        }
+    }
+
+    // Cleanup
+    input_tensors.clear();
+    TF_DeleteTensor(audio_tensor);
+    TF_DeleteTensor(outputTensors[0]);
+    TF_DeleteTensor(outputTensors[1]);
+    TF_DeleteTensor(outputTensors[2]);
+    TF_DeleteSession(session, status);
+    TF_DeleteSessionOptions(options);
+}
+
+std::vector<float> _Sound::loadWavFile(std::string filename)
+{
+    // Open the WAV file
+    SF_INFO sfinfo;
+    SNDFILE* file = sf_open(filename.c_str(), SFM_READ, &sfinfo);
+
+    if (file == nullptr)
+    {
+        std::cerr << "Failed to open file: " << filename << std::endl;
+        return {}; // Return an empty vector on failure
+    }
+
+    // Prepare a buffer to hold all samples
+    std::vector<float> samples(sfinfo.frames * sfinfo.channels);
+
+    // Read the samples into the buffer
+    sf_count_t num_samples_read = sf_readf_float(file, samples.data(), sfinfo.frames);
+
+    if (num_samples_read < sfinfo.frames)
+    {
+        std::cerr << "Failed to read all samples from file: " << filename << std::endl;
+        // Handle partial read or error appropriately
+    }
+
+    // Close the file
+    sf_close(file);
+
+    return samples; // Return the loaded samples
+}
+
+TF_Tensor* _Sound::ImportWaveformAsTensor(const std::vector<float>& audioSamples, int sampleRate)
+{
+    // Dimensions of the tensor. Assuming audioSamples is 1D for simplicity.
+    int64_t dims[] = { static_cast<int64_t>(audioSamples.size()) };
+
+    // Create a TensorFlow tensor with the dimensions and data type.
+    TF_Tensor* tensor = TF_AllocateTensor(TF_FLOAT, dims, 1, audioSamples.size() * sizeof(float));
+
+    // Copy audio samples into the TensorFlow tensor.
+    std::memcpy(TF_TensorData(tensor), audioSamples.data(), audioSamples.size() * sizeof(float));
+
+    // At this point, `tensor` contains your audio data and can be used with TensorFlow operations.
+    return tensor;
+}
+
+std::string* _Sound::LoadClassLabels(const std::string& filePath)
+{
+    std::ifstream file(filePath);
+    std::string line;
+    std::string* labels = new std::string[300];
+    int number = 0;
+
+    while (std::getline(file, line))
+    {
+        labels[number] = line;
+        number++;
+    }
+
+    return labels;
+}

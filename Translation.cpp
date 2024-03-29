@@ -15,11 +15,8 @@
 */
 
 #include "AugmentedIntelligence.h"
-#include "Awareness.h"
+#include "Working-Memory.h"
+#include "Short-Term Memory.h"
+#include "Translation.h"
 
 using namespace std;
-
-void _Awareness::AwarenessGUI()
-{
-
-}

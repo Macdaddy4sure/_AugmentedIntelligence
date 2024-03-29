@@ -27,6 +27,7 @@
 using namespace std;
 
 /*
+
     Adaptable Thinking
     Adaptable thinking gives a child the ability to problem solve or adjust to situations when necessary and overcome instantaneous obstacles.This skill also applies to a child’s ability to see things from someone else’s perspective.A child who exhibits this type of cognitive thinking isn’t stumped by everyday hurdles or a difference in opinion.An example of adaptable thinking is a child who encounters a roadblock on their walk to school and devises an alternate route.
 
@@ -47,4 +48,5 @@ using namespace std;
 
     Organization
     Organization skills addresses a child’s ability to efficiently arrange materials or thoughts in an orderly fashion.Organization is vital to a child’s growth and development as it allows them to tell a succinct story or keep track of possessions.Efficient organization is displayed when a child designates a distinct folder or notebook to each school subject or consistently maintains any sort of systematic method.
+
 */

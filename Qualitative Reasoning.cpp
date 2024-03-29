@@ -36,6 +36,7 @@
 #include "Needs.h"
 #include "NetworkingClient.h"
 #include "NLP.h"
+#include "NLU.h"
 #include "Prediction.h"
 #include "Reading.h"
 #include "Smart Phone.h"

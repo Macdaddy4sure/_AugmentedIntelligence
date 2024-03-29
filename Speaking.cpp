@@ -42,7 +42,7 @@ using namespace std;
 //}
 
 // The following function will listen for a word from the speaking thread
-string _NLP::SpeakingQueueWord(string word)
+string _Speaking::SpeakingQueueWord(string word)
 {
     int spaces = 0;
 
@@ -57,7 +57,7 @@ string _NLP::SpeakingQueueWord(string word)
 }
 
 // The following function will listen for sentences from the speaking thread
-string _NLP::SpeakingQueueSentence(string* word)
+string _Speaking::SpeakingQueueSentence(string* word)
 {
     int spaces = 0;
 

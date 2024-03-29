@@ -27,8 +27,8 @@ using namespace std;
 void _Reference::InitReference()
 {
     _dictionary_terms = _Reference::init_dictionary();
-    _wikisimple_articles = _Reference::init_wikisimple_articles();
-    _wikipedia_articles = _Reference::init_wikipedia_articles();
+    //_wikisimple_articles = _Reference::init_wikisimple_articles();
+    //_wikipedia_articles = _Reference::init_wikipedia_articles();
     _rationalism_terms = _Reference::init_rationalism();
     _psychology_terms = _Reference::init_psychology();
     _cognitive_psychology_terms = _Reference::init_cognitive_psychology();

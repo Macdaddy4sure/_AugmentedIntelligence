@@ -1727,7 +1727,7 @@ bool _Bias::StatusQuoBias(string sentence)
 
 // Stereotyping
 // Expecting a member of a group to have certain characteristics without having actual information about that individual.
-bool _Bias::Stereotypeing(string sentence)
+bool _Bias::Stereotyping(string sentence)
 {
     // Get the definition for the bias
     // 1. bias Additive
@@ -1755,6 +1755,7 @@ bool _Bias::SubAdditiveityEffect(string sentence)
     double* result = _NLU::VectorAddition(definition, result);
     double* result_additive = _NLU::VectorAddition(definition_additive, result_additive);
     double* result_average = _NLU::VectorAddition(definition_average, result_average);
+    //double* result_difference = _NLU::VectorDifference(definition, result);
 }
 
 // Subjective validation

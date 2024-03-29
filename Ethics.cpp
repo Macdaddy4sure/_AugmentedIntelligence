@@ -28,7 +28,7 @@
 using namespace std;
 
 // This function will be for filtering speaking for ethics violations or rude and innapropriate speach
-string _NLP::EthicsCheckSpeaking(string text)
+string _Ethics::EthicsCheckSpeaking(string text)
 {
     // 1. Get queue of words
     // 2. Connect to ethics database
@@ -36,7 +36,7 @@ string _NLP::EthicsCheckSpeaking(string text)
 }
 
 // This function will be for filtering actions for ethics violations or rude and innapropriate behavior
-string _NLP::EthicsCheckAction(string action)
+string _Ethics::EthicsCheckAction(string action)
 {
 
 }

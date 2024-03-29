@@ -38,11 +38,19 @@ using namespace std;
 //    long long milliseconds;
 //};
 
-// This function writes new data to short term memory
+void _WorkingMemory::WorkingMemory()
+{
+    for (;;)
+    {
+        //_WorkingMemory::AddWorkingMemory();
+    }
+}
+
+// This function writes new data to working memory
 //  Invokation: This function will be invoked as its own thread as all data members are updated
 //  Potential problem: The CPU might write to short term memory too quickly. Functions that use short term memory might fail to read STM effectivelyas the data members are moved arround too fast
 //      To negate this, functions that use STM can execute as fast as they want, however, additions and modifications to STM must wait a small determined time
-void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _vision_path_camera2, string _sound_path, string _speech_dialogue, string _reading_text, string _action1_text, string _action2_text, string _action3_text, string _vision_objects_image_path, string _vision_actions_image_path, string _vision_object_text, string _vision_analysis_text, string _typing_text, string __Reference_pos_gps_north, string __Reference_pos_gps_west, string __Reference_pos_gps_elevation, string __Reference_pos_gps_image, string _pos_gps_north, string _pos_gps_west, string _pos_gps_elevation, string _pos_x, string _pos_y, string _pos_z)
+void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _vision_path_camera2, string _sound_path, string _speech_dialogue, string _reading_text, string _action1_text, string _action2_text, string _action3_text, string _vision_objects_image_path, string _vision_actions_image_path, string _vision_object_text, string _vision_analysis_text, string _typing_text, string __Reference_pos_gps_north, string __Reference_pos_gps_west, string __Reference_pos_gps_elevation, string __Reference_pos_gps_image, string _pos_gps_north, string _pos_gps_west, string _pos_gps_elevation, string _pos_x, string _pos_y, string _pos_z, string _simple_text, string _simple_image)
 {
     TimeFormat current_time;
     int wait_milliseconds = 100;
@@ -477,7 +485,7 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
     {
         for (int x = 0; x < 1000; x++)
         {
-            if (wm_vision_actions_image_path[x][0] == "")
+            if (wm_vision_objects_text[x][0] == "")
             {
                 wm_vision_objects_text[x][0] = _vision_object_text;
                 wm_vision_objects_text[x][1] = current_time.years + "-";
@@ -967,6 +975,82 @@ void _WorkingMemory::AddWorkingMemory(string _vision_path_camera1, string _visio
             boolean = false;
         }
     }
+    if (_simple_text != "")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_simple_text[x][0] == "")
+            {
+                wm_simple_text[x][0] = _simple_text;
+                wm_simple_text[x][1] = current_time.years + "-";
+                wm_simple_text[x][1] += current_time.months + "-";
+                wm_simple_text[x][1] += current_time.days + ":";
+                wm_simple_text[x][1] += current_time.hours + "-";
+                wm_simple_text[x][1] += current_time.minutes + "-";
+                wm_simple_text[x][1] += current_time.seconds;
+                boolean = true;
+            }
+        }
+
+        if (boolean)
+        {
+            wm_simple_text[0][0].clear();
+            wm_simple_text[0][1].clear();
+
+            for (int y = 0; y < 1000; y++)
+            {
+                wm_simple_text[y][0] = wm_simple_text[y + 1][0];
+                wm_simple_text[y][1] = wm_simple_text[y + 1][1];
+            }
+
+            wm_simple_text[1000][0] = _simple_text;
+            wm_simple_text[1000][1] = current_time.years + "-";
+            wm_simple_text[1000][1] += current_time.months + "-";
+            wm_simple_text[1000][1] += current_time.days + ":";
+            wm_simple_text[1000][1] += current_time.hours + "-";
+            wm_simple_text[1000][1] += current_time.minutes + "-";
+            wm_simple_text[1000][1] += current_time.seconds;
+            boolean = false;
+        }
+    }
+    if (_simple_image != "")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_simple_image[x][0] == "")
+            {
+                wm_simple_image[x][0] = _simple_image;
+                wm_simple_image[x][1] = current_time.years + "-";
+                wm_simple_image[x][1] += current_time.months + "-";
+                wm_simple_image[x][1] += current_time.days + ":";
+                wm_simple_image[x][1] += current_time.hours + "-";
+                wm_simple_image[x][1] += current_time.minutes + "-";
+                wm_simple_image[x][1] += current_time.seconds;
+                boolean = true;
+            }
+        }
+
+        if (boolean)
+        {
+            wm_simple_image[0][0].clear();
+            wm_simple_image[0][1].clear();
+
+            for (int y = 0; y < 1000; y++)
+            {
+                wm_simple_image[y][0] = wm_simple_image[y + 1][0];
+                wm_simple_image[y][1] = wm_simple_image[y + 1][1];
+            }
+
+            wm_simple_image[1000][0] = _simple_image;
+            wm_simple_image[1000][1] = current_time.years + "-";
+            wm_simple_image[1000][1] += current_time.months + "-";
+            wm_simple_image[1000][1] += current_time.days + ":";
+            wm_simple_image[1000][1] += current_time.hours + "-";
+            wm_simple_image[1000][1] += current_time.minutes + "-";
+            wm_simple_image[1000][1] += current_time.seconds;
+            boolean = false;
+        }
+    }
 }
 
 string* _WorkingMemory::MemoryAnalysis(string text, string prev_date, string prev_date2)
@@ -992,4 +1076,44 @@ string* _WorkingMemory::MemorySearch(string text, string prev_date, string prev_
 string* _WorkingMemory::MemorySearch(string text)
 {
 
+}
+
+void _WorkingMemory::ClearWorkingMemory()
+{
+    for (int x = 0; x < 1000; x++)
+    {
+        for (int y = 0; y < 2; y++)
+        {
+            wm_vision_path_camera1[x][y].clear();
+            wm_vision_path_camera2[x][y].clear();
+            wm_longterm_memory[x][y].clear();
+            wm_sound_path[x][y].clear();
+            wm_speech_dialogue[x][y].clear();
+            wm_action1_text[x][y].clear();
+            wm_action1_text[x][y].clear();
+            wm_action3_text[x][y].clear();
+            wm_text_identification[x][y].clear();
+            wm_reading_text[x][y].clear();
+            wm_reading_image[x][y].clear();
+            wm_algebra_text[x][y].clear();
+            wm_vision_objects_image_path[x][y].clear();
+            wm_vision_actions_image_path[x][y].clear();
+            wm_vision_objects_text[x][y].clear();
+            wm_vision_analysis_text[x][y].clear();
+            wm_typing_text[x][y].clear();
+            wm_Reference_pos_gps_north[x][y].clear();
+            wm_Reference_pos_gps_west[x][y].clear();
+            wm_Reference_pos_gps_elevation[x][y].clear();
+            wm_Reference_pos_gps_image[x][y].clear();
+            wm_pos_gps_north_text[x][y].clear();
+            wm_pos_gps_west_text[x][y].clear();
+            wm_pos_gps_elevation_text[x][y].clear();
+            wm_pos_x[x][y].clear();
+            wm_pos_y[x][y].clear();
+            wm_pos_z[x][y].clear();
+            wm_simple_text[x][y].clear();
+            wm_simple_image[x][y].clear();
+
+        }
+    }
 }

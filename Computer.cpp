@@ -139,23 +139,23 @@ void _Computers::TrackCursor()
 {
 	POINT p;
 
-	if (GetCursorPos(&p))
-	{
-		//cursor position now in p.x and p.y
-	}
+	GetCursorPos(&p);
 }
 
 void _Computers::getLeftMouseClick()
 {
 	if (GetKeyState(VK_LBUTTON))
-	{   //finding clicked position
+	{
+		//finding clicked position
 		HWND hWnd = FindWindowA(0, ("Motion Paths"));
 		LPDWORD pid;
 		GetWindowThreadProcessId(hWnd, pid);
+
 		if (hWnd) { cout << "Found" << endl; }
 
 		POINT p;
 		GetCursorPos(&p);
+
 		if (ScreenToClient(hWnd, &p))
 		{
 			int mouseX = p.x;
@@ -168,10 +168,12 @@ void _Computers::getLeftMouseClick()
 void _Computers::getRightMouseClick()
 {
 	if (GetKeyState(VK_RBUTTON))
-	{   //finding clicked position
+	{   
+		//finding clicked position
 		HWND hWnd = FindWindowA(0, ("Motion Paths"));
 		LPDWORD pid;
 		GetWindowThreadProcessId(hWnd, pid);
+
 		if (hWnd) { cout << "Found" << endl; }
 
 		POINT p;
@@ -189,7 +191,8 @@ void _Computers::getRightMouseClick()
 void _Computers::getMiddleMouseClick()
 {
 	if (GetKeyState(VK_LBUTTON))
-	{   //finding clicked position
+	{
+		//finding clicked position
 		HWND hWnd = FindWindowA(0, ("Motion Paths"));
 		LPDWORD pid;
 		GetWindowThreadProcessId(hWnd, pid);
@@ -210,7 +213,8 @@ void _Computers::getMiddleMouseClick()
 void _Computers::getBackMouseClick()
 {
 	if (GetKeyState(VK_LBUTTON))
-	{   //finding clicked position
+	{
+		//finding clicked position
 		HWND hWnd = FindWindowA(0, ("Motion Paths"));
 		LPDWORD pid;
 		GetWindowThreadProcessId(hWnd, pid);
@@ -230,7 +234,8 @@ void _Computers::getBackMouseClick()
 void _Computers::getKeypresses()
 {
 	if (GetKeyState(VK_LBUTTON))
-	{   //finding clicked position
+	{
+		//finding clicked position
 		HWND hWnd = FindWindowA(0, ("Motion Paths"));
 		LPDWORD pid;
 		GetWindowThreadProcessId(hWnd, pid);
@@ -238,6 +243,7 @@ void _Computers::getKeypresses()
 
 		POINT p;
 		GetCursorPos(&p);
+
 		if (ScreenToClient(hWnd, &p))
 		{
 			int mouseX = p.x;
@@ -358,7 +364,7 @@ string _Computers::CurrentTask()
 		ExitProcess(1);
 
 	// Send something to this process's stdout using printf.
-	printf("\n ** This is a message from the child process. ** \n");
+	//printf("\n ** This is a message from the child process. ** \n");
 
 	// This simple algorithm uses the existence of the pipes to control execution.
 	// It relies on the pipe buffers to ensure that no data is lost.
@@ -378,7 +384,6 @@ string _Computers::CurrentTask()
 		if (!bSuccess)
 			break;
 	}
-	return 0;
 }
 
 // Use object detection with pytorch to track the taskbar, the start menu, the icons, the flyout icons, the clock, and the tool tip menu

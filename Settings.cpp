@@ -32,85 +32,85 @@ void _Settings::Settings()
 	bool boolean2 = false;
 
 	// General Settings
-	terms_conditions = _Settings::GetTermsConditions();
-	working_memory_enabled = _Settings::GetWorkingMemoryEnable();
-	working_memory_limit = _Settings::GetWorkingMemoryLimit();
-	short_term_memory_enabled = _Settings::GetShortTermMemoryEnabled();
-	short_term_memory_time = _Settings::GetShortTermMemoryTime();
-	long_term_memory_enabled = _Settings::GetLongTermMemoryEnabled();
-	long_term_memory_limit = _Settings::GetLongTermMemoryLimit();
-	sound_memory_enabled = _Settings::GetSoundMemoryEnable();
-	speech_memory_enabled = _Settings::GetSpeechMemoryEnabled();
-	speech_recognition = _Settings::GetSpeechRecognitionEnable();
-	speech_lie_detection = _Settings::GetSpeechLieDetectionEnabled();
-	sound_directory = _Settings::GetSoundDirectory();
-	sound_codec = _Settings::GetSoundCodec();
-	sound_bitrate = _Settings::GetSoundBitrate();
-	speech_directory = _Settings::GetSpeechDirectory();
-	ethics_check_enabled = _Settings::GetEthicsCheckEnable();
-	cuda_accelleration = _Settings::GetCUDAAccellerationEnable();
-	cuda_accelleration_remote_enabled = _Settings::GetCUDAAccellerationRemoteEnable();
-	cuda_accelleration_remote_hostname = _Settings::GetCUDAAccellerationRemoteHostname();
-	cuda_accelleration_remote_cores = _Settings::GetCUDAAccellerationRemoteCores();
-	tensor_accelleration = _Settings::GetTensorAccelleration();
-	tensor_accelleration_remote_enabled = _Settings::GetTensorAccellerationRemoteEnabled();
-	tensor_accelleration_remote_hostname = _Settings::GetTenorAccellerationRemoteHostname();
-	tensor_accelleration_remote_cores = _Settings::GetTensorAccellerationRemoteCores();
-	vision_object_detection = _Settings::GetObjectDetectionEnable();
-	vision_object_detection_cuda = _Settings::GetObjectDetectionCUDAEnabled();
-	vision_object_detection_remote_enabled = _Settings::GetObjectDetectionRemoteEnabled();
-	vision_object_detection_server_hostname = _Settings::GetObjectDetectionRemoteHostname();
-	visual_reasoning = _Settings::GetVisualReasoningEnable();
-	visual_memory = _Settings::GetVisualMemoryEnable();
-	vision_memory_directory = _Settings::GetVisionDirectory();
-	camera1_enabled = _Settings::GetCamera1Enable();
-	camera1 = _Settings::GetCamera1();
-	camera1_fps = _Settings::GetCamera1FPS();
-	camera1_resolution = _Settings::GetCamera1Resolution();
-	camera2_enabled = _Settings::GetCamera2Enable();
-	camera2 = _Settings::GetCamera2();
-	camera2_fps = _Settings::GetCamera2FPS();
-	camera2_resolution = _Settings::GetCamera2Resolution();
-	computer_use = _Settings::GetComputerUseEnable();
-	computer_monitor_recognition = _Settings::GetComputerMonitorRecognitionEnabled();
-	computer_owned_recognition = _Settings::GetComputerOwnedRecognitionEnabled();
-	reading = _Settings::GetReadingEnable();
-	reading_fallacy_check = _Settings::GetReadingFallacyCheckEnable();
-	ffmpeg_location = _Settings::GetFFMpegLocation();
-	microphone1_enable = _Settings::GetMicrophone1Enable();
-	microphone1_device = _Settings::GetMicrophone1Device();
-	microphone2_enable = _Settings::GetMicrophone2Enable();
-	microphone2_device = _Settings::GetMicrophone2Device();
-	news_watching = _Settings::GetNewsWatchingEnable();
-	actions_watching = _Settings::GetActionWatchingEnable();
-	needs_detection = _Settings::GetNeedsWatchingEnable();
-	navigation_detection = _Settings::GetNavigationDetectionEnable();
-	social_needs_detection = _Settings::GetSocialNeedsDetectionEnable();
+	//terms_conditions = _Settings::GetTermsConditions();
+	//working_memory_enabled = _Settings::GetWorkingMemoryEnable();
+	//working_memory_limit = _Settings::GetWorkingMemoryLimit();
+	//short_term_memory_enabled = _Settings::GetShortTermMemoryEnabled();
+	//short_term_memory_time = _Settings::GetShortTermMemoryTime();
+	//long_term_memory_enabled = _Settings::GetLongTermMemoryEnabled();
+	//long_term_memory_limit = _Settings::GetLongTermMemoryLimit();
+	//sound_memory_enabled = _Settings::GetSoundMemoryEnable();
+	//speech_memory_enabled = _Settings::GetSpeechMemoryEnabled();
+	//speech_recognition = _Settings::GetSpeechRecognitionEnable();
+	//speech_lie_detection = _Settings::GetSpeechLieDetectionEnabled();
+	//sound_directory = _Settings::GetSoundDirectory();
+	//sound_codec = _Settings::GetSoundCodec();
+	//sound_bitrate = _Settings::GetSoundBitrate();
+	//speech_directory = _Settings::GetSpeechDirectory();
+	//ethics_check_enabled = _Settings::GetEthicsCheckEnable();
+	//cuda_accelleration = _Settings::GetCUDAAccellerationEnable();
+	//cuda_accelleration_remote_enabled = _Settings::GetCUDAAccellerationRemoteEnable();
+	//cuda_accelleration_remote_hostname = _Settings::GetCUDAAccellerationRemoteHostname();
+	//cuda_accelleration_remote_cores = _Settings::GetCUDAAccellerationRemoteCores();
+	//tensor_accelleration = _Settings::GetTensorAccelleration();
+	//tensor_accelleration_remote_enabled = _Settings::GetTensorAccellerationRemoteEnabled();
+	//tensor_accelleration_remote_hostname = _Settings::GetTenorAccellerationRemoteHostname();
+	//tensor_accelleration_remote_cores = _Settings::GetTensorAccellerationRemoteCores();
+	//vision_object_detection = _Settings::GetObjectDetectionEnable();
+	//vision_object_detection_cuda = _Settings::GetObjectDetectionCUDAEnabled();
+	//vision_object_detection_remote_enabled = _Settings::GetObjectDetectionRemoteEnabled();
+	//vision_object_detection_server_hostname = _Settings::GetObjectDetectionRemoteHostname();
+	//visual_reasoning = _Settings::GetVisualReasoningEnable();
+	//visual_memory = _Settings::GetVisualMemoryEnable();
+	//vision_memory_directory = _Settings::GetVisionDirectory();
+	//camera1_enabled = _Settings::GetCamera1Enable();
+	//camera1 = _Settings::GetCamera1();
+	//camera1_fps = _Settings::GetCamera1FPS();
+	//camera1_resolution = _Settings::GetCamera1Resolution();
+	//camera2_enabled = _Settings::GetCamera2Enable();
+	//camera2 = _Settings::GetCamera2();
+	//camera2_fps = _Settings::GetCamera2FPS();
+	//camera2_resolution = _Settings::GetCamera2Resolution();
+	//computer_use = _Settings::GetComputerUseEnable();
+	//computer_monitor_recognition = _Settings::GetComputerMonitorRecognitionEnabled();
+	//computer_owned_recognition = _Settings::GetComputerOwnedRecognitionEnabled();
+	//reading = _Settings::GetReadingEnable();
+	//reading_fallacy_check = _Settings::GetReadingFallacyCheckEnable();
+	//ffmpeg_location = _Settings::GetFFMpegLocation();
+	//microphone1_enable = _Settings::GetMicrophone1Enable();
+	//microphone1_device = _Settings::GetMicrophone1Device();
+	//microphone2_enable = _Settings::GetMicrophone2Enable();
+	//microphone2_device = _Settings::GetMicrophone2Device();
+	//news_watching = _Settings::GetNewsWatchingEnable();
+	//actions_watching = _Settings::GetActionWatchingEnable();
+	//needs_detection = _Settings::GetNeedsWatchingEnable();
+	//navigation_detection = _Settings::GetNavigationDetectionEnable();
+	//social_needs_detection = _Settings::GetSocialNeedsDetectionEnable();
 
-	// MySQL Settings
-	mysql_hostname = _Settings::GetMySQLHostname();
-	mysql_username = _Settings::GetMySQLUsername();
-	mysql_password = _Settings::GetMySQLPassword();
-	mysql_vision_database = _Settings::GetMySQLVisionDatabase();
-	mysql_sound_database = _Settings::GetMySQLSoundDatabase();
-	mysql_speech_database = _Settings::GetMySQLSpeechDatabase();
-	mysql_working_memory_database = _Settings::GetMySQLWorkingMemoryDatabase();
-	mysql_short_term_memory_database = _Settings::GetMySQLShortTermMemoryDatabase();
-	mysql_long_term_memory_database = _Settings::GetMySQLLongTermMemoryDatabase();
+	//// MySQL Settings
+	//mysql_hostname = _Settings::GetMySQLHostname();
+	//mysql_username = _Settings::GetMySQLUsername();
+	//mysql_password = _Settings::GetMySQLPassword();
+	//mysql_vision_database = _Settings::GetMySQLVisionDatabase();
+	//mysql_sound_database = _Settings::GetMySQLSoundDatabase();
+	//mysql_speech_database = _Settings::GetMySQLSpeechDatabase();
+	//mysql_working_memory_database = _Settings::GetMySQLWorkingMemoryDatabase();
+	//mysql_short_term_memory_database = _Settings::GetMySQLShortTermMemoryDatabase();
+	//mysql_long_term_memory_database = _Settings::GetMySQLLongTermMemoryDatabase();
 
-	// Computer Settings
-	private_computer = _Settings::GetPrivateComputer();
-	computer_hostname = _Settings::GetComputerHostname();
-	computer_username = _Settings::GetComputerUsername();
-	computer_password = _Settings::GetComputerPassword();
+	//// Computer Settings
+	//private_computer = _Settings::GetPrivateComputer();
+	//computer_hostname = _Settings::GetComputerHostname();
+	//computer_username = _Settings::GetComputerUsername();
+	//computer_password = _Settings::GetComputerPassword();
 
-	// FTP Settings
-	ftp_enabled = _Settings::GetFTPEnabled();
-	ftp_hostname = _Settings::GetFTPHostname();
-	ftp_username = _Settings::GetFTPUsername();
-	ftp_password = _Settings::GetFTPPassword();
-	ftp_vision_directory = _Settings::GetVisionFTPDirectory();
-	ftp_sound_directory = _Settings::GetSoundFTPDirectory();
+	//// FTP Settings
+	//ftp_enabled = _Settings::GetFTPEnabled();
+	//ftp_hostname = _Settings::GetFTPHostname();
+	//ftp_username = _Settings::GetFTPUsername();
+	//ftp_password = _Settings::GetFTPPassword();
+	//ftp_vision_directory = _Settings::GetVisionFTPDirectory();
+	//ftp_sound_directory = _Settings::GetSoundFTPDirectory();
 
 	while (!boolean)
 	{
@@ -135,7 +135,7 @@ void _Settings::Settings()
 		cout << "| 10. Enable/Disable Tensor Accelleration                |" << endl;
 		cout << "| 11. Enable/Disable Tensor Accelleration Remote         |" << endl;
 		cout << "| 12. Enable/Disable Object Detection                    |" << endl;
-		cout << "| 13. Enable Disable Object Detection CUDA               |" << endl;
+		cout << "| 13. Enable/Disable Object Detection CUDA               |" << endl;
 		cout << "| 14. Enable/Disable Object Detection Remote             |" << endl;
 		cout << "| 15. Enable/Disable Visual Reasoning                    |" << endl;
 		cout << "| 16. Enable/Disable Sound Reasoning                     |" << endl;
@@ -187,115 +187,115 @@ void _Settings::Settings()
 		if (working_memory_enabled)
 			cout << "Working Memory: True" << endl;
 		else
-			cout << "Working Memory: false" << endl;
+			cout << "Working Memory: False" << endl;
 		if (short_term_memory_enabled)
 			cout << "Short Term Memory: True" << endl;
 		else
-			cout << "Short Term Memory: false" << endl;
+			cout << "Short Term Memory: False" << endl;
 		if (long_term_memory_enabled)
 			cout << "Long Term Memory: True" << endl;
 		else
-			cout << "Long Term Memory: false" << endl;
+			cout << "Long Term Memory: False" << endl;
 		if (visual_memory)
 			cout << "Visual Memory: True" << endl;
 		else
-			cout << "Visual Memory: false" << endl;
+			cout << "Visual Memory: False" << endl;
 		if (sound_memory)
 			cout << "Sound Memory: True" << endl;
 		else
-			cout << "Sound Memory: false" << endl;
+			cout << "Sound Memory: False" << endl;
 		if (speech_memory)
 			cout << "Speech Memory: True" << endl;
 		else
-			cout << "Speech Memory: false" << endl;
+			cout << "Speech Memory: False" << endl;
 		if (ethics_check_enabled)
 			cout << "Ethics Check: True" << endl;
 		else
-			cout << "Ethics Check: false" << endl;
+			cout << "Ethics Check: False" << endl;
 		if (cuda_accelleration)
 			cout << "CUDA Accelleration: True" << endl;
 		else
-			cout << "CUDA Accelleration: false" << endl;
+			cout << "CUDA Accelleration: False" << endl;
 		if (cuda_accelleration_remote_enabled)
 			cout << "CUDA Accelleration Remote: True" << endl;
 		else
-			cout << "CUDA Accelleration Remote: false" << endl;
+			cout << "CUDA Accelleration Remote: False" << endl;
 		if (tensor_accelleration)
 			cout << "Tensor Accelleration: True" << endl;
 		else
-			cout << "Tensor Accelleraton: false" << endl;
+			cout << "Tensor Accelleraton: False" << endl;
 		if (tensor_accelleration_remote_enabled)
 			cout << "Tensor Accelleration Remote: True" << endl;
 		else
-			cout << "Tensor Accelleration Remote: false" << endl;
+			cout << "Tensor Accelleration Remote: False" << endl;
 		if (vision_object_detection)
 			cout << "Visual Object Detection: True" << endl;
 		else
-			cout << "Visual Object Detection: false" << endl;
+			cout << "Visual Object Detection: False" << endl;
 		if (vision_object_detection_cuda)
 			cout << "Vision Object Detection CUDA: True" << endl;
 		else
-			cout << "Vision Object Detection CUDA: false" << endl;
+			cout << "Vision Object Detection CUDA: False" << endl;
 		if (vision_object_detection_remote_enabled)
 			cout << "Visual Object Detection Remote: True" << endl;
 		else
-			cout << "Visual Object Detection Remote: false" << endl;
+			cout << "Visual Object Detection Remote: False" << endl;
 		if (visual_reasoning)
 			cout << "Visual Reasoning: True" << endl;
 		else
-			cout << "Visual Reasoning: false" << endl;
+			cout << "Visual Reasoning: False" << endl;
 		if (sound_reasoning)
 			cout << "Sound Reasoning: True" << endl;
 		else
-			cout << "Sound Reasoning: false" << endl;
+			cout << "Sound Reasoning: False" << endl;
 		if (reading_reasoning)
 			cout << "Reading Reasoning: True" << endl;
 		else
-			cout << "Reading Reasoning: false" << endl;
+			cout << "Reading Reasoning: False" << endl;
 		if (speaking_reasoning)
 			cout << "Speaking Reasoing: True" << endl;
 		else
-			cout << "Speaking Reasoning: false" << endl;
+			cout << "Speaking Reasoning: False" << endl;
 		if (camera1_enabled)
 			cout << "Camera 1 Enabled: True" << endl;
 		else
-			cout << "Camera 1 Enabled: false" << endl;
+			cout << "Camera 1 Enabled: False" << endl;
 		if (camera2_enabled)
 			cout << "Camera 2 Enabled: True" << endl;
 		else
-			cout << "Camera 2 Enabled: false" << endl;
+			cout << "Camera 2 Enabled: False" << endl;
 		if (microphone1_enable)
 			cout << "Microphone 1 Enabled: True" << endl;
 		else
-			cout << "Microphone 1 Enabled: false" << endl;
+			cout << "Microphone 1 Enabled: False" << endl;
 		if (microphone2_enable)
 			cout << "Microphone 2 Enabled: True" << endl;
 		else
-			cout << "Microphone 2 Enabled: false" << endl;
+			cout << "Microphone 2 Enabled: False" << endl;
 		if (speech_recognition)
 			cout << "Speech Recognition: True" << endl;
 		else
-			cout << "Speech Recognition: false" << endl;
+			cout << "Speech Recognition: False" << endl;
 		if (computer_use)
 			cout << "Computer Use: True" << endl;
 		else
-			cout << "Computer Use: false" << endl;
+			cout << "Computer Use: False" << endl;
 		if (computer_monitor_recognition)
 			cout << "Computer Monitor Recognition: True" << endl;
 		else
-			cout << "Computer Monitor Recognition: false" << endl;
+			cout << "Computer Monitor Recognition: False" << endl;
 		if (computer_owned_recognition)
 			cout << "Computer Owned Recognition: True" << endl;
 		else
-			cout << "Computer Owned Recognition: false" << endl;
+			cout << "Computer Owned Recognition: False" << endl;
 		if (reading)
 			cout << "Reading: True" << endl;
 		else
-			cout << "Reading: false" << endl;
+			cout << "Reading: False" << endl;
 		if (reading_fallacy_check)
 			cout << "Fallacy Checking: True" << endl;
 		else
-			cout << "Fallacy Checking: false" << endl;
+			cout << "Fallacy Checking: False" << endl;
 		cout << "Visual Memory Location: " << vision_memory_directory << endl;
 		cout << "Sound Memory Location: " << sound_directory << endl;
 		cout << "Working Memory Limit: " << working_memory_limit << " MB" << endl;
@@ -322,23 +322,23 @@ void _Settings::Settings()
 		if (news_watching)
 			cout << "News Watching: True" << endl;
 		else
-			cout << "News Watching: false" << endl;
+			cout << "News Watching: False" << endl;
 		if (actions_watching)
 			cout << "Actions Watching: True" << endl;
 		else
-			cout << "Actions Watching: false" << endl;
+			cout << "Actions Watching: False" << endl;
 		if (needs_detection)
 			cout << "Needs Detection: True" << endl;
 		else
-			cout << "Needs Detection: false" << endl;
+			cout << "Needs Detection: False" << endl;
 		if (navigation_detection)
 			cout << "Navigation Detection: True" << endl;
 		else
-			cout << "Navigation Detection: false" << endl;
+			cout << "Navigation Detection: False" << endl;
 		if (social_needs_detection)
 			cout << "Social Needs Detection: True" << endl;
 		else
-			cout << "Social Needs Detection: false" << endl;
+			cout << "Social Needs Detection: False" << endl;
 		cout << endl;
 		cout << "Your Selection: ";
 		getline(cin, input);
@@ -350,7 +350,7 @@ void _Settings::Settings()
 			else
 				working_memory_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "2")
 		{
@@ -359,7 +359,7 @@ void _Settings::Settings()
 			else
 				short_term_memory_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "3")
 		{
@@ -368,7 +368,7 @@ void _Settings::Settings()
 			else
 				long_term_memory_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "4")
 		{
@@ -377,7 +377,7 @@ void _Settings::Settings()
 			else
 				visual_memory = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "5")
 		{
@@ -386,16 +386,16 @@ void _Settings::Settings()
 			else
 				sound_memory = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "6")
 		{
-			if (!sound_memory)
-				sound_memory = true;
+			if (!speech_memory)
+				speech_memory = true;
 			else
-				sound_memory = false;
+				speech_memory = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "7")
 		{
@@ -404,7 +404,7 @@ void _Settings::Settings()
 			else
 				ethics_check_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "8")
 		{
@@ -413,7 +413,7 @@ void _Settings::Settings()
 			else
 				cuda_accelleration = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "9")
 		{
@@ -422,7 +422,7 @@ void _Settings::Settings()
 			else
 				cuda_accelleration_remote_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "10")
 		{
@@ -431,7 +431,7 @@ void _Settings::Settings()
 			else
 				tensor_accelleration = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "11")
 		{
@@ -440,7 +440,7 @@ void _Settings::Settings()
 			else
 				tensor_accelleration_remote_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "12")
 		{
@@ -449,7 +449,7 @@ void _Settings::Settings()
 			else
 				vision_object_detection = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "13")
 		{
@@ -458,7 +458,7 @@ void _Settings::Settings()
 			else
 				vision_object_detection_cuda = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "14")
 		{
@@ -467,7 +467,7 @@ void _Settings::Settings()
 			else
 				vision_object_detection_server = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "15")
 		{
@@ -476,7 +476,7 @@ void _Settings::Settings()
 			else
 				visual_reasoning = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "16")
 		{
@@ -485,7 +485,7 @@ void _Settings::Settings()
 			else
 				sound_reasoning = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "17")
 		{
@@ -494,7 +494,7 @@ void _Settings::Settings()
 			else
 				reading_reasoning = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "18")
 		{
@@ -503,7 +503,7 @@ void _Settings::Settings()
 			else
 				speaking_reasoning = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "19")
 		{
@@ -512,7 +512,7 @@ void _Settings::Settings()
 			else
 				camera1_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "20")
 		{
@@ -521,7 +521,7 @@ void _Settings::Settings()
 			else
 				camera2_enabled = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "21")
 		{
@@ -530,7 +530,7 @@ void _Settings::Settings()
 			else
 				microphone1_enable = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "22")
 		{
@@ -539,7 +539,7 @@ void _Settings::Settings()
 			else
 				microphone2_enable = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "23")
 		{
@@ -548,7 +548,7 @@ void _Settings::Settings()
 			else
 				speech_recognition = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "24")
 		{
@@ -557,7 +557,7 @@ void _Settings::Settings()
 			else
 				computer_use = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "25")
 		{
@@ -566,7 +566,7 @@ void _Settings::Settings()
 			else
 				computer_monitor_recognition = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "26")
 		{
@@ -575,7 +575,7 @@ void _Settings::Settings()
 			else
 				computer_owned_recognition = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "27")
 		{
@@ -584,7 +584,7 @@ void _Settings::Settings()
 			else
 				reading = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "28")
 		{
@@ -593,7 +593,7 @@ void _Settings::Settings()
 			else
 				reading_fallacy_check = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "29")
 		{
@@ -611,7 +611,7 @@ void _Settings::Settings()
 				{
 					// Save the variable to working memory
 					vision_memory_directory = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -632,7 +632,7 @@ void _Settings::Settings()
 				{
 					// Save the variable to working memory
 					sound_directory = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -654,7 +654,7 @@ void _Settings::Settings()
 				{
 					// Save the variable to working memory
 					working_memory_limit = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -674,7 +674,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					working_memory_location = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -694,7 +694,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					short_term_memory_limit = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -714,7 +714,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					short_term_memory_location = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -735,7 +735,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					long_term_memory_limit = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -755,7 +755,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					long_term_memory_location = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -775,7 +775,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					cuda_accelleration_remote_hostname = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -795,7 +795,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					cuda_accelleration_remote_cores = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -815,7 +815,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					tensor_accelleration_remote_hostname = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -835,7 +835,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					tensor_accelleration_remote_cores = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -855,7 +855,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					ffmpeg_location = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -875,7 +875,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera1 = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -895,7 +895,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera1_fps = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -915,7 +915,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera1_resolution = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -935,7 +935,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera2 = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -955,7 +955,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera2_fps = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -975,7 +975,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					camera2_resolution = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -995,7 +995,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					microphone1_device_name = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -1015,7 +1015,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					microphone2_device_name = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -1035,7 +1035,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					sound_codec = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -1055,7 +1055,7 @@ void _Settings::Settings()
 				if (input2 != "")
 				{
 					sound_bitrate = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
 			}
@@ -1067,7 +1067,7 @@ void _Settings::Settings()
 			else
 				news_watching = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "53")
 		{
@@ -1076,7 +1076,7 @@ void _Settings::Settings()
 			else
 				action_detection = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "54")
 		{
@@ -1085,7 +1085,7 @@ void _Settings::Settings()
 			else
 				needs_detection = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "55")
 		{
@@ -1094,7 +1094,7 @@ void _Settings::Settings()
 			else
 				navigation_detection = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "56")
 		{
@@ -1103,11 +1103,11 @@ void _Settings::Settings()
 			else
 				social_needs_detection = false;
 
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "0")
 		{
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 			boolean = true;
 		}
 		else
@@ -1117,566 +1117,384 @@ void _Settings::Settings()
 
 bool _Settings::GetTermsConditions()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "terms_conditions")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 't' && input[x + 1] == 'e' && input[x + 2] == 'r' && input[x + 3] == 'm' && input[x + 4] == 's' && input[x + 5] == '_' && input[x + 6] == 'c' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'd' && input[x + 10] == 'i' && input[x + 11] == 't' && input[x + 12] == 'i' && input[x + 13] == 'o' && input[x + 14] == 'n' && input[x + 15] == 's')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "False" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetObjectDetectionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "vision_object_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == '_' && input[x + 7] == 'o' && input[x + 8] == 'b' && input[x + 9] == 'j' && input[x + 10] == 'e' && input[x + 11] == 'c' && input[x + 12] == 't' && input[x + 13] == '_' && input[x + 14] == 'd' && input[x + 15] == 'e' && input[x + 16] == 't' && input[x + 17] == 'e' && input[x + 18] == 'c' && input[x + 19] == 't' && input[x + 20] == 'i' && input[x + 21] == 'o' && input[x + 22] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 24; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetVisualMemoryEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "visual_memory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'u' && input[x + 4] == 'a' && input[x + 5] == 'l' && input[x + 6] == '_' && input[x + 7] == 'm' && input[x + 8] == 'e' && input[x + 9] == 'm' && input[x + 10] == 'o' && input[x + 11] == 'r' && input[x + 12] == 'y')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetSoundMemoryEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "sound_memory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'o' && input[x + 2] == 'u' && input[x + 3] == 'n' && input[x + 4] == 'd' && input[x + 5] == '_' && input[x + 6] == 'm' && input[x + 7] == 'e' && input[x + 8] == 'm' && input[x + 9] == 'o' && input[x + 10] == 'r' && input[x + 11] == 'y')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetSpeechRecognitionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "speech_recognition_enable")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'p' && input[x + 2] == 'e' && input[x + 3] == 'e' && input[x + 4] == 'c' && input[x + 5] == 'h' && input[x + 6] == '_' && input[x + 7] == 'r' && input[x + 8] == 'e' && input[x + 9] == 'c' && input[x + 10] == 'o' && input[x + 11] == 'g' && input[x + 12] == 'n' && input[x + 13] == 'i' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetSpeechLieDetection()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "speech_lie_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'p' && input[x + 2] == 'e' && input[x + 3] == 'e' && input[x + 4] == 'c' && input[x + 5] == 'h' && input[x + 6] == '_' && input[x + 7] == 'l' && input[x + 8] == 'i' && input[x + 9] == 'e' && input[x + 10] == '_' && input[x + 11] == 'd' && input[x + 12] == 'e' && input[x + 13] == 't' && input[x + 14] == 'e' && input[x + 15] == 'c' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetVisualReasoningEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "visual_reasoning")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'u' && input[x + 4] == 'a' && input[x + 5] == 'l' && input[x + 6] == '_' && input[x + 7] == 'r' && input[x + 8] == 'e' && input[x + 9] == 'a' && input[x + 10] == 's' && input[x + 11] == 'o' && input[x + 12] == 'n' && input[x + 13] == 'i' && input[x + 14] == 'n' && input[x + 15] == 'g')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 17; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetComputerUseEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
+	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "computer_use")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'u' && input[x + 10] == 's' && input[x + 11] == 'e')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 13; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetReadingFallacyCheckEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "reading_fallacy_check")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'r' && input[x + 1] == 'e' && input[x + 2] == 'a' && input[x + 3] == 'd' && input[x + 4] == 'i' && input[x + 5] == 'n' && input[x + 6] == 'g' && input[x + 7] == '_' && input[x + 8] == 'f' && input[x + 9] == 'a' && input[x + 10] == 'l' && input[x + 11] == 'l' && input[x + 12] == 'a' && input[x + 13] == 'c' && input[x + 14] == 'y' && input[x + 15] == '_' && input[x + 16] == 'c' && input[x + 17] == 'h' && input[x + 18] == 'e' && input[x + 19] == 'c' && input[x + 20] == 'k')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 22; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetEthicsCheckEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ethics_check_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'e' && input[x + 1] == 't' && input[x + 2] == 'h' && input[x + 3] == 'i' && input[x + 4] == 'c' && input[x + 5] == 's' && input[x + 6] == '_' && input[x + 7] == 'c' && input[x + 8] == 'h' && input[x + 9] == 'e' && input[x + 10] == 'c' && input[x + 11] == 'k' && input[x + 12] == '_' && input[x + 13] == 'e' && input[x + 14] == 'n' && input[x + 15] == 'a' && input[x + 16] == 'b' && input[x + 17] == 'l' && input[x + 18] == 'e' && input[x + 19] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 bool _Settings::GetGPUAccellerationEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 string _Settings::GetMySQLHostname()
 {
-	fstream mysql_hostname;
+	fstream settings;
 	string input;
-	string hostname;
-	mysql_hostname.open("C:/settings.txt");
+	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	if (mysql_hostname.is_open())
+	if (settings.is_open())
 	{
-		while (getline(mysql_hostname, input))
+		while (getline(settings, input))
 		{
 			for (int x = 0; x <= input.length(); x++)
 			{
 				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 's' && input[x + 9] == 't' && input[x + 10] == 'n' && input[x + 11] == 'a' && input[x + 12] == 'm' && input[x + 13] == 'e')
 				{
-					for (int y = x + 16; y <= input.length(); y++)
+					for (int y = x + 15; y <= input.length(); y++)
 					{
 						if (input[y] != '\"')
 						{
-							hostname += input[y];
+							temp += input[y];
 						}
 					}
-					return hostname;
+					return temp;
 				}
 			}
 		}
 	}
-	return hostname;
+	return temp;
 }
 
 string _Settings::GetMySQLUsername()
@@ -1684,7 +1502,7 @@ string _Settings::GetMySQLUsername()
 	fstream mysql_username;
 	string input;
 	string username;
-	mysql_username.open("C:/settings.txt");
+	mysql_username.open("./settings.txt", ios::in);
 
 	if (mysql_username.is_open())
 	{
@@ -1694,7 +1512,7 @@ string _Settings::GetMySQLUsername()
 			{
 				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'u' && input[x + 7] == 's' && input[x + 8] == 'e' && input[x + 9] == 'r' && input[x + 10] == 'n' && input[x + 11] == 'a' && input[x + 12] == 'm' && input[x + 13] == 'e')
 				{
-					for (int y = x + 16; y <= input.length(); y++)
+					for (int y = x + 15; y <= input.length(); y++)
 					{
 						if (input[y] != '\"')
 						{
@@ -1714,7 +1532,7 @@ string _Settings::GetMySQLPassword()
 	fstream mysql_password;
 	string input;
 	string password;
-	mysql_password.open("C:/settings.txt");
+	mysql_password.open("./settings.txt", ios::in);
 
 	if (mysql_password.is_open())
 	{
@@ -1724,7 +1542,7 @@ string _Settings::GetMySQLPassword()
 			{
 				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'p' && input[x + 7] == 'a' && input[x + 8] == 's' && input[x + 9] == 's' && input[x + 10] == 'w' && input[x + 11] == 'o' && input[x + 12] == 'r' && input[x + 13] == 'd')
 				{
-					for (int y = x + 16; y <= input.length(); y++)
+					for (int y = x + 15; y <= input.length(); y++)
 					{
 						if (input[y] != '\"')
 						{
@@ -1741,369 +1559,275 @@ string _Settings::GetMySQLPassword()
 
 string _Settings::GetCamera1()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera1")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '1')
+				{
+					for (int y = x + 8; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetCamera1Enable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera1_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '1' && input[x + 7] == '_' && input[x + 8] == 'e' && input[x + 9] == 'n' && input[x + 10] == 'a' && input[x + 11] == 'b' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 string _Settings::GetCamera2()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera2")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '2')
+				{
+					for (int y = x + 8; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetCamera2Enable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera2_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '2' && input[x + 7] == '_' && input[x + 8] == 'e' && input[x + 9] == 'n' && input[x + 10] == 'a' && input[x + 11] == 'b' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 string _Settings::GetVisionDirectory()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "vision_memory_directory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == '_' && input[x + 7] == 'm' && input[x + 8] == 'e' && input[x + 9] == 'm' && input[x + 10] == 'o' && input[x + 11] == 'r' && input[x + 12] == 'y' && input[x + 13] == '_' && input[x + 14] == 'd' && input[x + 15] == 'i' && input[x + 16] == 'r' && input[x + 17] == 'e' && input[x + 18] == 'c' && input[x + 19] == 't' && input[x + 20] == 'o' && input[x + 21] == 'r' && input[x + 22] == 'y')
+				{
+					for (int y = x + 24; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetSoundDirectory()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "sound_directory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 's' && input[x + 1] == 'o' && input[x + 2] == 'u' && input[x + 3] == 'n' && input[x + 4] == 'd' && input[x + 5] == '_' && input[x + 6] == 'd' && input[x + 7] == 'i' && input[x + 8] == 'r' && input[x + 9] == 'e' && input[x + 10] == 'c' && input[x + 11] == 't' && input[x + 12] == 'o' && input[x + 13] == 'r' && input[x + 14] == 'y')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetSpeechDirectory()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "speech_directory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 's' && input[x + 1] == 'p' && input[x + 2] == 'e' && input[x + 3] == 'e' && input[x + 4] == 'c' && input[x + 5] == 'h' && input[x + 6] == '_' && input[x + 7] == 'd' && input[x + 8] == 'i' && input[x + 9] == 'r' && input[x + 10] == 'e' && input[x + 11] == 'c' && input[x + 12] == 't' && input[x + 13] == 'o' && input[x + 14] == 'r' && input[x + 15] == 'y')
+				{
+					for (int y = x + 17; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetVideoFrameRate()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera1_fps")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '1' && input[x + 7] == '_' && input[x + 8] == 'f' && input[x + 9] == 'p' && input[x + 10] == 's')
+				{
+					for (int y = x + 12; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetShortTermMemoryTime()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	//settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
-	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
-		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "short_term_memory_time")
-			{
-				mysql_close(conn);
-				return value;
-			}
-		}
-	}
-	mysql_close(conn);
-	return value;
+	//if (settings.is_open())
+	//{
+	//	while (getline(settings, input))
+	//	{
+	//		for (int x = 0; x <= input.length(); x++)
+	//		{
+	//			{
+	//				for (int y = x + 16; y <= input.length(); y++)
+	//				{
+	//					if (input[y] != '\"')
+	//					{
+	//						temp += input[y];
+	//					}
+	//				}
+	//				return temp;
+	//			}
+	//		}
+	//	}
+	//}
+	return temp;
 }
 
 // Memory Management Settings
@@ -2198,7 +1922,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean2 = true;
 					ftp_hostname = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2214,7 +1938,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean3 = true;
 					ftp_username = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2230,7 +1954,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean4 = true;
 					ftp_password = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2246,7 +1970,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean5 = true;
 					vision_ftp_directory = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2262,7 +1986,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean6 = true;
 					sound_ftp_directory = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2278,7 +2002,7 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean7 = true;
 					vision_storage_limit = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2294,13 +2018,13 @@ void _Settings::MemoryManagementSettings()
 				{
 					boolean8 = true;
 					sound_storage_limit = input2;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
 		else if (input == "0")
 		{
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 			boolean = true;
 		}
 	}
@@ -2310,325 +2034,244 @@ void _Settings::MemoryManagementSettings()
 
 bool _Settings::GetFTPEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ftp_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'e' && input[x + 5] == 'n' && input[x + 6] == 'a' && input[x + 7] == 'b' && input[x + 8] == 'l' && input[x + 9] == 'e' && input[x + 10] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 12; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return false;
 }
 
 string _Settings::GetFTPHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ftp_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'h' && input[x + 5] == 'o' && input[x + 6] == 's' && input[x + 7] == 't' && input[x + 8] == 'n' && input[x + 9] == 'a' && input[x + 10] == 'm' && input[x + 11] == 'e')
+				{
+					for (int y = x + 13; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetFTPUsername()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ftp_username")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'u' && input[x + 5] == 's' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == 'n' && input[x + 9] == 'a' && input[x + 10] == 'm' && input[x + 11] == 'e')
+				{
+					for (int y = x + 13; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetFTPPassword()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ftp_password")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'p' && input[x + 5] == 'a' && input[x + 6] == 's' && input[x + 7] == 's' && input[x + 8] == 'w' && input[x + 9] == 'o' && input[x + 10] == 'r' && input[x + 11] == 'd')
+				{
+					for (int y = x + 13; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetVisionFTPDirectory()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "ftp_vision_directory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'v' && input[x + 5] == 'i' && input[x + 6] == 's' && input[x + 7] == 'i' && input[x + 8] == 'o' && input[x + 9] == 'n' && input[x + 10] == '_' && input[x + 11] == 'd' && input[x + 12] == 'i' && input[x + 13] == 'r' && input[x + 14] == 'e' && input[x + 15] == 'c' && input[x + 16] == 't' && input[x + 17] == 'o' && input[x + 18] == 'r' && input[x + 19] == 'y')
+				{
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetSoundFTPDirectory()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ftp_sound_directory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 's' && input[x + 5] == 'o' && input[x + 6] == 'u' && input[x + 7] == 'n' && input[x + 8] == 'd' && input[x + 9] == '_' && input[x + 10] == 'd' && input[x + 11] == 'i' && input[x + 12] == 'r' && input[x + 13] == 'e' && input[x + 14] == 'c' && input[x + 15] == 't' && input[x + 16] == 'o' && input[x + 17] == 'r' && input[x + 18] == 'y')
+				{
+					for (int y = x + 20; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetVisionStorageLimit()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value);
-
-			if (setting == "long_term_memory_limit")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'v' && input[x + 5] == 'i' && input[x + 6] == 's' && input[x + 7] == 'i' && input[x + 8] == 'o' && input[x + 9] == 'n' && input[x + 10] == '_' && input[x + 11] == 's' && input[x + 12] == 't' && input[x + 13] == 'o' && input[x + 14] == 'r' && input[x + 15] == 'a' && input[x + 16] == 'g' && input[x + 17] == 'e' && input[x + 18] == '_' && input[x + 19] == 'l' && input[x + 20] == 'i' && input[x + 21] == 'm' && input[x + 22] == 'i' && input[x + 23] == 't')
+				{
+					for (int y = x + 25; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetSoundStorageLimit()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value);
-
-			if (setting == "mysql_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 's' && input[x + 5] == 'o' && input[x + 6] == 'u' && input[x + 7] == 'n' && input[x + 8] == 'd' && input[x + 9] == '_' && input[x + 10] == 's' && input[x + 11] == 't' && input[x + 12] == 'o' && input[x + 13] == 'r' && input[x + 14] == 'a' && input[x + 15] == 'g' && input[x + 16] == 'e' && input[x + 17] == '_' && input[x + 18] == 'l' && input[x + 19] == 'i' && input[x + 20] == 'm' && input[x + 21] == 'i' && input[x + 22] == 't')
+				{
+					for (int y = x + 24; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 void _Settings::MySQLSettings()
@@ -2684,7 +2327,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_hostname = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2704,7 +2347,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_username = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2724,7 +2367,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_password = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2744,7 +2387,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_vision_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2764,7 +2407,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_sound_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2784,7 +2427,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_speech_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2804,7 +2447,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_working_memory_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2824,7 +2467,7 @@ void _Settings::MySQLSettings()
 				{
 					mysql_short_term_memory_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2844,13 +2487,13 @@ void _Settings::MySQLSettings()
 				{
 					mysql_long_term_memory_database = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
 		if (input == "0")
 		{
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 			boolean = true;
 		}
 	}
@@ -2899,7 +2542,7 @@ void _Settings::ComputerSettings()
 				private_computer = false;
 			else
 				private_computer = true;
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 		}
 		else if (input == "2")
 		{
@@ -2916,7 +2559,7 @@ void _Settings::ComputerSettings()
 				{
 					computer_hostname = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2935,7 +2578,7 @@ void _Settings::ComputerSettings()
 				{
 					computer_username = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
@@ -2954,13 +2597,13 @@ void _Settings::ComputerSettings()
 				{
 					computer_password = input2;
 					boolean2 = true;
-					_Settings::SaveSettings();
+					_Settings::SaveSettingsFile();
 				}
 			}
 		}
 		else if (input == "0")
 		{
-			_Settings::SaveSettings();
+			_Settings::SaveSettingsFile();
 			boolean = true;
 		}
 		else
@@ -2972,1543 +2615,1134 @@ void _Settings::ComputerSettings()
 
 bool _Settings::GetSoundMemoryEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "sound_memory_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'o' && input[x + 2] == 'u' && input[x + 3] == 'n' && input[x + 4] == 'd' && input[x + 5] == '_' && input[x + 6] == 'm' && input[x + 7] == 'e' && input[x + 8] == 'm' && input[x + 9] == 'o' && input[x + 10] == 'r' && input[x + 11] == 'y' && input[x + 12] == '_' && input[x + 13] == 'e' && input[x + 14] == 'n' && input[x + 15] == 'a' && input[x + 16] == 'b' && input[x + 17] == 'l' && input[x + 18] == 'e' && input[x + 19] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetCUDAAccellerationRemoteHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration_remote_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'h' && input[x + 27] == 'o' && input[x + 28] == 's' && input[x + 29] == 't' && input[x + 30] == 'n' && input[x + 31] == 'a' && input[x + 32] == 'm' && input[x + 33] == 'e')
+				{
+					for (int y = x + 35; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetWorkingMemoryLimit()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "working_memory_limit")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'w' && input[x + 1] == 'o' && input[x + 2] == 'r' && input[x + 3] == 'k' && input[x + 4] == 'i' && input[x + 5] == 'n' && input[x + 6] == 'g' && input[x + 7] == '_' && input[x + 8] == 'm' && input[x + 9] == 'e' && input[x + 10] == 'm' && input[x + 11] == 'o' && input[x + 12] == 'r' && input[x + 13] == 'y' && input[x + 14] == '_' && input[x + 15] == 'l' && input[x + 16] == 'i' && input[x + 17] == 'm' && input[x + 18] == 'i' && input[x + 19] == 't')
+				{
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetShortTermMemoryLimit()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "short_term_memory_time")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 's' && input[x + 1] == 'h' && input[x + 2] == 'o' && input[x + 3] == 'r' && input[x + 4] == 't' && input[x + 5] == '_' && input[x + 6] == 't' && input[x + 7] == 'e' && input[x + 8] == 'r' && input[x + 9] == 'm' && input[x + 10] == '_' && input[x + 11] == 'm' && input[x + 12] == 'e' && input[x + 13] == 'm' && input[x + 14] == 'o' && input[x + 15] == 'r' && input[x + 16] == 'y' && input[x + 17] == '_' && input[x + 18] == 'l' && input[x + 19] == 'i' && input[x + 20] == 'm' && input[x + 21] == 'i' && input[x + 22] == 't')
+				{
+					for (int y = x + 24; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetObjectDetectionRemoteEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "vision_object_detection_remote_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == '_' && input[x + 7] == 'o' && input[x + 8] == 'b' && input[x + 9] == 'j' && input[x + 10] == 'e' && input[x + 11] == 'c' && input[x + 12] == 't' && input[x + 13] == '_' && input[x + 14] == 'd' && input[x + 15] == 'e' && input[x + 16] == 't' && input[x + 17] == 'e' && input[x + 18] == 'c' && input[x + 19] == 't' && input[x + 20] == 'i' && input[x + 21] == 'o' && input[x + 22] == 'n' && input[x + 23] == '_' && input[x + 24] == 'r' && input[x + 25] == 'e' && input[x + 26] == 'm' && input[x + 27] == 'o' && input[x + 28] == 't' && input[x + 29] == 'e' && input[x + 30] == '_' && input[x + 31] == 'e' && input[x + 32] == 'n' && input[x + 33] == 'a' && input[x + 34] == 'b' && input[x + 35] == 'l' && input[x + 36] == 'e' && input[x + 37] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 39; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetObjectDetectionRemoteHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "vision_object_detection_server_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == '_' && input[x + 7] == 'o' && input[x + 8] == 'b' && input[x + 9] == 'j' && input[x + 10] == 'e' && input[x + 11] == 'c' && input[x + 12] == 't' && input[x + 13] == '_' && input[x + 14] == 'd' && input[x + 15] == 'e' && input[x + 16] == 't' && input[x + 17] == 'e' && input[x + 18] == 'c' && input[x + 19] == 't' && input[x + 20] == 'i' && input[x + 21] == 'o' && input[x + 22] == 'n' && input[x + 23] == '_' && input[x + 24] == 's' && input[x + 25] == 'e' && input[x + 26] == 'r' && input[x + 27] == 'v' && input[x + 28] == 'e' && input[x + 29] == 'r' && input[x + 30] == '_' && input[x + 31] == 'h' && input[x + 32] == 'o' && input[x + 33] == 's' && input[x + 34] == 't' && input[x + 35] == 'n' && input[x + 36] == 'a' && input[x + 37] == 'm' && input[x + 38] == 'e')
+				{
+					for (int y = x + 40; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetCamera1FPS()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera1_fps")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '1' && input[x + 7] == '_' && input[x + 8] == 'f' && input[x + 9] == 'p' && input[x + 10] == 's')
+				{
+					for (int y = x + 12; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetCamera1Resolution()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera1_resolution")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '1' && input[x + 7] == '_' && input[x + 8] == 'r' && input[x + 9] == 'e' && input[x + 10] == 's' && input[x + 11] == 'o' && input[x + 12] == 'l' && input[x + 13] == 'u' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
+				{
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetCamera2FPS()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera2_fps")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '2' && input[x + 7] == '_' && input[x + 8] == 'f' && input[x + 9] == 'p' && input[x + 10] == 's')
+				{
+					for (int y = x + 12; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetCamera2Resolution()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "camera2_resolution")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'a' && input[x + 2] == 'm' && input[x + 3] == 'e' && input[x + 4] == 'r' && input[x + 5] == 'a' && input[x + 6] == '2' && input[x + 7] == '_' && input[x + 8] == 'r' && input[x + 9] == 'e' && input[x + 10] == 's' && input[x + 11] == 'o' && input[x + 12] == 'l' && input[x + 13] == 'u' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
+				{
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetComputerUseEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "computer_use")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'p' && input[x + 1] == 'r' && input[x + 2] == 'i' && input[x + 3] == 'v' && input[x + 4] == 'a' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == '_' && input[x + 8] == 'c' && input[x + 9] == 'o' && input[x + 10] == 'm' && input[x + 11] == 'p' && input[x + 12] == 'u' && input[x + 13] == 't' && input[x + 14] == 'e' && input[x + 15] == 'r')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 17; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetCUDAAccellerationEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetCUDAAccellerationRemoteEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration_remote_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'e' && input[x + 27] == 'n' && input[x + 28] == 'a' && input[x + 29] == 'b' && input[x + 30] == 'l' && input[x + 31] == 'e' && input[x + 32] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 34; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetGPUAccellerationRemoteHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration_remote_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'h' && input[x + 27] == 'o' && input[x + 28] == 's' && input[x + 29] == 't' && input[x + 30] == 'n' && input[x + 31] == 'a' && input[x + 32] == 'm' && input[x + 33] == 'e')
+				{
+					for (int y = x + 35; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
+	return temp;
 }
 
 bool _Settings::GetSpeechLieDetectionEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "speech_lie_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'p' && input[x + 2] == 'e' && input[x + 3] == 'e' && input[x + 4] == 'c' && input[x + 5] == 'h' && input[x + 6] == '_' && input[x + 7] == 'l' && input[x + 8] == 'i' && input[x + 9] == 'e' && input[x + 10] == '_' && input[x + 11] == 'd' && input[x + 12] == 'e' && input[x + 13] == 't' && input[x + 14] == 'e' && input[x + 15] == 'c' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetComputerMonitorRecognitionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "computer_monitor_recognition")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'm' && input[x + 10] == 'o' && input[x + 11] == 'n' && input[x + 12] == 'i' && input[x + 13] == 't' && input[x + 14] == 'o' && input[x + 15] == 'r' && input[x + 16] == '_' && input[x + 17] == 'r' && input[x + 18] == 'e' && input[x + 19] == 'c' && input[x + 20] == 'o' && input[x + 21] == 'g' && input[x + 22] == 'n' && input[x + 23] == 'i' && input[x + 24] == 't' && input[x + 25] == 'i' && input[x + 26] == 'o' && input[x + 27] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 29; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetComputerOwnedRecognitionEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "computer_owned_recognition")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetMicrophone1Enable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "microphone1_enable")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'm' && input[x + 1] == 'i' && input[x + 2] == 'c' && input[x + 3] == 'r' && input[x + 4] == 'o' && input[x + 5] == 'p' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'e' && input[x + 10] == '1' && input[x + 11] == '_' && input[x + 12] == 'e' && input[x + 13] == 'n' && input[x + 14] == 'a' && input[x + 15] == 'b' && input[x + 16] == 'l' && input[x + 17] == 'e')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetMicrophone1Device()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "microphone1_device")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'i' && input[x + 2] == 'c' && input[x + 3] == 'r' && input[x + 4] == 'o' && input[x + 5] == 'p' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'e' && input[x + 10] == '1' && input[x + 11] == '_' && input[x + 12] == 'd' && input[x + 13] == 'e' && input[x + 14] == 'v' && input[x + 15] == 'i' && input[x + 16] == 'c' && input[x + 17] == 'e')
+				{
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetMicrophone2Enable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "microphone2_enable")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'm' && input[x + 1] == 'i' && input[x + 2] == 'c' && input[x + 3] == 'r' && input[x + 4] == 'o' && input[x + 5] == 'p' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'e' && input[x + 10] == '2' && input[x + 11] == '_' && input[x + 12] == 'e' && input[x + 13] == 'n' && input[x + 14] == 'a' && input[x + 15] == 'b' && input[x + 16] == 'l' && input[x + 17] == 'e')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetMicrophone2Device()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "microphone2_device")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'i' && input[x + 2] == 'c' && input[x + 3] == 'r' && input[x + 4] == 'o' && input[x + 5] == 'p' && input[x + 6] == 'h' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'e' && input[x + 10] == '2' && input[x + 11] == '_' && input[x + 12] == 'd' && input[x + 13] == 'e' && input[x + 14] == 'v' && input[x + 15] == 'i' && input[x + 16] == 'c' && input[x + 17] == 'e')
+				{
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetCUDAAcellerationEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetCUDAAccelerationRemoteHostname()
 {
-	fstream ftp_settings;
+	fstream settings;
 	string input;
-	string ftp_vision_directory;
+	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	ftp_settings.open("ftp_settings.cfg");
-
-	while (getline(ftp_settings, input))
+	if (settings.is_open())
 	{
-		// Check for mysql_username
-		for (int x = 0; x < input.length(); x++)
+		while (getline(settings, input))
 		{
-			if (input[x] == 'f' && input[x + 1] == 't' && input[x + 2] == 'p' && input[x + 3] == '_' && input[x + 4] == 'v' && input[x + 5] == 'i' && input[x + 6] == 's' && input[x + 7] == 'i' && input[x + 8] == 'o' && input[x + 9] == 'n' && input[x + 10] == '_' && input[x + 11] == 'd' && input[x + 12] == 'i' && input[x + 13] == 'r' && input[x + 14] == 'e' && input[x + 15] == 'c' && input[x + 16] == 't' && input[x + 17] == 'o' && input[x + 18] == 'r' && input[x + 19] == 'y')
+			for (int x = 0; x <= input.length(); x++)
 			{
-				for (int y = x + 21; y < input.length(); y++)
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'h' && input[x + 27] == 'o' && input[x + 28] == 's' && input[x + 29] == 't' && input[x + 30] == 'n' && input[x + 31] == 'a' && input[x + 32] == 'm' && input[x + 33] == 'e')
 				{
-					if (input[y] == '\"')
+					for (int y = x + 35; y <= input.length(); y++)
 					{
-						for (int z = y + 1; input[z] != '\"'; z++)
+						if (input[y] != '\"')
 						{
-							ftp_vision_directory += input[z];
+							temp += input[y];
 						}
-						return ftp_vision_directory;
 					}
+					return temp;
 				}
 			}
 		}
 	}
-	return ftp_vision_directory;
+	return temp;
 }
 
 bool _Settings::GetLongTermMemoryEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "long_term_memory_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'l' && input[x + 1] == 'o' && input[x + 2] == 'n' && input[x + 3] == 'g' && input[x + 4] == '_' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == 'm' && input[x + 9] == '_' && input[x + 10] == 'm' && input[x + 11] == 'e' && input[x + 12] == 'm' && input[x + 13] == 'o' && input[x + 14] == 'r' && input[x + 15] == 'y' && input[x + 16] == '_' && input[x + 17] == 'e' && input[x + 18] == 'n' && input[x + 19] == 'a' && input[x + 20] == 'b' && input[x + 21] == 'l' && input[x + 22] == 'e' && input[x + 23] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 25; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetLongTermMemoryLimit()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "long_term_memory_limit")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'l' && input[x + 1] == 'o' && input[x + 2] == 'n' && input[x + 3] == 'g' && input[x + 4] == '_' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == 'm' && input[x + 9] == '_' && input[x + 10] == 'm' && input[x + 11] == 'e' && input[x + 12] == 'm' && input[x + 13] == 'o' && input[x + 14] == 'r' && input[x + 15] == 'y' && input[x + 16] == '_' && input[x + 17] == 'l' && input[x + 18] == 'i' && input[x + 19] == 'm' && input[x + 20] == 'i' && input[x + 21] == 't')
+				{
+					for (int y = x + 23; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetReadingEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "reading")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'r' && input[x + 1] == 'e' && input[x + 2] == 'a' && input[x + 3] == 'd' && input[x + 4] == 'i' && input[x + 5] == 'n' && input[x + 6] == 'g')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 8; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetFFMpegLocation()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ffmpeg_location")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'f' && input[x + 1] == 'f' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'e' && input[x + 5] == 'g' && input[x + 6] == '_' && input[x + 7] == 'l' && input[x + 8] == 'o' && input[x + 9] == 'c' && input[x + 10] == 'a' && input[x + 11] == 't' && input[x + 12] == 'i' && input[x + 13] == 'o' && input[x + 14] == 'n')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetCUDAAccellerationRemoteCores()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "cuda_accelleration_remote_cores")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'c' && input[x + 27] == 'o' && input[x + 28] == 'r' && input[x + 29] == 'e' && input[x + 30] == 's')
+				{
+					for (int y = x + 32; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetTenorAccellerationRemoteHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "tensor_accelleration_remote_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'u' && input[x + 2] == 'd' && input[x + 3] == 'a' && input[x + 4] == '_' && input[x + 5] == 'a' && input[x + 6] == 'c' && input[x + 7] == 'c' && input[x + 8] == 'e' && input[x + 9] == 'l' && input[x + 10] == 'l' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'i' && input[x + 16] == 'o' && input[x + 17] == 'n' && input[x + 18] == '_' && input[x + 19] == 'r' && input[x + 20] == 'e' && input[x + 21] == 'm' && input[x + 22] == 'o' && input[x + 23] == 't' && input[x + 24] == 'e' && input[x + 25] == '_' && input[x + 26] == 'h' && input[x + 27] == 'o' && input[x + 28] == 's' && input[x + 29] == 't' && input[x + 30] == 'n' && input[x + 31] == 'a' && input[x + 32] == 'm' && input[x + 33] == 'e')
+				{
+					for (int y = x + 35; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetComputerMonitorRecognitionEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "computer_monitor_recognition")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'm' && input[x + 10] == 'o' && input[x + 11] == 'n' && input[x + 12] == 'i' && input[x + 13] == 't' && input[x + 14] == 'o' && input[x + 15] == 'r' && input[x + 16] == '_' && input[x + 17] == 'r' && input[x + 18] == 'e' && input[x + 19] == 'c' && input[x + 20] == 'o' && input[x + 21] == 'g' && input[x + 22] == 'n' && input[x + 23] == 'i' && input[x + 24] == 't' && input[x + 25] == 'i' && input[x + 26] == 'o' && input[x + 27] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 29; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetTensorAccelleration()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "tensor_accelleration")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 't' && input[x + 1] == 'e' && input[x + 2] == 'n' && input[x + 3] == 's' && input[x + 4] == 'o' && input[x + 5] == 'r' && input[x + 6] == '_' && input[x + 7] == 'a' && input[x + 8] == 'c' && input[x + 9] == 'c' && input[x + 10] == 'e' && input[x + 11] == 'l' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'r' && input[x + 15] == 'a' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetTensorAccellerationRemoteEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "tensor_accelleration_remote_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 't' && input[x + 1] == 'e' && input[x + 2] == 'n' && input[x + 3] == 's' && input[x + 4] == 'o' && input[x + 5] == 'r' && input[x + 6] == '_' && input[x + 7] == 'a' && input[x + 8] == 'c' && input[x + 9] == 'c' && input[x + 10] == 'e' && input[x + 11] == 'l' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'r' && input[x + 15] == 'a' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n' && input[x + 20] == '_' && input[x + 21] == 'r' && input[x + 22] == 'e' && input[x + 23] == 'm' && input[x + 24] == 'o' && input[x + 25] == 't' && input[x + 26] == 'e' && input[x + 27] == '_' && input[x + 28] == 'e' && input[x + 29] == 'n' && input[x + 30] == 'a' && input[x + 31] == 'b' && input[x + 32] == 'l' && input[x + 33] == 'e' && input[x + 34] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 36; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetTensorAccellerationRemoteHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value);
-
-			if (setting == "tensor_accelleration_remote_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 't' && input[x + 1] == 'e' && input[x + 2] == 'n' && input[x + 3] == 's' && input[x + 4] == 'o' && input[x + 5] == 'r' && input[x + 6] == '_' && input[x + 7] == 'a' && input[x + 8] == 'c' && input[x + 9] == 'c' && input[x + 10] == 'e' && input[x + 11] == 'l' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'r' && input[x + 15] == 'a' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n' && input[x + 20] == '_' && input[x + 21] == 'r' && input[x + 22] == 'e' && input[x + 23] == 'm' && input[x + 24] == 'o' && input[x + 25] == 't' && input[x + 26] == 'e' && input[x + 27] == '_' && input[x + 28] == 'h' && input[x + 29] == 'o' && input[x + 30] == 's' && input[x + 31] == 't' && input[x + 32] == 'n' && input[x + 33] == 'a' && input[x + 34] == 'm' && input[x + 35] == 'e')
+				{
+					for (int y = x + 37; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
+	return temp;
 }
 
 string _Settings::GetTensorAccellerationRemoteCores()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "tensor_accelleration_remote_cores")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 't' && input[x + 1] == 'e' && input[x + 2] == 'n' && input[x + 3] == 's' && input[x + 4] == 'o' && input[x + 5] == 'r' && input[x + 6] == '_' && input[x + 7] == 'a' && input[x + 8] == 'c' && input[x + 9] == 'c' && input[x + 10] == 'e' && input[x + 11] == 'l' && input[x + 12] == 'l' && input[x + 13] == 'e' && input[x + 14] == 'r' && input[x + 15] == 'a' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n' && input[x + 20] == '_' && input[x + 21] == 'r' && input[x + 22] == 'e' && input[x + 23] == 'm' && input[x + 24] == 'o' && input[x + 25] == 't' && input[x + 26] == 'e' && input[x + 27] == '_' && input[x + 28] == 'c' && input[x + 29] == 'o' && input[x + 30] == 'r' && input[x + 31] == 'e' && input[x + 32] == 's')
+				{
+					for (int y = x + 34; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetWorkingMemoryEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "working_memory_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'w' && input[x + 1] == 'o' && input[x + 2] == 'r' && input[x + 3] == 'k' && input[x + 4] == 'i' && input[x + 5] == 'n' && input[x + 6] == 'g' && input[x + 7] == '_' && input[x + 8] == 'm' && input[x + 9] == 'e' && input[x + 10] == 'm' && input[x + 11] == 'o' && input[x + 12] == 'r' && input[x + 13] == 'y' && input[x + 14] == '_' && input[x + 15] == 'e' && input[x + 16] == 'n' && input[x + 17] == 'a' && input[x + 18] == 'b' && input[x + 19] == 'l' && input[x + 20] == 'e' && input[x + 21] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 23; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetSpeechMemoryEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "speech_memory")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'p' && input[x + 2] == 'e' && input[x + 3] == 'e' && input[x + 4] == 'c' && input[x + 5] == 'h' && input[x + 6] == '_' && input[x + 7] == 'm' && input[x + 8] == 'e' && input[x + 9] == 'm' && input[x + 10] == 'o' && input[x + 11] == 'r' && input[x + 12] == 'y' && input[x + 13] == '_' && input[x + 14] == 'e' && input[x + 15] == 'n' && input[x + 16] == 'a' && input[x + 17] == 'b' && input[x + 18] == 'l' && input[x + 19] == 'e' && input[x + 20] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 22; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
@@ -4553,1014 +3787,698 @@ bool _Settings::GetSpeechMemoryEnabled()
 
 bool _Settings::GetSmartphoneRecognitionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "smart_phone_recognition")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetWorkingMemoryEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "working_memory_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetShortTermMemoryEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "short_term_memory_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 's' && input[x + 1] == 'h' && input[x + 2] == 'o' && input[x + 3] == 'r' && input[x + 4] == 't' && input[x + 5] == '_' && input[x + 6] == 't' && input[x + 7] == 'e' && input[x + 8] == 'r' && input[x + 9] == 'm' && input[x + 10] == '_' && input[x + 11] == 'm' && input[x + 12] == 'e' && input[x + 13] == 'm' && input[x + 14] == 'o' && input[x + 15] == 'r' && input[x + 16] == 'y' && input[x + 17] == '_' && input[x + 18] == 'e' && input[x + 19] == 'n' && input[x + 20] == 'a' && input[x + 21] == 'b' && input[x + 22] == 'l' && input[x + 23] == 'e' && input[x + 24] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 26; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetEthicsCheckEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "ethics_check_enabled")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'e' && input[x + 1] == 't' && input[x + 2] == 'h' && input[x + 3] == 'i' && input[x + 4] == 'c' && input[x + 5] == 's' && input[x + 6] == '_' && input[x + 7] == 'c' && input[x + 8] == 'h' && input[x + 9] == 'e' && input[x + 10] == 'c' && input[x + 11] == 'k' && input[x + 12] == '_' && input[x + 13] == 'e' && input[x + 14] == 'n' && input[x + 15] == 'a' && input[x + 16] == 'b' && input[x + 17] == 'l' && input[x + 18] == 'e' && input[x + 19] == 'd')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetTensorRemoteCores()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	string temp;
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
-	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
-		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value);
-
-			if (setting == "tensor_accelleration_remote_cores")
-			{
-				mysql_close(conn);
-				return value;
-			}
-		}
-	}
-	mysql_close(conn);
 }
 
 bool _Settings::GetObjectDetectionCUDAEnabled()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	 //cout << "mysql_username: " << mysql_username << endl;
-	// cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "vision_object_detection_cuda")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'v' && input[x + 1] == 'i' && input[x + 2] == 's' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == '_' && input[x + 7] == 'o' && input[x + 8] == 'b' && input[x + 9] == 'j' && input[x + 10] == 'e' && input[x + 11] == 'c' && input[x + 12] == 't' && input[x + 13] == '_' && input[x + 14] == 'd' && input[x + 15] == 'e' && input[x + 16] == 't' && input[x + 17] == 'e' && input[x + 18] == 'c' && input[x + 19] == 't' && input[x + 20] == 'i' && input[x + 21] == 'o' && input[x + 22] == 'n' && input[x + 23] == '_' && input[x + 24] == 'c' && input[x + 25] == 'u' && input[x + 26] == 'd' && input[x + 27] == 'a')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 29; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetSoundCodec()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
 	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "sound_codec")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 's' && input[x + 1] == 'o' && input[x + 2] == 'u' && input[x + 3] == 'n' && input[x + 4] == 'd' && input[x + 5] == '_' && input[x + 6] == 'c' && input[x + 7] == 'o' && input[x + 8] == 'd' && input[x + 9] == 'e' && input[x + 10] == 'c')
+				{
+					for (int y = x + 12; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetSoundBitrate()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "sound_bitrate")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 's' && input[x + 1] == 'o' && input[x + 2] == 'u' && input[x + 3] == 'n' && input[x + 4] == 'd' && input[x + 5] == '_' && input[x + 6] == 'b' && input[x + 7] == 'i' && input[x + 8] == 't' && input[x + 9] == 'r' && input[x + 10] == 'a' && input[x + 11] == 't' && input[x + 12] == 'e')
+				{
+					for (int y = x + 14; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLVisionDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_vision_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'v' && input[x + 7] == 'i' && input[x + 8] == 's' && input[x + 9] == 'i' && input[x + 10] == 'o' && input[x + 11] == 'n' && input[x + 12] == '_' && input[x + 13] == 'd' && input[x + 14] == 'a' && input[x + 15] == 't' && input[x + 16] == 'a' && input[x + 17] == 'b' && input[x + 18] == 'a' && input[x + 19] == 's' && input[x + 20] == 'e')
+				{
+					for (int y = x + 22; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLSoundDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_sound_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 's' && input[x + 7] == 'o' && input[x + 8] == 'u' && input[x + 9] == 'n' && input[x + 10] == 'd' && input[x + 11] == '_' && input[x + 12] == 'd' && input[x + 13] == 'a' && input[x + 14] == 't' && input[x + 15] == 'a' && input[x + 16] == 'b' && input[x + 17] == 'a' && input[x + 18] == 's' && input[x + 19] == 'e')
+				{
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLSpeechDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_speech_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 's' && input[x + 7] == 'p' && input[x + 8] == 'e' && input[x + 9] == 'e' && input[x + 10] == 'c' && input[x + 11] == 'h' && input[x + 12] == '_' && input[x + 13] == 'd' && input[x + 14] == 'a' && input[x + 15] == 't' && input[x + 16] == 'a' && input[x + 17] == 'b' && input[x + 18] == 'a' && input[x + 19] == 's' && input[x + 20] == 'e')
+				{
+					for (int y = x + 22; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLWorkingMemoryDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
+	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_working_memory_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'w' && input[x + 7] == 'o' && input[x + 8] == 'r' && input[x + 9] == 'k' && input[x + 10] == 'i' && input[x + 11] == 'n' && input[x + 12] == 'g' && input[x + 13] == '_' && input[x + 14] == 'm' && input[x + 15] == 'e' && input[x + 16] == 'm' && input[x + 17] == 'o' && input[x + 18] == 'r' && input[x + 19] == 'y' && input[x + 20] == '_' && input[x + 21] == 'd' && input[x + 22] == 'a' && input[x + 23] == 't' && input[x + 24] == 'a' && input[x + 25] == 'b' && input[x + 26] == 'a' && input[x + 27] == 's' && input[x + 28] == 'e')
+				{
+					for (int y = x + 30; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLShortTermMemoryDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_short_term_memory_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 's' && input[x + 7] == 'h' && input[x + 8] == 'o' && input[x + 9] == 'r' && input[x + 10] == 't' && input[x + 11] == '_' && input[x + 12] == 't' && input[x + 13] == 'e' && input[x + 14] == 'r' && input[x + 15] == 'm' && input[x + 16] == '_' && input[x + 17] == 'm' && input[x + 18] == 'e' && input[x + 19] == 'm' && input[x + 20] == 'o' && input[x + 21] == 'r' && input[x + 22] == 'y' && input[x + 23] == '_' && input[x + 24] == 'd' && input[x + 25] == 'a' && input[x + 26] == 't' && input[x + 27] == 'a' && input[x + 28] == 'b' && input[x + 29] == 'a' && input[x + 30] == 's' && input[x + 31] == 'e')
+				{
+					for (int y = x + 33; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetMySQLLongTermMemoryDatabase()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM mysql_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "mysql_long_term_memory_database")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'm' && input[x + 1] == 'y' && input[x + 2] == 's' && input[x + 3] == 'q' && input[x + 4] == 'l' && input[x + 5] == '_' && input[x + 6] == 'l' && input[x + 7] == 'o' && input[x + 8] == 'n' && input[x + 9] == 'g' && input[x + 10] == '_' && input[x + 11] == 't' && input[x + 12] == 'e' && input[x + 13] == 'r' && input[x + 14] == 'm' && input[x + 15] == '_' && input[x + 16] == 'm' && input[x + 17] == 'e' && input[x + 18] == 'm' && input[x + 19] == 'o' && input[x + 20] == 'r' && input[x + 21] == 'y' && input[x + 22] == '_' && input[x + 23] == 'd' && input[x + 24] == 'a' && input[x + 25] == 't' && input[x + 26] == 'a' && input[x + 27] == 'b' && input[x + 28] == 'a' && input[x + 29] == 's' && input[x + 30] == 'e')
+				{
+					for (int y = x + 32; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetPrivateComputer()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM computer_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "private_computer")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'p' && input[x + 1] == 'r' && input[x + 2] == 'i' && input[x + 3] == 'v' && input[x + 4] == 'a' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == '_' && input[x + 8] == 'c' && input[x + 9] == 'o' && input[x + 10] == 'm' && input[x + 11] == 'p' && input[x + 12] == 'u' && input[x + 13] == 't' && input[x + 14] == 'e' && input[x + 15] == 'r')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 17; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 string _Settings::GetComputerHostname()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
-	
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM computer_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "computer_hostname")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'h' && input[x + 10] == 'o' && input[x + 11] == 's' && input[x + 12] == 't' && input[x + 13] == 'n' && input[x + 14] == 'a' && input[x + 15] == 'm' && input[x + 16] == 'e')
+				{
+					for (int y = x + 18; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetComputerUsername()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM computer_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "computer_username")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'u' && input[x + 10] == 's' && input[x + 11] == 'e' && input[x + 12] == 'r' && input[x + 13] == 'n' && input[x + 14] == 'a' && input[x + 15] == 'm' && input[x + 16] == 'e')
+				{
+					for (int y = x + 18; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 string _Settings::GetComputerPassword()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream mysql_hostname;
+	string input;
+	string temp;
+	mysql_hostname.open("./settings.txt", ios::in);
 
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (mysql_hostname.is_open())
 	{
-		sql1 = "SELECT * FROM computer_settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(mysql_hostname, input))
 		{
-			setting = row[0];
-			value = row[1];
-			//value_int = stoi(value.c_str());
-
-			if (setting == "computer_password")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				mysql_close(conn);
-				return value;
+				if (input[x] == 'c' && input[x + 1] == 'o' && input[x + 2] == 'm' && input[x + 3] == 'p' && input[x + 4] == 'u' && input[x + 5] == 't' && input[x + 6] == 'e' && input[x + 7] == 'r' && input[x + 8] == '_' && input[x + 9] == 'p' && input[x + 10] == 'a' && input[x + 11] == 's' && input[x + 12] == 's' && input[x + 13] == 'w' && input[x + 14] == 'o' && input[x + 15] == 'r' && input[x + 16] == 'd')
+				{
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					return temp;
+				}
 			}
 		}
 	}
-	mysql_close(conn);
-	return value;
+	return temp;
 }
 
 bool _Settings::GetNewsWatchingEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "news_watching")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'n' && input[x + 1] == 'e' && input[x + 2] == 'w' && input[x + 3] == 's' && input[x + 4] == '_' && input[x + 5] == 'w' && input[x + 6] == 'a' && input[x + 7] == 't' && input[x + 8] == 'c' && input[x + 9] == 'h' && input[x + 10] == 'i' && input[x + 11] == 'n' && input[x + 12] == 'g')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 14; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetActionWatchingEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "actions_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'a' && input[x + 1] == 'c' && input[x + 2] == 't' && input[x + 3] == 'i' && input[x + 4] == 'o' && input[x + 5] == 'n' && input[x + 6] == 's' && input[x + 7] == '_' && input[x + 8] == 'w' && input[x + 9] == 'a' && input[x + 10] == 't' && input[x + 11] == 'c' && input[x + 12] == 'h' && input[x + 13] == 'i' && input[x + 14] == 'n' && input[x + 15] == 'g')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 17; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetNeedsWatchingEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "needs_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'n' && input[x + 1] == 'e' && input[x + 2] == 'e' && input[x + 3] == 'd' && input[x + 4] == 's' && input[x + 5] == '_' && input[x + 6] == 'd' && input[x + 7] == 'e' && input[x + 8] == 't' && input[x + 9] == 'e' && input[x + 10] == 'c' && input[x + 11] == 't' && input[x + 12] == 'i' && input[x + 13] == 'o' && input[x + 14] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 16; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetNavigationDetectionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "navigation_watching")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
+				if (input[x] == 'n' && input[x + 1] == 'a' && input[x + 2] == 'v' && input[x + 3] == 'i' && input[x + 4] == 'g' && input[x + 5] == 'a' && input[x + 6] == 't' && input[x + 7] == 'i' && input[x + 8] == 'o' && input[x + 9] == 'n' && input[x + 10] == '_' && input[x + 11] == 'd' && input[x + 12] == 'e' && input[x + 13] == 't' && input[x + 14] == 'e' && input[x + 15] == 'c' && input[x + 16] == 't' && input[x + 17] == 'i' && input[x + 18] == 'o' && input[x + 19] == 'n')
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 21; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
 
 bool _Settings::GetSocialNeedsDetectionEnable()
 {
-	MYSQL* conn;
-	MYSQL_ROW row;
-	MYSQL_RES* result;
-	string sql1;
-	string mysql_database = "ai_settings";
-	string mysql_hostname = _Settings::GetMySQLHostname();
-	string mysql_username = _Settings::GetMySQLUsername();
-	string mysql_password = _Settings::GetMySQLPassword();
-	string setting;
-	string value;
+	fstream settings;
+	string input;
 	string temp;
+	settings.open("./settings.txt", ios::in);
 
-	//cout << "mysql_username: " << mysql_username << endl;
-   // cout << "mysql_password: " << mysql_password << endl;
-
-	conn = mysql_init(0);
-	conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-	if (conn)
+	if (settings.is_open())
 	{
-		sql1 = "SELECT * FROM settings;";
-		mysql_query(conn, sql1.c_str());
-		result = mysql_store_result(conn);
-
-		while (row = mysql_fetch_row(result))
+		while (getline(settings, input))
 		{
-			setting = row[0];
-			value = row[1];
-
-			if (setting == "social_needs_detection")
+			for (int x = 0; x <= input.length(); x++)
 			{
-				if (value == "TRUE" || value == "True" || value == "true")
 				{
-					mysql_close(conn);
-					return true;
-				}
-				else if (value == "false" || value == "false" || value == "false")
-				{
-					mysql_close(conn);
-					return false;
+					for (int y = x + 19; y <= input.length(); y++)
+					{
+						if (input[y] != '\"')
+						{
+							temp += input[y];
+						}
+					}
+					if (temp == "true" || temp == "True")
+						return true;
+					else
+						return false;
 				}
 			}
 		}
 	}
-	mysql_close(conn);
 	return false;
 }
-
 
 //bool _Settings::GetNeedsDetectionEnabled()
 //{
@@ -5568,6 +4486,199 @@ bool _Settings::GetSocialNeedsDetectionEnable()
 //	string mysql_password = _Settings::GetMySQLPassword();
 //	return false;
 //}
+
+void _Settings::SaveSettingsFile()
+{
+	fstream settings;
+
+	settings.open("./settings.txt", ios::out | ios::trunc);
+
+	if (settings.is_open())
+	{
+		// Settings
+		if (terms_conditions)
+			settings << "terms_conditions=True" << endl;
+		else
+			settings << "terms_conditions=False" << endl;
+		if (working_memory_enabled)
+			settings << "working_memory_enabled=True" << endl;
+		else
+			settings << "working_memory_enabled=False" << endl;
+		settings << "working_memory_limit=" << working_memory_limit << endl;
+		if (short_term_memory_enabled)
+			settings << "short_term_memory_enabled=True" << endl;
+		else
+			settings << "short_term_memory_enabled=False" << endl;
+		if (long_term_memory_enabled)
+			settings << "long_term_memory_enabled=True" << endl;
+		else
+			settings << "long_term_memory_enabled=False" << endl;
+		settings << "long_term_memory_limit=" << long_term_memory_limit << endl;
+		if (sound_memory_enabled)
+			settings << "sound_memory_enabled=True" << endl;
+		else
+			settings << "sound_memory_enabled=False" << endl;
+		if (speech_memory_enabled)
+			settings << "speech_memory_enabled=True" << endl;
+		else
+			settings << "speech_memory_enabled=False" << endl;
+		if (speech_recognition)
+			settings << "speech_recognition=True" << endl;
+		else
+			settings << "speech_recognition=False" << endl;
+		if (speech_lie_detection)
+			settings << "speech_lie_detection=True" << endl;
+		else
+			settings << "speech_lie_detection=False" << endl;
+		settings << "sound_directory=" << sound_directory << endl;
+		settings << "sound_codec=" << sound_codec << endl;
+		settings << "sound_bitrate=" << sound_bitrate << endl;
+		settings << "speech_directory=" << speech_directory << endl;
+		if (ethics_check_enabled)
+			settings << "ethics_check_enabled=True" << endl;
+		else
+			settings << "ethics_check_enabled=False" << endl;
+		if (cuda_accelleration)
+			settings << "cuda_accelleration=True" << endl;
+		else
+			settings << "cuda_accelleration=False" << endl;
+		if (cuda_accelleration_remote_enabled)
+			settings << "cuda_accelleration_remote_enabled=True" << endl;
+		else
+			settings << "cuda_accelleration_remote_enabled=False" << endl;
+		settings << "cuda_accelleration_remote_hostname=" << cuda_accelleration_remote_hostname << endl;
+		settings << "cuda_accelleration_remote_cores=" << cuda_accelleration_remote_cores << endl;
+		if (tensor_accelleration)
+			settings << "tensor_accelleration=True" << endl;
+		else
+			settings << "tensor_accelleration=True" << endl;
+		if (tensor_accelleration_remote_enabled)
+			settings << "tensor_accelleration_remote_enabled=True" << endl;
+		else
+			settings << "tensor_accelleration_remote_enabled=False" << endl;
+		settings << "tensor_accelleration_remote_hostname=" << tensor_accelleration_remote_hostname << endl;
+		settings << "tensor_accelleration_remote_cores=" << tensor_accelleration_remote_cores << endl;
+		if (vision_object_detection)
+			settings << "vision_object_detection=True" << endl;
+		else
+			settings << "vision_object_detection=False" << endl;
+		if (vision_object_detection_cuda)
+			settings << "vision_object_detection_cuda=True" << endl;
+		else
+			settings << "vision_object_detection_cuda=False" << endl;
+		if (vision_object_detection_remote_enabled)
+			settings << "vision_object_detection_remote_enabled=True" << endl;
+		else
+			settings << "vision_object_detection_remote_enabled=False" << endl;
+		settings << "vision_object_detection_server_hostname=" << vision_object_detection_server_hostname << endl;
+		if (visual_reasoning)
+		settings << "visual_reasoning=True" << endl;
+		else
+		settings << "visual_reasoning=False" << endl;
+		if (visual_memory)
+		settings << "visual_memory=True" << endl;
+		else
+		settings << "visual_memory=False" << endl;
+		settings << "vision_memory_directory=" << vision_memory_directory << endl;
+		if (camera1_enabled)
+		settings << "camera1_enabled=True" << endl;
+		else
+		settings << "camera1_enabled=False" << endl;
+		settings << "camera1=" << camera1 << endl;
+		settings << "camera1_fps=" << camera1_fps << endl;
+		settings << "camera1_resolution=" << camera1_resolution << endl;
+		if (camera2_enabled)
+			settings << "camera2_enabled=True" << endl;
+		else
+			settings << "camera2_enabled=False" << endl;
+		settings << "camera2=" << camera2 << endl;
+		settings << "camera2_fps=" << camera2_fps << endl;
+		settings << "camera2_resolution=" << camera2_resolution << endl;
+		if (computer_use)
+			settings << "computer_use=True" << endl;
+		else
+			settings << "computer_use=False" << endl;
+		if (computer_monitor_recognition)
+			settings << "computer_monitor_recognition=True" << endl;
+		else
+			settings << "computer_monitor_recognition=False" << endl;
+		if (computer_owned_recognition)
+			settings << "computer_owned_recognition=True" << endl;
+		else
+			settings << "computer_owned_recognition=False" << endl;
+		if (reading)
+			settings << "reading=True" << endl;
+		else
+			settings << "reading=False" << endl;
+		if (reading_fallacy_check)
+			settings << "reading_fallacy_check=True" << endl;
+		else
+			settings << "reading_fallacy_check=False" << endl;
+		settings << "ffmpeg_location=" << ffmpeg_location << endl;
+		if (microphone1_enable)
+			settings << "microphone1_enable=True" << endl;
+		else
+			settings << "microphone1_enable=False" << endl;
+		settings << "microphone1_device=" << microphone1_device << endl;
+		if (microphone2_enable)
+			settings << "microphone2_enable=True" << endl;
+		else
+			settings << "microphone2_enable=False" << endl;
+		settings << "microphone2_device=" << microphone2_device << endl;
+		if (news_watching)
+			settings << "news_watching=True" << endl;
+		else
+			settings << "news_watching=False" << endl;
+		if (actions_watching)
+			settings << "actions_watching=True" << endl;
+		else
+			settings << "actions_watching=False" << endl;
+		if (needs_detection)
+			settings << "needs_detection=True" << endl;
+		else
+			settings << "needs_detection=False" << endl;
+		if (navigation_detection)
+			settings << "navigation_detection=True" << endl;
+		else
+			settings << "navigation_detection=False" << endl;
+		if (social_needs_detection)
+			settings << "social_needs_detection_enable=True" << endl;
+		else
+			settings << "social_needs_detection_enable=False" << endl;
+
+		// MySQL
+		settings << "mysql_hostname=" << mysql_hostname << endl;
+		settings << "mysql_username=" << mysql_username << endl;
+		settings << "mysql_password=" << mysql_password << endl;
+		settings << "mysql_vision_database=" << mysql_vision_database << endl;
+		settings << "mysql_sound_database=" << mysql_sound_database << endl;
+		settings << "mysql_speech_database=" << mysql_speech_database << endl;
+		settings << "mysql_short_term_memory_database=" << mysql_short_term_memory_database << endl;
+		settings << "mysql_long_term_memory_database=" << mysql_long_term_memory_database << endl;
+
+		// Computer Settings
+		if (private_computer)
+			settings << "private_computer=True" << endl;
+		else
+			settings << "private_computer=False" << endl;
+		settings << "computer_hostname=" << computer_hostname << endl;
+		settings << "computer_username=" << computer_username << endl;
+		settings << "computer_password=" << computer_password << endl;
+
+		// FTP Settings
+		if (ftp_enabled)
+			settings << "ftp_enabled=True" << endl;
+		else
+			settings << "ftp_enabled=False" << endl;
+		settings << "ftp_hostname=" << ftp_hostname << endl;
+		settings << "ftp_username=" << ftp_username << endl;
+		settings << "ftp_password=" << ftp_password << endl;
+		settings << "ftp_vision_directory=" << ftp_vision_directory << endl;
+		settings << "ftp_sound_directory=" << ftp_sound_directory << endl;
+		settings << "ftp_vision_storage_limit=" << ftp_vision_storage_limit << endl;
+		settings << "ftp_sound_storage_limit=" << ftp_sound_storage_limit << endl;
+	}
+}
 
 void _Settings::SaveSettings()
 {

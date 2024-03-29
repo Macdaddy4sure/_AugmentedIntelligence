@@ -352,6 +352,7 @@ double* _NLU::getSentenceVectorsAdditive(string sentence)
         }
     }
 }
+
 //__global__ double* _NLU::CUDA::getSentenceVectorsAdditive(string sentence)
 //{
 //
@@ -475,11 +476,6 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
         return sentence_vector;
     }
 }
-
-//__global__ double* _NLU::CUDA::getSentenceVectorsAdditiveAverage(string sentence)
-//{
-//
-//}
 
 double* _NLU::getAverageVectorSentence(string sentence)
 {

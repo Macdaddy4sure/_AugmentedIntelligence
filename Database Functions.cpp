@@ -144,13 +144,76 @@ bool _DatabaseFunctions::MovieExists(string title)
 // This function will upload all detected objects from the object detection neural network
 void _DatabaseFunctions::StoreObject(string object)
 {
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_database = "dictionary";
+    string mysql_hostname;
+    string mysql_username = _Settings::GetMySQLUsername();
+    string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
 
+    if (conn)
+    {
+
+    }
 }
 
 // This function will be invoked when the user commands to find the last seen location of an object
 void _DatabaseFunctions::FindObject(string object)
 {
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    string mysql_database = "long_term_memory";
+    string mysql_hostname;
+    string mysql_username = _Settings::GetMySQLUsername();
+    string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
 
+    if (conn)
+    {
+        sql1 = "SHOW TABLES;";
+        mysql_query(conn, sql1.c_str());
+
+    }
+}
+
+string _DatabaseFunctions::QueryWordVector(string word, string word_type)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    //string mysql_dictionary_database = "dictionary";
+    string mysql_table = "wiki_vectors";
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`;";
+        mysql_query(conn, sql1.c_str());
+        result1 = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result1))
+        {
+            if (word == row[0] && word_type == row[1])
+            {
+                mysql_close(conn);
+                return row[2];
+            }
+        }
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
 }
 
 //string** _DatabaseFunctions::DictionarySearchVector(string word)
@@ -223,18 +286,18 @@ void _DatabaseFunctions::savePassword(string hostname, string password)
     string sql1;
     string mysql_database = "personal_information";
     string table_name = "passwords";
-    string image_location = stm_vision_path_camera1[1000][0];
+    //string image_location = stm_vision_path_camera1[1000][0];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
-        query1 << "INSERT INTO " << table_name << "(computer_hostname, image_location, password) VALUES(" << hostname.c_str() << ", " << image_location.c_str() << ", " << password.c_str() << ");";
-        sql1 = query1.str();
-        /*cout << "SQL1: " << sql1 << endl;*/
-        mysql_query(conn, sql1.c_str());
-        result = mysql_store_result(conn);
+        //query1 << "INSERT INTO " << table_name << "(computer_hostname, image_location, password) VALUES(" << hostname.c_str() << ", " << image_location.c_str() << ", " << password.c_str() << ");";
+        //sql1 = query1.str();
+        ///*cout << "SQL1: " << sql1 << endl;*/
+        //mysql_query(conn, sql1.c_str());
+        //result = mysql_store_result(conn);
     }
 }
 
@@ -1492,5 +1555,419 @@ void _DatabaseFunctions::CreateTable(string database_input, string table_input, 
 
         mysql_query(conn, sql1.c_str());
         result = mysql_store_result(conn);
+    }
+}
+
+string* _MySQL::QueryDatabaseWordTypes(string word)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string mysql_table = "entries";
+    string sql1;
+    //string tableName = "entries";
+    string wordTypes[10];
+    int count = 0;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        mysql_query(conn, sql1.c_str());
+        result1 = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result1))
+        {
+            if (row[0] == word)
+            {
+                // Check if the current interation is a punctuation charcter, get the name of the punctuation
+                for (int x = 0; x <= sizeof(wordTypes); x++)
+                {
+                    if (wordTypes[x] == "")
+                    {
+                        wordTypes[x] = row[1];
+                    }
+                }
+            }
+        }
+    }
+    mysql_close(conn);
+    return wordTypes;
+}
+
+string** _MySQL::QueryDatabaseDefinitions(string word, string* wordTypes)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string sql1;
+    string** array2D;
+    array2D = new string * [5];
+    string temp;
+    string temp2;
+    string mysql_table = "entries";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result1 = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result1))
+        {
+            if (row[0] == word)
+            {
+                // Find empty space in rows
+                for (int x = 0; x <= sizeof(wordTypes); x++)
+                {
+                    if (x == 0)
+                    {
+                        array2D[x][0] = row[1];
+
+                        // Find empty space in definitions
+                        for (int y = 0; y <= 10; y++)
+                        {
+                            if (array2D[x][y] == "")
+                            {
+                                array2D[x][y] = row[2];
+                            }
+                        }
+                    }
+                    else
+                    {
+                        for (int y = sizeof(wordTypes); y > 0; y--)
+                        {
+                            if (array2D[y][0] == wordTypes[y - 1])
+                            {
+                                array2D[x][y] = row[2];
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    mysql_close(conn);
+    return array2D;
+}
+
+void _MySQL::CreateTableWords(string mysql_origin_database, string mysql_table)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_destination_database_words.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "CREATE TABLE `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`(word TEXT, word_type TEXT, definition TEXT, special_type TEXT, pronoun_anaphora TEXT, prepsitional_phrase bool, object_of_preposition bool, direct_object bool, indirect_object bool, paragraph_num TEXT, sentence_num TEXT, vector TEXT);";
+        mysql_query(conn, sql1.c_str());
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+}
+
+void _MySQL::CreateTableSentences(string mysql_origin_database, string mysql_table)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_destination_database_sentences.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "CREATE TABLE `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`(sentence TEXT, subject TEXT, verb TEXT, predicate_sentence TEXT, direct_object TEXT, pronoun_anaphora TEXT, prepsitional_phrase TEXT, object_of_preposition TEXT, direct_object TEXT, indirect_object TEXT, noun_phrase TEXT, relative_clause TEXT, infinitive_phrase TEXT, adjective_phrase TEXT, adverbial_phrase TEXT, participle_phrase TEXT, absolute_phrase TEXT, independent_clause TEXT, dependent_clause TEXT, noun_clause TEXT, simple_sentence bool, compound_sentence bool, complex_sentence bool, compound_complex_sentence bool, declarative_sentence bool, interrogative_sentence bool, negative_interrogative_sentence bool, imperative_sentence bool, conditional_sentence bool, regular_sentence bool, irregular_sentence bool, single_word_sentence bool, instructions bool, yes_or_no_sentence bool, literal_question bool, it_depends bool, statement_of_uncertainty bool, paragraph_num TEXT, sentence_num TEXT, sentence_vector TEXT, averaged_vector TEXT);";
+        mysql_query(conn, sql1.c_str());
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+}
+
+void _MySQL::QueryDatabaseWikiWords(string mysql_database, string mysql_table, string paragraph_number, string sentence_number, string word, string word_type, string definition, string special_type, string pronoun_anaphora, bool object_of_preposition, bool direct_object, bool indirect_object, string vector)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_destination_database_words.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "INSERT INTO `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`(word, word_type, definition, special_type, pronoun_anaphora, prepositional_phrase, object_of_preposition, direct_object, indirect_object, noun_phrase, relative_clause, infinitive_phrase, adjective_phrase, adverbial_phrase, participle_phrase, absolute_phrase, independent_clause, dependent_clause, noun_clause, paragraph_number, sentence_number, vector) VALUES(\"";
+        sql1 += word.c_str();
+        sql1 += "\", \"";
+        sql1 += word_type.c_str();
+        sql1 += "\", \"";
+        sql1 += definition.c_str();
+        sql1 += "\", \"";
+        sql1 += special_type.c_str();
+        sql1 += "\", \"";
+        sql1 += pronoun_anaphora.c_str();
+        sql1 += "\", \"";
+        if (object_of_preposition)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (direct_object)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (indirect_object)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        sql1 += vector.c_str();
+        sql1 += "\", \"";
+        sql1 += paragraph_number.c_str();
+        sql1 += "\", \"";
+        sql1 += sentence_number.c_str();
+        sql1 += "\");";
+        mysql_query(conn, sql1.c_str());
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        mysql_close(conn);
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        mysql_close(conn);
+    }
+}
+
+void _MySQL::QueryDatabaseWikiSentences(string mysql_database, string mysql_table, string paragraph_number, string sentence_number, string sentence, string* subject, string verb, string* predicate_sentence, string direct_object, string indirect_object, string* prepositional_phrase, string object_of_preposition, string* noun_phrase, string* relative_clause, string* infinitive_phrase, string* adjective_phrase, string* adverbial_phrase, string* participle_phrase, string* absolute_phrase, string* independent_clause, string* dependent_clause, string* noun_clause, bool simple_sentence, bool compound_sentence, bool complex_sentence, bool compound_complex_sentence, bool declarative_sentence, bool interrogative_sentence, bool negative_interrogative_sentence, bool imperative_sentence, bool conditional_sentence, bool regular_sentence, bool irregular_sentence, bool single_word_sentence, bool instructions, bool yes_or_no_sentence, bool literal_question, bool it_depends, bool statement_of_uncertainty, string sentence_vector, string averaged_vector)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_destination_database_sentences.c_str(), 3306, NULL, 0);
+
+    string subject_str = _Utilities::StringArray2String(subject);
+    string predicate_sentence_str = _Utilities::StringArray2String(predicate_sentence);
+    string prepositional_phrase_str = _Utilities::StringArray2String(prepositional_phrase);
+    string noun_phrase_str = _Utilities::StringArray2String(noun_phrase);
+    string relative_clause_str = _Utilities::StringArray2String(relative_clause);
+    string infinitive_phrase_str = _Utilities::StringArray2String(infinitive_phrase);
+    string adjective_phrase_str = _Utilities::StringArray2String(adjective_phrase);
+    string adverbial_phrase_str = _Utilities::StringArray2String(adverbial_phrase);
+    string participle_phrase_str = _Utilities::StringArray2String(participle_phrase);
+    string absolute_phrase_str = _Utilities::StringArray2String(absolute_phrase);
+    string independent_clause_str = _Utilities::StringArray2String(independent_clause);
+    string dependent_clause_str = _Utilities::StringArray2String(dependent_clause);
+    string noun_clause_str = _Utilities::StringArray2String(noun_clause);
+
+    if (conn)
+    {
+        sql1 = "INSERT INTO `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`(sentence, subject, verb, predicate_sentence, direct_object, indirect_object, preposition, object_of_preposition, noun_phrase, relative_clause, infinitive_phrase, adjective_phrase, adverbial_phrase, participle_phrase, absolute_phrase, independent_clause, dependent_clause, noun_phrase, simple_sentence, compound_sentence, complex_sentence, compound_complex, complex, compound_complex_sentence, declarative_sentence, interrogative_sentence, negative_interroagative_sentence, imperative_sentence, conditional_sentence, regular_sentence, irregular_sentence, single_word_sentence, instructions, yes_or_no_sentence, literal_question, it_depends, statement_of_uncertainty, paragraph_sentence, sentence_number, sentence_vector, averaged_vector) VALUES(\"";
+        sql1 += sentence.c_str();
+        sql1 += "\", \"";
+        sql1 += subject_str.c_str();
+        sql1 += "\", \"";
+        sql1 += verb.c_str();
+        sql1 += "\", \"";
+        sql1 += predicate_sentence_str.c_str();
+        sql1 += "\", \"";
+        sql1 += direct_object.c_str();
+        sql1 += "\", \"";
+        sql1 += indirect_object.c_str();
+        sql1 += "\", \"";
+        sql1 += prepositional_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += object_of_preposition.c_str();
+        sql1 += "\", \"";
+        sql1 += noun_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += relative_clause_str.c_str();
+        sql1 += "\", \"";
+        sql1 += infinitive_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += adjective_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += adverbial_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += participle_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += absolute_phrase_str.c_str();
+        sql1 += "\", \"";
+        sql1 += independent_clause_str.c_str();
+        sql1 += "\", \"";
+        sql1 += dependent_clause_str.c_str();
+        sql1 += "\", \"";
+        sql1 += noun_clause_str.c_str();
+        sql1 += "\", \"";
+        if (simple_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (compound_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (complex_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (compound_complex_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (declarative_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (interrogative_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (negative_interrogative_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (imperative_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (conditional_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (regular_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (irregular_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (single_word_sentence)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (instructions)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (literal_question)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (it_depends)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        if (statement_of_uncertainty)
+            sql1 += "True";
+        else
+            sql1 += "False";
+        sql1 += "\", \"";
+        sql1 += paragraph_number.c_str();
+        sql1 += "\", \"";
+        sql1 += sentence_number.c_str();
+        sql1 += "\", \"";
+        sql1 += sentence_vector.c_str();
+        sql1 += "\", \"";
+        sql1 += averaged_vector.c_str();
+        sql1 += "\");";
+        mysql_query(conn, sql1.c_str());
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
+    }
+}
+
+string _MySQL::QueryWordVector(string word, string word_type)
+{
+    MYSQL* conn;
+    MYSQL_ROW row;
+    MYSQL_RES* result1;
+    string mysql_table = "wiki_vectors";
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM `";
+        sql1 += mysql_table.c_str();
+        sql1 += "`;";
+        mysql_query(conn, sql1.c_str());
+        result1 = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result1))
+        {
+            if (word == row[0] && word_type == row[1])
+            {
+                mysql_close(conn);
+                return row[2];
+            }
+        }
+    }
+    else
+    {
+        cout << "Could not connect to MySQL Server..." << endl;
+        std::this_thread::sleep_for(std::chrono::milliseconds(1));
+        mysql_close(conn);
     }
 }

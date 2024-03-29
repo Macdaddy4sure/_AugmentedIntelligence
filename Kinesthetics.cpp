@@ -1,3 +1,5 @@
+#pragma once
+
 /*
     Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
@@ -13,3 +15,78 @@
     See the License for the specific language governing permissionsand
     limitations under the License.
 */
+
+#include "Kinesthetics.h"
+
+using namespace std;
+
+float* _Kinesthetics::LeftEyeTracking()
+{
+
+}
+
+float _Kinesthetics::LeftSuperiorRectusTension()
+{
+
+}
+
+float _Kinesthetics::LeftLateralRectusTension()
+{
+
+}
+
+float _Kinesthetics::LeftInferiorObliqueTension()
+{
+
+}
+
+float _Kinesthetics::LeftInferiorRectusTension()
+{
+
+}
+
+float _Kinesthetics::LeftMedialRectusTension()
+{
+
+}
+
+bool _Kinesthetics::LeftEyeMuscleTension(float LeftSuperiorRectus, float LeftLeteralRectus, float LeftInferiorOblique, float LeftInferiorRectus, float leftMedialRectus)
+{
+
+}
+
+float* _Kinesthetics::RightEyeTracking()
+{
+
+}
+
+float _Kinesthetics::RightSuperiorRectusTension()
+{
+
+}
+
+float _Kinesthetics::RightLateralRectusTension()
+{
+
+}
+
+float _Kinesthetics::RightInferiorObliqueTension()
+{
+
+}
+
+float _Kinesthetics::RightInferiorRectusTension()
+{
+
+}
+
+float _Kinesthetics::RightMedialRectusTension()
+{
+
+}
+
+bool _Kinesthetics::RightEyeMuscleTension(float RightSuperiorRectus, float RightLeteralRectus, float RightInferiorOblique, float RightInferiorRectus, float RightMedialRectus)
+{
+
+}
+

@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
 
 /*
-   Copyright Tesseract-OCR 2022
+   Copyright Tesseract-OCR 2023
    
    https://github.com/tesseract-ocr/tesseract/blob/master/LICENSE
 
@@ -47,8 +47,8 @@
 #include "Vision.h"
 
 using namespace std;
-//using namespace tesseract;
-//using namespace cv;
+using namespace tesseract;
+using namespace cv;
 
 struct word
 {
@@ -62,83 +62,83 @@ struct word
 // The following function will use OpenCV to identify text strings through camera 1, camera 2 or both
 void _Reading::TextIdentification(string image)
 {
-    //TessBaseAPI tess;
-    //string output;
-    //Mat large = imread(image);
-    //Mat rgb;
+    TessBaseAPI tess;
+    string output;
+    Mat large = imread(image);
+    Mat rgb;
 
-    //// downsample and use it for processing
-    //pyrDown(large, rgb);
-    //pyrDown(rgb, rgb);
-    //Mat small;
-    //cvtColor(rgb, small, CV_BGR2GRAY);
+    // downsample and use it for processing
+    pyrDown(large, rgb);
+    pyrDown(rgb, rgb);
+    Mat small;
+    cvtColor(rgb, small, CV_BGR2GRAY);
 
-    //// morphological gradient
-    //Mat grad;
-    //Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    //morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
+    // morphological gradient
+    Mat grad;
+    Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
 
-    //// binarize
-    //Mat bw;
-    //threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
+    // binarize
+    Mat bw;
+    threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
 
-    //// connect horizontally oriented regions
-    //Mat connected;
-    //morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
-    //morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
+    // connect horizontally oriented regions
+    Mat connected;
+    morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
+    morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
 
-    //// find contours
-    //Mat mask = Mat::zeros(bw.size(), CV_8UC1);
-    //vector<vector<Point> > contours;
-    //vector<Vec4i> hierarchy;
-    //findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+    // find contours
+    Mat mask = Mat::zeros(bw.size(), CV_8UC1);
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
-    //// filter contours
-    //for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
-    //{
-    //    Rect rect = boundingRect(contours[idx]);
-    //    Mat maskROI(mask, rect);
-    //    maskROI = Scalar(0, 0, 0);
+    // filter contours
+    for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
+    {
+        Rect rect = boundingRect(contours[idx]);
+        Mat maskROI(mask, rect);
+        maskROI = Scalar(0, 0, 0);
 
-    //    // fill the contour
-    //    drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
+        // fill the contour
+        drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
 
-    //    RotatedRect rrect = minAreaRect(contours[idx]);
-    //    double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
+        RotatedRect rrect = minAreaRect(contours[idx]);
+        double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
 
-    //    Scalar color;
-    //    int thickness = 1;
+        Scalar color;
+        int thickness = 1;
 
-    //    // assume at lwest 25% of the area is filled if it contains text
-    //    if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
-    //    {
-    //        thickness = 2;
-    //        color = Scalar(0, 255, 0);
-    //    }
-    //    else
-    //    {
-    //        thickness = 1;
-    //        color = Scalar(0, 0, 255);
-    //    }
+        // assume at lwest 25% of the area is filled if it contains text
+        if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
+        {
+            thickness = 2;
+            color = Scalar(0, 255, 0);
+        }
+        else
+        {
+            thickness = 1;
+            color = Scalar(0, 0, 255);
+        }
 
-    //    Point2f pts[100];
-    //    rrect.points(pts);
+        Point2f pts[100];
+        rrect.points(pts);
 
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
-    //        tess.Recognize(0);
-    //        output = tess.GetUTF8Text();
+        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
+        tess.Recognize(0);
+        output = tess.GetUTF8Text();
 
-    //        //stm_reading_text[1000][i][0] = output;
-    //        stm_reading_text[1000][i][1] = pts[i].x;
-    //        stm_reading_text[1000][i][2] = pts[i].y;
-    //        stm_reading_text[1000][i][3] = pts[(i + 1) % 4].x;
-    //        stm_reading_text[1000][i][4] = pts[(i + 1) % 4].y;
+        for (int i = 0; i < 100; i++)
+        {
+            //stm_reading_text[1000][0] = output;
+            //stm_reading_text[1000][i][1] = pts[i].x;
+            //stm_reading_text[1000][i][2] = pts[i].y;
+            //stm_reading_text[1000][i][3] = pts[(i + 1) % 4].x;
+            //stm_reading_text[1000][i][4] = pts[(i + 1) % 4].y;
 
-    //        // Shift short term memory down
-    //    }
-    //}
+            // Shift short term memory down
+        }
+    }
 }
 
 // This function will be executed when the current action is for reading
