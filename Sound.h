@@ -27,4 +27,9 @@ public:
     static void MySQL_Sound();
     static void SoundListener();
     static void RecallSoundMemory(string raw_recognition, int search_years, int search_months, int search_days, int search_weeks, int search_hours, int search_minutes, int search_seconds);
+    static string* SoundRecognition(string wav_location);
+    //static void RunSession(TF_Session* session, TF_Graph* graph, TF_Status* status, TF_SessionOptions* options, TF_Tensor* waveform_tensor, string labelsPath);
+    static TF_Tensor* ImportWaveformAsTensor(const vector<float>& audioSamples, int sampleRate);
+    static vector<float> loadWavFile(string filename);
+    static std::string* LoadClassLabels(const std::string& filePath);
 };

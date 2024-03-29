@@ -40,3 +40,10 @@ using namespace std;
 
 // The Golden Rule
 // 1. Treat other people the way you want to be treated...
+
+class _Ethics
+{
+public:
+    static string EthicsCheckAction(string action);
+    static string EthicsCheckSpeaking(string text);
+};

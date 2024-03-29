@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -46,7 +46,6 @@ public:
     static bool MovieExists(string title);
     static void CreateReminder();
     static string FixArticle(string article);
-    static string toLowerWord(string word);
     static string CreateSummary(string data);
     static void UpdateMySQL();
     static string ReturnPunctuation(string* words);
@@ -60,6 +59,11 @@ public:
     static string* ArrayOfStringsToLowercase(string* words);
     static string to_timestamp(int64_t t);
     static string** Create2DStringArray(unsigned int width, unsigned int height);
+    static string Vector2String(double* vector);
+    static string toLowerWord(string word);
+    static string* toLowerWordsArr(string* words);
+    static string* WordsArrPunctuationExplode(string* words);
+    static string StringArray2String(string* arr);
     //static void resize_image_max_len(const cv::Mat& image, cv::Mat& resized_image, float& ratio_h, float& ratio_w, int max_side_len);
     //static void resize_image_fix_height(const cv::Mat& image, cv::Mat& resized_image, float& ratio, int fixed_height);
     //static void pad_image_width(const cv::Mat& image, cv::Mat& padded_image, int target_width);

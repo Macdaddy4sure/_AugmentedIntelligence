@@ -23,16 +23,19 @@ using namespace std;
 class _WorkingMemory
 {
 public:
-    static void AddWorkingMemory(string _vision_path_camera1, string _vision_path_camera2, string _sound_path, string _speech_dialogue, string _reading_text, string _action1_text, string _action2_text, string _action3_text, string _vision_objects_image_path, string _vision_actions_image_path, string _vision_object_text, string _vision_analysis_text, string _typing_text, string __Reference_pos_gps_north, string __Reference_pos_gps_west, string __Reference_pos_gps_elevation, string __Reference_pos_gps_image, string _pos_gps_north, string _pos_gps_west, string _pos_gps_elevation, string _pos_x, string _pos_y, string _pos_z);
+    static void WorkingMemory();
+    static void AddWorkingMemory(string _vision_path_camera1, string _vision_path_camera2, string _sound_path, string _speech_dialogue, string _reading_text, string _action1_text, string _action2_text, string _action3_text, string _vision_objects_image_path, string _vision_actions_image_path, string _vision_object_text, string _vision_analysis_text, string _typing_text, string __Reference_pos_gps_north, string __Reference_pos_gps_west, string __Reference_pos_gps_elevation, string __Reference_pos_gps_image, string _pos_gps_north, string _pos_gps_west, string _pos_gps_elevation, string _pos_x, string _pos_y, string _pos_z, string _simple_text, string _simple_image);
     static string* SoundStringRecall(string text, string prev_date, string prev_date2);
     static string* ReadingStringRecall(string text, string prev_date, string prev_date2);
     static string* MemorySearch(string text, string prev_date, string prev_date2);
     static string* MemorySearch(string text);
     static string* MemoryAnalysis(string text, string prev_date, string prev_date2);
+    static void ClearWorkingMemory();
 };
 
 static string wm_vision_path_camera1[1000][2];
 static string wm_vision_path_camera2[1000][2];
+static string wm_longterm_memory[1000][2];
 static string wm_sound_path[1000][2];
 static string wm_speech_dialogue[1000][2];
 static string wm_action1_text[1000][2];
@@ -41,6 +44,7 @@ static string wm_action3_text[1000][2];
 static string wm_text_identification[1000][2];
 static string wm_reading_text[1000][2];
 static string wm_reading_image[1000][2];
+static string wm_algebra_text[1000][2];
 static string wm_vision_objects_image_path[1000][2];
 static string wm_vision_actions_image_path[1000][2];
 static string wm_vision_objects_text[1000][2];
@@ -56,3 +60,5 @@ static string wm_pos_gps_elevation_text[1000][2];
 static string wm_pos_x[1000][2];
 static string wm_pos_y[1000][2];
 static string wm_pos_z[1000][2];
+static string wm_simple_text[1000][2];
+static string wm_simple_image[1000][2];

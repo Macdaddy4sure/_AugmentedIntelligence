@@ -21,7 +21,7 @@
 using namespace std;
 
 // string completed[x][y]: [x][0] = word, [x][1] = word type, [x][2] = definition, [x][3] = vector
-static string completed[100][3];
+//static string completed[100][3];
 
 static string vision_table = "vision";
 static string sound_table = "sound";

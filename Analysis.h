@@ -19,3 +19,18 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
+
+class _AnalysisError
+{
+public:
+    static bool SamplingError(string text);
+    static bool MeasurmentError(string text);
+    static bool ProcessingError(string text);
+    static bool AnalysisError(string text);
+    static bool ConfirmationBias(string text);
+    static bool OutliersAndNoise (string text);
+    static bool OverFitting(string text);
+    static bool UnderFitting(string text);
+    static bool DataIntegrity(string text);
+    static bool ConfoundingVariables(string text);
+};

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -563,7 +563,6 @@
 #include <helper_functions.h>
 #include <helper_cuda.h>
 #include <sstream>
-#include <vector>
 #include <algorithm>
 #include <cctype>
 #include <chrono>
@@ -604,14 +603,25 @@
 #include <errno.h>
 #include <math.h>
 #include <time.h>
+#include <map>
+#include <regex>
 #include <cmath>
 #include <memory>
 #include <utility>
-#include <vector>
 #include <wtypes.h>
 #include <tesseract/baseapi.h>
-//#include <leptonica/allheaders.h>
+#include <leptonica/allheaders.h>
 #include <tensorflow/c/c_api.h>
+#include <sndfile.h>
+//#include <tensorflow/core/public/session.h>
+//#include <tensorflow/core/platform/env.h>
+//#include <tensorflow/core/framework/tensor.h>
+//#include <tensorflow/core/protobuf/meta_graph.pb.h>
+//#include <libavdevice/avdevice.h>
+//#include <libavformat/avformat.h>
+//#include <libavcodec/avcodec.h>
+//#include <libswscale/swscale.h>
+//#include <libavutil/imgutils.h>
 //#include <tensorflow/c/eager/c_api.h>
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
@@ -623,6 +633,12 @@
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/imgproc/imgproc_c.h>
+//#include <torch/script.h>
+//#include <torch/torch.h>
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
+//#include <common.h>
 //#include <cppflow/cppflow.h>
 //#include <cppflow/ops.h>
 //#include <cppflow/model.h>

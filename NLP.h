@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,14 +23,14 @@ using namespace std;
 class _NLP
 {
 public:
-    static void Writing();
-    static void SentenceAnalysis(string raw_recognition, string imagePath);
+    static string* getWordTypes(string word);
     static string* getDefinitions(string word);
-    static string SpeakingQueueWord(string word);
-    static string SpeakingQueueSentence(string* word);
-    static string* CreateDeductiveArgument(string text);
-    static string* CreateInductiveArgument(string text);
-    static string* DeductiveArgumentCheck(string argument);
+    static string getSpecialType(string word, string word_type);
+    static string getVerb(string* words, string* compiled_word_types);
+    static string getWordTypesDisambiguation(string word, string special_type, string* word_types);
+    static string getDefinitionsDisambiguation(string word, string word_type, string* definitions);
+    static string getAverageVectorSentence(string* words, string* compiled_word_types);
+    static string getSentenceVector(string* words, string* compiled_word_types);
     static string isNoun(string word);
     static string isPronoun(string word);
     static string isVerb(string word);
@@ -38,10 +38,14 @@ public:
     static string isAdverb(string word);
     static bool isAdverbManner(string word);
     static string isInterjection(string word);
-    static string isConjunction(string word);
+    static string isConjunction(string* word);
     static string isDeterminer(string word);
     static string isArticle(string word);
-    static bool isPresentTenseVerb(string word);
+    static bool isOtherAdverb(string word);
+    static bool isOtherAdjective(string word);
+    static bool isOtherVerb(string word);
+    static bool isOtherPronoun(string word);
+    static bool isOtherNoun(string word);
     static bool isInterjectionSwear(string word);
     static bool isEmotiveInterjections(string word);
     static bool isCognitiveInterjections(string word);
@@ -66,63 +70,62 @@ public:
     static bool isAdverbTime(string word);
     static bool isAdverbPlace(string word);
     static bool isAdverbDegree(string word);
-    static string getDirectObject(string* words);
+    static string* getDirectObject(string* words, string* compiled_word_types);
     //static string getDirectObject();
-    static string getIndirectObject(string* words);
-    static string getObjectofPreposition(string* words);
-    static string* getNounPhrase(string* words);
-    static string* getSubjectComplements(string* words);
-    static string* getPredicateNoun(string* words);
-    static string* getPredicatePronoun(string* words);
-    static string* getPredicateAdjective(string* words);
-    static string* getRelativeClause(string* words);
-    static string* getInfinitivePhrase(string* words);
-    static string* getAdjuncts(string* words);
-    static string* getAdjectivePhrase(string* words);
-    static string* getAdverbialPhrase(string* words);
-    static string* getParticiplePhrase(string* words);
-    static string* getAbsolutePhrase(string* words);
-    static string getAppositive(string* words);
-    static string* getIndependentClause(string* words);
-    static string* getDependentClause(string* words);
-    static string* getNounClause(string* words);
-    static string* getAdverbialClause(string* words);
+    static string getIndirectObject(string* words, string* compiled_word_types);
+    static string getObjectofPreposition(string* words, string* compiled_word_types);
+    static string* getNounPhrase(string* words, string* compiled_word_types);
+    static string* getSubjectComplements(string* words, string* compiled_word_types);
+    static string* getPredicateNoun(string* words, string* compiled_word_types);
+    static string* getPredicatePronoun(string* words, string* compiled_word_types);
+    static string* getPredicateAdjective(string* words, string* compiled_word_types);
+    static string* getRelativeClause(string* words, string* compiled_word_types);
+    static string* getInfinitivePhrase(string* words, string* compiled_word_types);
+    static string* getAdjuncts(string* words, string* compiled_word_types);
+    static string* getAdjectivePhrase(string* words, string* compiled_word_types);
+    static string* getAdverbialPhrase(string* words, string* compiled_word_types);
+    static string* getParticiplePhrase(string* words, string* compiled_word_types);
+    static string* getAbsolutePhrase(string* words, string* compiled_word_types);
+    static string getAppositive(string* words, string* compiled_word_types);
+    static string* getIndependentClause(string* words, string* compiled_word_types);
+    static string* getDependentClause(string* words, string* compiled_word_types);
+    static string* getNounClause(string* words, string* compiled_word_types);
+    static string* getAdverbialClause(string* words, string* compiled_word_types);
     static string isPreposition(string word);
     static string isNumber(string word);
     static bool isNumberWords(string word);
-    static bool isSimpleSentence(string* words);
-    static bool isCompoundSentence(string* words, string* subject, string* predicate);
-    static bool isComplexSentence(string* words, string* subject, string* predicate);
-    static bool isCompound_ComplexSentence(string* words, string* subject, string* predicate);
-    static bool isDeclaritiveSentence(string* words, string* subject, string* predicate);
-    static bool isInterrogativeSentence(string* words, string* subject, string* predicate);
-    static bool isNegativeInterrogativeSentence(string* words, string* subject, string* predicate);
-    static bool isImperativeSentence(string* words, string* subject, string* predicate);
-    static bool isConditionalSentence(string* words, string* subject, string* predicate);
-    static bool isRegularSentence(string* words, string* subject, string* predicate);
-    static bool isIrregularSentence(string* words, string* subject, string* predicate);
-    static bool isSingleWordSentence(string* words);
-    static bool isSentenceFragment(string* words);
-    static bool isInstructions(string* words);
-    static bool isYesNoQuestion(string* words);
-    static bool isLiteralQuestions(string* words);
-    static bool isIndirectSentence(string* words);
-    static bool isItDepends(string* words);
-    static bool isStatementofUncertainty(string* words);
-    static bool isRunOnSentence(string* words);
-    static bool isCommaSplice(string* words);
-    static bool isFusedSentence(string* words);
-    static string* getSubject(string* words);
-    static string* getPredicate(string* words);
-    static void getPartsofSpeech(string* words);
+    static bool isSimpleSentence(string* words, string* compiled_word_types);
+    static bool isCompoundSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isComplexSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isCompound_ComplexSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isDeclaritiveSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isInterrogativeSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isNegativeInterrogativeSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isImperativeSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isConditionalSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isRegularSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isIrregularSentence(string* words, string* subject, string* predicate, string* compiled_word_types);
+    static bool isSingleWordSentence(string* words, string* compiled_word_types);
+    static bool isSentenceFragment(string* words, string* compiled_word_types);
+    static bool isInstructions(string* words, string* compiled_word_types);
+    static bool isYesNoQuestion(string* words, string* compiled_word_types);
+    static bool isLiteralQuestions(string* words, string* compiled_word_types);
+    static bool isIndirectSentence(string* words, string* compiled_word_types);
+    static bool isItDepends(string* words, string* compiled_word_types);
+    static bool isStatementofUncertainty(string* words, string* compiled_word_types);
+    static bool isRunOnSentence(string* words, string* compiled_word_types);
+    static bool isCommaSplice(string* words, string* compiled_word_types);
+    static string* getSubject(string* words, string* compiled_word_types);
+    static string* getPredicate(string* words, string* compiled_word_types);
+    static void getPartsofSpeech(string* words, string* compiled_word_types);
     //static string* parseDefinitions(static string definitions);
-    static string* getPrepositionalPhrase(string* words);
-    static string* getPrepositionalPhraseNoun(string* words);
-    static string* getPreposionalPhraseVerb(string* words);
-    static string* getPrepositionalPhraseAdjective(string* words);
-    static string* getPrepositionalPhraseAdverb(string* words);
-    static string* getPrepositionalPhraseIdiom(string* words);
-    static string* getPrepositionalPhraseDangling(string* words);
+    static string* getPrepositionalPhrase(string* words, string* compiled_word_types);
+    static string* getPrepositionalPhraseNoun(string* words, string* compiled_word_types);
+    static string* getPreposionalPhraseVerb(string* words, string* compiled_word_types);
+    static string* getPrepositionalPhraseAdjective(string* words, string* compiled_word_types);
+    static string* getPrepositionalPhraseAdverb(string* words, string* compiled_word_types);
+    static string* getPrepositionalPhraseIdiom(string* words, string* compiled_word_types);
+    static string* getPrepositionalPhraseDangling(string* words, string* compiled_word_types);
     static bool isCommonNoun(string word);
     static bool isProperNoun(string word);
     static bool isFirstName(string word);
@@ -195,351 +198,176 @@ public:
     static bool isDeterminers(string word);
     static bool isGerund(string word);
     static bool isInterjections(string word);
-    static bool isIndependentClause(string* words);
-    static bool isDependentClause(string* words);
-    static bool isNounClause(string* words);
-    static bool isAdverbialClause(string* words);
+    static bool isIndependentClause(string* words, string* compiled_word_types);
+    static bool isDependentClause(string* words, string* compiled_word_types);
+    static bool isNounClause(string* words, string* compiled_word_types);
+    static bool isAdverbialClause(string* words, string* compiled_word_types);
     static bool isPresentTense(string word);
-    static bool isPresentTenseSentence(string* words);
+    static bool isPresentTenseSentence(string* words, string* compiled_word_types);
     static bool isPastTense(string word);
-    static bool isPastTenseSentence(string* words);
+    static bool isPastTenseSentence(string* words, string* compiled_word_types);
     static bool isFutureTense(string word);
-    static bool isFutureTenseSentence(string* words);
+    static bool isFutureTenseSentence(string* words, string* compiled_word_types);
     static bool isPerfectiveAspect(string word);
-    static bool isPerfectiveAspectSentence(string* words);
+    static bool isPerfectiveAspectSentence(string* words, string* compiled_word_types);
     static bool isImperfectiveAspect(string word);
-    static bool isImperfectiveAspectSentence(string* words);
+    static bool isImperfectiveAspectSentence(string* words, string* compiled_word_types);
     static bool isAspectofPresentTense(string word);
-    static bool isAspectofPresentTenseSentence(string* words);
+    static bool isAspectofPresentTenseSentence(string* words, string* compiled_word_types);
     static bool isAspectofPastTense(string word);
-    static bool isAspectofPastTenseSentence(string* words);
+    static bool isAspectofPastTenseSentence(string* words, string* compiled_word_types);
     static bool isAspectofFutureTense(string word);
-    static bool isAspectofFutureTenseSentence(string* words);
+    static bool isAspectofFutureTenseSentence(string* words, string* compiled_word_types);
     static bool isIndicativeMood(string word);
-    static bool isIndicativeMoodSentence(string* words);
+    static bool isIndicativeMoodSentence(string* words, string* compiled_word_types);
     static bool isSubjunctiveMood(string word);
-    static bool isSubjunctiveMoodSentence(string* words);
+    static bool isSubjunctiveMoodSentence(string* words, string* compiled_word_types);
     static bool isSubjunctiveMoodWishes(string word);
     static bool isActiveVoice(string word);
-    static bool isActiveVoiceSentence(string* words);
+    static bool isActiveVoiceSentence(string* words, string* compiled_word_types);
     static bool isPassiveVoice(string word);
-    static bool isPassiveVoiceSentence(string* words);
+    static bool isPassiveVoiceSentence(string* words, string* compiled_word_types);
     static bool isMiddleVoice(string word);
-    static bool isMiddleVoiceSentence(string* words);
+    static bool isMiddleVoiceSentence(string* words, string* compiled_word_types);
     static bool isReportedSpeech(string word);
-    static bool isReportedSpeechSentence(string* words);
+    static bool isReportedSpeechSentence(string* words, string* compiled_word_types);
     //static bool isNumber(staticstring word);
     static bool isPlural(string word);
-    static bool isPluralSentence(string* words);
+    static bool isPluralSentence(string* words, string* compiled_word_types);
     static bool isSingular(string word);
-    static bool isSingularSentence(string* words);
-    static bool isFutureTenseVerb(string word);
-    static string* GetAllFutureTenseVerbs();
-    //static bool isPresentTenseVerb(string word);
-    static string* GetAllPresentTenseVerbs();
-    static bool isEdVerb(string word);
+    static bool isSingularSentence(string* words, string* compiled_word_types);
     //staticstring getGenderNoun(staticstring word);
     static string getGenderNoun(string words);
-    static string* getGenderNouns(string* words);
-    static string* GetAllIngWords();
-    static string* GetAllEdWords();
-    //static string* GetAllPresentTenseVerbs();
-    //static string* GetAllFutureTenseVerbs();
-    //static bool isFutureTenseVerb(string word);
-    static string* returnWords(string sentence);
-    static string* getWordTypes(string word);
-    static string* getWordDefinitions(string word);
-    static string* QueryDatabaseWordTypes(string word);
-    static string* QueryDatabaseDefinitions(string word, string* wordTypes);
-    static string FallacyCheck(string text, bool fiction);
-    static string FallacyCheck(string text, string data, bool fiction);
-    //static string EthicsCheckSpeaking(string text);
-    //static string EthicsCheckAction(string action);
-    static string* ParseWikipedia(string* words);
-    static string* ParseWikisimple(string* words);
-    // Fix to 2d tables
-    //static string* SearchDictionary(string word);
-    //static string** SearchDictionary(string word, string word_type);
-    //static string** SearchDictionary(string word, string word_type, string definition);
-    //static string** SearchDictionaryDefinition(string definition);
-    //static string** SearchDictionaryWordType(string word_type);
-    //static string* SearchDictionaryVector(string word);
-    //static string* SearchDictionaryVector(string word, string word_type);
-    //static string* SearchDictionaryVector(string word, string word_type, string definition);
-    //static string* SearchDictionaryVectorDefinition(string definition);
-    //static string* SearchDictionaryVectorWordType(string word_type);
-    //static string** SearchDictionaryWithVector(string* vector);
-    static string EthicsCheckSpeaking(string text);
-    static string EthicsCheckAction(string action);
-    static string* AmIsArePositive(string* words);
-    static string* AmIsAreNegative(string* words);
-    static string* PastContinuousDoing(string* words);
-    static string* IfStatementsBeginning(string* words);
-    static string* beingVerbNegative(string* words);
-    static bool isbeingVerbPositive(string* words);
-    static bool isbeingVerbNegative(string* words);
-    static string* presentSimplePositive(string* words);
+    static string* getGenderNouns(string* words, string* compiled_word_types);
+    static string* getPresentHaveStatements(string* words);
+    static string* getPresentHaveGotStatements(string* words);
+    static string* getPresentContinuousQuestions(string* words);
+    static bool isPresentSimpleNegative(string* words);
+    static string* getPresentSimplePositive(string* words);
+    static string* getPresentSimpleNegative(string* words);
+    static string* getBeingVerbPositive(string* words);
+    static string* getBeingVerbNegative(string* words);
+    static string* getPresentContinuousQuestionsYes(string* words);
+    static bool isBeingVerbNegative(string* words);
+    static bool isBeingVerbPositive(string* words);
     static bool isDoDoesInfinitive(string* words);
-    static string* presentSimpleNegative(string* words);
-    static bool ispresentSimpleNegative(string* words);
-    static string* presentContinuousQuestions(string* words);
-    static string* presentHaveGotStatements(string* words);
-    static string* presentHaveStatements(string* words);
     static bool isPresentContinuousQuestions(string* words);
-    static string* presentContinuousQuestionsYes(string* words);
+    static bool isHaveGotStatement(string* words);
     static bool isPresentContinuousQuestionsYes(string* words);
     static bool isPresentSimplePositive(string* words);
-    static bool isHaveGotStatement(string* words);
-    static string* beingVerbPositive(string* words);
-    static string* IWasDoingPastContinuousPositive(string* words);
-    static string* IWasDoingPastContinuousNegative(string* words);
-    static string* IWasDoingPastContinuousQuestion(string* words);
-    static string* AmIsAreQuestionsPositive(string* words);
-    static string* AmIsAreQuestionsQuestion(string* words);
-    static string* AmIsAreQuestionsWhere(string* words);
-    static string* AmIsAreQuestionsWhat(string* words);
-    static string* AmIsAreQuestionsWho(string* words);
-    static string* AmIsAreQuestionsHow(string* words);
-    static string* AmIsAreQuestionsWhy(string* words);
-    static string* AmIsAreQuestionsShortAnswersPositive(string* words);
-    static string* AmIsAreQuestionsShortAnswersNegative(string* words);
-    static string* AmIsAreQuestionsShortAnswersNegativeContractions(string* words);
-    static string PresentVerbToIng(string verb);
-    static string* IamDoingPresentContinuousPositive(string* words);
-    static string* IamDoingPresentContinuousNegative(string* words);
-    static string* AreYouDoingPresentContinuousQuestionPositive(string* words);
-    static string* AreYouDoingPresentContinuousQuestionsOrder(string* words);
-    static string* AreYouDoingPresentContinuousQuestionsShortAnswerPositive(string* words);
-    static string* AreYouDoingPresentContinuousQuestionsShortAnswerNegative(string* words);
-    static string* IDoWorkLikePresentSimple(string* words);
-    static string* IDoWorkLikePresentSimpleFrequency(string* words);
-    static string* IDontPresentSimpleNegativePositive(string* words);
-    static string* IDontPresentSimpleNegativeNegative(string* words);
-    static string* IDontPresentSimpleNegativePlusInfinitive(string* words);
-    static string* DoYouPresentSimpleQuestionsPositive(string* words);
-    static string* DoYouPresentSimpleQuestionsQuestion(string* words);
-    static string* DoYouPresentSimpleQuestionsDoDoes(string* words);
-    static string* IamDoingPresentContinuous(string* words);
-    static string* IhaveAndIveGotPositiveHave(string* words);
-    static string* IhaveAndIveGotPositiveGot(string* words);
-    static string* IhaveAndIveGotNegtativeHave(string* words);
-    static string* IhaveAndIveGotNegativeGot(string* words);
-    static string* DoYouPresentSimpleQuestions(string* words);
-    static string* IhaveAndIveGotQuestionsHave(string* words);
-    static string* IhaveAndIveGotQuestionsGot(string* words);
-    static string AmIsTense(string* words);
-    static string* AmIsSentenceToPastTense(string* words);
-    static string* WasWerePositive(string* words);
-    static string* WasWereNegative(string* words);
-    static string* WasWereQuestion(string* words);
-    static string* WasWereShortAnswers(string* words);
-    static string* WorkedGotWentPastSimple(string* words);
-    static string PresentSimpleToPastSimple(string verb);
-    static string PastSimpleNegativeAndQuestions(string verb);
-    static string PastSimpleNegativeAndQuestionsPositive(string verb);
-    static string PastSimpleNegativeAndQuestionsNegative(string verb);
-    static string PastSimpleNegativeAndQuestionsQuestion(string verb);
-    static string DoDoesToPastTense(string present_word);
-    static string* DidDidntInfinitiveTest(string* words);
-    static string* DidDidntQuestions(string* words);
-    static string* DidDidntShortAnswersPositive(string* words);
-    static string* DidDidntShortAnswersNegative(string* words);
-    static string* CheckForTimeProgressionPastSimple(string* sentences);
-    static string* CheckForTimeProgressionPastContinuous(string* sentences);
-    static string* CheckForTimeProgressionPresentPerfect(string* sentences);
-    static string* IwasDoingPastContinuous(string* words);
-    static string* IDidPastSimple(string* words);
-    static string* IHaveDonePresentPerfect1(string* words);
-    static string* IHaveDonePresentPerfect1Questions(string* words);
-    static string* IveJustPresentPerfect2(string* words);
-    static string* IveAlreadyPresentPerfect2(string* words);
-    static string* IhaventYetPresentPerfect2(string* words);
-    static string* IhaventYetPresentPerfect2Negative(string* words);
-    static string* IhaventYetPresentPerfect2Questions(string* words);
-    static string* HaveYouEverPresentPerfect3(string* words);
-    static string* HaveYouEverPresentPerfect3EverNever(string* words);
-    static string* HaveYouEverPresentPerfect3GoneBeen(string* words);
-    static string* HowLongHaveYouPresentPerfect4(string* words);
-    static string* HowLongHaveYouPresentSimple( string* words);
-    static string* For(string* words);
-    static string* Since(string* words);
-    static string* Ago(string* words);
-    static string* IHaveDonePresentPerfect(string* words);
-    static string* IDidPastPast(string* words);
-    static string* Passive1PresentSimple(string* words);
-    static string* Passive1PastSimple(string* words);
-    static string* Passive1WasWereBorn(string* words);
-    static string* Passive1PassiveBy(string* words);
-    static string* Passive2IsBeingDone(string* words);
-    static string* Passive2HasBeenDone(string* words);
-    static string* BePresentContinuous(string* words);
-    static string* BePastContinuous(string* words);
-    static string* BePassivePresentSimple(string* words);
-    static string* BePassivePastSimple(string* words);
-    static string* HaveHasPresentPerfect(string* words);
-    static string* DoDoesPresentSimpleNegativeQuestions(string* words);
-    static string* DidPastSimpleNegativeQuestions(string* words);
-    static string* AmIsAreIngPresentContinuous(string* words);
-    static string* AmIsAreIngFuture(string* words);
-    static string* IamDoingSomethingTomorrow(string* words);
-    static string* ImGoingToFuturePositive(string* words);
-    static string* ImGoingToFutureNegative(string* words);
-    static string* WillFuturePositve(string* words);
-    static string* WillFutureNegative(string* words);
-    static string* ShallFuturePositive(string* words);
-    static string* ShallFutureNegative(string* words);
-    static string* IllIwill(string* words);
-    static string* IThinkIll(string* words);
-    static string* ShallI(string* words);
-    static string* IMightPositive(string* words);
-    static string* IMightNegative(string* words);
-    static string* May(string* words);
-    static string* MayI(string* words);
-    static string* Can(string* words);
-    static string* ICan(string* words);
-    static string* CouldPositive(string* words);
-
-    class CUDA
-    {
-    public:
-        // NLP.h
-        //static string* getWordTypes(string word);
-        //static string* QueryDatabaseWordTypes(string word);
-        //static string* QueryDatabaseDefinitions(string word, string* wordTypes);
-        //static string* SearchDictionary(string word);
-        //static string* SearchDictionary(string word, string word_type);
-        //static string* SearchDictionary(string word, string word_type, string definition);
-        //static string* SearchDictionaryDefinition(string definition);
-        //static string* SearchDictionaryWordType(string word_type);
-        //static string* SearchDictionaryVector(string word);
-        //static string* SearchDictionaryVector(string word, string word_type);
-        //static string* SearchDictionaryVector(string word, string word_type, string definition);
-        //static string* SearchDictionaryVectorDefinition(string definition);
-        //static string* SearchDictionaryVectorWordType(string word_type);
-        //static string* SearchDictionaryWithVector(string* vector);
-    };
+    static string* returnWords(string sentence);
+    static string* QueryDatabaseWordTypes(string word);
+    static string* QueryDatabaseDefinitions(string word, string* wordTypes);
+    static void Writing();
 };
 
-// Types of words
+static string completed[100][3];
+
 static const string _verb_list[] = { "transitive_verb", "intransitive_verb", "irregular_verb", "action_verb", "stative_verb", "linking_verb", "light_verb", "phrasal_verb", "conditional_verb", "causative_verb", "factive_verb", "reflexive_verb" };
 static const string _noun_list[] = { "common_noun", "proper_noun", "noun_of_address", "concrete_noun", "abstract_noun", "countable_noun", "uncountable_noun", "collective_noun", "compound_nouns", "nominalization" };
-static const string _adjectives_list[] = { "attributive_adjectives", "predicative_adjectives", "proper_adjectives", "collective_adjectives", "demonstrative_adjectives", "iterrogative_adjectives", "nominal_adjectives", "compound_adjectives", "order_of_adjectives", "comparative_adjectives", "superlative_adjectives" };
+static const string _adjectives_list[] = { "attributive_adjectives", "predicative_adjectives", "proper_adjectives", "collective_adjectives", "demonstrative_adjectives", "iterrogative_adjectives", "nominal_adjectives", "compound_adjectives", "order_of_adjectives", "comparative_adjectives", "superlative_adjectives", "" };
 static const string _adverb_list[] = { "adverb_of_time", "adverb_of_place", "adverb_of_manner", "mitigators", "intensifiers", "adverb_of_frequency", "adverb_of_purpose", "focusing_adverbs", "negative_adverbs", "conjunctive_adverbs", "evaluative_adverbs", "viewpoint_adverbs", "relative_adverbs", "adverbial_nouns", "regular_adverb", "irregular_adverb", "comparative_adverb", "superlative_adverb" };
-static const string _pronoun_list[] = { "personal_pronouns", "object_pronouns", "possessive_pronouns", "intensive_pronoun", "indefinite_pronoun", "demonstrative_pronoun", "interogative_pronoun", "relative_pronoun", "reciprocal_pronoun", "dummy_pronoun" };
+static const string _pronoun_list[] = { "personal_pronouns", "intensive_pronoun", "indefinite_pronoun", "demonstrative_pronoun", "interogative_pronoun", "relative_pronoun", "reciprocal_pronoun", "dummy_pronoun" };
 static const string _logic_operators[] = { "and", "or", "not" };
 static const string _categories_of_preposition[] = { "time", "place", "direction", "movement", "agency", "instrument", "device", "reason", "purpose", "connection", "origin" };
-
-// Pronoun List
-static const string personal_pronouns[] = { "i", "we", "you", "he", "she", "it", "they" };
-static const string object_pronouns[] = { "mine", "ours", "yours", "hers", "his", "theirs" };
-static const string pronomial_adjectives[] = { "my", "our", "your", "her", "his", "their" };
-static const string reflexive_pronouns[] = { "myself", "yourself", "herself", "himself", "itself", "ourselves", "yourselves", "themselves" };
-static const string intensive_pronouns[] = { "myself", "yourself", "herself", "himself", "itself", "ourselves", "yourselves", "themselves" };
-static const string indefinite_pronouns[] = { "all", "another", "any", "anybody", "anybody", "anyone", "anything", "both", "each", "either", "everybody", "everyone", "everything", "few", "many", "most", "neither", "nobody", "none", "no one", "nothing", "one", "other", "others", "several", "some", "somebody", "someone", "something", "such" };
-static const string demonstrative_pronouns[] = { "such", "that", "these", "this", "those" };
-static const string interrogative_pronouns[] = { "what", "whatever", "which", "whichever", "who", "whoever", "whom", "whomever", "whose" };
-static const string relative_pronouns[] = { "as", "that", "what", "whatever", "which", "whichever", "who", "whoever", "whom", "whomever", "whose" };
-static const string archaic_pronouns[] = { "thou", "thee", "thy", "thine", "ye" };
-static const string all_pronouns[] = { "all", "another", "any", "anybody", "anyone", "anything", "as", "aught", "both", "each", "each other", "either", "enough", "everybody", "everyone", "everything", "few", "he", "her", "hers", "herself", "him", "himself", "his", "i", "idem", "it", "its", "itself", "many", "me", "most", "my", "myself", "naught", "neither", "no one", "nobody", "none", "nothing", "nought", "one", "one another", "other", "others", "ought", "our", "ours", "ourself", "ourselves", "several", "she", "some", "somebody", "someone", "something", "somewhat", "such", "suchlike", "that", "thee", "their", "theirs", "theirself", "theirselves", "them", "themself", "themselves", "there", "these", "they", "thine", "this", "those", "thou", "thy", "thyself", "us", "we", "what", "whatever", "whatnot", "whatsoever", "whence", "whereby", "wherefrom", "wherein", "whereinto", "whereof", "whereon", "wherever", "wheresoever", "whereto", "whereunto", "wherewith", "wherewithal", "whether", "which", "whichever", "whichsoever", "who", "whoever", "whom", "whomever", "whomso", "whomsover", "whose", "whoever", "whose", "whosesoever", "whoso", "whosover", "ye", "yon", "yonder", "you", "your", "yours", "yourself", "yourselves" };
-
-// Other
 static const string _being_verb_contractions[] = { "they'd", "they'll", "they're", "they've", "we'd", "we're", "we've", "he'd", "he'll", "he's", "I'd", "I'll", "I'm", "I've", "she'd", "she'll", "she's", "you've", "you're" };
 
-// Verbs
-static string* verbs;
-static string* transitive_verbs;
-static string* intransitive_verbs;
-static string* irregular_verbs;
-static string* action_verbs;
-static string* stative_verbs;
-static string* linking_verbs;
-static string* light_verbs;
-static string* phrasal_verbs;
-static string* conditional_verbs;
-static string* causative_verbs;
-static string* factive_verbs;
-static string* reflexive_verbs;
 
-// Nouns
-static string* nouns;
-static string* common_nouns;
-static string* proper_nouns;
-static string* noun_of_address;
-static string* concrete_nouns;
-static string* abstract_nouns;
-static string* countable_nouns;
-static string* uncountable_nouns;
-static string* collective_nouns;
-static string* compound_nouns;
-static string* nominalizations;
-
-// Adjectives
-static string* adjectives;
-static string* attributaive_adjectives;
-static string* predicative_adjectives;
-static string* proper_adjectives;
-static string* collective_adjectives;
-static string* demonstrative_adjectives;
-static string* interrogative_adjectives;
-static string* nominal_adjectives;
-static string* compund_adjectives;
-static string* order_of_adjectives;
-static string* comparative_adjectives;
-static string* superlative_adjectives;
-
-// Adverbs
-static string* adverbs;
-static string* adverbs_of_time;
-static string* adverbs_of_place;
-static string* adverbs_of_manner;
-static string* mitigators;
-static string* intensifiers;
-static string* adverbs_of_frequency;
-static string* adverbs_of_purpose;
-static string* focusing_adverbs;
-static string* negative_adverbs;
-static string* conjunctive_adverbs;
-static string* evaluative_adverbs;
-static string* viewpoint_adverbs;
-static string* relative_adverbs;
-static string* adverbial_nouns;
-static string* regular_adverbs;
-static string* irregular_adverbs;
-static string* comparative_adverbs;
-static string* superlative_adverbs;
-static string* order_adverb;
-
-// Pronouns
-//static string* pronouns;
-//static string* personal_pronouns;
-//static string* intensive_pronouns;
-//static string* indefinite_pronouns;
-//static string* demonstrative_pronouns;
-//static string* interogative_pronouns;
-//static string* relative_pronouns;
-//static string* reciprocal_pronouns;
-//static string* dummy_pronouns;
-
-// Interjections
-static string* interjection_swear;
-static string* emotive_interjections;
-static string* cognitive_interjections;
-static string* volitive_interjections;
-
-// Numbers
-static string* numbers;
-static string* numbers_digits;
-
-// Conjunctions
-static string* conjunction;
-
-// Determiner
-static string* possessive_determiner;
-static string* pre_determiner;
-
-// Articles
-static string* definite_article;
-static string* indefinite_article;
-
-// Preposition
-static string* preposition;
+//// Verbs
+//static string** verbs;
+//static string** transitive_verbs;
+//static string** intransitive_verbs;
+//static string** irregular_verbs;
+//static string** action_verbs;
+//static string** stative_verbs;
+//static string** linking_verbs;
+//static string** light_verbs;
+//static string** phrasal_verbs;
+//static string** conditional_verbs;
+//static string** causative_verbs;
+//static string** factive_verbs;
+//static string** reflexive_verbs;
+//
+//// Nouns
+//static string** nouns;
+//static string** common_nouns;
+//static string** proper_nouns;
+//static string** noun_of_address;
+//static string** concrete_nouns;
+//static string** abstract_nouns;
+//static string** countable_nouns;
+//static string** uncountable_nouns;
+//static string** collective_nouns;
+//static string** compound_nouns;
+//static string** nominalizations;
+//
+//// Adjectives
+//static string** adjectives;
+//static string** attributaive_adjectives;
+//static string** predicative_adjectives;
+//static string** proper_adjectives;
+//static string** collective_adjectives;
+//static string** demonstrative_adjectives;
+//static string** interrogative_adjectives;
+//static string** nominal_adjectives;
+//static string** compund_adjectives;
+//static string** order_of_adjectives;
+//static string** comparative_adjectives;
+//static string** superlative_adjectives;
+//
+//// Adverbs
+//static string** adverbs;
+//static string** adverbs_of_time;
+//static string** adverbs_of_place;
+//static string** adverbs_of_manner;
+//static string** mitigators;
+//static string** intensifiers;
+//static string** adverbs_of_frequency;
+//static string** adverbs_of_purpose;
+//static string** focusing_adverbs;
+//static string** negative_adverbs;
+//static string** conjunctive_adverbs;
+//static string** evaluative_adverbs;
+//static string** viewpoint_adverbs;
+//static string** relative_adverbs;
+//static string** adverbial_nouns;
+//static string** regular_adverbs;
+//static string** irregular_adverbs;
+//static string** comparative_adverbs;
+//static string** superlative_adverbs;
+//static string** order_adverb;
+//
+//// Pronouns
+//static string** pronouns;
+//static string** personal_pronouns;
+//static string** intensive_pronouns;
+//static string** indefinite_pronouns;
+//static string** demonstrative_pronouns;
+//static string** interogative_pronouns;
+//static string** relative_pronouns;
+//static string** reciprocal_pronouns;
+//static string** dummy_pronouns;
+//
+//// Interjections
+//static string** interjection_swear;
+//static string** emotive_interjections;
+//static string** cognitive_interjections;
+//static string** volitive_interjections;
+//
+//// Numbers
+//static string** numbers;
+//static string** numbers_digits;
+//
+//// Conjunctions
+//static string** conjunction;
+//
+//// Determiner
+//static string** possessive_determiner;
+//static string** pre_determiner;
+//
+//// Articles
+//static string** definite_article;
+//static string** indefinite_article;
+//
+//// Preposition
+//static string** preposition;

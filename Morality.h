@@ -17,12 +17,3 @@
 */
 
 #include "AugmentedIntelligence.h"
-
-// Large Language Models (LLMs)
-// 1. BLOOM
-// 2. Gemma
-// 3. GPT-NEO ?
-// 4. Llama 2
-// 5. Llama Code
-// 6. Phi
-// 7. GPT-2

@@ -128,7 +128,7 @@ public:
     static bool SocialComparisonBias(string text);
     static bool SocialDesirabilityBias(string text);
     static bool StatusQuoBias(string text);
-    static bool Stereotypeing(string text);
+    static bool Stereotyping(string text);
     static bool SubAdditiveityEffect(string text);
     static bool SubjectiveValidation(string text);
     static bool Surrogation(string text);

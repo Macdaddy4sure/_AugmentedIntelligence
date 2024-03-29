@@ -576,4 +576,6 @@ public:
     static string* SearchDictionaryVector(string word, string word_type, string definition);
     static string* SearchDictionaryVectorDefinition(string definition);
     static string* SearchDictionaryVectorWordType(string word_type);
+
+    // WikiMedia.h
 };

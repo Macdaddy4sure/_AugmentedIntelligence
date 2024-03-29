@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -18,11 +18,10 @@
 
 #include "AugmentedIntelligence.h"
 
-// Large Language Models (LLMs)
-// 1. BLOOM
-// 2. Gemma
-// 3. GPT-NEO ?
-// 4. Llama 2
-// 5. Llama Code
-// 6. Phi
-// 7. GPT-2
+using namespace std;
+
+class _Translation
+{
+public:
+
+};

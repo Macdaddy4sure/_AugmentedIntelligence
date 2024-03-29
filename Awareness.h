@@ -19,3 +19,9 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
+
+class _Awareness
+{
+public:
+    static void AwarenessGUI();
+};

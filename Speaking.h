@@ -20,4 +20,10 @@
 
 using namespace std;
 
-//static void Speaking();
+class _Speaking
+{
+public:
+    static string SpeakingQueueWord(string word);
+    static string SpeakingQueueSentence(string* word);
+    // Text to speech engine?
+};

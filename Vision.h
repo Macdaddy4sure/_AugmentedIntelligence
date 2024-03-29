@@ -25,20 +25,28 @@ using namespace cv::dnn;
 class _Vision
 {
 public:
+    static void Vision();
     static void VisionRawCamera1();
     static void VisionRawCamera2();
-    static void Vision();
-    static string** ObjectDetection(string image_path);
     static void MySQLVisionRAWCamera1();
     static void MySQLVisionRAWCamera2();
-    static void TextDetection();
-    static void TextRecognition();
+    static string* ObjectDetection(string image_path);
+    static void RunSession(TF_Session* session, TF_Graph* graph, TF_Status* status, TF_SessionOptions* options, TF_Tensor* inputTensor, cv::Mat image, int image_number);
+    static void DrawBoundingBoxes(cv::Mat& image, const std::vector<cv::Rect>& boxes, const std::vector<int>& classIds, std::vector<float>& scores, std::string* classLabels);
+    static cv::Mat PreprocessImage(const std::string& imagePath, int targetWidth, int targetHeight);
+    static TF_Tensor* MatToTensor(const cv::Mat& image);
+    static std::vector<cv::Rect> ExtractBoxes(TF_Tensor* boxesTensor, const cv::Size& imageSize);
+    static std::vector<float> ExtractScores(TF_Tensor* scoresTensor);
+    static std::vector<int> ExtractClassIds(TF_Tensor* classesTensor);
+    static std::string* LoadLabels(const std::string& labelFilePath);
+
+
+private:
+    //static void TextDetection();
+    //static void TextRecognition(string image);
+    // User defined image sequence, pre-encoded
+    // Variables
+    static string vision_camera1_image_path;
+    static string vision_camera2_image_path;
 };
 
-//
-//struct Detection
-//{
-//    int class_id;
-//    float confidence;
-//    cv::Rect box;
-//};
