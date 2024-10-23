@@ -1,5 +1,5 @@
 /*
-	Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+	Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
 	Licensed under the Apache License, Version 2.0 (the "License");
 	you may not use this file except in compliance with the License.
@@ -144,7 +144,6 @@ void _Settings::Settings()
 		cout << "| 19. Enable/Disable Camera 1                            |" << endl;
 		cout << "| 20. Enable/Disable Camera 2                            |" << endl;
 		cout << "| 21. Enable/Disable Microphone 1                        |" << endl;
-		cout << "| 22. Enable/Disable Microphone 2                        |" << endl;
 		cout << "| 23. Enable/Disable Speech Recognition                  |" << endl;
 		cout << "| 24. Enable/Disable Computer Use                        |" << endl;
 		cout << "| 25. Enable/Disable Computer Monitor Recognition        |" << endl;
@@ -163,22 +162,29 @@ void _Settings::Settings()
 		cout << "| 38. Set CUDA Accelleration Remote Cores                |" << endl;
 		cout << "| 39. Set Tensor Accelleration Remote Hostname           |" << endl;
 		cout << "| 40. Set Tensor Accelleration Remote Cores              |" << endl;
-		cout << "| 41. Set FFMPEG Location                                |" << endl;
-		cout << "| 42. Set Camera 1 Device                                |" << endl;
-		cout << "| 43. Set Camera 1 FPS                                   |" << endl;
-		cout << "| 44. Set Camera 1 Resolution                            |" << endl;
-		cout << "| 45. Set Camera 2 Device                                |" << endl;
-		cout << "| 46. Set Camera 2 FPS                                   |" << endl;
-		cout << "| 47. Set Camera 2 Resolution                            |" << endl;
-		cout << "| 48. Set Microphone 1 Device                            |" << endl;
-		cout << "| 49. Set Microphone 2 Device                            |" << endl;
-		cout << "| 50. Set Sound Codec                                    |" << endl;
-		cout << "| 51. Set Sound Bitrate                                  |" << endl;
-		cout << "| 52. Enable/Disable News Watching Scraper               |" << endl;
-		cout << "| 53. Enable/Disable Actions Detction                    |" << endl;
-		cout << "| 54. Enable/Disable Needs Detection                     |" << endl;
-		cout << "| 55. Enable/Disable Navigation Detection                |" << endl;
-		cout << "| 56. Enable/Disable Social Needs Detection              |" << endl;
+		cout << "| 41. Tensorflow Saved Model Location                    |" << endl;
+		cout << "| 42. Tensorflow Model Labels                            |" << endl;
+		cout << "| 43. Set FFMPEG Location                                |" << endl;
+		cout << "| 44. Set Camera 1 Device                                |" << endl;
+		cout << "| 45. Set Camera 1 FPS                                   |" << endl;
+		cout << "| 46. Set Camera 1 Resolution                            |" << endl;
+		cout << "| 47. Set Camera 2 Device                                |" << endl;
+		cout << "| 48. Set Camera 2 FPS                                   |" << endl;
+		cout << "| 49. Set Camera 2 Resolution                            |" << endl;
+		cout << "| 50. Set Microphone 1 Device                            |" << endl;
+		cout << "| 51. Set Microphone 2 Device                            |" << endl;
+		cout << "| 52. Set Sound Codec                                    |" << endl;
+		cout << "| 53. Set Sound Bitrate                                  |" << endl;
+		cout << "| 54. Set Sound Sample Rate                              |" << endl;
+		cout << "| 55. Set Sound Channels                                 |" << endl;
+		cout << "| 56. Set Sound Bits Per Channel                         |" << endl;
+		cout << "| 57. Speech Commands Activation Keyword                 |" << endl;
+		cout << "| 58. Speech Commands Terminator Keyword                 |" << endl;
+		cout << "| 59. Enable/Disable News Watching Scraper               |" << endl;
+		cout << "| 60. Enable/Disable Actions Detction                    |" << endl;
+		cout << "| 61. Enable/Disable Needs Detection                     |" << endl;
+		cout << "| 62. Enable/Disable Navigation Detection                |" << endl;
+		cout << "| 63. Enable/Disable Social Needs Detection              |" << endl;
 		cout << "----------------------------------------------------------" << endl;
 		cout << "| 0. Back to Main Menu                                   |" << endl;
 		cout << "----------------------------------------------------------" << endl;
@@ -208,6 +214,14 @@ void _Settings::Settings()
 			cout << "Speech Memory: True" << endl;
 		else
 			cout << "Speech Memory: False" << endl;
+		if (llm_server_enabled)
+			cout << "LLM Server: True" << endl;
+		else
+			cout << "LLM Server: False" << endl;
+		if (whisper_server_enabled)
+			cout << "Transcription Server: True" << endl;
+		else
+			cout << "Transcription Server: False" << endl;
 		if (ethics_check_enabled)
 			cout << "Ethics Check: True" << endl;
 		else
@@ -268,10 +282,10 @@ void _Settings::Settings()
 			cout << "Microphone 1 Enabled: True" << endl;
 		else
 			cout << "Microphone 1 Enabled: False" << endl;
-		if (microphone2_enable)
-			cout << "Microphone 2 Enabled: True" << endl;
-		else
-			cout << "Microphone 2 Enabled: False" << endl;
+		//if (microphone2_enable)
+		//	cout << "Microphone 2 Enabled: True" << endl;
+		//else
+		//	cout << "Microphone 2 Enabled: False" << endl;
 		if (speech_recognition)
 			cout << "Speech Recognition: True" << endl;
 		else
@@ -316,9 +330,23 @@ void _Settings::Settings()
 		cout << "Camera 2 FPS: " << camera2_fps << endl;
 		cout << "Camera 2 Resolution: " << camera2_resolution << endl;
 		cout << "Microphone 1 Device: " << microphone1_device_name << endl;
-		cout << "Microphone 2 Device: " << microphone2_device_name << endl;
-		cout << "Sound Codec: " << sound_codec << endl;
-		cout << "Sound Bitrate: " << sound_bitrate << " Kb/s" << endl;
+		//cout << "Microphone 2 Device: " << microphone2_device_name << endl;
+		cout << "Microphone Codec: " << sound_codec << endl;
+		cout << "Microphone Bitrate: " << sound_bitrate << " Kb/s" << endl;
+		cout << "Microphone Sample Rate: " << sound_sample_rate << " Hz" << endl;
+		cout << "Microphone Channels: " << sound_channels << endl;
+		cout << "Microphone Bits Per Sample: " << sound_bits_per_sample << endl;
+		cout << "Speech Commands Activation: " << speech_commands_activation << endl;
+		cout << "Speech Commands Terminator: " << speech_commands_terminator << endl;
+		cout << "Transcription Server Hostname: " << whisper_hostname << endl;
+		cout << "Transcription Server Username: " << whisper_username << endl;
+		cout << "Transcription Server Password: " << whisper_password << endl;
+		//cout << "Microphone Sample Rate: " << mic_sample_rate << endl;
+		//cout << "Microphone Number Channels: " << mic_num_channels << endl;
+		//cout << "Microphone Bits Per Sample: " << mic_bits_per_sample << endl;
+		cout << "LLM Server Hostname: " << llm_hostname << endl;
+		cout << "LLM Server Username: " << llm_username << endl;
+		cout << "LLM Server Password: " << llm_password << endl;
 		if (news_watching)
 			cout << "News Watching: True" << endl;
 		else
@@ -532,15 +560,15 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "22")
-		{
-			if (!microphone2_enable)
-				microphone2_enable = true;
-			else
-				microphone2_enable = false;
+		//else if (input == "22")
+		//{
+		//	if (!microphone2_enable)
+		//		microphone2_enable = true;
+		//	else
+		//		microphone2_enable = false;
 
-			_Settings::SaveSettingsFile();
-		}
+		//	_Settings::SaveSettingsFile();
+		//}
 		else if (input == "23")
 		{
 			if (!speech_recognition)
@@ -894,7 +922,7 @@ void _Settings::Settings()
 
 				if (input2 != "")
 				{
-					camera1_fps = input2;
+					camera1_fps = stoi(input2);
 					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
@@ -954,7 +982,7 @@ void _Settings::Settings()
 
 				if (input2 != "")
 				{
-					camera2_fps = input2;
+					camera2_fps = stoi(input2);
 					_Settings::SaveSettingsFile();
 					boolean2 = true;
 				}
@@ -1000,26 +1028,26 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "49")
-		{
-			while (!boolean2)
-			{
-				system("cls");
+		//else if (input == "49")
+		//{
+		//	while (!boolean2)
+		//	{
+		//		system("cls");
 
-				cout << endl;
-				cout << "Microphone 2 Device" << endl;
-				cout << endl;
-				cout << "Your Selection: ";
-				getline(cin, input2);
+		//		cout << endl;
+		//		cout << "Microphone 2 Device" << endl;
+		//		cout << endl;
+		//		cout << "Your Selection: ";
+		//		getline(cin, input2);
 
-				if (input2 != "")
-				{
-					microphone2_device_name = input2;
-					_Settings::SaveSettingsFile();
-					boolean2 = true;
-				}
-			}
-		}
+		//		if (input2 != "")
+		//		{
+		//			microphone2_device_name = input2;
+		//			_Settings::SaveSettingsFile();
+		//			boolean2 = true;
+		//		}
+		//	}
+		//}
 		else if (input == "50")
 		{
 			while (!boolean2)
@@ -1062,6 +1090,106 @@ void _Settings::Settings()
 		}
 		else if (input == "52")
 		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Sound Sample Rate" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					sound_sample_rate = stoi(input2);
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "53")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Sound Channels" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					sound_channels = stoi(input2);
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "54")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Sound Bits Per Channel" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					sound_bits_per_sample = stoi(input2);
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "55")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Speech Commands Activation: " << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					speech_commands_activation = input2;
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "56")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Speech Commands Terminator: " << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					speech_commands_terminator = input2;
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+			}
+		else if (input == "57")
+		{
 			if (!news_watching)
 				news_watching = true;
 			else
@@ -1069,7 +1197,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "53")
+		else if (input == "58")
 		{
 			if (!action_detection)
 				action_detection = true;
@@ -1078,7 +1206,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "54")
+		else if (input == "59")
 		{
 			if (!speech_recognition)
 				needs_detection = true;
@@ -1087,7 +1215,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "55")
+		else if (input == "60")
 		{
 			if (!navigation_detection)
 				navigation_detection = true;
@@ -1096,7 +1224,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "56")
+		else if (input == "61")
 		{
 			if (!social_needs_detection)
 				social_needs_detection = true;
@@ -2062,6 +2190,8 @@ bool _Settings::GetFTPEnabled()
 			}
 		}
 	}
+
+	return false;
 }
 
 string _Settings::GetFTPHostname()
@@ -2609,6 +2739,242 @@ void _Settings::ComputerSettings()
 		else
 		{
 
+		}
+	}
+}
+
+void _Settings::WhisperServerSettings()
+{
+	string input;
+	string input2;
+	bool boolean = false;
+	bool boolean2 = false;
+
+	while (!boolean)
+	{
+		system("cls");
+
+		cout << endl;
+		cout << "Whisper Server Settings" << endl;
+		cout << "1. Server Hostname" << endl;
+		cout << "2. Server Username" << endl;
+		cout << "3. Server Password" << endl;
+		//cout << "4. Microphone Sample Rate" << endl;
+		//cout << "5. Microphone Number Channels" << endl;
+		//cout << "6. Microphone Bits Per Sample" << endl;
+		cout << "-------------------------------------" << endl;
+		cout << "0. Main Menu" << endl;
+		cout << endl;
+		cout << "Whisper Server Settings" << endl;
+		cout << "Whisper Hostname: " << whisper_hostname << endl;
+		cout << "Whisper Username: " << whisper_username << endl;
+		cout << "Whisper Password: " << whisper_password << endl;
+		//cout << "Microphone Sample Rate: " << mic_sample_rate << endl;
+		//cout << "Microphone Channels: " << mic_num_channels << endl;
+		//cout << "Microphone Bits Per Sample: " << mic_bits_per_sample << endl;
+		cout << endl;
+		cout << "Your Selection: ";
+		getline(cin, input);
+
+		if (input == "1")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << "Whisper Server Hostname" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					whisper_hostname = input2;
+					boolean2 = true;
+					_Settings::SaveSettingsFile();
+				}
+			}
+		}
+		else if (input == "2")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << "Whisper Server Username" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					whisper_username = input2;
+					boolean2 = true;
+					_Settings::SaveSettingsFile();
+				}
+			}
+		}
+		//else if (input == "3")
+		//{
+		//	while (!boolean2)
+		//	{
+		//		system("cls");
+
+		//		cout << "Microhone Sample Rate" << endl;
+		//		cout << endl;
+		//		cout << "Your Selection: ";
+		//		getline(cin, input2);
+
+		//		if (input2 != "")
+		//		{
+		//			mic_sample_rate = stoi(input2);
+		//			boolean2 = true;
+		//			_Settings::SaveSettingsFile();
+		//		}
+		//	}
+		//}
+		//else if (input == "3")
+		//{
+		//	while (!boolean2)
+		//	{
+		//		system("cls");
+
+		//		cout << "Microphone Number Channels" << endl;
+		//		cout << endl;
+		//		cout << "Your Selection: ";
+		//		getline(cin, input2);
+
+		//		if (input2 != "")
+		//		{
+		//			mic_num_channels = stoi(input2);
+		//			boolean2 = true;
+		//			_Settings::SaveSettingsFile();
+		//		}
+		//	}
+		//}
+		//else if (input == "3")
+		//{
+		//	while (!boolean2)
+		//	{
+		//		system("cls");
+
+		//		cout << "Microphone Bits Per Channel" << endl;
+		//		cout << endl;
+		//		cout << "Your Selection: ";
+		//		getline(cin, input2);
+
+		//		if (input2 != "")
+		//		{
+		//			mic_bits_per_sample = stoi(input2);
+		//			boolean2 = true;
+		//			_Settings::SaveSettingsFile();
+		//		}
+		//	}
+		//}
+		else if (input == "0")
+		{
+			_Settings::SaveSettingsFile();
+			boolean = true;
+		}
+		else
+		{
+			cout << "Invalid Option..." << endl;
+		}
+	}
+}
+
+void _Settings::LLMServerSettings()
+{
+	string input;
+	string input2;
+	bool boolean = false;
+	bool boolean2 = false;
+
+	while (!boolean)
+	{
+		system("cls");
+
+		cout << endl;
+		cout << "LLM Server Settings" << endl;
+		cout << "1. Server Hostname" << endl;
+		cout << "2. Server Username" << endl;
+		cout << "3. Server Password" << endl;
+		cout << "-------------------------------------" << endl;
+		cout << "0. Main Menu" << endl;
+		cout << endl;
+		cout << "LLM Server Settings" << endl;
+		cout << "LLM Hostname: " << llm_hostname << endl;
+		cout << "LLM Username: " << llm_username << endl;
+		cout << "LLM Password: " << llm_password << endl;
+		cout << endl;
+		cout << "Your Selection: ";
+		getline(cin, input);
+
+		if (input == "1")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << "LLM Server Hostname" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					llm_hostname = input2;
+					boolean2 = true;
+					_Settings::SaveSettingsFile();
+				}
+			}
+		}
+		else if (input == "2")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << "LLM Server Username" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					llm_username = input2;
+					boolean2 = true;
+					_Settings::SaveSettingsFile();
+				}
+			}
+		}
+		else if (input == "3")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << "LLM Server Password" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					llm_password = input2;
+					boolean2 = true;
+					_Settings::SaveSettingsFile();
+				}
+			}
+		}
+		else if (input == "0")
+		{
+			_Settings::SaveSettingsFile();
+			boolean = true;
+		}
+		else
+		{
+			cout << "Invalid Options..." << endl;
 		}
 	}
 }
@@ -4615,16 +4981,16 @@ void _Settings::SaveSettingsFile()
 		else
 			settings << "reading_fallacy_check=False" << endl;
 		settings << "ffmpeg_location=" << ffmpeg_location << endl;
-		if (microphone1_enable)
-			settings << "microphone1_enable=True" << endl;
-		else
-			settings << "microphone1_enable=False" << endl;
-		settings << "microphone1_device=" << microphone1_device << endl;
-		if (microphone2_enable)
-			settings << "microphone2_enable=True" << endl;
-		else
-			settings << "microphone2_enable=False" << endl;
-		settings << "microphone2_device=" << microphone2_device << endl;
+		//if (microphone1_enable)
+		//	settings << "microphone1_enable=True" << endl;
+		//else
+		//	settings << "microphone1_enable=False" << endl;
+		//settings << "microphone1_device=" << microphone1_device << endl;
+		//if (microphone2_enable)
+		//	settings << "microphone2_enable=True" << endl;
+		//else
+		//	settings << "microphone2_enable=False" << endl;
+		//settings << "microphone2_device=" << microphone2_device << endl;
 		if (news_watching)
 			settings << "news_watching=True" << endl;
 		else
@@ -4988,7 +5354,7 @@ void _Settings::SaveSettings()
 			}
 			else if (x == 25)
 			{
-				if (camera1_fps == "")
+				if (camera1_fps == NULL)
 					sql1 += "NULL";
 				else
 				{
@@ -5034,7 +5400,7 @@ void _Settings::SaveSettings()
 			}
 			else if (x == 29)
 			{
-				if (camera2_fps == "")
+				if (camera2_fps == NULL)
 					sql1 += "NULL";
 				else
 				{
@@ -5225,50 +5591,50 @@ void _Settings::SaveSettings()
 				//cout << "SQL1: " << sql1 << endl;
 				mysql_query(conn3, sql1.c_str());
 			}
-			else if (x == 47)
-			{
-				if (microphone1_enabled)
-					sql1 += "true";
-				else
-					sql1 += "false";
-				sql1 += "\");";
-				//cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
-			}
-			else if (x == 48)
-			{
-				if (microphone1_device_name == "")
-					sql1 += "NULL";
-				else
-				{
-					sql1 += microphone1_device_name;
-				}
-				sql1 += "\");";
-				//cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
-			}
-			else if (x == 49)
-			{
-				if (microphone2_enabled)
-					sql1 += "true";
-				else
-					sql1 += "false";
-				sql1 += "\");";
-				//cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
-			}
-			else if (x == 50)
-			{
-				if (microphone2_device_name == "")
-					sql1 += "NULL";
-				else
-				{
-					sql1 += microphone2_device_name;
-				}
-				sql1 += "\");";
-				//cout << "SQL1: " << sql1 << endl;
-				mysql_query(conn3, sql1.c_str());
-			}
+			//else if (x == 47)
+			//{
+			//	if (microphone1_enabled)
+			//		sql1 += "true";
+			//	else
+			//		sql1 += "false";
+			//	sql1 += "\");";
+			//	//cout << "SQL1: " << sql1 << endl;
+			//	mysql_query(conn3, sql1.c_str());
+			//}
+			//else if (x == 48)
+			//{
+			//	if (microphone1_device_name == "")
+			//		sql1 += "NULL";
+			//	else
+			//	{
+			//		sql1 += microphone1_device_name;
+			//	}
+			//	sql1 += "\");";
+			//	//cout << "SQL1: " << sql1 << endl;
+			//	mysql_query(conn3, sql1.c_str());
+			//}
+			//else if (x == 49)
+			//{
+			//	if (microphone2_enabled)
+			//		sql1 += "true";
+			//	else
+			//		sql1 += "false";
+			//	sql1 += "\");";
+			//	//cout << "SQL1: " << sql1 << endl;
+			//	mysql_query(conn3, sql1.c_str());
+			//}
+			//else if (x == 50)
+			//{
+			//	if (microphone2_device_name == "")
+			//		sql1 += "NULL";
+			//	else
+			//	{
+			//		sql1 += microphone2_device_name;
+			//	}
+			//	sql1 += "\");";
+			//	//cout << "SQL1: " << sql1 << endl;
+			//	mysql_query(conn3, sql1.c_str());
+			//}
 			else if (x == 51)
 			{
 				if (ffmpeg_location == "")

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -35,7 +35,7 @@ public:
     static string CurrentTask();
     static void GetTaskbar();
     static void GetIndividualMonitors();
-    static void TrackCursor();
+    static float TrackCursor();
     static void getKeypresses();
     static void getBackMouseClick();
     static void getMiddleMouseClick();

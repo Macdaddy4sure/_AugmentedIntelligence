@@ -14,8 +14,6 @@
     limitations under the License.
 */
 
-
-
 #include "AugmentedIntelligence.h"
 #include "Sound.h"
 #include "Working-Memory.h"
@@ -25,146 +23,30 @@
 #include "Mathematics.h"
 #include "NLP.h"
 #include "Reference.h"
+#include "Speech Recognition.h"
 #include "Variables.h"
 #include "Settings.h"
+#include "Time.h"
 #include "Utilities.h"
 
 using namespace std;
 
-// The following function will listen for voice commands from the speech recognition thread
-//  Function                                                  Possible Input                                                 Implementation Difficulty
-//  BibleVerseSearch(string book, int chapter)              | Search for bible verse, John chapter three                   | Easy
-//  BibleVerseSearch(string book, int chapter, int verse)   | Search for bible verse, John chapter three verse sixteen     | Easy
-//  BibleVersePageNumber()                                  | Search for bible verse, page number visual trigger           | Intermediate (Requires OpenCV and TensorFlow)
-//  SearchWikipedia(string title, string summary)           | Search Wikipedia for x_article summary                       | Easy
-//  SearchWikipedia(string title, string heading)           | Search Wikipedia for x_article #Heading                      | Easy
-//  SearchWikipedia(string title)                           | Search Wikipedia for x_article                               | Easy
-//  SearchWiktionary()                                      | Search Wikitionary for definition                            | Easy
-//  SearchWiktionary()
-//  Speaking()                                              | ???                                                          | Intermediate (Calls to long and short term memory to find words to speak)
-//  MemorySearch()                                          | Search memory for memories containing dogs                   | Easy (Calls to long term and short term memory to search)
-//  Reading()                                               | ??? Should be a visual trigger                               | Intermediate (Requires short term memory, imagine, text synchronization)
-//  Writing()                                               | ??? Shoulkd be a visual trigger                              | Intermediate
-//  Computer()                                              | Using computer???, should be a visual trigger                | Intermediate to Challenging (Requires TensorFlow and/or OpenCV to know when a user is looking at a computer monitor)
-//  Gaming()                                                | Playing Fallout 4 on PS4, should be a visual trigger         | Intermediate to Challenging (Requires TensorFlow anmd/or OpenCV to know when a user is playing a game)
-//  HomeDatabaseSearch()                                    | Get fallacy for given string                                 | Intermediate to Challenging
-//  BiasCheck()                                             | Get bias for given string and data                           | Challenging, (Requires TensorFlow and/or OpenCV to check the environment for cues relating to bias)
-//  CreateDeductiveArgument()                               | Create deductive syllogism / deductive argument from data    | Challenging
-//  CreateInductiveArgument()                               | Create inductive syllogism / inductive argument from data    | Challenging
-//  GetShortTermMemory()                                    | Dump short term sound memory                                 | Easy
-//  GetShortTermMemory()                                    | Dump short term visual memory                                | Easy
-//  CreateReminder()                                        | Create a reminder of x                                       | Easy
-//
-// Commands for transcription
-//  1. Can you repeat that please?
-//      a. Test if the transcription contains ords that were not caught by whispe. Also check if the person is looking at you and words are being missed.
-void _Sound::SoundListener()
+// TODO: Cut record every 5 seconds
+// This funnction will listen through the microphone and save raw sound data then upload to MySQL Database
+void _Sound::Sound()
 {
-    string text;
-    int number;
-    double result;
-    string words[20];
-    string temp_word;
-    int spaces = 0;
-
-    while (true)
-    {
-        //text = _AI::SpeechRecognition();
-        
-        // Look for commands to the program
-        for (int i = 0; i <= text.length(); i++)
-        {
-            // Parse the file to find individual words denoted by spaces
-            if (!isspace(text[i]))
-            {
-                words[spaces] += text[i];
-            }
-            else
-            {
-                spaces++;
-            }
-        }
-
-        // Check for keywords to call functions
-        for (int j = 0; j <= spaces; j++)
-        {
-            temp_word = words[j];
-
-            if (isdigit((temp_word[j])) || words[j] == "absolute" || words[j] == "modulus" || words[j] == "square" || words[j] == "third" || words[j] == "factorial" || words[j] == "log" || words[j] == "natural" || words[j] == "sine" || words[j] == "cosine" || words[j] == "tangent" || words[j] == "secant" || words[j] == "cosecant" || words[j] == "cotangent" || words[j] == "arcsine" || words[j] == "arcosine" || words[j] == "arctangent" || words[j] == "arcsecant" || words[j] == "arccosecant" || words[j] == "arccotangent" || words[j] == "hyperbolic" || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "sine") || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "cosine") || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "tangent") || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "cosecant") || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "secant") || (words[j] == "area" && words[j + 1] == "hyperbolic" && words[j + 2] == "cotangent"))
-            {
-                _Math::ArithmeticParse(text);
-            }
-            else if ((words[j] == "algebra" && words[j + 1] == "calculate") || (words[j] == "factor" && (words[j + 1] == "binomial" || words[j + 1] == "trinomial")))
-            {
-                _Math::AlgebraParse(text);
-            }
-            else if (words[j] == "geometry" && words[j + 1] == "calculate")
-            {
-                _Math::GeometryParse(text);
-            }
-            else if (words[j] == "trigonometry" && words[j + 1] == "calculate")
-            {
-                _Math::TrigonometryParse(text);
-            }
-            else if (words[j] == "calculus" && words[j + 1] == "calculate")
-            {
-                _Math::CalculusParse(text);
-            }
-            else if (words[j] == "statistics" && words[j + 1] == "calculate")
-            {
-                _Math::StatisticsParse(text);
-            }
-            else if (words[j] == "create" && words[j + 1] == "deductive" && words[j + 2] == "argument")
-            {
-                //_NLP::CreateDeductiveArgument(text);
-            }
-            else if (words[j] == "create" && words[j + 1] == "inductive" && words[j + 2] == "argument")
-            {
-                //_NLP::CreateInductiveArgument(text);
-            }
-            else if ((words[j] == "convert" && words[j + 1] == "units") || words[j] == "units" && words[j + 1] == "conversion")
-            {
-                _Math::UnitConversions(text);
-            }
-            else if (words[j] == "fallacy" && words[j + 1] == "check" && words[j + 2] == "text")
-            {
-
-            }
-            else if (words[j] == "fallacy" && words[j + 1] == "check" && words[j + 2] == "data")
-            {
-
-            }
-            else if (words[j] == "bias" && words[j + 1] == "check" && words[j + 2] == "text")
-            {
-
-            }
-            else if (words[j] == "bias" && words[j + 1] == "check" && words[j + 2] == "data")
-            {
-
-            }
-            else if (words[j] == "find" && words[j + 1] == "object")
-            {
-                _DatabaseFunctions::FindObject(words[j + 2]);
-            }
-            else if (words[j] == "where" && words[j + 1] == "is" && words[j + 2] == "it")
-            {
-                // Do stuff
-            }
-        }
-    }
-}
-
-
-// TODO: Cut playback every five minutes
-// This funnction will listen through the microphone and save raw sound data with PortAudio
-void _Sound::SoundRAW()
-{
+    //const int sampleRate = 48000;
+    //const int numChannels = 2;
+    //const int bitsPerSample = 24;
+    //const int seconds = 5;
+    const int recordTime = 5; // Record for 5 seconds
+    const PaSampleFormat sampleFormat = paFloat32;
+    std::vector<float> recordedSamples;
     string command;
     string filename;
-    microphone1_device_name = _Settings::GetMicrophone1Device();
-    sound_bitrate = _Settings::GetSoundBitrate();
-    sound_codec = _Settings::GetSoundCodec();
-    sound_directory = _Settings::GetSoundDirectory();
+    string transcription;
+    string sound_detection;
+    //sound_directory = _Settings::GetSoundDirectory();
     ostringstream oss;
 
     while (true)
@@ -172,43 +54,123 @@ void _Sound::SoundRAW()
         auto t = std::time(nullptr);
         auto tm = *std::localtime(&t);
         oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
-        auto date = oss.str();
+        string current_time = oss.str();
 
-        command = "ffmpeg -f dshow -i audio=\"";
-        command += microphone1_device_name;
-        command += "\" -c:a \"";
-        command += sound_codec;
-        command += "\"-ar 44100 -b:a \"";
-        command += sound_bitrate;
-        command += "\" -segment_time 300 -ac 1 \"";
-        command += sound_directory;
-        command += date;
-        command += ".wav ";
-        filename = date;
-        filename += ".wav ";
-        sound_directory += date;
-        sound_directory += filename;
+        PaError err = Pa_Initialize();
+        if (err != paNoError) return;
 
-        system(command.c_str());
+        PaStream* stream;
+        err = Pa_OpenDefaultStream(&stream, sound_channels, 0, sampleFormat, sound_sample_rate, paFramesPerBufferUnspecified, _Sound::RecordCallback, &recordedSamples);
+        if (err != paNoError) return;
 
-        // Send data to be imported to MySQL
-        //MySQLSoundRAW(date, filename, NULL, bitrate, codec, fileLocation);
+        err = Pa_StartStream(stream);
+        if (err != paNoError) return;
+
+        // Use chrono to accurately measure time for recording duration
+        auto startTime = std::chrono::high_resolution_clock::now();
+        bool recording = true;
+        while (recording)
+        {
+            auto currentTime = std::chrono::high_resolution_clock::now();
+            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
+            if (elapsed >= recordTime) 
+            {
+                recording = false;
+            }
+        }
+
+        //// Record for a few seconds
+        //Pa_Sleep(seconds * 1000);
+
+        err = Pa_CloseStream(stream);
+        if (err != paNoError) return;
+
+        Pa_Terminate();
+
+        filename = sound_directory.c_str();
+        filename += "/";
+        filename += current_time.c_str();
+        filename += "_output.wav";
+
+        // Write to WAV file
+        std::ofstream outFile(filename.c_str(), std::ios::binary);
+        WriteWAVHeader(outFile, sound_sample_rate, sound_bits_per_sample, sound_channels, recordedSamples.size());
+        for (float sample : recordedSamples)
+        {
+            int16_t intSample = static_cast<int16_t>(sample * 32767);
+            outFile.write(reinterpret_cast<const char*>(&intSample), sizeof(intSample));
+        }
+        outFile.close();
+
+        //Debug
+        //std::cout << "Recording finished." << std::endl;
+
+        if (speech_recognition_enable)
+        {
+            // Whisper transcription
+            transcription = _SpeechRecognition::SpeechRecognition(filename);
+            cout << "transcription: " << transcription << endl; // Debug
+        }
+        if (sound_recognition)
+        {
+            // Sound recognition that detects small sounds not transription
+            //sound_detection = _Sound::SoundRecognition(filename);
+            sound_detection = "NULL";
+        }
+
+        _Sound::MySQL_Sound(filename, current_time, transcription, sound_detection);
+
+        if (sound_memory)
+        {
+            for (int x = 0; x < 1000; x++)
+            {
+                if (stm_sound_path[x][0] == "")
+                {
+                    lock_guard<mutex> lock(mtx_stm_sound_path[x][0]);
+                    lock_guard<mutex> lock2(mtx_stm_sound_path[x][1]);
+                    lock_guard<mutex> lock3(mtx_stm_sound_path[x][2]);
+                    lock_guard<mutex> lock4(mtx_stm_sound_path[x][3]);
+                    stm_sound_path[x][0] = filename;
+                    stm_sound_path[x][1] = current_time;
+                    stm_sound_path[x][2] = transcription;
+                    stm_sound_path[x][3] = sound_detection;
+                    break;
+                }
+                if (stm_sound_path[x][0] != "" && x == 999)
+                {
+                    for (int y = 0; y < 999; y++)
+                    {
+                        //lock_guard<mutex> lock(mtx_stm_sound_path[y][0]);
+                        //lock_guard<mutex> lock2(mtx_stm_sound_path[y][1]);
+                        //lock_guard<mutex> lock3(mtx_stm_sound_path[y + 1][0]);
+                        //lock_guard<mutex> lock4(mtx_stm_sound_path[y + 1][1]);
+                        stm_sound_path[y][0] = stm_sound_path[y + 1][0];
+                        stm_sound_path[y][1] = stm_sound_path[y + 1][1];
+                        stm_sound_path[y][2] = stm_sound_path[y + 1][2];
+                        stm_sound_path[y][3] = stm_sound_path[y + 1][3];
+                    }
+                    lock_guard<mutex> lock(mtx_stm_sound_path[999][0]);
+                    lock_guard<mutex> lock2(mtx_stm_sound_path[999][1]);
+                    lock_guard<mutex> lock3(mtx_stm_sound_path[999][2]);
+                    lock_guard<mutex> lock4(mtx_stm_sound_path[999][3]);
+                    stm_sound_path[999][0] = filename;
+                    stm_sound_path[999][1] = current_time;
+                    stm_sound_path[999][2] = transcription;
+                    stm_sound_path[999][3] = sound_detection;
+                    break;
+                }
+            }
+        }
     }
 }
 
 // The following function will upadte the MySQL database with raw sound information
-void _Sound::MySQL_Sound()
+void _Sound::MySQL_Sound(string filename, string current_time, string transcription, string sound_recognition)
 {
     MYSQL* conn;
     MYSQL_RES* result;
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    ostringstream query1;
-    ostringstream query2;
     string sql1;
     string sql2;
-    string database1 = "SoundRAW";
-    int wait_milliseconds = 100;
     string current_date;
     string temp;
     string temp_date;
@@ -223,108 +185,255 @@ void _Sound::MySQL_Sound()
     string table_name = current_date;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
-    result = mysql_use_result(conn);
-
-    query1 << "" << table_name;
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_sound_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
-        while (sound_memory)
-        {
-            // Create the table if it does not exist
-            query1 << "CREATE TABLE IF NOT EXISTS " << table_name << "(date TEXT, fileLocation TEXT)";
-            sql1 = query1.str();
-            mysql_query(conn, sql1.c_str());
+        // Create the table if it does not exist
+        sql1 = "CREATE TABLE IF NOT EXISTS `";
+        sql1 += table_name.c_str();
+        sql1 += "`(filelocation TEXT, date TEXT, transcription TEXT, sound_recognition TEXT)";
+        mysql_query(conn, sql1.c_str());
 
-            query2 << "INSERT INTO " << table_name << "(date, fileLocation) VALUES(" << current_date << ", " << sound_directory << ");";
-            sql2 = query2.str();
-            mysql_query(conn, sql2.c_str());
-        }
+        sql2 = "INSERT INTO `";
+        sql2 += table_name.c_str();
+        sql2 += "`(date, filelocation, transcription, sound_recognition) VALUES(\"";
+        sql2 += current_date.c_str();
+        sql2 += "\", \"";
+        sql2 += filename.c_str();
+        sql2 += "\", \"";
+        sql2 += transcription.c_str();
+        sql2 += "\", \"";
+        sql2 += sound_recognition.c_str();
+        sql2 += "\");";
+        mysql_query(conn, sql2.c_str());
     }
-
-    //terminate();
 }
 
 // This function will recall sound, recognition, and both memory an x amount of minutes or seconds
 //  1. Get the current time
 //  2. Convert the string to integers and subtract the time from current time
 //  3. Recall the memory from the x amount of time to the current time
-void _Sound::RecallSoundMemory(string raw_recognition, int search_years, int search_months, int search_days, int search_weeks, int search_hours, int search_minutes, int search_seconds)
+// Returns filename of the encoded sound file
+void _Sound::RecallSoundMemory(int search_years, int search_months, int search_days, int search_hours, int search_minutes, int search_seconds, int duration_years, int duration_months, int duration_days, int duration_hours, int duration_minutes, int duration_seconds, string &encoded_filename, string &transcription, string &sound_recognition)
 {
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
 
-    MYSQL* conn;
-    MYSQL_ROW row;
-    MYSQL_RES* result;
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    ostringstream query1;
-    string sql1;
-    string database1 = "Sound";
-    string table_name;
     ostringstream oss;
     oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
-    string date = oss.str();
+    string current_time = oss.str();
+
+    MYSQL* conn;
+    MYSQL_RES* result;
+    MYSQL_ROW row;
+    string sql1;
+    string table_name = "sound";
     string str_current_years;
     string str_current_months;
     string str_current_days;
     string str_current_hours;
     string str_current_minutes;
-    //int current_years;
-    //int current_months;
-    //int current_days;
-    //int current_hours;
-    //int current_minutes;
-    //int current_seconds;
-    //int duration_years;
-    //int duration_months;
-    //int duration_days;
-    //int duration_weeks;
-    //int duration_hours;
-    //int duration_minutes;
-    int duration_seconds;
-    //bool duration;
-    string words[20];
-    bool weeks_bool = false;
-    int spaces = 0;
+    long long current_seconds = _Time::ConvertDateToSeconds(current_time);
+    long long database_temp_seconds;
+    long long search_seconds_long;
+    long long difference_seconds;
+    long long sum_seconds_duration;
+    long long sum_seconds_long;
+    long long temp_seconds;
+    string* past_data = new string[4];
+    string* current_data = new string[4];
+    string* filenames = new string[1000];
+    //string output_directory = "D:/Temp/";
+    
+    bool caught = false;
 
-    if (raw_recognition == "raw")
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_sound_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
     {
-        table_name = "SoundRAW";
+        sql1 = "SELECT * FROM ";
+        sql1 += table_name.c_str();
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
 
-        conn = mysql_init(0);
-        conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
-        result = mysql_use_result(conn);
+        // Convert the search seconds to a single variable
+        search_seconds_long = search_years * 31536000;
+        search_seconds_long += search_months * 2419200;
+        search_seconds_long += search_days * 86400;
+        search_seconds_long += search_hours * 3600;
+        search_seconds_long += search_minutes * 60;
+        search_seconds_long += search_seconds;
 
-        if (conn)
+        // Convert the amount of time to play after the search variable is found
+        sum_seconds_long = duration_years * 31536000;
+        sum_seconds_long += duration_months * 2419200;
+        sum_seconds_long += duration_days * 86400;
+        sum_seconds_long += duration_hours * 3600;
+        sum_seconds_long += duration_minutes * 60;
+        sum_seconds_long += duration_seconds;
+
+        // Get the difference in seconds from the current seconds to the search seconds
+        difference_seconds = current_seconds - search_seconds_long;
+
+        // Get the sum of the seconds from the seaerch parameter to the duration of the search
+        sum_seconds_duration = search_seconds_long + sum_seconds_long;
+
+        // Get the file name
+        while (row = mysql_fetch_row(result))
         {
-            query1 << "SELECT * FROM " << table_name;
-            sql1 = query1.str();
-            /*cout << "SQL1: " << sql1 << endl;*/
-            mysql_query(conn, sql1.c_str());
-            MYSQL_RES* result = mysql_store_result(conn);
+            // Find the sound files that correspond to the dates
+            // 1. Get the current date
+            // 2. Find the file where the search term is included in the file
+            //  a. Convert the amount of time to seconds
+            database_temp_seconds = _Time::ConvertDateToSeconds(row[0]);
 
-            // Get the file name
-            while (row = mysql_fetch_row(result))
+            if (current_data[0] != "")
             {
-                // Find the sound files that correspond to the dates
-                // 1. Get the current date
-                // 2. Find the file where the search term is included in the file
-                //  a. Convert the amount of time to seconds
-                duration_seconds = search_years * 31536000;
-                duration_seconds += search_months * 2419200;
-                duration_seconds += search_weeks * 604800;
-                duration_seconds += search_days * 86400;
-                duration_seconds += search_hours * 3600;
-                duration_seconds += search_minutes * 60;
+                past_data[0] = current_data[0];
+                past_data[1] = current_data[1];
+                past_data[2] = current_data[2];
+                past_data[3] = current_data[3];
+                current_data[0] = row[0];
+                current_data[1] = row[1];
+                current_data[2] = row[2];
+                current_data[3] = row[3];
+            }
+            else
+            {
+                current_data[0] = row[0];
+                current_data[1] = row[1];
+                current_data[2] = row[2];
+                current_data[3] = row[3];
+            }
+
+            if (database_temp_seconds >= difference_seconds && !caught)
+            {
+                filenames[0] = past_data[1];
+                filenames[1] = current_data[1];
+                transcription = past_data[2] + " ";
+                transcription += current_data[2] + " ";
+                sound_recognition = past_data[3] + " ";
+                sound_recognition += current_data[3] + " ";
+                caught = true;
+            }
+            // Get all of the data until the end of the duration
+            if (database_temp_seconds <= sum_seconds_duration && caught)
+            {
+                // Find a empty space in the filename
+                for (int x = 0; x <= 10000; x++)
+                {
+                    if (filenames[x] == "")
+                    {
+                        filenames[x] = current_data[1];
+                        break;
+                    }  
+                }
+
+                transcription += current_data[2] + " ";
+                sound_recognition += current_data[2] + " ";
+                encoded_filename = _Sound::CombineWAV(filenames, sound_directory);
+                return;
             }
         }
     }
+
+    current_time.clear();
+    oss.str(""); // Correct way to clear the contents of the stringstream
+    oss.clear(); // Clear any error flags
+    return;
 }
 
-string* _Sound::SoundRecognition(string wav_location)
+// Function to combine WAV Files and return the destination of the file
+string _Sound::CombineWAV(string* wav_files, string sound_directory)
+{
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+
+    ostringstream oss;
+    oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    string current_time = oss.str();
+
+    string output_file = sound_directory + "/" + current_time + "_combined_file.wav";
+    SF_INFO sfinfo;
+    SNDFILE* infile;
+    SNDFILE* outfile;
+
+    // Open the first input file to read the format
+    if (!(infile = sf_open(wav_files[0].c_str(), SFM_READ, &sfinfo)))
+    {
+        std::cerr << "Could not open input file: " << wav_files[0] << std::endl;
+        return NULL;
+    }
+
+    // Create the output file with the same format as the input file
+    if (!(outfile = sf_open(output_file.c_str(), SFM_WRITE, &sfinfo))) 
+    {
+        return NULL;
+    }
+
+    std::vector<short> buffer(1024);
+    sf_count_t num_read;
+
+    // Process each input file
+    for (int x = 0; x <= sizeof(wav_files); x++)
+    {
+        infile = sf_open(wav_files[x].c_str(), SFM_READ, &sfinfo);
+        if (!infile)
+        {
+            return NULL;
+        }
+
+        // Read samples from input file and write them to output file
+        while ((num_read = sf_read_short(infile, buffer.data(), buffer.size())) > 0)
+        {
+            sf_write_short(outfile, buffer.data(), num_read);
+        }
+
+        sf_close(infile); // Close the current input file
+    }
+
+    sf_close(outfile); // Close the output file
+    return output_file;
+}
+
+// Function to write the WAV header to a file
+void _Sound::WriteWAVHeader(std::ofstream& file, int sampleRate, int bitsPerSample, int numChannels, uint32_t numSamples)
+{
+    WAVHeader header;
+    header.numChannels = numChannels;
+    header.sampleRate = sampleRate;
+    header.bitsPerSample = bitsPerSample;
+    header.byteRate = sampleRate * numChannels * bitsPerSample / 8;
+    header.blockAlign = numChannels * bitsPerSample / 8;
+    header.subchunk2Size = numSamples * numChannels * bitsPerSample / 8;
+    header.chunkSize = 36 + header.subchunk2Size;
+
+    file.write(reinterpret_cast<const char*>(&header), sizeof(header));
+}
+
+// PortAudio callback function
+int _Sound::RecordCallback(const void* inputBuffer, void* outputBuffer,
+    unsigned long framesPerBuffer,
+    const PaStreamCallbackTimeInfo* timeInfo,
+    PaStreamCallbackFlags statusFlags,
+    void* userData)
+{
+    std::vector<float>* recordedSamples = static_cast<std::vector<float>*>(userData);
+    const float* input = static_cast<const float*>(inputBuffer);
+
+    for (unsigned long i = 0; i < framesPerBuffer; ++i)
+    {
+        recordedSamples->push_back(*input++);
+    }
+
+    return paContinue;
+}
+
+string _Sound::SoundRecognition(string wav_location)
 {
     string model_path = "D:/_test3_audio/saved_model"; // Make this into a setting...
     string labelsPath = "D:/_test3_audio/saved_model/assets/labels.csv";
@@ -332,7 +441,7 @@ string* _Sound::SoundRecognition(string wav_location)
     std::vector<float> audioSamples = _Sound::loadWavFile(wav_location);
     int sampleRate = 44100;
 
-    TF_Tensor* audio_tensor = _Sound::ImportWaveformAsTensor(audioSamples, sampleRate);
+    TF_Tensor* audio_tensor = _Sound::ImportWaveformAsTensor(audioSamples, sound_sample_rate);
 
     // Initialize TensorFlow
     TF_Status* status = TF_NewStatus();
@@ -355,7 +464,7 @@ string* _Sound::SoundRecognition(string wav_location)
     else
     {
         printf("Error loading model\n");
-        return 0;
+        return NULL;
     }
 
     // Run object detection model DEBUG
@@ -423,8 +532,8 @@ string* _Sound::SoundRecognition(string wav_location)
                 }
             }
 
-            std::cout << "Frame " << i << ": Most probable class = " << classLabels[maxScoreIndex]
-                << ", Score = " << maxScore << std::endl;
+            //std::cout << "Frame " << i << ": Most probable class = " << classLabels[maxScoreIndex]
+            //    << ", Score = " << maxScore << std::endl;
         }
     }
     // Assuming outputTensors[1] contains the embeddings tensor.

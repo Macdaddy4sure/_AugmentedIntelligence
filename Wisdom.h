@@ -20,8 +20,10 @@
 
 using namespace std;
 
-class _Scrapers
+class _Wisdom
 {
 public:
-    static void NewsWatchingScraper();
 };
+
+// Simple Function to retrieve from MySQL
+// From there...

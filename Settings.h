@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -43,6 +43,8 @@ public:
     static bool GetReadingFallacyCheckEnable();
     static bool GetGPUAccellerationEnable();
     static void ComputerSettings();
+    static void LLMServerSettings();
+    static void WhisperServerSettings();
     //static bool GetStereoVisionEnable();
     //static bool Get2DSemanticsEnable();
     static bool GetCUDAAccellerationEnable();
@@ -134,6 +136,7 @@ public:
 };
 
 extern bool terms_conditions;
+extern bool awareness_interface;
 extern bool cuda_accelleration;
 extern bool cuda_accelleration_remote_enabled;
 extern string cuda_accelleration_remote_hostname;
@@ -153,17 +156,28 @@ extern bool vision_object_detection;
 extern bool vision_object_detection_cuda;
 extern bool vision_object_detection_server;
 extern string vision_object_detection_server_hostname;
+extern string tensorflow_model;
+extern string tensorflow_labels;
 extern bool visual_reasoning;
 extern bool visual_memory;
 extern string vision_memory_directory;
 extern string camera1;
 extern bool camera1_enabled;
-extern string camera1_fps;
+extern int camera1_fps;
 extern string camera1_resolution;
+extern int camera1_resolution_width;
+extern int camera1_resolution_height;
 extern string camera2;
 extern bool camera2_enabled;
-extern string camera2_fps;
+extern int camera2_fps;
 extern string camera2_resolution;
+extern int camera2_resolution_width;
+extern int camera2_resolution_height;
+extern bool speech_commands;
+extern bool vision_commands;
+extern bool action_commands;
+extern bool phone_commands;
+extern bool visual_thinking;
 extern bool computer_use;
 extern bool computer_monitor_recognition;
 extern bool reading;
@@ -171,26 +185,32 @@ extern bool reading_fallacy_check;
 extern bool sound_memory;
 extern bool speech_memory;
 extern bool speech_recognition;
+extern bool sound_recognition;
 extern bool ethics_check_enabled;
 extern string sound_directory;
 extern string sound_codec;
 extern string sound_bitrate;
 extern string speech_directory;
+extern bool microphone1_enable;
+extern string microphone1_device_name;
+extern int sound_sample_rate;
+extern int sound_channels;
+extern int sound_bits_per_sample;
 extern bool speech_recognition_enable;
 extern bool speech_lie_detection;
 extern string short_term_memory_time;
 extern bool sound_memory_enabled;
 extern bool vision_object_detection_remote_enabled;
-extern bool microphone1_enabled;
-extern string microphone1_device_name;
-extern bool microphone2_enabled;
-extern string microphone2_device_name;
+//extern bool microphone1_enabled;
+//extern string microphone1_device_name;
+//extern bool microphone2_enabled;
+//extern string microphone2_device_name;
 extern bool computer_owned_recognition;
 extern string ffmpeg_location;
-extern bool microphone1_enable;
-extern string microphone1_device;
-extern bool microphone2_enable;
-extern string microphone2_device;
+//extern bool microphone1_enable;
+//extern string microphone1_device;
+//extern bool microphone2_enable;
+//extern string microphone2_device;
 extern bool sound_reasoning;
 extern bool reading_reasoning;
 extern bool speaking_reasoning;
@@ -236,6 +256,23 @@ extern string mysql_long_term_memory_database;
 extern string mysql_dictionary_database;
 extern string mysql_destination_database_words;
 extern string mysql_destination_database_sentences;
+
+// Whisper Server Settings
+extern bool whisper_server_enabled;
+extern string whisper_hostname;
+extern string whisper_username;
+extern string whisper_password;
+//extern int mic_sample_rate;
+//extern int mic_num_channels;
+//extern int mic_bits_per_sample;
+
+// LLM Server Settings
+extern string speech_commands_activation;
+extern string speech_commands_terminator;
+extern bool llm_server_enabled;
+extern string llm_hostname;
+extern string llm_username;
+extern string llm_password;
 
 // Driving Settings
 extern bool driving_enabled;

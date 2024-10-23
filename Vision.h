@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -28,19 +28,34 @@ public:
     static void Vision();
     static void VisionRawCamera1();
     static void VisionRawCamera2();
-    static void MySQLVisionRAWCamera1();
-    static void MySQLVisionRAWCamera2();
-    static string* ObjectDetection(string image_path);
-    static void RunSession(TF_Session* session, TF_Graph* graph, TF_Status* status, TF_SessionOptions* options, TF_Tensor* inputTensor, cv::Mat image, int image_number);
-    static void DrawBoundingBoxes(cv::Mat& image, const std::vector<cv::Rect>& boxes, const std::vector<int>& classIds, std::vector<float>& scores, std::string* classLabels);
+    //static void ImageProcessing(Mat frame);
+    static void MySQLVisionRAWCamera1(string filename, int camera1_fps, vector<vector<string>> coco_object_detection, string image_analysis);
+    static void MySQLVisionRAWCamera2(string filename, int camera2_fps, vector<vector<string>> coco_object_detection, string image_analysis);
+    //static void ImageProcessing(string camera, cv::Mat frame);
+    //static void MySQLVisionRAWCamera1(string filename, string** detected_objects);
+    //static void MySQLVisionRAWCamera2(string filename, string** detected_objects);
+    static vector<vector<string>> ObjectDetection(Mat frame);
+    static vector<vector<string>> ObjectDetectionSequence(TF_Status* status, TF_Graph* graph, TF_SessionOptions* options, TF_Buffer* run_opts, const char* tags, TF_Session* session, Mat frame);
+    static vector<vector<string>> ObjectDetectionYOLO(Mat frame);
+    static vector<vector<string>> ImageSegmentationYOLO(Mat frame);
+    static vector<vector<string>> ObjectDetectionAntsBees(Mat frame);
+    static vector<vector<string>> ObjectDetectionBirds(Mat frame);
+    static vector<vector<string>> ObjectDetectionBoatsVessels(Mat frame);
+    static vector<vector<string>> ObjectDetectionEggs(Mat frame);
+    static vector<vector<string>> ObjectDetectionCats(Mat frame);
+    static vector<vector<string>> ObjectDetectionAntsDogs(Mat frame);
+    static vector<vector<string>> ObjectDetectionAntsPests(Mat frame);
+    static vector<vector<string>> ObjectDetectionBalls(Mat frame);
+    static vector<vector<string>> ObjectDetectionTrash(Mat frame);
+    static vector<vector<string>> ObjectDetectionUnknown(Mat frame);
+    //static string** ObjectDetection(Mat frame);
     static cv::Mat PreprocessImage(const std::string& imagePath, int targetWidth, int targetHeight);
-    static TF_Tensor* MatToTensor(const cv::Mat& image);
+    static TF_Tensor* MatToTensor(const cv::Mat& frame);
+    static void DrawBoundingBoxes(const cv::Mat& image, const std::vector<cv::Rect>& boxes, const std::vector<int>& classIds, std::vector<float>& scores, string* classLabels);
     static std::vector<cv::Rect> ExtractBoxes(TF_Tensor* boxesTensor, const cv::Size& imageSize);
     static std::vector<float> ExtractScores(TF_Tensor* scoresTensor);
     static std::vector<int> ExtractClassIds(TF_Tensor* classesTensor);
     static std::string* LoadLabels(const std::string& labelFilePath);
-
-
 private:
     //static void TextDetection();
     //static void TextRecognition(string image);

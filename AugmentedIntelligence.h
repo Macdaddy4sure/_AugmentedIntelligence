@@ -572,15 +572,9 @@
 #include <ctime>
 #include <stdio.h>
 #include <fcntl.h>
-#include <curl/curl.h>
-#include <curl/curlver.h>
-#include <curl/easy.h>
-#include <curl/system.h>
 #include <string>
 #include <errno.h>
 #include <fcntl.h>
-// OpenSSL Library
-//#include <openssl/sha.h>
 #include <filesystem>
 #include <fstream>
 #include <io.h>
@@ -599,6 +593,7 @@
 #include <time.h>
 #include <vector>
 #include <windows.h>
+//#include <WinSock2.h>
 #include <assert.h>
 #include <errno.h>
 #include <math.h>
@@ -613,22 +608,13 @@
 #include <leptonica/allheaders.h>
 #include <tensorflow/c/c_api.h>
 #include <sndfile.h>
-//#include <tensorflow/core/public/session.h>
-//#include <tensorflow/core/platform/env.h>
-//#include <tensorflow/core/framework/tensor.h>
-//#include <tensorflow/core/protobuf/meta_graph.pb.h>
-//#include <libavdevice/avdevice.h>
-//#include <libavformat/avformat.h>
-//#include <libavcodec/avcodec.h>
-//#include <libswscale/swscale.h>
-//#include <libavutil/imgutils.h>
-//#include <tensorflow/c/eager/c_api.h>
+#include <future>
 #include <opencv2/opencv.hpp>
 #include <opencv2/dnn.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/core/mat.hpp>
 #include <opencv2/videoio.hpp>
-#include <opencv2/highgui/highgui.hpp>
+#include <opencv2/highgui.hpp>
 #include <opencv2/core.hpp>
 #include <opencv2/imgproc.hpp>
 #include <opencv2/highgui.hpp>
@@ -638,6 +624,23 @@
 #include <stddef.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <portaudio.h>
+#include <nlohmann/json.hpp>
+#include <base64.h>
+
+extern "C" {
+// OpenSSL Library
+#include <openssl/sha.h>
+#include <openssl/bio.h>
+#include <openssl/evp.h>
+#include <openssl/buffer.h>
+#include <curl/curl.h>
+#include <curl/curlver.h>
+#include <curl/easy.h>
+#include <curl/system.h>
+}
+
+#pragma comment(lib, "avformat.lib")
 //#include <common.h>
 //#include <cppflow/cppflow.h>
 //#include <cppflow/ops.h>
@@ -662,3 +665,4 @@ public:
     static void InitDatabases();
     static string getOsName();
 };
+

@@ -20,8 +20,9 @@
 
 using namespace std;
 
-class _Scrapers
+class _FTP
 {
 public:
-    static void NewsWatchingScraper();
+    static void FTPClient(string directory, string file);
+    static size_t read_callback(void* ptr, size_t size, size_t nmemb, FILE* stream);
 };

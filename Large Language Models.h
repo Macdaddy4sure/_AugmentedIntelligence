@@ -18,10 +18,20 @@
 
 #include "AugmentedIntelligence.h"
 
-using namespace std;
-
-class _Scrapers
+class _LLM
 {
 public:
-    static void NewsWatchingScraper();
+    static string OllamaAPI(string model_word, string prompt, string image_location);
+    //static string PromptToJSON(string model, string prompt);
+    static string LLavaPromptToJSON(string model, string prompt, string base64_image);
+    static string getPrompt();
 };
+
+// Large Language Models (LLMs)
+// 1. BLOOM
+// 2. Gemma
+// 3. GPT-NEO ?
+// 4. Llama 2
+// 5. Llama Code
+// 6. Phi
+// 7. GPT-2

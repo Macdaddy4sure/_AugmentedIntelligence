@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -53,27 +53,87 @@ public:
     static void LongTermMemoryNames();
 };
 
-static string lt_vision_path_camera1[1000][2];                             // 60 frames per second = 5184000 frames per 24 hours
+static mutex mtx_lt_vision_path_camera1[1000][2];
+static string lt_vision_path_camera1[1000][2];
+static mutex mtx_lt_vision_path_camera2[1000][2];
 static string lt_vision_path_camera2[1000][2];
-static string lt_sound_path[1000][2];                                    // 86400 seconds = 24 hours of recording for lt
-static string lt_speech_dialogue[1000][2];                  // 11404800 lines of dialogue per 24 hours
-static string lt_action1_text[1000][2];                       // 5184000 lines for 24 hours
-static string lt_action2_text[1000][2];                       // 5184000 lines for 24 hours
-static string lt_action3_text[1000][2];                       // 5184000 lines for 24 hours
-static string lt_reading_text[1000][2];                    // 11404800 lines of dialogue per 24 hours
+static mutex mtx_lt_longterm_memory[1000][2];
+static string lt_longterm_memory[1000][2];
+static mutex mtx_lt_sound_path[1000][2];
+static string lt_sound_path[1000][2];
+static mutex mtx_lt_speech_dialogue[1000][2];
+static string lt_speech_dialogue[1000][2];
+static mutex mtx_lt_action1_text[1000][2];
+static string lt_action1_text[1000][2];
+static mutex mtx_lt_action2_text[1000][2];
+static string lt_action2_text[1000][2];
+static mutex mtx_lt_action3_text[1000][2];
+static string lt_action3_text[1000][2];
+static mutex mtx_lt_text_identification[1000][2];
+static string lt_text_identification[1000][2];
+static mutex mtx_lt_reading_text[1000][2];
+static string lt_reading_text[1000][2];
+static mutex mtx_lt_reading_image[1000][2];
 static string lt_reading_image[1000][2];
-static string lt_vision_objects_image_path[1000][2];                   // 5184000 lines for 24 hours
-static string lt_vision_actions_image_path[1000][2];                   // 5184000 lines for 24 hours
-static string lt_vision_objects_text[1000][2];                // 5184000 lines for 24 hours
-static string lt_vision_analysis_text[1000][2];               // 5184000 lines for 24 hours
-static string lt_typing_text[1000][2];                      // 11404800 lines of dialogue per 24 hours
+static mutex mtx_lt_llm_prompt_history[1000][2];
+static string lt_llm_prompt_history[1000][2];
+static mutex mtx_lt_llm_response[1000][2];
+static string lt_llm_response[1000][2];
+static mutex mtx_lt_algebra_text[1000][2];
+static string lt_algebra_text[1000][2];
+static mutex mtx_lt_vision_objects_image_path_camera1[1000][2];
+static string lt_vision_objects_image_path_camera1[1000][2];
+static mutex mtx_lt_vision_objects_image_path_camera2[1000][2];
+static string lt_vision_objects_image_path_camera2[1000][2];
+static mutex mtx_lt_vision_actions_image_path_camera1[1000][2];
+static string lt_vision_actions_image_path_camera1[1000][2];
+static mutex mtx_lt_vision_actions_image_path_camera2[1000][2];
+static string lt_vision_actions_image_path_camera2[1000][2];
+static mutex mtx_lt_vision_objects_text_camera1[1000][2];
+static string lt_vision_objects_text_camera1[1000][2];
+static mutex mtx_lt_vision_objects_text_camera2[1000][2];
+static string lt_vision_objects_text_camera2[1000][2];
+static mutex mtx_lt_vision_analysis_text_camera1[1000][2];
+static string lt_vision_analysis_text_camera1[1000][2];
+static mutex mtx_lt_vision_analysis_text_camera2[1000][2];
+static string lt_vision_analysis_text_camera2[1000][2];
+static mutex mtx_lt_typing_text[1000][2];
+static string lt_typing_text[1000][2];
+static mutex mtx_lt_Reference_pos_gps_north[1000][2];
 static string lt_Reference_pos_gps_north[1000][2];
+static mutex mtx_lt_Reference_pos_gps_west[1000][2];
 static string lt_Reference_pos_gps_west[1000][2];
+static mutex mtx_lt_Reference_pos_gps_elevation[1000][2];
 static string lt_Reference_pos_gps_elevation[1000][2];
+static mutex mtx_lt_Reference_pos_gps_image[1000][2];
 static string lt_Reference_pos_gps_image[1000][2];
+static mutex mtx_lt_pos_gps_north_text[1000][2];
 static string lt_pos_gps_north_text[1000][2];
+static mutex mtx_lt_pos_gps_west_text[1000][2];
 static string lt_pos_gps_west_text[1000][2];
+static mutex mtx_lt_pos_gps_elevation_text[1000][2];
 static string lt_pos_gps_elevation_text[1000][2];
+static mutex mtx_lt_pos_x[1000][2];
 static string lt_pos_x[1000][2];
+static mutex mtx_lt_pos_y[1000][2];
 static string lt_pos_y[1000][2];
+static mutex mtx_lt_pos_z[1000][2];
 static string lt_pos_z[1000][2];
+static mutex mtx_lt_wikipedia[1000][3];
+static string lt_wikipedia[1000][3];
+static mutex mtx_lt_wikisimple[1000][3];
+static string lt_wikisimple[1000][3];
+static mutex mtx_lt_wikiquote[1000][3];
+static string lt_wikiquote[1000][3];
+static mutex mtx_lt_wikisource[1000][3];
+static string lt_wikisource[1000][3];
+static mutex mtx_lt_wikihow[1000][3];
+static string lt_wikihow[1000][3];
+static mutex mtx_lt_wikibooks[1000][3];
+static string lt_wikibooks[1000][3];
+static mutex mtx_lt_stackexchange[1000][3];
+static string lt_stackexchange[1000][3];
+static mutex mtx_lt_simple_text[1000][2];
+static string lt_simple_text[1000][2];
+static mutex mtx_lt_simple_image[1000][2];
+static string lt_simple_image[1000][2];

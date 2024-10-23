@@ -18,10 +18,8 @@
 
 #include "AugmentedIntelligence.h"
 
-using namespace std;
-
-class _Scrapers
+class _SpeechSynthesis
 {
 public:
-    static void NewsWatchingScraper();
+    void TextToSpeech(string text);
 };

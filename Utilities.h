@@ -40,6 +40,8 @@ public:
     static int partition(int arr[], int low, int high);
     static void quickSort(int arr[], int low, int high);
     static string* sortLines(string outText, string* recognition);
+    static string* RemovePunctuationArr(string* words);
+    static string* RemovePunctuationString(string sentence);
     static int GenerateRandomNumber(int low, int high);
     static string* StringArraySorter(string* input);
     static void MoviesSorter();
@@ -64,6 +66,10 @@ public:
     static string* toLowerWordsArr(string* words);
     static string* WordsArrPunctuationExplode(string* words);
     static string StringArray2String(string* arr);
+    static size_t WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp);
+    static string getHash(string filename);
+    static int getDatatypeUsed(string datatype);
+    static string base64_encode(const string& input);
     //static void resize_image_max_len(const cv::Mat& image, cv::Mat& resized_image, float& ratio_h, float& ratio_w, int max_side_len);
     //static void resize_image_fix_height(const cv::Mat& image, cv::Mat& resized_image, float& ratio, int fixed_height);
     //static void pad_image_width(const cv::Mat& image, cv::Mat& padded_image, int target_width);

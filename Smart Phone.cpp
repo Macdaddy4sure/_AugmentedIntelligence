@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -27,7 +27,7 @@
 using namespace std;
 
 // PURPOSE: Gather data from screen captures from personal computer coupled with definitions of computer processes for general use
-//	1. Create Java client app for private computers
+//	1. Create native client app for private computers
 //	2. Send screen captures to client
 //	3. Get application information from the Java app
 //	4. Use TensorFlow to identify text in apps

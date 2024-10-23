@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -27,15 +27,15 @@ public:
     static void GetSummation(string recognition);
     static double* getDictionaryVector(string word);
     static double* getAdditiveVector(string word);
-    static double* getAdditiveVectorSentence(string sentence);
+    static double* getAdditiveVectorSentence(string* sentence);
     static double* VectorAddition(double* vector1, double* vector2);
-    static double* getSentenceVectors(string sentence);
-    static double* getSentenceVectorsAdditive(string sentence);
-    static double* getSentenceVectorsAdditiveAverage(string sentence);
+    static double* getSentenceVectors(string* sentence);
+    static double* getSentenceVectorsAdditive(string* sentence);
+    static double* getSentenceVectorsAdditiveAverage(string* sentence);
     static double* getVectorAdditiveAverage(string word);
-    static double* getAverageVectorSentence(string sentence);
-    static string BiasCheck(string text);
-    static string BiasCheck(string text, string data);
+    static double* getAverageVectorSentence(string* sentence);
+    static string BiasCheck(string* text);
+    static string BiasCheck(string* text, string data);
     static string** getPOSTaggedArticle(string mysql_table, string mysql_database);
     //static bool GetSpeechLieDetection();
 
@@ -44,13 +44,13 @@ public:
     public: 
         static double* getDictionaryVector(string word);
         static double* getAdditiveVector(string word);
-        static double* getAdditiveVectorSentence(string sentence);
+        static double* getAdditiveVectorSentence(string* sentence);
         static double* VectorAddition(double* vector1, double* vector2);
-        static double* getSentenceVectors(string sentence);
-        static double* getSentenceVectorsAdditive(string sentence);
-        static double* getSentenceVectorsAdditiveAverage(string sentence);
+        static double* getSentenceVectors(string* sentence);
+        static double* getSentenceVectorsAdditive(string* sentence);
+        static double* getSentenceVectorsAdditiveAverage(string* sentence);
         static double* getVectorAdditiveAverage(string word);
-        static double* getAverageVectorSentence(string sentence);
+        static double* getAverageVectorSentence(string* sentence);
         static string** getPOSTaggedArticle(string mysql_table, string mysql_database);
     };
 };

@@ -255,7 +255,7 @@ public:
     static bool isHaveGotStatement(string* words);
     static bool isPresentContinuousQuestionsYes(string* words);
     static bool isPresentSimplePositive(string* words);
-    static string* returnWords(string sentence);
+    static string* returnWords(string* sentence);
     static string* QueryDatabaseWordTypes(string word);
     static string* QueryDatabaseDefinitions(string word, string* wordTypes);
     static void Writing();

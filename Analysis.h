@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,14 +23,14 @@ using namespace std;
 class _AnalysisError
 {
 public:
-    static bool SamplingError(string text);
-    static bool MeasurmentError(string text);
-    static bool ProcessingError(string text);
-    static bool AnalysisError(string text);
-    static bool ConfirmationBias(string text);
-    static bool OutliersAndNoise (string text);
-    static bool OverFitting(string text);
-    static bool UnderFitting(string text);
-    static bool DataIntegrity(string text);
-    static bool ConfoundingVariables(string text);
+    static bool SamplingError(string* text);
+    static bool MeasurmentError(string* text);
+    static bool ProcessingError(string* text);
+    static bool AnalysisError(string* text);
+    static bool ConfirmationBias(string* text);
+    static bool OutliersAndNoise (string* text);
+    static bool OverFitting(string* text);
+    static bool UnderFitting(string* text);
+    static bool DataIntegrity(string* text);
+    static bool ConfoundingVariables(string* text);
 };

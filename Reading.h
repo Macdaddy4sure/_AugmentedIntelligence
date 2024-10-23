@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,13 +19,14 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
+using namespace cv;
 
 class _Reading
 {
 public:
     static void ReadingScreenshot(string filepath);
     //static bool GetReadingEnable();
-    static void Reading();
+    static void Reading(Mat img);
     static void TextIdentification(string image);
     static void TestIdentificationOpenCV();
     static void BookReadingSync(string search);

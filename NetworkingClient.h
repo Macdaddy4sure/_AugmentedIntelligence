@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -19,9 +19,3 @@
 #include "AugmentedIntelligence.h"
 
 using namespace std;
-
-class _NetworkingClient
-{
-public:
-    static void StartNetworkingClient();
-};

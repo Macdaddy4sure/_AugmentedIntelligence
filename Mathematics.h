@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,4 +42,7 @@ public:
     static double Radians2Degrees(double radians);
     static bool isExponent(string operation);
     static int NumberName(string text);
+    static double dotProduct(const double* a, const double* b, int size);
+    static double magnitude(const double* vec, int size);
+    static double cosineSimilarity(const double* a, const double* b, int size);
 };

@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,5 +23,8 @@ using namespace std;
 class _Translation
 {
 public:
-
+    string Translate(string language, string prompt);
+    static string Translate2English(string language, string prompt);
+    static string Translate2Language(string language, string prompt);
+    static string getPrompt();
 };

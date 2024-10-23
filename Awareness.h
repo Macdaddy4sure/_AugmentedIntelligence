@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,5 +23,46 @@ using namespace std;
 class _Awareness
 {
 public:
-    static void AwarenessGUI();
+    static void AwarenessInterface();
+    static void AwarenessInterfaceComputers();
+    static void AwarenessInterfaceTyping();
+    static void AwarenessInterfaceDriving();
+    static void AwarenessInterfaceWriting();
+    static void AwarenessInterfaceGaming();
+    static void AwarenessInterfaceMathematics();
+    static void getVisionActivation();
+    static void getActionDetectionActivation();
+    static void getPhoneActivation();
+    static void getSoundActivationKeywords();
+    static void VisualThinking();
+
+    class Computer
+    {
+
+    };
+
+    class Typing
+    {
+
+    };
+
+    class Driving
+    {
+
+    };
+
+    class Writing
+    {
+
+    };
+
+    class Gaming
+    {
+
+    };
+
+    class Mathematics
+    {
+
+    };
 };

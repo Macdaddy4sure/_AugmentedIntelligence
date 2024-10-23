@@ -20,8 +20,8 @@
 
 using namespace std;
 
-class _Scrapers
+class _SpeechCommands
 {
 public:
-    static void NewsWatchingScraper();
+    static void SpeechCommands(string* words);
 };
