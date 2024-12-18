@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,17 +14,19 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Analysis.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Analysis.hpp"
+#include "Large Language Models.hpp"
+#include "Parsers.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -55,52 +57,494 @@ using namespace std;
 // Documentation: Document your analysis process thoroughly, including the methods used, decisions made, and challenges encountered.This is crucial for transparency and for others who may review or build upon your work.
 // Feedback Integration: Be open to feedback and ready to revise your analysis in light of new information or perspectives.
 
-bool _AnalysisError::SamplingError(string text)
+string _AnalysisError::Terms::AnalysisChecking(string text)
 {
+    if (_AnalysisError::Terms::SamplingError(text))
+    {
+        return "Sampling Error";
+    }
+    if (_AnalysisError::Terms::MeasurmentError(text))
+    {
+        return "Measurment Error";
+    }
+    //if (_AnalysisError::Terms::ProcessingError(text))
+    //{
 
+    //}
+    //if (_AnalysisError::Terms::AnalysisError(text))
+    //{
+
+    //}
+    //if (_AnalysisError::Terms::ConfirmationBias(text))
+    //{
+
+    //}
+    if (_AnalysisError::Terms::OutliersAndNoise(text))
+    {
+        return "Outliers and Noise";
+    }
+    if (_AnalysisError::Terms::OverFitting(text))
+    {
+        return "Over Fitting";
+    }
+    if (_AnalysisError::Terms::UnderFitting(text))
+    {
+        return "Under Fitting";
+    }
+    if (_AnalysisError::Terms::DataIntegrity(text))
+    {
+        return "Data Integrity";
+    }
+    if (_AnalysisError::Terms::ConfoundingVariables(text))
+    {
+        return "Confounding Variables";
+    }
+    else
+    {
+        return nullptr;
+    }
 }
 
-bool _AnalysisError::MeasurmentError(string text)
+bool _AnalysisError::Terms::SamplingError(string text)
 {
+    string model = "image";
+    string analysis_definition = "The sampling error is the error caused by observing a sample instead of the whole population. The sampling error is the difference between a sample statistic used to estimate a population parameter and the actual but unknown value of the parameter.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
-bool _AnalysisError::ProcessingError(string text)
+bool _AnalysisError::Terms::MeasurmentError(string text)
 {
+    string model = "image";
+    string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
-bool _AnalysisError::AnalysisError(string text)
+bool _AnalysisError::Terms::ProcessingError(string text)
 {
-
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+ 
+    //for (int x = 0; x < sizeof(words); x++)
+    //{
+    //    if (words[x] == "yes")
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
+    //return false;
+    return false;
 }
 
-bool _AnalysisError::ConfirmationBias(string text)
+bool _AnalysisError::Terms::AnalysisError(string text)
 {
-
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+    return false;
 }
 
-bool _AnalysisError::OutliersAndNoise(string text)
+bool _AnalysisError::Terms::ConfirmationBias(string text)
 {
-
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+    return false;
 }
 
-bool _AnalysisError::OverFitting(string text)
+bool _AnalysisError::Terms::OutliersAndNoise(string text)
 {
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    return false;
 }
 
-bool _AnalysisError::UnderFitting(string text)
+bool _AnalysisError::Terms::OverFitting(string text)
 {
+    string model = "image";
+    string analysis_definition = "the production of an analysis that corresponds too closely or exactly to a particular set of data, and may therefore fail to fit to additional data or predict future observations reliably.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
-bool _AnalysisError::DataIntegrity(string text)
+bool _AnalysisError::Terms::UnderFitting(string text)
 {
+    string model = "image";
+    string analysis_definition = "occurs when a mathematical model cannot adequately capture the underlying structure of the data. An under-fitted model is a model where some parameters or terms that would appear in a correctly specified model are missing.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }
 
-bool _AnalysisError::ConfoundingVariables(string text)
+bool _AnalysisError::Terms::DataIntegrity(string text)
 {
+    string model = "image";
+    string analysis_definition = "the maintenance of, and the assurance of, data accuracy and consistency over its entire life-cycle.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
 
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::ConfoundingVariables(string text)
+{
+    string model = "image";
+    string analysis_definition = "is a variable that influences both the dependent variable and independent variable, causing a spurious association. Confounding is a causal concept, and as such, cannot be described in terms of correlations or associations. The existence of confounders is an important quantitative explanation why correlation does not imply causation. Some notations are explicitly designed to identify the existence, possible existence, or non-existence of confounders in causal relationships between elements of a system.";
+    string prompt = "Check if the following text matches the following analysis rules and limit the response to yes or no: " + analysis_definition + " " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::SamplingErrorVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "The sampling error is the error caused by observing a sample instead of the whole population. The sampling error is the difference between a sample statistic used to estimate a population parameter and the actual but unknown value of the parameter.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::MeasurmentErrorVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::ProcessingErrorVision(string image_location)
+{
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    //for (int x = 0; x < sizeof(words); x++)
+    //{
+    //    if (words[x] == "yes")
+    //    {
+    //        return true;
+    //    }
+    //    else
+    //    {
+    //        return false;
+    //    }
+    //}
+    //return false;
+    return false;
+}
+
+bool _AnalysisError::Terms::AnalysisErrorVision(string image_location)
+{
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+    return false;
+}
+
+bool _AnalysisError::Terms::ConfirmationBiasVision(string image_location)
+{
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+    return false;
+}
+
+bool _AnalysisError::Terms::OutliersAndNoiseVision(string image_location)
+{
+    //string model = "image";
+    //string analysis_definition = "The difference between a measured value of a quantity and its unknown true value.";
+    //string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    //string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    //response = _Parsers::LLM::LLama3Parse(response);
+    //string* words = _Utilities::String2Words(response);
+    //words = _Utilities::RemovePunctuationArr(words);
+    //words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    return false;
+}
+
+bool _AnalysisError::Terms::OverFittingVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "the production of an analysis that corresponds too closely or exactly to a particular set of data, and may therefore fail to fit to additional data or predict future observations reliably.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::UnderFittingVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "occurs when a mathematical model cannot adequately capture the underlying structure of the data. An under-fitted model is a model where some parameters or terms that would appear in a correctly specified model are missing.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::DataIntegrityVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "the maintenance of, and the assurance of, data accuracy and consistency over its entire life-cycle.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
+}
+
+bool _AnalysisError::Terms::ConfoundingVariablesVision(string image_location)
+{
+    string model = "image";
+    string analysis_definition = "a variable that influences both the dependent variable and independent variable, causing a spurious association. Confounding is a causal concept, and as such, cannot be described in terms of correlations or associations. The existence of confounders is an important quantitative explanation why correlation does not imply causation. Some notations are explicitly designed to identify the existence, possible existence, or non-existence of confounders in causal relationships between elements of a system.";
+    string prompt = "Check if the following definition matches the image and limit the response to yes or no: " + analysis_definition;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    string* words = _Utilities::String2Words(response);
+    words = _Utilities::RemovePunctuationArr(words);
+    words = _Utilities::ArrayOfStringsToLowercase(words);
+
+    for (int x = 0; x < sizeof(words); x++)
+    {
+        if (words[x] == "yes")
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    return false;
 }

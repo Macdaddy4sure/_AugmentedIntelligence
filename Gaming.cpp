@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,16 +14,18 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Actions.h"
-#include "Gaming.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Actions.hpp"
+#include "Gaming.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
+#include "Vision.hpp"
+#include "Sound.hpp"
 
 using namespace std;
 
@@ -95,68 +97,5 @@ using namespace std;
 //            Get vision data to call this function
 void _Actions::Gaming()
 {
-    //PyObject* pName, * pModule, * pFunc;
-    //PyObject* pArgs, * pValue;
-    //int i;
 
-    //if (argc < 3) {
-    //    fprintf(stderr, "Usage: call pythonfile funcname [args]\n");
-    //    return 1;
-    //}
-
-    //Py_Initialize();
-    //pName = PyUnicode_DecodeFSDefault(argv[1]);
-    ///* Error checking of pName left out */
-
-    //pModule = PyImport_Import(pName);
-    //Py_DECREF(pName);
-
-    //if (pModule != NULL) {
-    //    pFunc = PyObject_GetAttrString(pModule, argv[2]);
-    //    /* pFunc is a new reference */
-
-    //    if (pFunc && PyCallable_Check(pFunc)) {
-    //        pArgs = PyTuple_New(argc - 3);
-    //        for (i = 0; i < argc - 3; ++i) {
-    //            pValue = PyLong_FromLong(atoi(argv[i + 3]));
-    //            if (!pValue) {
-    //                Py_DECREF(pArgs);
-    //                Py_DECREF(pModule);
-    //                fprintf(stderr, "Cannot convert argument\n");
-    //                return 1;
-    //            }
-    //            /* pValue reference stolen here: */
-    //            PyTuple_SetItem(pArgs, i, pValue);
-    //        }
-    //        pValue = PyObject_CallObject(pFunc, pArgs);
-    //        Py_DECREF(pArgs);
-    //        if (pValue != NULL) {
-    //            printf("Result of call: %ld\n", PyLong_AsLong(pValue));
-    //            Py_DECREF(pValue);
-    //        }
-    //        else {
-    //            Py_DECREF(pFunc);
-    //            Py_DECREF(pModule);
-    //            PyErr_Print();
-    //            fprintf(stderr, "Call failed\n");
-    //            return 1;
-    //        }
-    //    }
-    //    else {
-    //        if (PyErr_Occurred())
-    //            PyErr_Print();
-    //        fprintf(stderr, "Cannot find function \"%s\"\n", argv[2]);
-    //    }
-    //    Py_XDECREF(pFunc);
-    //    Py_DECREF(pModule);
-    //}
-    //else {
-    //    PyErr_Print();
-    //    fprintf(stderr, "Failed to load \"%s\"\n", argv[1]);
-    //    return 1;
-    //}
-    //if (Py_FinalizeEx() < 0) {
-    //    return 120;
-    //}
-    //return 0;
 }

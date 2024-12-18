@@ -14,53 +14,58 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Actions.h"
-#include "Analysis.h"
-#include "Argument.h"
-#include "Bias.h"
-#include "Computers.h"
-#include "Database Functions.h"
-#include "Directories.h"
-#include "Driving.h"
-#include "EKG.h"
-#include "Ethics.h"
-#include "Executive Functions.h"
-#include "Fallacies.h"
-#include "Gaming.h"
-#include "Heuristics.h"
-#include "Home Database.h"
-#include "Learning.h"
-#include "Long-Term Memory.h"
-#include "Mathematics.h"
-#include "Mind.h"
-#include "Mods.h"
-#include "Needs.h"
-#include "NetworkingClient.h"
-#include "NetworkingServer.h"
-#include "NeuraLink.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Pattern Recognition.h"
-#include "Reading.h"
-#include "Reference.h"
-#include "Scrapers.h"
-#include "Server Functions.h"
-#include "Short-Term Memory.h"
-#include "Smart Phone.h"
-#include "Social.h"
-#include "Sound.h"
-#include "Speaking.h"
-#include "Speech Recognition.h"
-#include "Time.h"
-#include "Typing.h"
-#include "Variables.h"
-#include "Vision.h"
-#include "WikiMedia.h"
-#include "Working-Memory.h"
-#include "Writing.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Actions.hpp"
+#include "Analysis.hpp"
+#include "Argument.hpp"
+#include "Awareness.hpp"
+#include "Bias.hpp"
+#include "Computers.hpp"
+#include "Database Functions.hpp"
+#include "Directories.hpp"
+#include "Driving.hpp"
+#include "EKG.hpp"
+#include "Ethics.hpp"
+#include "Executive Functions.hpp"
+#include "Fallacy.hpp"
+#include "Gaming.hpp"
+#include "Heuristics.hpp"
+#include "Home Database.hpp"
+#include "Large Language Models.hpp"
+#include "Learning.hpp"
+#include "Listening.hpp"
+#include "Long-Term Memory.hpp"
+#include "Mathematics.hpp"
+#include "Mind.hpp"
+#include "Mods.hpp"
+#include "Needs.hpp"
+#include "NetworkingClient.hpp"
+#include "NetworkingServer.hpp"
+#include "NeuraLink.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Parsers.hpp"
+#include "Pattern Recognition.hpp"
+#include "Reading.hpp"
+#include "Reference.hpp"
+#include "Scrapers.hpp"
+#include "Server Functions.hpp"
+#include "Short-Term Memory.hpp"
+#include "Smart Phone.hpp"
+#include "Speech Commands.hpp"
+#include "Social.hpp"
+#include "Sound.hpp"
+#include "Speaking.hpp"
+#include "Speech Recognition.hpp"
+#include "Time.hpp"
+#include "Typing.hpp"
+#include "Variables.hpp"
+#include "Vision.hpp"
+#include "WikiMedia.hpp"
+#include "Working-Memory.hpp"
+#include "Writing.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -101,7 +106,8 @@ using namespace filesystem;
 // Types of Encoding Information in Intelligence
 
 // Settings
-bool terms_conditions = false;
+bool terms_conditions = true;
+bool awareness_interface = true;
 bool cuda_accelleration = false;
 bool cuda_accelleration_remote_enabled = false;
 string cuda_accelleration_remote_hostname = "";
@@ -123,48 +129,66 @@ bool vision_object_detection_server = false;
 string vision_object_detection_server_hostname = "";
 bool visual_reasoning = false;
 bool visual_memory = true;
-string vision_memory_directory = "";
+string vision_memory_directory = "D:/visual_memory";
 string camera1 = "Depstech webcam";
 bool camera1_enabled = true;
-string camera1_fps = "15";
+int camera1_fps = 10;
 string camera1_resolution = "3840x2160";
-string camera2;
-bool camera2_enabled;
-string camera2_fps;
-string camera2_resolution;
-bool computer_use = false;
-bool computer_monitor_recognition = false;
+int camera1_resolution_width = 3840;
+int camera1_resolution_height = 2160;
+string camera2 = "Depstech Webcam";
+bool camera2_enabled = false;
+int camera2_fps = 10;
+string camera2_resolution = "3840x2160";
+int camera2_resolution_width = 3840;
+int camera2_resolution_height = 2160;
+bool computer_use = true;
+bool computer_monitor_recognition = true;
 bool reading = true;
 bool reading_fallacy_check = true;
 bool sound_memory = true;
 bool speech_memory = true;
 bool speech_recognition = true;
-bool ethics_check_enabled = false;
-string sound_directory = "J:/sound_memory/";
+bool ethics_check_enabled = true;
+string sound_directory = "D:/sound_memory";
 string sound_codec = "flac";
 string sound_bitrate = "1000";
-string speech_directory = "J:/speech_directory/";
+string speech_directory = "D:/speech_directory/";
+string microphone1_device_name;
+bool microphone1_enable = true;
+int sound_sample_rate = 48000;
+int sound_channels = 1;
+int sound_bits_per_sample = 16;
+int sound_recording_interval = 5;
 bool speech_recognition_enable = true;
-bool speech_lie_detection = false;
+bool sound_recognition = true;
+bool speech_commands = true;
+bool vision_commands = true;
+bool action_commands = true;
+bool phone_commands = true;
+bool visual_thinking = true;
+bool speech_lie_detection = true;
 string short_term_memory_time = "1000";
 bool sound_memory_enabled = true;
-bool vision_object_detection_remote_enabled;
-bool microphone1_enabled = true;
-bool microphone1_enable = true;
-string microphone1_device = "Microphone (Depstech webcam MIC)";
-string microphone1_device_name = "Microphone (Depstech webcam MIC)";
-bool microphone2_enabled = false;
-string microphone2_device_name = "";
+string tensorflow_model = "C:/_AugmentedIntelligence/tensorflow_models/coco_object_detection/saved_model";
+string tensorflow_labels = "C:/_AugmentedIntelligence/tensorflow_models/coco_object_detection/coco.names";
+bool vision_object_detection_remote_enabled = false;
+//bool microphone1_enabled = true;
+//bool microphone1_enable = true;
+//string microphone1_device = "Microphone (Depstech webcam MIC)";
+//string microphone1_device_name = "Microphone (Depstech webcam MIC)";
+//bool microphone2_enabled = false;
+//string microphone2_device_name = "";
 bool computer_owned_recognition = "";
 string ffmpeg_location = "";
-bool microphone2_enable = false;
-string microphone2_device = "";
+//bool microphone2_enable = false;
+//string microphone2_device = "";
 bool sound_reasoning = false;
-bool reading_reasoning = false;
+bool reading_reasoning = true;
 bool speaking_reasoning = false;
-string working_memory_location = "J:/working_memory/";
-string short_term_memory_location = "J:/short_term_memory/";
-string long_term_memory_location = "J:/long_term_memory/";
+string working_memory_location = "D:/working_memory/";
+string short_term_memory_location = "D:/short_term_memory/";
+string long_term_memory_location = "D:/long_term_memory/";
 bool news_watching = false;
 bool actions_watching = false;
 bool action_detection = false;
@@ -174,27 +198,35 @@ bool social_needs_detection = false;
 bool vision_text_detection = false;
 bool vision_text_recognition = false;
 bool vision_face_recognition = false;
+bool listening_fallacy_checking = true;
+bool listening_bias_checking = true;
+bool listening_axiom_checking = false;
+bool listening_literature_device_checking = true;
+bool listening_abuse_checking = true;
+bool listening_logic_detection = true;
+bool listening_law_checking = false;
+bool listening_dictionary_checking = false;
 
 // FTP Settings
-bool ftp_enabled = false;
-string ftp_hostname;
-string ftp_username;
-string ftp_password;
-string ftp_vision_directory;
-string ftp_sound_directory;
+bool ftp_enabled = true;
+string ftp_hostname = "ftp://macdaddy4sure.com";
+string ftp_username = "Tyler";
+string ftp_password = "Bellflower90706%";
+string ftp_vision_directory = "/MARS_AI/vision_memory/";
+string ftp_sound_directory = "/MARS_AI/sound_memory/";
 string ftp_vision_storage_limit;
 string ftp_sound_storage_limit;
 
 // Computer Settings
 bool private_computer;
-string computer_hostname;
-string computer_username;
-string computer_password;
+string computer_hostname = "EARTH.CROCKETT.AI";
+string computer_username = "Tyler";
+string computer_password = "Anaheim92801$";
 
 // MySQL Settings
-string mysql_hostname = "MARS";
+string mysql_hostname = "localhost";
 string mysql_username = "root";
-string mysql_password = "Anaheim92801%";
+string mysql_password = "Anaheim92801$";
 string mysql_vision_database = "vision";
 string mysql_sound_database = "sound";
 string mysql_speech_database = "speech";
@@ -204,6 +236,38 @@ string mysql_long_term_memory_database = "long_term_memory";
 string mysql_dictionary_database = "dictionary";
 string mysql_destination_database_words = "wikipedia_pos_tagged_words";
 string mysql_destination_database_sentences = "wikipedia_pos_tagged_sentences";
+
+// Remote MySQL Settings
+string Remote_mysql_hostname = "localhost";
+string Remote_mysql_username = "root";
+string Remote_mysql_password = "Bellflower90706%";
+string Remote_mysql_vision_database = "vision";
+string Remote_mysql_sound_database = "sound";
+string Remote_mysql_speech_database = "speech";
+string Remote_mysql_working_memory_database = "working_memory";
+string Remote_mysql_short_term_memory_database = "short_term_memory";
+string Remote_mysql_long_term_memory_database = "long_term_memory";
+string Remote_mysql_dictionary_database = "dictionary";
+string Remote_mysql_destination_database_words = "wikipedia_pos_tagged_words";
+string Remote_mysql_destination_database_sentences = "wikipedia_pos_tagged_sentences";
+
+// LLM Server
+string speech_commands_activation = "machina";
+string speech_commands_terminator = "bellum";
+bool llm_server_enabled = true;
+string llm_hostname = "http://localhost:11436/api/generate";
+string llm_username = "Tyler";
+string llm_password = "Anaheim92801$";
+string llm_model = "";
+
+// Whisper Server Settings
+bool whisper_server_enabled = true;
+string whisper_hostname = "http://localhost:4999/transcribe";
+string whisper_username = "Tyler";
+string whisper_password = "Anaheim92801$";
+//int mic_sample_rate = 48000;
+//int mic_num_channels = 2;
+//int mic_bits_per_sample = 16;
 
 // Driving Settings
 bool driving_enabled = false;
@@ -215,177 +279,19 @@ float driving_center_mirror;
 int main()
 {
     string input;
-
-    // Debug
-    //_DatabaseFunctions::PrintWikipedia("NATO");
-
-    ////MySQL Settings
-    ////mysql_hostname = _Settings::GetMySQLHostname();
-    ////cout << "MySQL Hostname Enabled: " << mysql_hostname << endl;
-    //mysql_username = _Settings::GetMySQLUsername();
-    ////cout << "MySQL Username: " << mysql_username << endl;
-    //mysql_password = _Settings::GetMySQLPassword();
-    ////cout << "MySQL Password: " << mysql_password << endl;
-    //mysql_vision_database = _Settings::GetMySQLVisionDatabase();
-    ////cout << "MySQL Vision Database: " << mysql_vision_database << endl;
-    //mysql_sound_database = _Settings::GetMySQLSoundDatabase();
-    ////cout << "MySQL Sound Database: " << mysql_sound_database << endl;
-    //mysql_speech_database = _Settings::GetMySQLSpeechDatabase();
-    ////cout << "MySQL Speech Database: " << mysql_speech_database << endl;
-    //mysql_working_memory_database = _Settings::GetMySQLWorkingMemoryDatabase();
-    ////cout << "MySQL Working Memory Database: " << mysql_working_memory_database << endl;
-    //mysql_short_term_memory_database = _Settings::GetMySQLShortTermMemoryDatabase();
-    ////cout << "MySQL Short-Term Memory Database: " << mysql_short_term_memory_database << endl;
-    //mysql_long_term_memory_database = _Settings::GetMySQLLongTermMemoryDatabase();
-    ////cout << "MySQL Long-Term Memory Database: " << mysql_long_term_memory_database << endl;
-
-    ////// Settings
-    //terms_conditions = _Settings::GetTermsConditions();
-    ////cout << "Terms Conditions: " << terms_conditions << endl;
-    //working_memory_enabled = _Settings::GetWorkingMemoryEnabled();
-    ////cout << "Working Memory Limit: " << working_memory_limit << endl;
-    //working_memory_limit = _Settings::GetWorkingMemoryLimit();
-    ////cout << "Short Term Memory: " << short_term_memory_enabled << endl;
-    //short_term_memory_enabled = _Settings::GetShortTermMemoryEnabled();
-    ////cout << "STM Time: " << short_term_memory_time << endl;
-    //short_term_memory_time = _Settings::GetShortTermMemoryTime();
-    ////cout << "STM Enabled: " << short_term_memory_time << endl;
-    //long_term_memory_enabled = _Settings::GetLongTermMemoryEnabled();
-    ////cout << "STM Time: " << long_term_memory_enabled << endl;
-    //long_term_memory_limit = _Settings::GetLongTermMemoryLimit();
-    ////cout << "LTM Enabled: " << long_term_memory_limit << endl;
-    //sound_memory_enabled = _Settings::GetSoundMemoryEnabled();
-    ////cout << "LTM Limit: " << sound_memory_enabled << endl;
-    //speech_memory = _Settings::GetSpeechMemoryEnabled();
-    ////cout << "Speech Memory: " << speech_memory << endl;
-    //speech_recognition = _Settings::GetSpeechRecognitionEnable();
-    ////cout << "SM Enabled: " << speech_recognition << endl;
-    //speech_lie_detection = _Settings::GetSpeechLieDetectionEnabled();
-    ////cout << "Speech Recognition Enabled: " << speech_lie_detection << endl;
-    //sound_directory = _Settings::GetSoundDirectory();
-    ////cout << "Speech Lie Detection: " << sound_directory << endl;
-    //sound_codec = _Settings::GetSoundCodec();
-    ////cout << "Sound Directory: " << sound_codec << endl;
-    //sound_bitrate = _Settings::GetSoundBitrate();
-    ////cout << "Sound Codec: " << sound_bitrate << endl;
-    //speech_directory = _Settings::GetSpeechRecognitionEnable();
-    ////cout << "Speech Directory: " << speech_directory << endl;
-    //ethics_check_enabled = _Settings::GetEthicsCheckEnabled();
-    ////cout << "Speech Directory: " << ethics_check_enabled << endl;
-    //cuda_accelleration = _Settings::GetCUDAAccellerationEnable();
-    ////cout << "Ethics Check Enabled: " << cuda_accelleration << endl;
-    //cuda_accelleration_remote_enabled = _Settings::GetCUDAAccellerationRemoteEnable();
-    ////cout << "CUDA Accelleration: " << cuda_accelleration_remote_enabled << endl;
-    //cuda_accelleration_remote_hostname = _Settings::GetCUDAAccellerationRemoteHostname();
-    ////cout << "CUDA Accelleration Remote Enabled: " << cuda_accelleration_remote_hostname << endl;
-    //cuda_accelleration_remote_cores = _Settings::GetCUDAAccellerationRemoteCores();
-    ////cout << "CUDA Accelleration Remote Hostname: " << cuda_accelleration_remote_cores << endl;
-    //tensor_accelleration = _Settings::GetTensorAccelleration();
-    ////cout << "CUDA Accelleration Remote Cores: " << tensor_accelleration << endl;
-    //tensor_accelleration_remote_enabled = _Settings::GetTensorAccellerationRemoteEnabled();
-    ////cout << "Tensor Accelleration: " << tensor_accelleration_remote_enabled << endl;
-    //tensor_accelleration_remote_hostname = _Settings::GetTenorAccellerationRemoteHostname();
-    ////cout << "Tensor Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
-    //tensor_accelleration_remote_cores = _Settings::GetTensorAccellerationRemoteCores();
-    ////cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
-    //vision_object_detection = _Settings::GetObjectDetectionEnable();
-    ////cout << "Visual Object Detection: " << vision_object_detection << endl;
-    //vision_object_detection_cuda = _Settings::GetObjectDetectionCUDAEnabled();
-    ////cout << "Vision Object Detection CUDA: " << vision_object_detection_cuda << endl;
-    //vision_object_detection_remote_enabled = _Settings::GetObjectDetectionRemoteEnabled();
-    ////cout << "Vision Object Detection Remote Enabled: " << vision_object_detection_remote_enabled << endl;
-    //vision_object_detection_server_hostname = _Settings::GetObjectDetectionRemoteHostname();
-    ////cout << "Vision Object Detection Server Hostname: " << vision_object_detection_server_hostname << endl;
-    //visual_reasoning = _Settings::GetVisualReasoningEnable();
-    ////cout << "Visual Reasoning: " << visual_reasoning << endl;
-    //visual_memory = _Settings::GetVisualMemoryEnable();
-    ////cout << "Visual Memory: " << visual_memory << endl;
-    //vision_memory_directory = _Settings::GetVisionDirectory();
-    ////cout << "Vision Memory Directory: " << vision_memory_directory << endl;
-    //camera1_enabled = _Settings::GetCamera1Enable();
-    ////cout << "Camera1 Enabled: " << camera1_enabled << endl;
-    //camera1 = _Settings::GetCamera1();
-    ////cout << "Camera 1 Name: " << camera1 << endl;
-    //camera1_fps = _Settings::GetCamera1FPS();
-    ////cout << "Camera1_fps: " << camera1_fps << endl;
-    //camera1_resolution = _Settings::GetCamera1Resolution();
-    ////cout << "Camera 1 Resolution: " << camera1_resolution << endl;
-    //camera2_enabled = _Settings::GetCamera2Enable();
-    ////cout << "Camera2 Enabled: " << camera2_enabled << endl;
-    //camera2 = _Settings::GetCamera2();
-    ////cout << "Camera 2 Enabled: " << camera2 << endl;
-    //camera2_fps = _Settings::GetCamera2FPS();
-    ////cout << "Camera 2 FPS : " << camera2_fps << endl;
-    //camera2_resolution = _Settings::GetCamera2Resolution();
-    ////cout << "Camera 2 Resolution: " << camera2_resolution << endl;
-    //microphone1_enable = _Settings::GetMicrophone1Enable();
-    ////cout << "Microphone Enabled: " << microphone1_enable << endl;
-    //microphone1_device = _Settings::GetMicrophone1Device();
-    ////cout << "Microphone 1 Device: " << microphone1_device << endl;
-    //microphone2_enable = _Settings::GetMicrophone2Enable();
-    ////cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
-    //microphone2_device = _Settings::GetMicrophone2Device();
-    ////cout << "Microphone 2 Device Name: " << microphone2_device << endl;
-    //computer_use = _Settings::GetComputerUseEnabled();
-    ////cout << "Computer Use: " << computer_use << endl;
-    //computer_monitor_recognition = _Settings::GetComputerMonitorRecognitionEnabled();
-    ////cout << "Computer Monitor Recognition: " << computer_monitor_recognition << endl;
-    //computer_owned_recognition = _Settings::GetComputerOwnedRecognitionEnabled();
-    //cout << "Computer Owned Recognition: " << computer_owned_recognition << endl;
-    //reading = _Settings::GetReadingEnable();
-    //cout << "Reading: " << reading << endl;
-    //reading_fallacy_check = _Settings::GetReadingFallacyCheckEnable();
-    //cout << "Reading Fallacy Check: " << reading_fallacy_check << endl;
-    //ffmpeg_location = _Settings::GetFFMpegLocation();
-    //cout << "FFMpeg Location: " << ffmpeg_location << endl;
-    //microphone1_enable = _Settings::GetMicrophone1Enable();
-    //cout << "Microphone 1 Enabled: " << microphone1_enable << endl;
-    //microphone1_device = _Settings::GetMicrophone1Device();
-    //cout << "Microphone 1 Name: " << microphone1_device << endl;
-    //microphone2_enable = _Settings::GetMicrophone2Enable();
-    //cout << "Microphone 2 Enabled: " << microphone2_enable << endl;
-    //microphone2_device = _Settings::GetMicrophone2Device();
-    //cout << "Microphone 2 Name: " << microphone2_device << endl;
-    //news_watching = _Settings::GetNewsWatchingEnable();
-    //cout << "News Watching: " << news_watching << endl;
-    //actions_watching = _Settings::GetActionWatchingEnable();
-    //cout << "Actions Detection: " << actions_watching << endl;
-    //needs_detection = _Settings::GetNeedsWatchingEnable();
-    //cout << "Needs Detection: " << needs_detection << endl;
-    //navigation_detection = _Settings::GetNavigationDetectionEnable();
-    //cout << "Navigation Detection: " << navigation_detection << endl;
-    //social_needs_detection = _Settings::GetSocialNeedsDetectionEnable();
-    //cout << "Social Needs Detection: " << social_needs_detection << endl;
-
-    ////FTP Settings
-    //ftp_enabled = _Settings::GetFTPEnabled();
-    //cout << "FTP Enabled: " << ftp_enabled << endl;
-    //ftp_hostname = _Settings::GetFTPHostname();
-    //cout << "FTP Hostname: " << ftp_hostname << endl;
-    //ftp_username = _Settings::GetFTPUsername();
-    //cout << "FTP Username: " << ftp_username << endl;
-    //ftp_password = _Settings::GetFTPPassword();
-    //cout << "FTP Password: " << ftp_password << endl;
-    //ftp_vision_directory = _Settings::GetVisionFTPDirectory();
-    //cout << "FTP Vision Directory: " << ftp_vision_directory << endl;
-    //ftp_sound_directory = _Settings::GetSoundFTPDirectory();
-    //cout << "FTP Sound Directory: " << ftp_sound_directory << endl;
-
-    ////Computer Settings
-    //private_computer = _Settings::GetPrivateComputer();
-    //cout << "Private Computer: " << private_computer << endl;
-    //computer_hostname = _Settings::GetComputerHostname();
-    //cout << "Computer Hostname: " << computer_hostname << endl;
-    //computer_username = _Settings::GetComputerUsername();
-    //cout << "Computer Username: " << computer_username << endl;
-    //computer_password = _Settings::GetComputerPassword();
-    //cout << "Computer Password: " << computer_password << endl;
+    string input2;
 
     //_AI::InitDatabases();
 
     while (!terms_conditions)
     {
         system("cls");
+
+        //string image_location = "C:/29-09-2024_21-20-07_0_camera1.jpg";
+        //string response = _LLM::OllamaAPI("image", "Analyze the following image", image_location);
+        //response = _Parsers::LLM::LLama3Parse(response);
+        //cout << response << endl;
+        //cin.get();
 
         cout << endl;
         cout << "**RECORDING DISCLAIMER**" << endl;
@@ -491,6 +397,9 @@ int main()
         cout << "| 10. FTP Settings                |" << endl;
         cout << "| 11. MySQL Settings              |" << endl;
         cout << "| 12. Computer Settings           |" << endl;
+        cout << "| 13. LLM Server Settings         |" << endl;
+        //cout << "| 14. Tensorflow Settings         |" << endl;
+        cout << "| 14. Whisper Server Settings     |" << endl;
         cout << "-----------------------------------" << endl;
         cout << endl;
         cout << "Current Settings" << endl;
@@ -518,6 +427,14 @@ int main()
             cout << "Speech Memory: True" << endl;
         else
             cout << "Speech Memory: False" << endl;
+        if (llm_server_enabled)
+            cout << "LLM Server: True" << endl;
+        else
+            cout << "LLM Server: False" << endl;
+        if (whisper_server_enabled)
+            cout << "Transcription Server: True" << endl;
+        else
+            cout << "Transcription Server: False" << endl;
         if (ethics_check_enabled)
             cout << "Ethics Check: True" << endl;
         else
@@ -563,7 +480,7 @@ int main()
         else
             cout << "Reading Reasoning: False" << endl;
         if (speaking_reasoning)
-            cout << "Speaking Reasoing: True" << endl;
+            cout << "Speaking Reasoning: True" << endl;
         else
             cout << "Speaking Reasoning: False" << endl;
         if (camera1_enabled)
@@ -578,10 +495,10 @@ int main()
             cout << "Microphone 1 Enabled: True" << endl;
         else
             cout << "Microphone 1 Enabled: False" << endl;
-        if (microphone2_enable)
-            cout << "Microphone 2 Enabled: True" << endl;
-        else
-            cout << "Microphone 2 Enabled: False" << endl;
+        //if (microphone2_enable)
+        //    cout << "Microphone 2 Enabled: True" << endl;
+        //else
+        //    cout << "Microphone 2 Enabled: False" << endl;
         if (speech_recognition)
             cout << "Speech Recognition: True" << endl;
         else
@@ -603,9 +520,37 @@ int main()
         else
             cout << "Reading: False" << endl;
         if (reading_fallacy_check)
-            cout << "Fallacy Checking: True" << endl;
+            cout << "Reading Fallacy Checking: True" << endl;
         else
-            cout << "Fallacy Checking: False" << endl;
+            cout << "Reading Fallacy Checking : False" << endl;
+        if (listening_fallacy_checking)
+            cout << "Listening Fallacy Checking: True" << endl;
+        else
+            cout << "Listening Fallacy Checking: False" << endl;
+        if (listening_bias_checking)
+            cout << "Listening Bias Checking: True" << endl;
+        else
+            cout << "Listening Bias Checking: False" << endl;
+        if (listening_literature_device_checking)
+            cout << "Listening Literature Device Checking: True" << endl;
+        else
+            cout << "Listening Literature Device Checking: False" << endl;
+        if (listening_axiom_checking)
+            cout << "Listening Axiom Checking: True" << endl;
+        else
+            cout << "Listening Axiom Checking: False" << endl;
+        if (listening_abuse_checking)
+            cout << "Listening Abuse Checking: True" << endl;
+        else
+            cout << "Listening Abuse Checking: False" << endl;
+        if (listening_law_checking)
+            cout << "Listening Law Checking: True" << endl;
+        else
+            cout << "Listening Law Checking: False" << endl;
+        if (listening_dictionary_checking)
+            cout << "Listening Dictionary Checking: True" << endl;
+        else
+            cout << "Listening Dictionary Checking: False" << endl;
         cout << "Visual Memory Location: " << vision_memory_directory << endl;
         cout << "Sound Memory Location: " << sound_directory << endl;
         cout << "Working Memory Limit: " << working_memory_limit << " MB" << endl;
@@ -618,6 +563,8 @@ int main()
         cout << "CUDA Acelleration Remote Cores: " << cuda_accelleration_remote_cores << endl;
         cout << "Tensor Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
         cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
+        cout << "Tensorflow Object Detection Model: " << tensorflow_model << endl;
+        cout << "Tensorflow Object Detection Labels: " << tensorflow_labels << endl;
         cout << "FFMpeg Location: " << ffmpeg_location << endl;
         cout << "Camera 1 Device: " << camera1 << endl;
         cout << "Camera 1 FPS: " << camera1_fps << endl;
@@ -626,9 +573,24 @@ int main()
         cout << "Camera 2 FPS: " << camera2_fps << endl;
         cout << "Camera 2 Resolution: " << camera2_resolution << endl;
         cout << "Microphone 1 Device: " << microphone1_device_name << endl;
-        cout << "Microphone 2 Device: " << microphone2_device_name << endl;
-        cout << "Sound Codec: " << sound_codec << endl;
-        cout << "Sound Bitrate: " << sound_bitrate << " Kb/s" << endl;
+        //cout << "Microphone 2 Device: " << microphone2_device_name << endl;
+        cout << "Microphone Codec: " << sound_codec << endl;
+        cout << "Microphone Bitrate: " << sound_bitrate << " Kb/s" << endl;
+        cout << "Microphone Sample Rate: " << sound_sample_rate << " Hz" << endl;
+        cout << "Microphone Channels: " << sound_channels << endl;
+        //cout << "Microphone Bits Per Sample: " << sound_bits_per_sample << endl;
+        //cout << "Object Detection Model: " << tensorflow_model << endl;
+        cout << "Speech Commands Activation: " << speech_commands_activation << endl;
+        cout << "Speech Commands Terminator: " << speech_commands_terminator << endl;
+        cout << "Transcription Server Hostname: " << whisper_hostname << endl;
+        cout << "Transcription Server Username: " << whisper_username << endl;
+        cout << "Transcription Server Password: " << whisper_password << endl;
+        //cout << "Microphone Sample Rate: " << mic_sample_rate << endl;
+        //cout << "Microphone Number Channels: " << mic_num_channels << endl;
+        //cout << "Microphone Bits Per Sample: " << mic_bits_per_sample << endl;
+        cout << "LLM Server Hostname: " << llm_hostname << endl;
+        cout << "LLM Server Username: " << llm_username << endl;
+        cout << "LLM Server Password: " << llm_password << endl;
         if (news_watching)
             cout << "News Watching: True" << endl;
         else
@@ -651,29 +613,39 @@ int main()
             cout << "Social Needs Detection: False" << endl;
         cout << endl;
         cout << "Your Selection: ";
-        getline(cin, input);
+        getline(cin, input2);
 
-        if (input == "1")
+        //input = "1";
+
+        if (input2 == "1")
         {
             _AI::InitThreads();
         }
-        else if (input == "0")
+        else if (input2 == "0")
         {
             _Settings::Settings();
         }
-        else if (input == "10")
+        else if (input2 == "10")
         {
             _Settings::MemoryManagementSettings();
         }
-        else if (input == "11")
+        else if (input2 == "11")
         {
             _Settings::MySQLSettings();
         }
-        else if (input == "12")
+        else if (input2 == "12")
         {
             _Settings::ComputerSettings();
         }
-        else if (input == "license" || input == "LICENSE" || input == "License")
+        else if (input2 == "13")
+        {
+            _Settings::LLMServerSettings();
+        }
+        else if (input2 == "14")
+        {
+            _Settings::WhisperServerSettings();
+        }
+        else if (input2 == "license" || input2 == "LICENSE" || input2 == "License")
         {
             _Utilities::PrintLicense();
             cout << endl;
@@ -692,145 +664,137 @@ void _AI::InitThreads()
 {
     //thread CurrentAction(_Actions::GetCurrentAction);
     //thread SettingsThread(_Settings::Settings);
-    /*_Reference::InitReference();*/
+    //_Reference::InitReference();
+
     // InitLists
-    if (short_term_memory_enabled)
+    if (awareness_interface)
     {
-        thread short_term_memory(_ShortTermMemory::ShortTermMemory);
+        // Debug
+        //_Awareness::AwarenessInterface();
 
-        //if (sound_memory)
-        //{
-        //    thread soundRAW(_Sound::SoundRAW);
-        //    //soundRAW.join();
-
-        //    if (speech_recognition)
-        //    {
-        //        if (sound_reasoning)
-        //        {
-        //            //thread sound_reasoning(_Sound::SoundReasoning);
-        //        }
-        //        if (speech_lie_detection)
-        //        {
-        //            //thread speech_recognition(_SpeechRecognition::SpeechRecognition);
-        //            //thread lie_detection;
-        //        }
-        //        else
-        //        {
-        //            //thread speech_recognition;
-        //        }
-        //    }
-        //}
-        //if (visual_memory)
-        //{
-        //    if (camera1_enabled)
-        //    {
-        //        thread vision_thread(_Vision::VisionRawCamera1);
-
-        //        if (vision_object_detection)
-        //        {
-        //            if (vision_object_detection_cuda)
-        //            {
-        //                if (vision_object_detection_remote_enabled)
-        //                {
-        //                    //thread vision_object_detection_remote_cuda;
-        //                }
-        //                else
-        //                {
-        //                    //thread vision_object_detection_cuda;
-        //                }
-        //            }
-        //            if (tensor_accelleration)
-        //            {
-        //                if (tensor_accelleration_remote_enabled)
-        //                {
-        //                    //thread tensor_accelleration_remote;
-        //                }
-        //                else
-        //                {
-        //                    //thread tensor_accelleration;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                thread ObjectDetectionThread(_Vision::ObjectDetection);
-        //            }
-        //        }
-        //        if (reading)
-        //        {
-        //            thread reading(_Reading::Reading);
-
-        //            if (reading_fallacy_check)
-        //            {
-        //                //thread reading_fallacy_check();
-        //            }
-        //        }
-        //    }
-        //    if (camera2_enabled)
-        //    {
-        //        thread visionRAW2(_Vision::VisionRawCamera2);
-        //        thread visionMySQL2(_Vision::MySQLVisionRAWCamera2);
-        //        //visionRAW2.join();
-        //        //visionMySQL2.join();
-        //    }
-        //    if (visual_reasoning)
-        //    {
-        //        //thread visual_reasoning(_Vision::VisualReasoning);
-        //    }
-        //}
+        // Actual implementation
+        // std::thread awarenessInterface(_Awareness::AwarenessInterface);
+        // awarenessInterface.std::thread::detach();
     }
-    if (working_memory_enabled)
+    //if (android_interface)
+    //{
+
+    //}
+    if (camera1_enabled || camera2_enabled)
     {
-        thread working_memory(_WorkingMemory::WorkingMemory);
+        // Debug
+        //_Vision::Vision();
+
+        // Actual implementation
+        std::thread vision(_Vision::Vision);
+        vision.std::thread::detach();
     }
-    if (long_term_memory_enabled)
+    if (sound_memory_enabled)
     {
-        //thread long_term_memory(_LongTermMemory::LongTermMemory);
+        // Debug
+        //_Sound::Sound();
+
+        // Actual implementation
+        std::thread sound(_Sound::Sound);
+        sound.std::thread::detach();
     }
-    if (vision_text_detection)
+    if (listening_fallacy_checking)
+    {
+        std::thread listening_fallacy_checking1(_Listening::FallacyChecking);
+        listening_fallacy_checking1.std::thread::detach();
+    }
+    if (listening_bias_checking)
+    {
+        std::thread listening_bias_checking1(_Listening::BiasChecking);
+        listening_bias_checking1.std::thread::detach();
+    }
+    if (listening_axiom_checking)
+    {
+        std::thread listening_axiom_checking1(_Listening::AxiomChecking);
+        listening_axiom_checking1.std::thread::detach();
+    }
+    if (listening_literature_device_checking)
+    {
+        std::thread listening_literature_device_checking1(_Listening::LiteratureDeviceChecking);
+        listening_literature_device_checking1.std::thread::detach();
+    }
+    if (listening_abuse_checking)
+    {
+        
+    }
+    if (reading)
     {
 
     }
-    if (vision_text_recognition)
+    if (speech_commands)
     {
-
-    }
-    if (vision_face_recognition)
-    {
-
-    }
-    
-    if (news_watching)
-    {
-        //thread newsWatchingScraper(_NLU::NewsWatchingScraper);
-    }
-    if (action_detection)
-    {
-        //thread action_watching;
-        //thread visual_reasoning;
-
-        if (ethics_check_enabled)
-        {
-            //thread ethics_check;
-            //thread visual_reasoning;
-        }
-        if (computer_use)
-        {
-            if (computer_monitor_recognition)
-            {
-                //thread computer_monitor_recognition;
-            }
-            if (computer_owned_recognition)
-            {
-                //thread computer_owned_recognition;
-            }
-        }
-        // Check if the user is watching or playing 
+        //std::thread speech_commands(_SpeechCommands::SpeechCommands);
+        //speech_commands.std::thread::detach();
     }
     if (ftp_enabled)
     {
         //thread memoryManagement(_DatabaseFunctions::MemoryManagement);
         //memoryManagement.join();
     }
+    if (short_term_memory_enabled)
+    {
+        // Debug
+        //_ShortTermMemory::ShortTermMemory();
+
+        // Actual implementation
+        // thread short_term_memory(_ShortTermMemory::ShortTermMemory);
+        // short_term_memory.std::thread::detach();
+    }
+    if (working_memory_enabled)
+    {
+        // thread working_memory(_WorkingMemory::WorkingMemory);
+        // This should be something like awareness...
+    }
+    if (long_term_memory_enabled)
+    {
+        // Debug ?
+        //_LongTermMemory::LongTermMemory();
+
+        // Actual implementation
+        //thread long_term_memory(_LongTermMemory::LongTermMemory);
+        //long_term_memory.std::thread::detach();
+    }
+     //Should be its own app...
+    if (news_watching)
+    {
+        // Debug
+        // _Actions::NewsWatching();
+        // thread newsWatchingScraper(_NLU::NewsWatchingScraper);
+        // newsWatchingScraper.std::thread::detach();
+    }
+    if (action_detection)
+    {
+        // Debug
+        //_Actions::GetCurrentAction();
+
+        // Actual implementation
+        // std::thread actions(_Actions::GetCurrentAction);
+        // actions.std::thread::detach();
+    }
+    if (computer_use)
+    {
+        if (computer_monitor_recognition)
+        {
+            //thread computer_monitor_recognition;
+            // computer_monitor_recognition.std::thread::detach();
+        }
+        if (computer_owned_recognition)
+        {
+            // thread computer_owned_recognition;
+            // computer_owned_recognition.std::thread::detach();
+        }
+    }
+    if (ethics_check_enabled)
+    {
+        //thread ethics_check;
+        //thread visual_reasoning;
+    }
+
 
     //thread ConceptualLearning1 (ConceptualLearningWords);
 

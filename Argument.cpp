@@ -14,81 +14,38 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Argument.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Argument.hpp"
+#include "Working-Memory.hpp"
+#include "Large Language Models.hpp"
+#include "Parsers.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
-// This function will create deductive logic syllogisms from a given input string
-// 0. Use precise word definitions in premises
-//  a. Load the definitions from MySQL into a two dimensional string array
-//  b. Load conceptual data and copy int a string array 
-// 1. Premise 1
-// 2. Premise 2
-// 3. Premise x
-// 4. Certain Conclusion
-//string* _NLP::CreateDeductiveArgument(string text)
-//{
-//    string* words;
-//    // -2. Parse the text, separate into sentences and string array of strings
-//
-//    // -1. Load relevant information to local variables
-//    // Databases with conceptual information:
-//    //      a. WikiSimple
-//    //      b. Dictionary
-//    //      c. Wikipedia
-//    //      d. Wikidataure
-//    //      e. Literature
-//
-//    // 0. Use precise word definitions in premises
-//
-//    // 1. Premise 1
-//    
-//    // 2. Premise 2
-//    
-//    // 3. Premise x
-//
-//    // 4. Certain Conclusion
-//    return words;
-//}
+string _Argument::CreateDeductiveArgument(string text)
+{
+    // Create a deductive argument from text
+    string prompt = "Create a deductive syllogism from the following text and return only the syllogism: " + text;
+    string model = "llama3";
+    string json = _LLM::OllamaAPI(model, prompt, "NULL");
+    string response = _Parsers::LLM::LLama3Parse(json);
+    return response;
+}
 
-// This function will create an inductive logic syllogism from data
-// 0. Use precise word definitions in premises
-// 1. Premise 1
-// 2. Premise 2
-// 3. Premise 3
-// 4. Probable conclusion
-//string* _NLP::CreateInductiveArgument(string text)
-//{
-//    string* words;
-//    // 0. Use precise word definitions in premises
-//    return words;
-//}
-//
-//string* _NLP::DeductiveArgumentCheck(string argument)
-//{
-//    string* words;
-//    // 4. Probable conclusion
-//    return words;
-//}
-
-//string _NLP::FallacyCheck(string text, bool fiction)
-//{
-//    string words;
-//    return words;
-//}
-//
-//string _NLP::FallacyCheck(string text, string data, bool fiction)
-//{
-//    string words;
-//    return words;
-//}
+string _Argument::CreateInductiveArgument(string text)
+{
+    // Create a inductive argument from text
+    string prompt = "Create a inductive syllogism from the following text and return only the syllogism: " + text;
+    string model = "llama3";
+    string json = _LLM::OllamaAPI(model, prompt, "NULL");
+    string response = _Parsers::LLM::LLama3Parse(json);
+    return response;
+}

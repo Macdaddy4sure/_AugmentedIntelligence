@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,20 +14,19 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Executive Functions.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Executive Functions.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
 /*
-
     Adaptable Thinking
     Adaptable thinking gives a child the ability to problem solve or adjust to situations when necessary and overcome instantaneous obstacles.This skill also applies to a child’s ability to see things from someone else’s perspective.A child who exhibits this type of cognitive thinking isn’t stumped by everyday hurdles or a difference in opinion.An example of adaptable thinking is a child who encounters a roadblock on their walk to school and devises an alternate route.
 

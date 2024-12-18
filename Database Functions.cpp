@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,17 +14,75 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Database Functions.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Actions.hpp"
+#include "Analysis.hpp"
+#include "Argument.hpp"
+#include "Bias.hpp"
+#include "Computers.hpp"
+#include "Database Functions.hpp"
+#include "Directories.hpp"
+#include "Drawing.hpp"
+#include "Driving.hpp"
+#include "Ethics.hpp"
+#include "Executive Functions.hpp"
+#include "Fallacy.hpp"
+#include "Feel.hpp"
+#include "Finance.hpp"
+#include "Gaming.hpp"
+#include "Goals.hpp"
+#include "Heuristics.hpp"
+#include "Keyboard.hpp"
+#include "Kinesthetics.hpp"
+#include "Large Language Models.hpp"
+#include "Learning.hpp"
+#include "Logic.hpp"
+#include "Long-Term Memory.hpp"
+#include "Mathematics.hpp"
+#include "Mind.hpp"
+#include "Mods.hpp"
+#include "Morality.hpp"
+#include "Mouse.hpp"
+#include "Music.hpp"
+#include "Needs.hpp"
+#include "NetworkingClient.hpp"
+#include "NetworkingServer.hpp"
+#include "NeuraLink.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Parsers.hpp"
+#include "Pathfinding.hpp"
+#include "Pattern Recognition.hpp"
+#include "Prediction.hpp"
+#include "Programming.hpp"
+#include "QA.hpp"
+#include "Qualitative Reasoning.hpp"
+#include "Quantitative Reasoning.hpp"
+#include "Reading.hpp"
+#include "Reference.hpp"
+#include "Scrapers.hpp"
+#include "Server Functions.hpp"
+#include "Settings.hpp"
+#include "Short-Term Memory.hpp"
+#include "Smart Phone.hpp"
+#include "Smell.hpp"
+#include "Social.hpp"
+#include "Sound.hpp"
+#include "Speaking.hpp"
+#include "Speech Recognition.hpp"
+#include "Speech Commands.hpp"
+#include "Sports.hpp"
+#include "Stocks.hpp"
+#include "Strategy.hpp"
+#include "Tensorflow.hpp"
+#include "Time.hpp"
+#include "Translation.hpp"
+#include "Typing.hpp"
+#include "Utilities.hpp"
+#include "Variables.hpp"
+#include "Vision.hpp"
+#include "Working-Memory.hpp"
+#include "Writing.hpp"
 
 using namespace std;
 
@@ -142,41 +200,78 @@ bool _DatabaseFunctions::MovieExists(string title)
 //}
 
 // This function will upload all detected objects from the object detection neural network
-void _DatabaseFunctions::StoreObject(string object)
+void _DatabaseFunctions::StoreObject(string object, string image_location)
 {
     MYSQL* conn;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    //string mysql_database = "dictionary";
-    string mysql_hostname;
+    string mysql_database = "objects";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string sql1;
 
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    ostringstream oss;
+
+    oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    string current_date = oss.str();
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
     if (conn)
     {
-
+        sql1 = "INSERT INTO `";
+        sql1 += object.c_str();
+        sql1 += "`(image_location, current_date) VALUES(\"";
+        sql1 += image_location.c_str();
+        sql1 += "\", \"";
+        sql1 += current_date.c_str();
+        sql1 += "\");";
+        mysql_query(conn, sql1.c_str());
     }
 }
 
 // This function will be invoked when the user commands to find the last seen location of an object
-void _DatabaseFunctions::FindObject(string object)
+string _DatabaseFunctions::FindObject(string object)
 {
     MYSQL* conn;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_database = "long_term_memory";
-    string mysql_hostname;
+    string mysql_database = "objects";
+    string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string sql1;
+    string image_location;
+    int counter = 0;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
-        sql1 = "SHOW TABLES;";
+        sql1 = "SELECT * FROM `";
+        sql1 += object.c_str();
+        sql1 += "`;";
         mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
 
+        while (row = mysql_fetch_row(result))
+        {
+            if (mysql_num_fields(result) == counter)
+            {
+                image_location = row[0];
+                return image_location;
+            }
+
+            counter++;
+        }
     }
+
+    return nullptr;
 }
 
 string _DatabaseFunctions::QueryWordVector(string word, string word_type)
@@ -275,73 +370,40 @@ string _DatabaseFunctions::QueryWordVector(string word, string word_type)
 //    return results;
 //}
 
-void _DatabaseFunctions::savePassword(string hostname, string password)
+void _DatabaseFunctions::savePassword(string hostname, string password, string image_location)
 {
-    MYSQL* conn;
-    MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    ostringstream query1;
-    string sql1;
-    string mysql_database = "personal_information";
-    string table_name = "passwords";
-    //string image_location = stm_vision_path_camera1[1000][0];
+    //MYSQL* conn;
+    //MYSQL_RES* result;
+    ////string mysql_hostname = _Settings::GetMySQLHostname();
+    ////string mysql_username = _Settings::GetMySQLUsername();
+    ////string mysql_password = _Settings::GetMySQLPassword();
+    //ostringstream query1;
+    //string sql1;
+    //string mysql_database = "personal_information";
+    //string table_name = "passwords";
+    ////string image_location = stm_vision_path_camera1[1000][0];
 
-    conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    //conn = mysql_init(0);
+    //conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
 
-    if (conn)
-    {
-        //query1 << "INSERT INTO " << table_name << "(computer_hostname, image_location, password) VALUES(" << hostname.c_str() << ", " << image_location.c_str() << ", " << password.c_str() << ");";
-        //sql1 = query1.str();
-        ///*cout << "SQL1: " << sql1 << endl;*/
-        //mysql_query(conn, sql1.c_str());
-        //result = mysql_store_result(conn);
-    }
-}
-
-string* _DatabaseFunctions::getPasswords()
-{
-    MYSQL* conn;
-    MYSQL_ROW row;
-    MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    ostringstream query1;
-    string sql1;
-    string database = "personal_information";
-    string table_name = "passwords";
-
-    conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database.c_str(), 3306, NULL, 0);
-
-    if (conn)
-    {
-        query1 << "SELECT * FROM " << table_name;
-        sql1 = query1.str();
-        /*cout << "SQL1: " << sql1 << endl;*/
-        mysql_query(conn, sql1.c_str());
-        result = mysql_store_result(conn);
-
-        while (row = mysql_fetch_row(result))
-        {
-            // Print to the end of the chapter
-            cout << "Name: " << row[0] << endl;
-            cout << "Password: " << row[1] << endl;
-        }
-    }
+    //if (conn)
+    //{
+    //    query1 << "INSERT INTO " << table_name << "(computer_hostname, image_location, password) VALUES(" << hostname.c_str() << ", " << image_location.c_str() << ", " << password.c_str() << ");";
+    //    sql1 = query1.str();
+    //    cout << "SQL1: " << sql1 << endl;
+    //    mysql_query(conn, sql1.c_str());
+    //    result = mysql_store_result(conn);
+    //}
 }
 
 string _DatabaseFunctions::getPassword(string domain)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     ostringstream query1;
     string sql1;
     string database = "personal_information";
@@ -368,7 +430,7 @@ string _DatabaseFunctions::getPassword(string domain)
             }
         }
     }
-    return "NULL";
+    return nullptr;
 }
 
 void _DatabaseFunctions::getPasswordsScreenshot(string password)
@@ -389,18 +451,21 @@ void _DatabaseFunctions::BookDatabaseSearch(string search, string* bookTitle, st
 // Get the music artist
 string _DatabaseFunctions::GetMusicArtist(string search)
 {
-
+    string temp;
+    return temp;
 }
 
 // Get music album
 string _DatabaseFunctions::GetMusicAlbum(string artist, string song)
 {
-
+    string temp;
+    return temp;
 }
 
 string _DatabaseFunctions::GetMusicSong(string artist, string album)
 {
-
+    string temp;
+    return temp;
 }
 
 // This function will search music lyrics from music database and return the song, album and artist
@@ -429,12 +494,12 @@ void _Utilities::MusicLyricsSync(string search)
 // This function will return the text of a specific chapter
 string _DatabaseFunctions::BibleVerseSearch(string book, int chapter)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     ostringstream query1;
     string sql1;
     string database = "bible_kjv";
@@ -463,17 +528,19 @@ string _DatabaseFunctions::BibleVerseSearch(string book, int chapter)
             }
         }
     }
+
+    return nullptr;
 }
 
 // This function will return the text of a bible verse from the book, chapter, and verse
 string _DatabaseFunctions::BibleVerseSearch(string book, int chapter, int verse)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     ostringstream query1;
     string sql1;
     string database = "bible_kjv";
@@ -503,6 +570,8 @@ string _DatabaseFunctions::BibleVerseSearch(string book, int chapter, int verse)
             }
         }
     }
+
+    return nullptr;
 }
 
 // This function returns the page number for the start of a book
@@ -510,7 +579,8 @@ string _DatabaseFunctions::BibleVerseSearch(string book, int chapter, int verse)
 //      A neural network will need to look at the table of contents, convert each line to strings and import the page numbers to the database
 int _DatabaseFunctions::BibleVersePageNumber(string book)
 {
-
+    int page_number;
+    return page_number;
 }
 
 // This function returns the page number for the book and chapter
@@ -518,7 +588,8 @@ int _DatabaseFunctions::BibleVersePageNumber(string book)
 //      A neural network will need to look at the table of contents, convert each line to strings and import the page numbers to the database
 int _DatabaseFunctions::BibleChapterPageNumber(string book, int chapter)
 {
-
+    int page_number;
+    return page_number;
 }
 
 // This function returns the page number for a specific verse
@@ -526,6 +597,7 @@ int _DatabaseFunctions::BibleChapterPageNumber(string book, int chapter)
 //      A neural network will need to look at the table of contents, convert each line to strings and import the page numbers to the database
 int _DatabaseFunctions::BibleVersePageNumber(string book, int chapter, int verse)
 {
+    int page_number;
     // 1. Open the users bible database
 
     // 2. Search for the book
@@ -535,24 +607,67 @@ int _DatabaseFunctions::BibleVersePageNumber(string book, int chapter, int verse
     // 4. Search for the verse
 
     // 5. Return the page number
+    return page_number;
 }
 
-// The following function will search wikipedia for text and information and will display the information to the consciousness
-string** _DatabaseFunctions::SearchWikipedia(string title)
+string* _DatabaseFunctions::SearchWikiTables(string wiki_name, string title)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = wiki_name;
+    string temp;
+    string* completed = new string[100];
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SHOW TABLES;";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            temp = row[0];
+
+            if (title == temp)
+            {
+                // Get the first available place in memory
+                for (int x = 0; x <= 100; x++)
+                {
+                    if (completed[x] == "")
+                    {
+                        completed[x] = temp;
+                    }
+                }
+            }
+        }
+    }
+
+    return completed;
+}
+
+// The following function will search wikipedia for an article
+string _DatabaseFunctions::SearchWikipedia(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string sql1;
     string mysql_database = "wikipedia";
     string mysql_table = title;
     mysql_table = _Utilities::FixWikiTableName(mysql_table);
-    string** completed = new string*[100];
-    completed[0] = new string[3];
-    int x = 0;
+    string completed = "";
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
@@ -568,17 +683,243 @@ string** _DatabaseFunctions::SearchWikipedia(string title)
 
         while (row = mysql_fetch_row(result))
         {
-            completed[x][0] = row[0];
-            completed[x][1] = row[1];
-            completed[x][2] = row[2];
-            completed[x][3] = row[3];
-            completed[x][4] = row[4];
-            x++;
+            completed += row[4] + '\n';
         }
     }
 
     // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
 
+    return completed;
+}
+
+string _DatabaseFunctions::SearchWikisimple(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikihow";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
+
+    return completed;
+}
+
+// The following function will search wikipedia for an article
+string _DatabaseFunctions::SearchWikihow(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikihow";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
+
+    return completed;
+}
+
+// The following function will search wikipedia for an article
+string _DatabaseFunctions::SearchWikiquote(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikiquote";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
+
+    return completed;
+}
+
+// The following function will search wikipedia for an article
+string _DatabaseFunctions::SearchWikisource(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikisource";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
+
+    return completed;
+}
+
+// The following function will search wikipedia for an article
+string _DatabaseFunctions::SearchWikibooks(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikibooks";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
+    // 2. Load the MySQL Wiki database into memory and keyword search for article
+
+    return completed;
+}
+
+string _DatabaseFunctions::SearchStackexchange(string title)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
+    string sql1;
+    string mysql_database = "wikibooks";
+    string mysql_table = title;
+    mysql_table = _Utilities::FixWikiTableName(mysql_table);
+    string completed = "";
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM ";
+        sql1 += mysql_table;
+        sql1 += ";";
+        /*cout << "SQL1: " << sql1 << endl;*/
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            completed += row[4] + '\n';
+        }
+    }
+
+    // 1. The function would need to rearrange words to best fit a query of Wikipedia
     // 2. Load the MySQL Wiki database into memory and keyword search for article
 
     return completed;
@@ -586,12 +927,12 @@ string** _DatabaseFunctions::SearchWikipedia(string title)
 
 void _DatabaseFunctions::PrintWikipedia(string title)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string heading;
     string sub_heading;
     string sub_sub_heading;
@@ -643,36 +984,39 @@ void _DatabaseFunctions::PrintWikipedia(string title)
                     }
                     else
                     {
-                        cout << heading << endl;
-
-                        if (sub_heading == "NULL")
+                        if (wiki_text != "")
                         {
-                            cout << wiki_text << endl;
-                            cout << endl;
-                        }
-                        else
-                        {
-                            cout << sub_heading << endl;
+                            cout << heading << endl;
 
-                            if (sub_sub_heading == "NULL")
+                            if (sub_heading == "NULL")
                             {
                                 cout << wiki_text << endl;
                                 cout << endl;
                             }
                             else
                             {
-                                cout << sub_sub_heading << endl;
+                                cout << sub_heading << endl;
 
-                                if (sub_sub_sub_heading == "NULL")
+                                if (sub_sub_heading == "NULL")
                                 {
                                     cout << wiki_text << endl;
                                     cout << endl;
                                 }
                                 else
                                 {
-                                    cout << sub_sub_sub_heading << endl;
-                                    cout << wiki_text << endl;
-                                    cout << endl;
+                                    cout << sub_sub_heading << endl;
+
+                                    if (sub_sub_sub_heading == "NULL")
+                                    {
+                                        cout << wiki_text << endl;
+                                        cout << endl;
+                                    }
+                                    else
+                                    {
+                                        cout << sub_sub_sub_heading << endl;
+                                        cout << wiki_text << endl;
+                                        cout << endl;
+                                    }
                                 }
                             }
                         }
@@ -683,19 +1027,18 @@ void _DatabaseFunctions::PrintWikipedia(string title)
     }
 
     // 1. The function would need to rearrange words to best fit a query of Wikipedia
-
     // 2. Load the MySQL Wiki database into memory and keyword search for article
 }
 
 string** _DatabaseFunctions::WiktionarySearch(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "wiktionary";
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string heading;
     string sub_heading;
     string sub_sub_heading;
@@ -787,6 +1130,8 @@ string** _DatabaseFunctions::WiktionarySearch(string word)
             }
         }
     }
+
+    return array;
 }
 //
 //string** _DatabaseFunctions::BookDatabaseSearch(string title)
@@ -829,11 +1174,6 @@ string** _DatabaseFunctions::WiktionarySearch(string word)
 //
 //}
 //
-string** _DatabaseFunctions::WikiHowSearch(string article)
-{
-
-}
-//
 //__global__ string** _DatabaseFunctions::CUDA::WikiHowSearch(string article)
 //{
 //
@@ -842,16 +1182,16 @@ string** _DatabaseFunctions::WikiHowSearch(string article)
 // TODO: Use CUDA to iterate through the list of common nouns
 string** _DatabaseFunctions::SearchDictionary(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
     string mysql_table = "entries";
     string sql1;
-    string** completed = new string*[100];
+    string** completed = new string*[10];
     completed[0] = new string[3];
 
     conn = mysql_init(0);
@@ -868,18 +1208,19 @@ string** _DatabaseFunctions::SearchDictionary(string word)
 
         while (row = mysql_fetch_row(result))
         {
-            if (word == row[0])
+            string temp = _Utilities::toLowerWord(row[0]);
+
+            if (word == temp)
             {
-                // Find an empty place in the completed string array
-                for (int x = 0; x <= 100; x++)
+                // Find the first place in memory for completed
+                for (int x = 0; x < 10; x++)
                 {
                     if (completed[x][0] == "")
                     {
-                        completed[x][0] = row[0];
+                        completed[x][0] = temp;
                         completed[x][1] = row[1];
                         completed[x][2] = row[2];
-                        completed[x][3] = row[3];
-
+                        break;
                     }
                 }
             }
@@ -893,7 +1234,7 @@ string** _DatabaseFunctions::SearchDictionary(string word)
 
 string** _DatabaseFunctions::SearchDictionary(string word, string word_type)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_hostname = _Settings::GetMySQLHostname();
@@ -902,7 +1243,7 @@ string** _DatabaseFunctions::SearchDictionary(string word, string word_type)
     string mysql_database = "dictionary";
     string mysql_table = "entries";
     string sql1;
-    string** completed = new string*[100];
+    string** completed = new string*[10];
     completed[0] = new string[3];
 
     conn = mysql_init(0);
@@ -919,17 +1260,20 @@ string** _DatabaseFunctions::SearchDictionary(string word, string word_type)
 
         while (row = mysql_fetch_row(result))
         {
-            if (word == row[0] && word_type == row[1])
+            string temp = _Utilities::toLowerWord(row[0]);
+            string temp2 = _Utilities::toLowerWord(row[1]);
+
+            if (word == temp && word_type == temp2)
             {
-                // Find an empty place in the completed string array
-                for (int x = 0; x <= 10; x++)
+                // Find the first place in memory for completed
+                for (int x = 0; x < 10; x++)
                 {
                     if (completed[x][0] == "")
                     {
-                        completed[x][0] = row[0];
+                        completed[x][0] = temp;
                         completed[x][1] = row[1];
                         completed[x][2] = row[2];
-                        completed[x][3] = row[3];
+                        break;
                     }
                 }
             }
@@ -943,16 +1287,16 @@ string** _DatabaseFunctions::SearchDictionary(string word, string word_type)
 
 string** _DatabaseFunctions::SearchDictionary(string word, string word_type, string definition)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
     string mysql_table = "entries";
     string sql1;
-    string** completed = new string*[100];
+    string** completed = new string * [10];
     completed[0] = new string[3];
 
     conn = mysql_init(0);
@@ -969,17 +1313,21 @@ string** _DatabaseFunctions::SearchDictionary(string word, string word_type, str
 
         while (row = mysql_fetch_row(result))
         {
-            if (word == row[0] && word_type == row[1] && definition == row[2])
+            string temp = _Utilities::toLowerWord(row[0]);
+            string temp2 = _Utilities::toLowerWord(row[1]);
+            string temp3 = _Utilities::toLowerWord(row[2]);
+
+            if (word == temp && word_type == temp2 && definition == temp3)
             {
-                // Find an empty place in the completed string array
-                for (int x = 0; x <= 10; x++)
+                // Find the first place in memory for completed
+                for (int x = 0; x < 10; x++)
                 {
                     if (completed[x][0] == "")
                     {
-                        completed[x][0] = row[0];
+                        completed[x][0] = temp;
                         completed[x][1] = row[1];
                         completed[x][2] = row[2];
-                        completed[x][3] = row[3];
+                        break;
                     }
                 }
             }
@@ -991,18 +1339,67 @@ string** _DatabaseFunctions::SearchDictionary(string word, string word_type, str
     return completed;
 }
 
-string** _DatabaseFunctions::SearchDictionaryDefinition(string definition)
+//string** _DatabaseFunctions::SearchDictionaryDefinition(string definition)
+//{
+//    MYSQL* conn = nullptr;
+//    MYSQL_ROW row;
+//    MYSQL_RES* result;
+//    string mysql_hostname = _Settings::GetMySQLHostname();
+//    string mysql_username = _Settings::GetMySQLUsername();
+//    string mysql_password = _Settings::GetMySQLPassword();
+//    string mysql_database = "dictionary";
+//    string mysql_table = "entries";
+//    string sql1;
+//    string** completed = new string * [10];
+//    completed[0] = new string[3];
+//
+//    conn = mysql_init(0);
+//    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+//
+//    if (conn)
+//    {
+//        sql1 = "SELECT * FROM ";
+//        sql1 += mysql_table;
+//        /*cout << "SQL1: " << sql1 << endl;*/
+//        mysql_query(conn, sql1.c_str());
+//        result = mysql_store_result(conn);
+//
+//        while (row = mysql_fetch_row(result))
+//        {
+//            if (definition == row[2])
+//            {
+//                // Find the first place in memory for completed
+//                for (int x = 0; x < 10; x++)
+//                {
+//                    if (completed[x][0] == "")
+//                    {
+//                        completed[x][0] = temp;
+//                        completed[x][1] = row[1];
+//                        completed[x][2] = row[2];
+//                        break;
+//                    }
+//                }
+//            }
+//        }
+//
+//        return completed;
+//    }
+//
+//    return completed;
+//}
+
+string** _DatabaseFunctions::SearchDictionaryWordType(string word_type)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
     string mysql_table = "entries";
     string sql1;
-    string** completed = new string * [100];
+    string** completed = new string * [10];
     completed[0] = new string[3];
 
     conn = mysql_init(0);
@@ -1018,7 +1415,9 @@ string** _DatabaseFunctions::SearchDictionaryDefinition(string definition)
 
         while (row = mysql_fetch_row(result))
         {
-            if (definition == row[2])
+            string temp = _Utilities::toLowerWord(row[1]);
+
+            if (word_type == temp)
             {
                 // Find an empty place in the completed string array
                 for (int x = 0; x <= 10; x++)
@@ -1028,7 +1427,7 @@ string** _DatabaseFunctions::SearchDictionaryDefinition(string definition)
                         completed[x][0] = row[0];
                         completed[x][1] = row[1];
                         completed[x][2] = row[2];
-                        completed[x][3] = row[3];
+                        break;
                     }
                 }
             }
@@ -1040,69 +1439,20 @@ string** _DatabaseFunctions::SearchDictionaryDefinition(string definition)
     return completed;
 }
 
-string** _DatabaseFunctions::SearchDictionaryWordType(string word_type)
+string** _DatabaseFunctions::SearchDictionaryVector(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
-    string mysql_table = "entries";
-    string sql1;
-    string** completed = new string * [500];
-    completed[0] = new string[5];
-
-    conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-    if (conn)
-    {
-        sql1 = "SELECT * FROM ";
-        sql1 += mysql_table;
-        /*cout << "SQL1: " << sql1 << endl;*/
-        mysql_query(conn, sql1.c_str());
-        result = mysql_store_result(conn);
-
-        while (row = mysql_fetch_row(result))
-        {
-            if (word_type == row[1])
-            {
-                // Find an empty place in the completed string array
-                for (int x = 0; x <= 10; x++)
-                {
-                    if (completed[x][0] == "")
-                    {
-                        completed[x][0] = row[0];
-                        completed[x][1] = row[1];
-                        completed[x][2] = row[2];
-                        completed[x][3] = row[3];
-                    }
-                }
-            }
-        }
-
-        return completed;
-    }
-
-    return completed;
-}
-
-string* _DatabaseFunctions::SearchDictionaryVector(string word)
-{
-    MYSQL* conn;
-    MYSQL_ROW row;
-    MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    string mysql_database = "dictionary";
-    string mysql_table = "entries2";
+    string mysql_table = "wiki_vectors";
     string sql1;
     string temp;
-    string temp2;
-    string completed[300];
+    string** completed = new string * [10];
+    completed[0] = new string[3];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
@@ -1117,28 +1467,19 @@ string* _DatabaseFunctions::SearchDictionaryVector(string word)
 
         while (row = mysql_fetch_row(result))
         {
+            string temp = _Utilities::toLowerWord(row[1]);
+
             if (word == row[0])
             {
-                temp = row[3];
-
-                for (int x = 0; x <= temp.length(); x++)
+                // Find the first place in memory for completed
+                for (int x = 0; x < 10; x++)
                 {
-                    if (temp[x] == ',')
+                    if (completed[x][0] == "")
                     {
-                        for (int y = 0; y <= 300; y++)
-                        {
-                            if (completed[y] == "")
-                            {
-                                completed[y] = temp2;
-                            }
-                        }
-
-                        temp2.clear();
-                        x++;
-                    }
-                    else
-                    {
-                        temp2 += temp[x];
+                        completed[x][0] = temp;
+                        completed[x][1] = row[1];
+                        completed[x][2] = row[2];
+                        break;
                     }
                 }
             }
@@ -1150,20 +1491,21 @@ string* _DatabaseFunctions::SearchDictionaryVector(string word)
     return completed;
 }
 
-string* _DatabaseFunctions::SearchDictionaryVector(string word, string word_type)
+string** _DatabaseFunctions::SearchDictionaryVector(string word, string word_type)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
-    string tableName = "entries2";
+    string tableName = "wiki_vectors";
     string sql1;
     string temp;
     string temp2;
-    string completed[300];
+    string** completed = new string*[10];
+    completed[0] = new string[3];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
@@ -1178,32 +1520,21 @@ string* _DatabaseFunctions::SearchDictionaryVector(string word, string word_type
 
         while (row = mysql_fetch_row(result))
         {
-            if (word == row[0])
+            string temp = _Utilities::toLowerWord(row[3]);
+
+            if (word == temp)
             {
-                temp = row[3];
-
-                for (int x = 0; x <= temp.length(); x++)
+                // Find the first place in memory for completed
+                for (int x = 0; x < 10; x++)
                 {
-                    if (temp[x] == ',')
+                    if (completed[x][0] == "")
                     {
-                        for (int y = 0; y <= 300; y++)
-                        {
-                            if (completed[y] == "")
-                            {
-                                completed[y] = temp2;
-                            }
-                        }
-
-                        temp2.clear();
-                        x++;
-                    }
-                    else
-                    {
-                        temp2 += temp[x];
+                        completed[x][0] = temp;
+                        completed[x][1] = row[1];
+                        completed[x][2] = row[2];
+                        break;
                     }
                 }
-
-                return completed;
             }
         }
     }
@@ -1211,140 +1542,101 @@ string* _DatabaseFunctions::SearchDictionaryVector(string word, string word_type
     return completed;
 }
 
-string* _DatabaseFunctions::SearchDictionaryVector(string word, string word_type, string definition)
-{
-    MYSQL* conn;
-    MYSQL_ROW row;
-    MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    string mysql_database = "dictionary";
-    string mysql_table = "entries2";
-    string sql1;
-    string temp;
-    string temp2;
-    string completed[300];
+//string** _DatabaseFunctions::SearchDictionaryVector(string word, string word_type, string definition)
+//{
+//    MYSQL* conn = nullptr;
+//    MYSQL_ROW row;
+//    MYSQL_RES* result;
+//    string mysql_hostname = _Settings::GetMySQLHostname();
+//    string mysql_username = _Settings::GetMySQLUsername();
+//    string mysql_password = _Settings::GetMySQLPassword();
+//    string mysql_database = "dictionary";
+//    string mysql_table = "wiki_vectors";
+//    string sql1;
+//    string temp;
+//    string temp2;
+//    string completed[300];
+//
+//    conn = mysql_init(0);
+//    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+//
+//    if (conn)
+//    {
+//        sql1 = "SELECT * FROM ";
+//        sql1 += mysql_table;
+//        /*cout << "SQL1: " << sql1 << endl;*/
+//        mysql_query(conn, sql1.c_str());
+//        result = mysql_store_result(conn);
+//
+//        while (row = mysql_fetch_row(result))
+//        {
+//            if (word == row[0] && word_type == row[1] && definition == row[2])
+//            {
+//                temp = row[3];
+//
+//            }
+//        }
+//
+//        return completed;
+//    }
+//
+//    return completed;
+//}
 
-    conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-    if (conn)
-    {
-        sql1 = "SELECT * FROM ";
-        sql1 += mysql_table;
-        /*cout << "SQL1: " << sql1 << endl;*/
-        mysql_query(conn, sql1.c_str());
-        result = mysql_store_result(conn);
-
-        while (row = mysql_fetch_row(result))
-        {
-            if (word == row[0] && word_type == row[1] && definition == row[2])
-            {
-                temp = row[3];
-
-                for (int x = 0; x <= temp.length(); x++)
-                {
-                    if (temp[x] == ',')
-                    {
-                        for (int y = 0; y <= 300; y++)
-                        {
-                            if (completed[y] == "")
-                            {
-                                completed[y] = temp2;
-                            }
-                        }
-
-                        temp2.clear();
-                        x++;
-                    }
-                    else
-                    {
-                        temp2 += temp[x];
-                    }
-                }
-            }
-        }
-
-        return completed;
-    }
-
-    return completed;
-}
-
-string* _DatabaseFunctions::SearchDictionaryVectorDefinition(string definition)
-{
-    MYSQL* conn;
-    MYSQL_ROW row;
-    MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
-    string mysql_database = "dictionary";
-    string mysql_table = "entries2";
-    string sql1;
-    string temp;
-    string temp2;
-    string completed[300];
-
-    conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
-
-    if (conn)
-    {
-        sql1 = "SELECT * FROM ";
-        sql1 += mysql_table;
-        /*cout << "SQL1: " << sql1 << endl;*/
-        mysql_query(conn, sql1.c_str());
-        result = mysql_store_result(conn);
-
-        while (row = mysql_fetch_row(result))
-        {
-            if (definition == row[2])
-            {
-                temp = row[3];
-
-                for (int x = 0; x <= temp.length(); x++)
-                {
-                    if (temp[x] == ',')
-                    {
-                        for (int y = 0; y <= 300; y++)
-                        {
-                            if (completed[y] == "")
-                            {
-                                completed[y] = temp2;
-                            }
-                        }
-
-                        temp2.clear();
-                        x++;
-                    }
-                    else
-                    {
-                        temp2 += temp[x];
-                    }
-                }
-            }
-        }
-
-        return completed;
-    }
-
-    return completed;
-}
+//string* _DatabaseFunctions::SearchDictionaryVectorDefinition(string definition)
+//{
+//    MYSQL* conn = nullptr;
+//    MYSQL_ROW row;
+//    MYSQL_RES* result;
+//    string mysql_hostname = _Settings::GetMySQLHostname();
+//    string mysql_username = _Settings::GetMySQLUsername();
+//    string mysql_password = _Settings::GetMySQLPassword();
+//    string mysql_database = "dictionary";
+//    string mysql_table = "entries2";
+//    string sql1;
+//    string temp;
+//    string temp2;
+//    string completed[300];
+//
+//    conn = mysql_init(0);
+//    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+//
+//    if (conn)
+//    {
+//        sql1 = "SELECT * FROM ";
+//        sql1 += mysql_table;
+//        /*cout << "SQL1: " << sql1 << endl;*/
+//        mysql_query(conn, sql1.c_str());
+//        result = mysql_store_result(conn);
+//
+//        while (row = mysql_fetch_row(result))
+//        {
+//            if (definition == row[2])
+//            {
+//                temp = row[3];
+//
+//                
+//            }
+//        }
+//
+//        return completed;
+//    }
+//
+//    return completed;
+//}
 
 string** _DatabaseFunctions::SearchDictionaryVectorWordType(string word_type)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_hostname = _Settings::GetMySQLHostname();
-    string mysql_username = _Settings::GetMySQLUsername();
-    string mysql_password = _Settings::GetMySQLPassword();
+    //string mysql_hostname = _Settings::GetMySQLHostname();
+    //string mysql_username = _Settings::GetMySQLUsername();
+    //string mysql_password = _Settings::GetMySQLPassword();
     string mysql_database = "dictionary";
-    string mysql_table = "entries2";
+    string mysql_table = "wiki_vectors";
     string sql1;
-    string** completed = new string*[100];
+    string** completed = new string*[10];
     completed[0] = new string[3];
 
     conn = mysql_init(0);
@@ -1363,14 +1655,14 @@ string** _DatabaseFunctions::SearchDictionaryVectorWordType(string word_type)
             if (word_type == row[1])
             {
                 // Find an empty place in the completed string array
-                for (int x = 0; x <= 10; x++)
+                for (int x = 0; x < 10; x++)
                 {
                     if (completed[x][0] == "")
                     {
                         completed[x][0] = row[0];
                         completed[x][1] = row[1];
                         completed[x][2] = row[2];
-                        completed[x][3] = row[3];
+                        break;
                     }
                 }
             }
@@ -1384,10 +1676,10 @@ string** _DatabaseFunctions::SearchDictionaryVectorWordType(string word_type)
 
 void _DatabaseFunctions::CreateMySQLTableFederal(string title, string chapter, string sub_chapter, string section, string us_code_text)
 {
-    MYSQL* conn;
-    string mysql_hostname = mysql_hostname.c_str();
-    string mysql_username = "root";
-    string mysql_password = "Anaheim228";
+    MYSQL* conn = nullptr;
+    //string mysql_hostname = mysql_hostname.c_str();
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim228";
     string mysql_database = "us_code";
     string mysql_table = title;
     string sql1;
@@ -1404,7 +1696,7 @@ void _DatabaseFunctions::CreateMySQLTableFederal(string title, string chapter, s
 
 void _DatabaseFunctions::QueryMySQLDatabaseFederal(string title, string chapter, string sub_chapter, string section, string us_code_text)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     string mysql_hostname = mysql_hostname.c_str();
     string mysql_username = "root";
     string mysql_password = "Anaheim228";
@@ -1438,7 +1730,7 @@ void _DatabaseFunctions::QueryMySQLDatabaseFederal(string title, string chapter,
 
 void _DatabaseFunctions::DropDatabase(string database_input)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
@@ -1464,7 +1756,7 @@ void _DatabaseFunctions::DropDatabase(string database_input)
 
 void _DatabaseFunctions::CreateDatabase(string database_input)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
@@ -1489,7 +1781,7 @@ void _DatabaseFunctions::CreateDatabase(string database_input)
 
 void _DatabaseFunctions::DropTable(string database_input, string table_input)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
@@ -1517,7 +1809,7 @@ void _DatabaseFunctions::DropTable(string database_input, string table_input)
 
 void _DatabaseFunctions::CreateTable(string database_input, string table_input, string* rows)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
@@ -1560,7 +1852,7 @@ void _DatabaseFunctions::CreateTable(string database_input, string table_input, 
 
 string* _MySQL::QueryDatabaseWordTypes(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_table = "entries";
@@ -1601,7 +1893,7 @@ string* _MySQL::QueryDatabaseWordTypes(string word)
 
 string** _MySQL::QueryDatabaseDefinitions(string word, string* wordTypes)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string sql1;
@@ -1663,7 +1955,7 @@ string** _MySQL::QueryDatabaseDefinitions(string word, string* wordTypes)
 
 void _MySQL::CreateTableWords(string mysql_origin_database, string mysql_table)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string sql1;
@@ -1690,7 +1982,7 @@ void _MySQL::CreateTableWords(string mysql_origin_database, string mysql_table)
 
 void _MySQL::CreateTableSentences(string mysql_origin_database, string mysql_table)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string sql1;
@@ -1717,7 +2009,7 @@ void _MySQL::CreateTableSentences(string mysql_origin_database, string mysql_tab
 
 void _MySQL::QueryDatabaseWikiWords(string mysql_database, string mysql_table, string paragraph_number, string sentence_number, string word, string word_type, string definition, string special_type, string pronoun_anaphora, bool object_of_preposition, bool direct_object, bool indirect_object, string vector)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     string sql1;
 
@@ -1774,7 +2066,7 @@ void _MySQL::QueryDatabaseWikiWords(string mysql_database, string mysql_table, s
 
 void _MySQL::QueryDatabaseWikiSentences(string mysql_database, string mysql_table, string paragraph_number, string sentence_number, string sentence, string* subject, string verb, string* predicate_sentence, string direct_object, string indirect_object, string* prepositional_phrase, string object_of_preposition, string* noun_phrase, string* relative_clause, string* infinitive_phrase, string* adjective_phrase, string* adverbial_phrase, string* participle_phrase, string* absolute_phrase, string* independent_clause, string* dependent_clause, string* noun_clause, bool simple_sentence, bool compound_sentence, bool complex_sentence, bool compound_complex_sentence, bool declarative_sentence, bool interrogative_sentence, bool negative_interrogative_sentence, bool imperative_sentence, bool conditional_sentence, bool regular_sentence, bool irregular_sentence, bool single_word_sentence, bool instructions, bool yes_or_no_sentence, bool literal_question, bool it_depends, bool statement_of_uncertainty, string sentence_vector, string averaged_vector)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     string sql1;
 
@@ -1938,7 +2230,7 @@ void _MySQL::QueryDatabaseWikiSentences(string mysql_database, string mysql_tabl
 
 string _MySQL::QueryWordVector(string word, string word_type)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_table = "wiki_vectors";
