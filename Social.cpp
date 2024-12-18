@@ -14,14 +14,14 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Social.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Social.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;

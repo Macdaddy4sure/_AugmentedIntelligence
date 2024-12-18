@@ -14,19 +14,19 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Vision.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Neuralink.h"
-#include "EKG.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Speech Recognition.h"
-#include "Time.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Vision.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Neuralink.hpp"
+#include "EKG.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Speech Recognition.hpp"
+#include "Time.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -88,100 +88,109 @@ void _ShortTermMemory::ShortTermMemory()
     //thread simple_image(_ShortTermMemory::stm_simple_image_funct);
 }
 
-void _ShortTermMemory::stm_vision_camera1_funct(string image_location, string image_fps, string image_hash, string image_time)
+void _ShortTermMemory::stm_vision_path_camera1_funct()
 {
-    for (int x = 0; x < 1000; x++)
+    string vision_camera1_path = vision_memory_directory;
+    vision_camera1_path += "camera1/";
+    string temp_path;
+
+    for (auto& p : directory_iterator(vision_camera1_path.c_str()))
     {
-        if (stm_vision_camera1[x][0].empty())
+        temp_path = p.path().string();
+        cout << temp_path << endl;
+        cin.get();
+
+        // Find a place to store the path of images
+        for (int x = 0; x < 1000; x++)
         {
-            lock_guard<mutex> lock(mtx_stm_vision_camera1[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera1[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera1[x][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera1[x][3]);
-            stm_vision_camera1[x][0] = image_location;
-            stm_vision_camera1[x][1] = image_fps;
-            stm_vision_camera1[x][2] = image_hash;
-            stm_vision_camera1[x][3] = image_time;
-            break;
-        }
-        if (!stm_vision_camera1[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
+            if ((stm_vision_path_camera1[x][0] == "") && (stm_vision_path_camera1[x][1] == ""))
             {
-                lock_guard<mutex> lock(mtx_stm_vision_camera1[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_vision_camera1[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_vision_camera1[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_vision_camera1[y][3]);
-                lock_guard<mutex> lock4(mtx_stm_vision_camera1[y + 1][0]);
-                lock_guard<mutex> lock5(mtx_stm_vision_camera1[y + 1][1]);
-                lock_guard<mutex> lock6(mtx_stm_vision_camera1[y + 1][2]);
-                lock_guard<mutex> lock7(mtx_stm_vision_camera1[y + 1][3]);
-                stm_vision_camera1[y][0] = stm_vision_camera1[y + 1][0];
-                stm_vision_camera1[y][1] = stm_vision_camera1[y + 1][1];
-                stm_vision_camera1[y][2] = stm_vision_camera1[y + 1][2];
-                stm_vision_camera1[y][3] = stm_vision_camera1[y + 1][3];
-                
+                ostringstream oss;
+
+                auto t = std::time(nullptr);
+                auto tm = *std::localtime(&t);
+
+                oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+                auto current_date = oss.str();
+
+                stm_vision_path_camera1[x][0] = temp_path;
+                stm_vision_path_camera1[x][1] = current_date;
             }
-            lock_guard<mutex> lock(mtx_stm_vision_camera1[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera1[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera1[999][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera1[999][3]);
-            stm_vision_camera1[999][0] = image_location;
-            stm_vision_camera1[999][1] = image_fps;
-            stm_vision_camera1[999][2] = image_hash;
-            stm_vision_camera1[999][3] = image_time;
-            break;
+            else
+            {
+                for (int y = 999; y >= 0; y--)
+                {
+                    string temp;
+
+                    if (y == 999)
+                    {
+                        stm_vision_path_camera1[y][0].clear();
+                        stm_vision_path_camera1[y][1].clear();
+                        stm_vision_path_camera1[y][0] = stm_vision_path_camera1[y + 1][0];
+                        stm_vision_path_camera1[y][1] = stm_vision_path_camera1[y + 1][1];
+                    }
+                    else
+                    {
+                        stm_vision_path_camera1[y][0] = stm_vision_path_camera1[y + 1][0];
+                        stm_vision_path_camera1[y][1] = stm_vision_path_camera1[y + 1][1];
+                    }
+                }
+            }
         }
     }
 }
 
-void _ShortTermMemory::stm_vision_camera2_funct(string image_location, string image_fps, string image_hash, string image_time)
+void _ShortTermMemory::stm_vision_path_camera2_funct()
 {
-    for (int x = 0; x < 1000; x++)
+    string vision_camera2_path = _Settings::GetVisionDirectory();
+    vision_camera2_path += "/camera2/";
+    string temp_path;
+
+    for (auto& p : directory_iterator(vision_camera2_path.c_str()))
     {
-        if (stm_vision_camera2[x][0].empty())
+        temp_path = p.path().string();
+
+        // Find a place to store the path of images
+        for (int x = 0; x < 1000; x++)
         {
-            lock_guard<mutex> lock(mtx_stm_vision_camera2[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera2[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera2[x][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera2[x][3]);
-            stm_vision_camera2[x][0] = image_location;
-            stm_vision_camera2[x][0] = image_fps;
-            stm_vision_camera2[x][0] = image_hash;
-            stm_vision_camera2[x][1] = image_time;
-            break;
-        }
-        if (!stm_vision_camera2[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
+            if ((stm_vision_path_camera2[x][0] == "") && (stm_vision_path_camera2[x][1] == ""))
             {
-                lock_guard<mutex> lock(mtx_stm_vision_camera2[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_vision_camera2[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_vision_camera2[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_vision_camera2[y][3]);
-                lock_guard<mutex> lock4(mtx_stm_vision_camera2[y + 1][0]);
-                lock_guard<mutex> lock5(mtx_stm_vision_camera2[y + 1][1]);
-                lock_guard<mutex> lock6(mtx_stm_vision_camera2[y + 1][2]);
-                lock_guard<mutex> lock7(mtx_stm_vision_camera2[y + 1][3]);
-                stm_vision_camera2[y][0] = stm_vision_camera2[y + 1][0];
-                stm_vision_camera2[y][1] = stm_vision_camera2[y + 1][1];
-                stm_vision_camera2[y][2] = stm_vision_camera2[y + 1][2];
-                stm_vision_camera2[y][3] = stm_vision_camera2[y + 1][3];
+                ostringstream oss;
+
+                auto t = std::time(nullptr);
+                auto tm = *std::localtime(&t);
+
+                oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+                auto current_date = oss.str();
+
+                stm_vision_path_camera2[x][0] = temp_path;
+                stm_vision_path_camera2[x][1] = current_date;
             }
-            lock_guard<mutex> lock(mtx_stm_vision_camera2[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera2[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera2[999][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera2[999][3]);
-            stm_vision_camera2[999][0] = image_location;
-            stm_vision_camera2[999][1] = image_fps;
-            stm_vision_camera2[999][1] = image_hash;
-            stm_vision_camera2[999][2] = image_time;
-            break;
+            else
+            {
+                for (int y = 999; y >= 0; y--)
+                {
+                    string temp;
+
+                    if (y == 999)
+                    {
+                        stm_vision_path_camera2[y][0].clear();
+                        stm_vision_path_camera2[y][1].clear();
+                        stm_vision_path_camera2[y][0] = stm_vision_path_camera2[y + 1][0];
+                        stm_vision_path_camera2[y][1] = stm_vision_path_camera2[y + 1][1];
+                    }
+                    else
+                    {
+                        stm_vision_path_camera2[y][0] = stm_vision_path_camera2[y + 1][0];
+                        stm_vision_path_camera2[y][1] = stm_vision_path_camera2[y + 1][1];
+                    }
+                }
+            }
         }
     }
 }
 
-void _ShortTermMemory::stm_longterm_memory_funct(string image_location, string image_time)
+void _ShortTermMemory::stm_longterm_memory_funct()
 {
 
 }
@@ -196,41 +205,52 @@ void _ShortTermMemory::stm_music_memory_sound_funct()
 
 }
 
-void _ShortTermMemory::stm_sound_funct(string sound_location, string transcription, string sound_time)
+void _ShortTermMemory::stm_sound_path_funct()
 {
-    for (int x = 0; x < 1000; x++)
+    string sound_path = _Settings::GetSoundDirectory();
+    sound_path += "/sound/";
+    string temp_path;
+
+    for (auto& p : directory_iterator(sound_path.c_str()))
     {
-        if (stm_sound[x][0].empty())
+        temp_path = p.path().string();
+
+        // Find a place to store the path of images
+        for (int x = 0; x < 1000; x++)
         {
-            lock_guard<mutex> lock(mtx_stm_sound[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_sound[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_sound[x][2]);
-            stm_sound[x][0] = sound_location;
-            stm_sound[x][1] = transcription;
-            stm_sound[x][2] = sound_time;
-            break;
-        }
-        if (!stm_sound[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
+            if ((stm_sound_path[x][0] == "") && (stm_sound_path[x][1] == ""))
             {
-                lock_guard<mutex> lock(mtx_stm_sound[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_sound[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_sound[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_sound[y + 1][0]);
-                lock_guard<mutex> lock4(mtx_stm_sound[y + 1][1]);
-                lock_guard<mutex> lock5(mtx_stm_sound[y + 1][2]);
-                stm_sound[y][0] = stm_sound[y + 1][0];
-                stm_sound[y][1] = stm_sound[y + 1][1];
-                stm_sound[y][2] = stm_sound[y + 1][2];
+                ostringstream oss;
+
+                auto t = std::time(nullptr);
+                auto tm = *std::localtime(&t);
+
+                oss << put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+                auto current_date = oss.str();
+
+                stm_sound_path[x][0] = temp_path;
+                stm_sound_path[x][1] = current_date;
             }
-            lock_guard<mutex> lock(mtx_stm_sound[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_sound[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_sound[999][2]);
-            stm_sound[999][0] = sound_location;
-            stm_sound[999][1] = transcription;
-            stm_sound[999][2] = sound_time;
-            break;
+            else
+            {
+                for (int y = 999; y >= 0; y--)
+                {
+                    string temp;
+
+                    if (y == 999)
+                    {
+                        stm_sound_path[y][0].clear();
+                        stm_sound_path[y][1].clear();
+                        stm_sound_path[y][0] = stm_sound_path[y + 1][0];
+                        stm_sound_path[y][1] = stm_sound_path[y + 1][1];
+                    }
+                    else
+                    {
+                        stm_sound_path[y][0] = stm_sound_path[y + 1][0];
+                        stm_sound_path[y][1] = stm_sound_path[y + 1][1];
+                    }
+                }
+            }
         }
     }
 }
@@ -240,1056 +260,29 @@ void _ShortTermMemory::stm_speech_dialogue_funct()
     //_SpeechRecognition::SpeechRecognition();
 }
 
-void _ShortTermMemory::stm_reading_text_funct(string image_location, string reading_text, string reading_time)
+void _ShortTermMemory::stm_reading_text_funct()
 {
-    for (int x = 0; x < 1000; x++)
-    {
-        if (stm_reading[x][0].empty())
-        {
-            lock_guard<mutex> lock(mtx_stm_reading[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_reading[x][2]);
-            stm_reading[x][0] = image_location;
-            stm_reading[x][1] = reading_text;
-            stm_reading[x][2] = reading_time;
-            break;
-        }
-        if (!stm_reading[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
-            {
-                lock_guard<mutex> lock(mtx_stm_reading[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_reading[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_reading[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_reading[y + 1][0]);
-                lock_guard<mutex> lock4(mtx_stm_reading[y + 1][1]);
-                lock_guard<mutex> lock5(mtx_stm_reading[y + 1][2]);
-                stm_reading[y][0] = stm_reading[y + 1][0];
-                stm_reading[y][1] = stm_reading[y + 1][1];
-                stm_reading[y][2] = stm_reading[y + 1][2];
-            }
-            lock_guard<mutex> lock(mtx_stm_reading[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_reading[999][2]);
-            stm_reading[999][0] = image_location;
-            stm_reading[999][1] = reading_text;
-            stm_reading[999][2] = reading_time;
-            break;
-        }
-    }
+    //_Reading::Reading();
 }
 
-//void _ShortTermMemory::stm_action1_text_funct()
-//{
-//    // _Actions::GetCurrentAction();
-//}
-//
-//void _ShortTermMemory::stm_action2_text_funct()
-//{
-//    // _Actions::GetCurrentAction();
-//}
-//
-//void _ShortTermMemory::stm_action3_text_funct()
-//{
-//    // _Actions::GetCurrentAction();
-//}
-
-void _ShortTermMemory::stm_vision_objects_image_camera1_funct(string image_location, string image_hash, string image_time, string object_detection_image, string object_detection_image_hash, string object_detection_image_time, string class1, string class1_x, string class1_width, string class1_y, string class1_height, string class1_score, string class2, string class2_x, string class2_width, string class2_y, string class2_height, string class2_score, string class3, string class3_x, string class3_width, string class3_y, string class3_height, string class3_score, string class4, string class4_x, string class4_width, string class4_y, string class4_height, string class4_score, string class5, string class5_x, string class5_width, string class5_y, string class5_height, string class5_score, string class6, string class6_x, string class6_width, string class6_y, string class6_height, string class6_score, string class7, string class7_x, string class7_width, string class7_y, string class7_height, string class7_score, string class8, string class8_x, string class8_width, string class8_y, string class8_height, string class8_score, string class9, string class9_x, string class9_width, string class9_y, string class9_height, string class9_score, string class10, string class10_x, string class10_width, string class10_y, string class10_height, string class10_score)
+void _ShortTermMemory::stm_action1_text_funct()
 {
-    for (int x = 0; x < 1000; x++)
-    {
-        if (stm_vision_objects_image_camera1[x][0].empty())
-        {
-            lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera1[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera1[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera1[x][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera1[x][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera1[x][4]);
-            lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera1[x][5]);
-            lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera1[x][6]);
-            lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera1[x][7]);
-            lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera1[x][8]);
-            lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera1[x][9]);
-            lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera1[x][10]);
-            lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera1[x][11]);
-            lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera1[x][12]);
-            lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera1[x][13]);
-            lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera1[x][14]);
-            lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera1[x][15]);
-            lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera1[x][16]);
-            lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera1[x][17]);
-            lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera1[x][18]);
-            lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera1[x][19]);
-            lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera1[x][20]);
-            lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera1[x][21]);
-            lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera1[x][22]);
-            lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera1[x][23]);
-            lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera1[x][24]);
-            lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera1[x][25]);
-            lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera1[x][26]);
-            lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera1[x][27]);
-            lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera1[x][28]);
-            lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera1[x][29]);
-            lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera1[x][30]);
-            lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera1[x][31]);
-            lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera1[x][32]);
-            lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera1[x][33]);
-            lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera1[x][34]);
-            lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera1[x][35]);
-            lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera1[x][36]);
-            lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera1[x][37]);
-            lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera1[x][38]);
-            lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera1[x][39]);
-            lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera1[x][40]);
-            lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera1[x][41]);
-            lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera1[x][42]);
-            lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera1[x][43]);
-            lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera1[x][44]);
-            lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera1[x][45]);
-            lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera1[x][46]);
-            lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera1[x][47]);
-            lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera1[x][48]);
-            lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera1[x][49]);
-            lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera1[x][50]);
-            lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera1[x][51]);
-            lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera1[x][52]);
-            lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera1[x][53]);
-            lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera1[x][54]);
-            lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera1[x][55]);
-            lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera1[x][56]);
-            lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera1[x][57]);
-            lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera1[x][58]);
-            lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera1[x][59]);
-            lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera1[x][60]);
-            lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera1[x][61]);
-            lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera1[x][62]);
-            lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera1[x][63]);
-            lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera1[x][64]);
-            stm_vision_objects_image_camera1[x][0] = image_location;
-            stm_vision_objects_image_camera1[x][1] = image_hash;
-            stm_vision_objects_image_camera1[x][2] = image_time;
-            stm_vision_objects_image_camera1[x][3] = object_detection_image;
-            stm_vision_objects_image_camera1[x][4] = object_detection_image_hash;
-            stm_vision_objects_image_camera1[x][5] = object_detection_image_time;
-            stm_vision_objects_image_camera1[x][6] = class1;
-            stm_vision_objects_image_camera1[x][7] = class1_x;
-            stm_vision_objects_image_camera1[x][8] = class1_width;
-            stm_vision_objects_image_camera1[x][9] = class1_y;
-            stm_vision_objects_image_camera1[x][10] = class1_height;
-            stm_vision_objects_image_camera1[x][11] = class1_score;
-            stm_vision_objects_image_camera1[x][12] = class2;
-            stm_vision_objects_image_camera1[x][13] = class2_x;
-            stm_vision_objects_image_camera1[x][14] = class2_width;
-            stm_vision_objects_image_camera1[x][15] = class2_y;
-            stm_vision_objects_image_camera1[x][16] = class2_height;
-            stm_vision_objects_image_camera1[x][17] = class2_score;
-            stm_vision_objects_image_camera1[x][18] = class3;
-            stm_vision_objects_image_camera1[x][19] = class3_x;
-            stm_vision_objects_image_camera1[x][20] = class3_width;
-            stm_vision_objects_image_camera1[x][21] = class3_y;
-            stm_vision_objects_image_camera1[x][22] = class3_height;
-            stm_vision_objects_image_camera1[x][23] = class3_score;
-            stm_vision_objects_image_camera1[x][24] = class4;
-            stm_vision_objects_image_camera1[x][25] = class4_x;
-            stm_vision_objects_image_camera1[x][26] = class4_width;
-            stm_vision_objects_image_camera1[x][27] = class4_y;
-            stm_vision_objects_image_camera1[x][28] = class4_height;
-            stm_vision_objects_image_camera1[x][29] = class4_score;
-            stm_vision_objects_image_camera1[x][30] = class5;
-            stm_vision_objects_image_camera1[x][31] = class5_x;
-            stm_vision_objects_image_camera1[x][32] = class5_width;
-            stm_vision_objects_image_camera1[x][33] = class5_y;
-            stm_vision_objects_image_camera1[x][34] = class5_height;
-            stm_vision_objects_image_camera1[x][35] = class5_score;
-            stm_vision_objects_image_camera1[x][36] = class6;
-            stm_vision_objects_image_camera1[x][37] = class6_x;
-            stm_vision_objects_image_camera1[x][38] = class6_width;
-            stm_vision_objects_image_camera1[x][39] = class6_y;
-            stm_vision_objects_image_camera1[x][40] = class6_height;
-            stm_vision_objects_image_camera1[x][41] = class6_score;
-            stm_vision_objects_image_camera1[x][42] = class7;
-            stm_vision_objects_image_camera1[x][43] = class7_x;
-            stm_vision_objects_image_camera1[x][44] = class7_width;
-            stm_vision_objects_image_camera1[x][45] = class7_y;
-            stm_vision_objects_image_camera1[x][46] = class7_height;
-            stm_vision_objects_image_camera1[x][47] = class7_score;
-            stm_vision_objects_image_camera1[x][48] = class8;
-            stm_vision_objects_image_camera1[x][49] = class8_x;
-            stm_vision_objects_image_camera1[x][50] = class8_width;
-            stm_vision_objects_image_camera1[x][51] = class8_y;
-            stm_vision_objects_image_camera1[x][52] = class8_height;
-            stm_vision_objects_image_camera1[x][53] = class8_score;
-            stm_vision_objects_image_camera1[x][54] = class9;
-            stm_vision_objects_image_camera1[x][55] = class9_x;
-            stm_vision_objects_image_camera1[x][56] = class9_width;
-            stm_vision_objects_image_camera1[x][57] = class9_y;
-            stm_vision_objects_image_camera1[x][58] = class9_height;
-            stm_vision_objects_image_camera1[x][59] = class9_score;
-            stm_vision_objects_image_camera1[x][60] = class10_x;
-            stm_vision_objects_image_camera1[x][61] = class10_width;
-            stm_vision_objects_image_camera1[x][62] = class10_y;
-            stm_vision_objects_image_camera1[x][63] = class10_height;
-            stm_vision_objects_image_camera1[x][64] = class10_score;
-            stm_vision_objects_image_camera1[x][0] = image_location;
-            stm_vision_objects_image_camera1[x][1] = image_hash;
-            stm_vision_objects_image_camera1[x][2] = image_time;
-            stm_vision_objects_image_camera1[x][3] = class1;
-            stm_vision_objects_image_camera1[x][4] = class1_x;
-            stm_vision_objects_image_camera1[x][5] = class1_width;
-            stm_vision_objects_image_camera1[x][6] = class1_y;
-            stm_vision_objects_image_camera1[x][7] = class1_height;
-            stm_vision_objects_image_camera1[x][8] = class1_score;
-            stm_vision_objects_image_camera1[x][9] = class2;
-            stm_vision_objects_image_camera1[x][10] = class2_x;
-            stm_vision_objects_image_camera1[x][11] = class2_width;
-            stm_vision_objects_image_camera1[x][12] = class2_y;
-            stm_vision_objects_image_camera1[x][13] = class2_height;
-            stm_vision_objects_image_camera1[x][14] = class2_score;
-            stm_vision_objects_image_camera1[x][15] = class3;
-            stm_vision_objects_image_camera1[x][16] = class3_x;
-            stm_vision_objects_image_camera1[x][17] = class3_width;
-            stm_vision_objects_image_camera1[x][18] = class3_y;
-            stm_vision_objects_image_camera1[x][19] = class3_height;
-            stm_vision_objects_image_camera1[x][20] = class3_score;
-            stm_vision_objects_image_camera1[x][21] = class4;
-            stm_vision_objects_image_camera1[x][22] = class4_x;
-            stm_vision_objects_image_camera1[x][23] = class4_width;
-            stm_vision_objects_image_camera1[x][24] = class4_y;
-            stm_vision_objects_image_camera1[x][25] = class4_height;
-            stm_vision_objects_image_camera1[x][26] = class4_score;
-            stm_vision_objects_image_camera1[x][27] = class5;
-            stm_vision_objects_image_camera1[x][28] = class5_x;
-            stm_vision_objects_image_camera1[x][29] = class5_width;
-            stm_vision_objects_image_camera1[x][30] = class5_y;
-            stm_vision_objects_image_camera1[x][31] = class5_height;
-            stm_vision_objects_image_camera1[x][32] = class5_score;
-            stm_vision_objects_image_camera1[x][33] = class6;
-            stm_vision_objects_image_camera1[x][34] = class6_x;
-            stm_vision_objects_image_camera1[x][35] = class6_width;
-            stm_vision_objects_image_camera1[x][36] = class6_y;
-            stm_vision_objects_image_camera1[x][37] = class6_height;
-            stm_vision_objects_image_camera1[x][38] = class6_score;
-            stm_vision_objects_image_camera1[x][39] = class7;
-            stm_vision_objects_image_camera1[x][40] = class7_x;
-            stm_vision_objects_image_camera1[x][41] = class7_width;
-            stm_vision_objects_image_camera1[x][42] = class7_y;
-            stm_vision_objects_image_camera1[x][43] = class7_height;
-            stm_vision_objects_image_camera1[x][44] = class7_score;
-            stm_vision_objects_image_camera1[x][45] = class8;
-            stm_vision_objects_image_camera1[x][46] = class8_x;
-            stm_vision_objects_image_camera1[x][47] = class8_width;
-            stm_vision_objects_image_camera1[x][48] = class8_y;
-            stm_vision_objects_image_camera1[x][49] = class8_height;
-            stm_vision_objects_image_camera1[x][50] = class8_score;
-            stm_vision_objects_image_camera1[x][51] = class9;
-            stm_vision_objects_image_camera1[x][52] = class9_x;
-            stm_vision_objects_image_camera1[x][53] = class9_width;
-            stm_vision_objects_image_camera1[x][54] = class9_y;
-            stm_vision_objects_image_camera1[x][55] = class9_height;
-            stm_vision_objects_image_camera1[x][56] = class9_score;
-            stm_vision_objects_image_camera1[x][57] = class10_x;
-            stm_vision_objects_image_camera1[x][58] = class10_width;
-            stm_vision_objects_image_camera1[x][59] = class10_y;
-            stm_vision_objects_image_camera1[x][60] = class10_height;
-            stm_vision_objects_image_camera1[x][61] = class10_score;
-            break;
-        }
-        if (!stm_vision_objects_image_camera1[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
-            {
-                lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera1[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera1[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera1[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera1[y][3]);
-                lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera1[y][4]);
-                lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera1[y][5]);
-                lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera1[y][6]);
-                lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera1[y][7]);
-                lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera1[y][8]);
-                lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera1[y][9]);
-                lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera1[y][10]);
-                lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera1[y][11]);
-                lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera1[y][12]);
-                lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera1[y][13]);
-                lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera1[y][14]);
-                lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera1[y][15]);
-                lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera1[y][16]);
-                lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera1[y][17]);
-                lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera1[y][18]);
-                lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera1[y][19]);
-                lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera1[y][20]);
-                lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera1[y][21]);
-                lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera1[y][22]);
-                lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera1[y][23]);
-                lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera1[y][24]);
-                lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera1[y][25]);
-                lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera1[y][26]);
-                lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera1[y][27]);
-                lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera1[y][28]);
-                lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera1[y][29]);
-                lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera1[y][30]);
-                lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera1[y][31]);
-                lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera1[y][32]);
-                lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera1[y][33]);
-                lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera1[y][34]);
-                lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera1[y][35]);
-                lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera1[y][36]);
-                lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera1[y][37]);
-                lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera1[y][38]);
-                lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera1[y][39]);
-                lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera1[y][40]);
-                lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera1[y][41]);
-                lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera1[y][42]);
-                lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera1[y][43]);
-                lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera1[y][44]);
-                lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera1[y][45]);
-                lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera1[y][46]);
-                lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera1[y][47]);
-                lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera1[y][48]);
-                lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera1[y][49]);
-                lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera1[y][50]);
-                lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera1[y][51]);
-                lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera1[y][52]);
-                lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera1[y][53]);
-                lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera1[y][54]);
-                lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera1[y][55]);
-                lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera1[y][56]);
-                lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera1[y][57]);
-                lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera1[y][58]);
-                lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera1[y][59]);
-                lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera1[y + 1][0]);
-                lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera1[y + 1][1]);
-                lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera1[y + 1][2]);
-                lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera1[y + 1][3]);
-                lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera1[y + 1][4]);
-                lock_guard<mutex> lock65(mtx_stm_vision_objects_image_camera1[y + 1][5]);
-                lock_guard<mutex> lock66(mtx_stm_vision_objects_image_camera1[y + 1][6]);
-                lock_guard<mutex> lock67(mtx_stm_vision_objects_image_camera1[y + 1][7]);
-                lock_guard<mutex> lock68(mtx_stm_vision_objects_image_camera1[y + 1][8]);
-                lock_guard<mutex> lock69(mtx_stm_vision_objects_image_camera1[y + 1][9]);
-                lock_guard<mutex> lock70(mtx_stm_vision_objects_image_camera1[y + 1][10]);
-                lock_guard<mutex> lock71(mtx_stm_vision_objects_image_camera1[y + 1][11]);
-                lock_guard<mutex> lock72(mtx_stm_vision_objects_image_camera1[y + 1][12]);
-                lock_guard<mutex> lock73(mtx_stm_vision_objects_image_camera1[y + 1][13]);
-                lock_guard<mutex> lock74(mtx_stm_vision_objects_image_camera1[y + 1][14]);
-                lock_guard<mutex> lock75(mtx_stm_vision_objects_image_camera1[y + 1][15]);
-                lock_guard<mutex> lock76(mtx_stm_vision_objects_image_camera1[y + 1][16]);
-                lock_guard<mutex> lock77(mtx_stm_vision_objects_image_camera1[y + 1][17]);
-                lock_guard<mutex> lock78(mtx_stm_vision_objects_image_camera1[y + 1][18]);
-                lock_guard<mutex> lock79(mtx_stm_vision_objects_image_camera1[y + 1][19]);
-                lock_guard<mutex> lock80(mtx_stm_vision_objects_image_camera1[y + 1][20]);
-                lock_guard<mutex> lock81(mtx_stm_vision_objects_image_camera1[y + 1][21]);
-                lock_guard<mutex> lock82(mtx_stm_vision_objects_image_camera1[y + 1][22]);
-                lock_guard<mutex> lock83(mtx_stm_vision_objects_image_camera1[y + 1][23]);
-                lock_guard<mutex> lock84(mtx_stm_vision_objects_image_camera1[y + 1][24]);
-                lock_guard<mutex> lock85(mtx_stm_vision_objects_image_camera1[y + 1][25]);
-                lock_guard<mutex> lock86(mtx_stm_vision_objects_image_camera1[y + 1][26]);
-                lock_guard<mutex> lock87(mtx_stm_vision_objects_image_camera1[y + 1][27]);
-                lock_guard<mutex> lock88(mtx_stm_vision_objects_image_camera1[y + 1][28]);
-                lock_guard<mutex> lock89(mtx_stm_vision_objects_image_camera1[y + 1][29]);
-                lock_guard<mutex> lock90(mtx_stm_vision_objects_image_camera1[y + 1][30]);
-                lock_guard<mutex> lock91(mtx_stm_vision_objects_image_camera1[y + 1][31]);
-                lock_guard<mutex> lock92(mtx_stm_vision_objects_image_camera1[y + 1][32]);
-                lock_guard<mutex> lock93(mtx_stm_vision_objects_image_camera1[y + 1][33]);
-                lock_guard<mutex> lock94(mtx_stm_vision_objects_image_camera1[y + 1][34]);
-                lock_guard<mutex> lock95(mtx_stm_vision_objects_image_camera1[y + 1][35]);
-                lock_guard<mutex> lock96(mtx_stm_vision_objects_image_camera1[y + 1][36]);
-                lock_guard<mutex> lock97(mtx_stm_vision_objects_image_camera1[y + 1][37]);
-                lock_guard<mutex> lock98(mtx_stm_vision_objects_image_camera1[y + 1][38]);
-                lock_guard<mutex> lock99(mtx_stm_vision_objects_image_camera1[y + 1][39]);
-                lock_guard<mutex> lock100(mtx_stm_vision_objects_image_camera1[y + 1][40]);
-                lock_guard<mutex> lock101(mtx_stm_vision_objects_image_camera1[y + 1][41]);
-                lock_guard<mutex> lock102(mtx_stm_vision_objects_image_camera1[y + 1][42]);
-                lock_guard<mutex> lock103(mtx_stm_vision_objects_image_camera1[y + 1][43]);
-                lock_guard<mutex> lock104(mtx_stm_vision_objects_image_camera1[y + 1][44]);
-                lock_guard<mutex> lock105(mtx_stm_vision_objects_image_camera1[y + 1][45]);
-                lock_guard<mutex> lock106(mtx_stm_vision_objects_image_camera1[y + 1][46]);
-                lock_guard<mutex> lock107(mtx_stm_vision_objects_image_camera1[y + 1][47]);
-                lock_guard<mutex> lock108(mtx_stm_vision_objects_image_camera1[y + 1][48]);
-                lock_guard<mutex> lock109(mtx_stm_vision_objects_image_camera1[y + 1][49]);
-                lock_guard<mutex> lock110(mtx_stm_vision_objects_image_camera1[y + 1][50]);
-                lock_guard<mutex> lock111(mtx_stm_vision_objects_image_camera1[y + 1][51]);
-                lock_guard<mutex> lock112(mtx_stm_vision_objects_image_camera1[y + 1][52]);
-                lock_guard<mutex> lock113(mtx_stm_vision_objects_image_camera1[y + 1][53]);
-                lock_guard<mutex> lock114(mtx_stm_vision_objects_image_camera1[y + 1][54]);
-                lock_guard<mutex> lock115(mtx_stm_vision_objects_image_camera1[y + 1][55]);
-                lock_guard<mutex> lock116(mtx_stm_vision_objects_image_camera1[y + 1][56]);
-                lock_guard<mutex> lock117(mtx_stm_vision_objects_image_camera1[y + 1][57]);
-                lock_guard<mutex> lock118(mtx_stm_vision_objects_image_camera1[y + 1][58]);
-                lock_guard<mutex> lock119(mtx_stm_vision_objects_image_camera1[y + 1][59]);
-                stm_vision_objects_image_camera1[y][0] = stm_vision_objects_image_camera1[y + 1][0];
-                stm_vision_objects_image_camera1[y][1] = stm_vision_objects_image_camera1[y + 1][1];
-                stm_vision_objects_image_camera1[y][2] = stm_vision_objects_image_camera1[y + 1][2];
-                stm_vision_objects_image_camera1[y][3] = stm_vision_objects_image_camera1[y + 1][3];
-                stm_vision_objects_image_camera1[y][4] = stm_vision_objects_image_camera1[y + 1][4];
-                stm_vision_objects_image_camera1[y][5] = stm_vision_objects_image_camera1[y + 1][5];
-                stm_vision_objects_image_camera1[y][6] = stm_vision_objects_image_camera1[y + 1][6];
-                stm_vision_objects_image_camera1[y][7] = stm_vision_objects_image_camera1[y + 1][7];
-                stm_vision_objects_image_camera1[y][8] = stm_vision_objects_image_camera1[y + 1][8];
-                stm_vision_objects_image_camera1[y][9] = stm_vision_objects_image_camera1[y + 1][9];
-                stm_vision_objects_image_camera1[y][10] = stm_vision_objects_image_camera1[y + 1][0];
-                stm_vision_objects_image_camera1[y][11] = stm_vision_objects_image_camera1[y + 1][11];
-                stm_vision_objects_image_camera1[y][12] = stm_vision_objects_image_camera1[y + 1][12];
-                stm_vision_objects_image_camera1[y][13] = stm_vision_objects_image_camera1[y + 1][13];
-                stm_vision_objects_image_camera1[y][14] = stm_vision_objects_image_camera1[y + 1][14];
-                stm_vision_objects_image_camera1[y][15] = stm_vision_objects_image_camera1[y + 1][15];
-                stm_vision_objects_image_camera1[y][16] = stm_vision_objects_image_camera1[y + 1][16];
-                stm_vision_objects_image_camera1[y][17] = stm_vision_objects_image_camera1[y + 1][17];
-                stm_vision_objects_image_camera1[y][18] = stm_vision_objects_image_camera1[y + 1][18];
-                stm_vision_objects_image_camera1[y][19] = stm_vision_objects_image_camera1[y + 1][19];
-                stm_vision_objects_image_camera1[y][20] = stm_vision_objects_image_camera1[y + 1][20];
-                stm_vision_objects_image_camera1[y][21] = stm_vision_objects_image_camera1[y + 1][21];
-                stm_vision_objects_image_camera1[y][22] = stm_vision_objects_image_camera1[y + 1][22];
-                stm_vision_objects_image_camera1[y][23] = stm_vision_objects_image_camera1[y + 1][23];
-                stm_vision_objects_image_camera1[y][24] = stm_vision_objects_image_camera1[y + 1][24];
-                stm_vision_objects_image_camera1[y][25] = stm_vision_objects_image_camera1[y + 1][25];
-                stm_vision_objects_image_camera1[y][26] = stm_vision_objects_image_camera1[y + 1][26];
-                stm_vision_objects_image_camera1[y][27] = stm_vision_objects_image_camera1[y + 1][27];
-                stm_vision_objects_image_camera1[y][28] = stm_vision_objects_image_camera1[y + 1][28];
-                stm_vision_objects_image_camera1[y][29] = stm_vision_objects_image_camera1[y + 1][29];
-                stm_vision_objects_image_camera1[y][30] = stm_vision_objects_image_camera1[y + 1][30];
-                stm_vision_objects_image_camera1[y][31] = stm_vision_objects_image_camera1[y + 1][31];
-                stm_vision_objects_image_camera1[y][32] = stm_vision_objects_image_camera1[y + 1][32];
-                stm_vision_objects_image_camera1[y][33] = stm_vision_objects_image_camera1[y + 1][33];
-                stm_vision_objects_image_camera1[y][34] = stm_vision_objects_image_camera1[y + 1][34];
-                stm_vision_objects_image_camera1[y][35] = stm_vision_objects_image_camera1[y + 1][35];
-                stm_vision_objects_image_camera1[y][36] = stm_vision_objects_image_camera1[y + 1][36];
-                stm_vision_objects_image_camera1[y][37] = stm_vision_objects_image_camera1[y + 1][37];
-                stm_vision_objects_image_camera1[y][38] = stm_vision_objects_image_camera1[y + 1][38];
-                stm_vision_objects_image_camera1[y][39] = stm_vision_objects_image_camera1[y + 1][39];
-                stm_vision_objects_image_camera1[y][40] = stm_vision_objects_image_camera1[y + 1][40];
-                stm_vision_objects_image_camera1[y][41] = stm_vision_objects_image_camera1[y + 1][41];
-                stm_vision_objects_image_camera1[y][42] = stm_vision_objects_image_camera1[y + 1][42];
-                stm_vision_objects_image_camera1[y][43] = stm_vision_objects_image_camera1[y + 1][43];
-                stm_vision_objects_image_camera1[y][44] = stm_vision_objects_image_camera1[y + 1][44];
-                stm_vision_objects_image_camera1[y][45] = stm_vision_objects_image_camera1[y + 1][45];
-                stm_vision_objects_image_camera1[y][46] = stm_vision_objects_image_camera1[y + 1][46];
-                stm_vision_objects_image_camera1[y][47] = stm_vision_objects_image_camera1[y + 1][47];
-                stm_vision_objects_image_camera1[y][48] = stm_vision_objects_image_camera1[y + 1][48];
-                stm_vision_objects_image_camera1[y][49] = stm_vision_objects_image_camera1[y + 1][49];
-                stm_vision_objects_image_camera1[y][50] = stm_vision_objects_image_camera1[y + 1][50];
-                stm_vision_objects_image_camera1[y][51] = stm_vision_objects_image_camera1[y + 1][51];
-                stm_vision_objects_image_camera1[y][52] = stm_vision_objects_image_camera1[y + 1][52];
-                stm_vision_objects_image_camera1[y][53] = stm_vision_objects_image_camera1[y + 1][53];
-                stm_vision_objects_image_camera1[y][54] = stm_vision_objects_image_camera1[y + 1][54];
-                stm_vision_objects_image_camera1[y][55] = stm_vision_objects_image_camera1[y + 1][55];
-                stm_vision_objects_image_camera1[y][56] = stm_vision_objects_image_camera1[y + 1][56];
-                stm_vision_objects_image_camera1[y][57] = stm_vision_objects_image_camera1[y + 1][57];
-                stm_vision_objects_image_camera1[y][58] = stm_vision_objects_image_camera1[y + 1][58];
-                stm_vision_objects_image_camera1[y][59] = stm_vision_objects_image_camera1[y + 1][59];
-                stm_vision_objects_image_camera1[y][60] = stm_vision_objects_image_camera1[y + 1][60];
-                stm_vision_objects_image_camera1[y][61] = stm_vision_objects_image_camera1[y + 1][61];
-                stm_vision_objects_image_camera1[y][62] = stm_vision_objects_image_camera1[y + 1][62];
-                stm_vision_objects_image_camera1[y][63] = stm_vision_objects_image_camera1[y + 1][63];
-                stm_vision_objects_image_camera1[y][64] = stm_vision_objects_image_camera1[y + 1][64];
-            }
-            lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera2[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera2[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera2[999][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera2[999][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera2[999][4]);
-            lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera2[999][5]);
-            lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera2[999][6]);
-            lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera2[999][7]);
-            lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera2[999][8]);
-            lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera2[999][9]);
-            lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera2[999][10]);
-            lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera2[999][11]);
-            lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera2[999][12]);
-            lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera2[999][13]);
-            lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera2[999][14]);
-            lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera2[999][15]);
-            lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera2[999][16]);
-            lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera2[999][17]);
-            lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera2[999][18]);
-            lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera2[999][19]);
-            lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera2[999][20]);
-            lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera2[999][21]);
-            lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera2[999][22]);
-            lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera2[999][23]);
-            lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera2[999][24]);
-            lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera2[999][25]);
-            lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera2[999][26]);
-            lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera2[999][27]);
-            lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera2[999][28]);
-            lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera2[999][29]);
-            lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera2[999][30]);
-            lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera2[999][31]);
-            lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera2[999][32]);
-            lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera2[999][33]);
-            lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera2[999][34]);
-            lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera2[999][35]);
-            lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera2[999][36]);
-            lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera2[999][37]);
-            lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera2[999][38]);
-            lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera2[999][39]);
-            lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera2[999][40]);
-            lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera2[999][41]);
-            lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera2[999][42]);
-            lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera2[999][43]);
-            lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera2[999][44]);
-            lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera2[999][45]);
-            lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera2[999][46]);
-            lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera2[999][47]);
-            lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera2[999][48]);
-            lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera2[999][49]);
-            lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera2[999][50]);
-            lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera2[999][51]);
-            lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera2[999][52]);
-            lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera2[999][53]);
-            lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera2[999][54]);
-            lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera2[999][55]);
-            lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera2[999][56]);
-            lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera2[999][57]);
-            lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera2[999][58]);
-            lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera2[999][59]);
-            lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera2[999][60]);
-            lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera2[999][61]);
-            lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera2[999][62]);
-            lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera2[999][63]);
-            lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera2[999][64]);
-            stm_vision_objects_image_camera2[999][0] = image_location;
-            stm_vision_objects_image_camera2[999][1] = image_hash;
-            stm_vision_objects_image_camera2[999][2] = image_time;
-            stm_vision_objects_image_camera2[999][3] = object_detection_image;
-            stm_vision_objects_image_camera2[999][4] = object_detection_image_hash;
-            stm_vision_objects_image_camera2[999][5] = object_detection_image_time;
-            stm_vision_objects_image_camera2[999][6] = class1;
-            stm_vision_objects_image_camera2[999][7] = class1_x;
-            stm_vision_objects_image_camera2[999][8] = class1_width;
-            stm_vision_objects_image_camera2[999][9] = class1_y;
-            stm_vision_objects_image_camera2[999][10] = class1_height;
-            stm_vision_objects_image_camera2[999][11] = class1_score;
-            stm_vision_objects_image_camera2[999][12] = class2;
-            stm_vision_objects_image_camera2[999][13] = class2_x;
-            stm_vision_objects_image_camera2[999][14] = class2_width;
-            stm_vision_objects_image_camera2[999][15] = class2_y;
-            stm_vision_objects_image_camera2[999][16] = class2_height;
-            stm_vision_objects_image_camera2[999][17] = class2_score;
-            stm_vision_objects_image_camera2[999][18] = class3;
-            stm_vision_objects_image_camera2[999][19] = class3_x;
-            stm_vision_objects_image_camera2[999][20] = class3_width;
-            stm_vision_objects_image_camera2[999][21] = class3_y;
-            stm_vision_objects_image_camera2[999][22] = class3_height;
-            stm_vision_objects_image_camera2[999][23] = class3_score;
-            stm_vision_objects_image_camera2[999][24] = class4;
-            stm_vision_objects_image_camera2[999][25] = class4_x;
-            stm_vision_objects_image_camera2[999][26] = class4_width;
-            stm_vision_objects_image_camera2[999][27] = class4_y;
-            stm_vision_objects_image_camera2[999][28] = class4_height;
-            stm_vision_objects_image_camera2[999][29] = class4_score;
-            stm_vision_objects_image_camera2[999][30] = class5;
-            stm_vision_objects_image_camera2[999][31] = class5_x;
-            stm_vision_objects_image_camera2[999][32] = class5_width;
-            stm_vision_objects_image_camera2[999][33] = class5_y;
-            stm_vision_objects_image_camera2[999][34] = class5_height;
-            stm_vision_objects_image_camera2[999][35] = class5_score;
-            stm_vision_objects_image_camera2[999][36] = class6;
-            stm_vision_objects_image_camera2[999][37] = class6_x;
-            stm_vision_objects_image_camera2[999][38] = class6_width;
-            stm_vision_objects_image_camera2[999][39] = class6_y;
-            stm_vision_objects_image_camera2[999][40] = class6_height;
-            stm_vision_objects_image_camera2[999][41] = class6_score;
-            stm_vision_objects_image_camera2[999][42] = class7;
-            stm_vision_objects_image_camera2[999][43] = class7_x;
-            stm_vision_objects_image_camera2[999][44] = class7_width;
-            stm_vision_objects_image_camera2[999][45] = class7_y;
-            stm_vision_objects_image_camera2[999][46] = class7_height;
-            stm_vision_objects_image_camera2[999][47] = class7_score;
-            stm_vision_objects_image_camera2[999][48] = class8;
-            stm_vision_objects_image_camera2[999][49] = class8_x;
-            stm_vision_objects_image_camera2[999][50] = class8_width;
-            stm_vision_objects_image_camera2[999][51] = class8_y;
-            stm_vision_objects_image_camera2[999][52] = class8_height;
-            stm_vision_objects_image_camera2[999][53] = class8_score;
-            stm_vision_objects_image_camera2[999][54] = class9;
-            stm_vision_objects_image_camera2[999][55] = class9_x;
-            stm_vision_objects_image_camera2[999][56] = class9_width;
-            stm_vision_objects_image_camera2[999][57] = class9_y;
-            stm_vision_objects_image_camera2[999][58] = class9_height;
-            stm_vision_objects_image_camera2[999][59] = class9_score;
-            stm_vision_objects_image_camera2[999][60] = class10_x;
-            stm_vision_objects_image_camera2[999][61] = class10_width;
-            stm_vision_objects_image_camera2[999][62] = class10_y;
-            stm_vision_objects_image_camera2[999][63] = class10_height;
-            stm_vision_objects_image_camera2[999][64] = class10_score;
-            break;
-        }
-    }
+    // _Actions::GetCurrentAction();
 }
 
-void _ShortTermMemory::stm_vision_objects_image_camera2_funct(string image_location, string image_hash, string image_time, string object_detection_image, string object_detection_image_hash, string object_detection_image_time, string class1, string class1_x, string class1_width, string class1_y, string class1_height, string class1_score, string class2, string class2_x, string class2_width, string class2_y, string class2_height, string class2_score, string class3, string class3_x, string class3_width, string class3_y, string class3_height, string class3_score, string class4, string class4_x, string class4_width, string class4_y, string class4_height, string class4_score, string class5, string class5_x, string class5_width, string class5_y, string class5_height, string class5_score, string class6, string class6_x, string class6_width, string class6_y, string class6_height, string class6_score, string class7, string class7_x, string class7_width, string class7_y, string class7_height, string class7_score, string class8, string class8_x, string class8_width, string class8_y, string class8_height, string class8_score, string class9, string class9_x, string class9_width, string class9_y, string class9_height, string class9_score, string class10, string class10_x, string class10_width, string class10_y, string class10_height, string class10_score)
+void _ShortTermMemory::stm_action2_text_funct()
 {
-    for (int x = 0; x < 1000; x++)
-    {
-        if (stm_vision_objects_image_camera2[x][0].empty())
-        {
-            lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera2[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera2[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera2[x][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera2[x][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera2[x][4]);
-            lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera2[x][5]);
-            lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera2[x][6]);
-            lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera2[x][7]);
-            lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera2[x][8]);
-            lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera2[x][9]);
-            lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera2[x][10]);
-            lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera2[x][11]);
-            lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera2[x][12]);
-            lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera2[x][13]);
-            lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera2[x][14]);
-            lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera2[x][15]);
-            lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera2[x][16]);
-            lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera2[x][17]);
-            lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera2[x][18]);
-            lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera2[x][19]);
-            lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera2[x][20]);
-            lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera2[x][21]);
-            lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera2[x][22]);
-            lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera2[x][23]);
-            lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera2[x][24]);
-            lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera2[x][25]);
-            lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera2[x][26]);
-            lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera2[x][27]);
-            lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera2[x][28]);
-            lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera2[x][29]);
-            lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera2[x][30]);
-            lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera2[x][31]);
-            lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera2[x][32]);
-            lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera2[x][33]);
-            lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera2[x][34]);
-            lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera2[x][35]);
-            lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera2[x][36]);
-            lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera2[x][37]);
-            lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera2[x][38]);
-            lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera2[x][39]);
-            lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera2[x][40]);
-            lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera2[x][41]);
-            lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera2[x][42]);
-            lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera2[x][43]);
-            lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera2[x][44]);
-            lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera2[x][45]);
-            lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera2[x][46]);
-            lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera2[x][47]);
-            lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera2[x][48]);
-            lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera2[x][49]);
-            lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera2[x][50]);
-            lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera2[x][51]);
-            lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera2[x][52]);
-            lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera2[x][53]);
-            lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera2[x][54]);
-            lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera2[x][55]);
-            lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera2[x][56]);
-            lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera2[x][57]);
-            lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera2[x][58]);
-            lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera2[x][59]);
-            lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera2[x][60]);
-            lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera2[x][61]);
-            lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera2[x][62]);
-            lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera2[x][63]);
-            lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera2[x][64]);
-            stm_vision_objects_image_camera2[x][0] = image_location;
-            stm_vision_objects_image_camera2[x][1] = image_hash;
-            stm_vision_objects_image_camera2[x][2] = image_time;
-            stm_vision_objects_image_camera2[x][3] = object_detection_image;
-            stm_vision_objects_image_camera2[x][4] = object_detection_image_hash;
-            stm_vision_objects_image_camera2[x][5] = object_detection_image_time;
-            stm_vision_objects_image_camera2[x][6] = class1;
-            stm_vision_objects_image_camera2[x][7] = class1_x;
-            stm_vision_objects_image_camera2[x][8] = class1_width;
-            stm_vision_objects_image_camera2[x][9] = class1_y;
-            stm_vision_objects_image_camera2[x][10] = class1_height;
-            stm_vision_objects_image_camera2[x][11] = class1_score;
-            stm_vision_objects_image_camera2[x][12] = class2;
-            stm_vision_objects_image_camera2[x][13] = class2_x;
-            stm_vision_objects_image_camera2[x][14] = class2_width;
-            stm_vision_objects_image_camera2[x][15] = class2_y;
-            stm_vision_objects_image_camera2[x][16] = class2_height;
-            stm_vision_objects_image_camera2[x][17] = class2_score;
-            stm_vision_objects_image_camera2[x][18] = class3;
-            stm_vision_objects_image_camera2[x][19] = class3_x;
-            stm_vision_objects_image_camera2[x][20] = class3_width;
-            stm_vision_objects_image_camera2[x][21] = class3_y;
-            stm_vision_objects_image_camera2[x][22] = class3_height;
-            stm_vision_objects_image_camera2[x][23] = class3_score;
-            stm_vision_objects_image_camera2[x][24] = class4;
-            stm_vision_objects_image_camera2[x][25] = class4_x;
-            stm_vision_objects_image_camera2[x][26] = class4_width;
-            stm_vision_objects_image_camera2[x][27] = class4_y;
-            stm_vision_objects_image_camera2[x][28] = class4_height;
-            stm_vision_objects_image_camera2[x][29] = class4_score;
-            stm_vision_objects_image_camera2[x][30] = class5;
-            stm_vision_objects_image_camera2[x][31] = class5_x;
-            stm_vision_objects_image_camera2[x][32] = class5_width;
-            stm_vision_objects_image_camera2[x][33] = class5_y;
-            stm_vision_objects_image_camera2[x][34] = class5_height;
-            stm_vision_objects_image_camera2[x][35] = class5_score;
-            stm_vision_objects_image_camera2[x][36] = class6;
-            stm_vision_objects_image_camera2[x][37] = class6_x;
-            stm_vision_objects_image_camera2[x][38] = class6_width;
-            stm_vision_objects_image_camera2[x][39] = class6_y;
-            stm_vision_objects_image_camera2[x][40] = class6_height;
-            stm_vision_objects_image_camera2[x][41] = class6_score;
-            stm_vision_objects_image_camera2[x][42] = class7;
-            stm_vision_objects_image_camera2[x][43] = class7_x;
-            stm_vision_objects_image_camera2[x][44] = class7_width;
-            stm_vision_objects_image_camera2[x][45] = class7_y;
-            stm_vision_objects_image_camera2[x][46] = class7_height;
-            stm_vision_objects_image_camera2[x][47] = class7_score;
-            stm_vision_objects_image_camera2[x][48] = class8;
-            stm_vision_objects_image_camera2[x][49] = class8_x;
-            stm_vision_objects_image_camera2[x][50] = class8_width;
-            stm_vision_objects_image_camera2[x][51] = class8_y;
-            stm_vision_objects_image_camera2[x][52] = class8_height;
-            stm_vision_objects_image_camera2[x][53] = class8_score;
-            stm_vision_objects_image_camera2[x][54] = class9;
-            stm_vision_objects_image_camera2[x][55] = class9_x;
-            stm_vision_objects_image_camera2[x][56] = class9_width;
-            stm_vision_objects_image_camera2[x][57] = class9_y;
-            stm_vision_objects_image_camera2[x][58] = class9_height;
-            stm_vision_objects_image_camera2[x][59] = class9_score;
-            stm_vision_objects_image_camera2[x][60] = class10_x;
-            stm_vision_objects_image_camera2[x][61] = class10_width;
-            stm_vision_objects_image_camera2[x][62] = class10_y;
-            stm_vision_objects_image_camera2[x][63] = class10_height;
-            stm_vision_objects_image_camera2[x][64] = class10_score;
-            break;
-        }
-        if (!stm_vision_objects_image_camera2[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
-            {
-                lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera2[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera2[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera2[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera2[y][3]);
-                lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera2[y][4]);
-                lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera2[y][5]);
-                lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera2[y][6]);
-                lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera2[y][7]);
-                lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera2[y][8]);
-                lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera2[y][9]);
-                lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera2[y][10]);
-                lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera2[y][11]);
-                lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera2[y][12]);
-                lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera2[y][13]);
-                lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera2[y][14]);
-                lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera2[y][15]);
-                lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera2[y][16]);
-                lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera2[y][17]);
-                lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera2[y][18]);
-                lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera2[y][19]);
-                lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera2[y][20]);
-                lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera2[y][21]);
-                lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera2[y][22]);
-                lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera2[y][23]);
-                lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera2[y][24]);
-                lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera2[y][25]);
-                lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera2[y][26]);
-                lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera2[y][27]);
-                lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera2[y][28]);
-                lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera2[y][29]);
-                lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera2[y][30]);
-                lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera2[y][31]);
-                lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera2[y][32]);
-                lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera2[y][33]);
-                lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera2[y][34]);
-                lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera2[y][35]);
-                lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera2[y][36]);
-                lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera2[y][37]);
-                lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera2[y][38]);
-                lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera2[y][39]);
-                lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera2[y][40]);
-                lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera2[y][41]);
-                lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera2[y][42]);
-                lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera2[y][43]);
-                lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera2[y][44]);
-                lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera2[y][45]);
-                lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera2[y][46]);
-                lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera2[y][47]);
-                lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera2[y][48]);
-                lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera2[y][49]);
-                lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera2[y][50]);
-                lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera2[y][51]);
-                lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera2[y][52]);
-                lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera2[y][53]);
-                lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera2[y][54]);
-                lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera2[y][55]);
-                lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera2[y][56]);
-                lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera2[y][57]);
-                lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera2[y][58]);
-                lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera2[y][59]);
-                lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera2[y][60]);
-                lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera2[y][61]);
-                lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera2[y][62]);
-                lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera2[y][63]);
-                lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera2[y][64]);
-                lock_guard<mutex> lock65(mtx_stm_vision_objects_image_camera2[y + 1][0]);
-                lock_guard<mutex> lock66(mtx_stm_vision_objects_image_camera2[y + 1][1]);
-                lock_guard<mutex> lock67(mtx_stm_vision_objects_image_camera2[y + 1][2]);
-                lock_guard<mutex> lock68(mtx_stm_vision_objects_image_camera2[y + 1][3]);
-                lock_guard<mutex> lock69(mtx_stm_vision_objects_image_camera2[y + 1][4]);
-                lock_guard<mutex> lock70(mtx_stm_vision_objects_image_camera2[y + 1][5]);
-                lock_guard<mutex> lock71(mtx_stm_vision_objects_image_camera2[y + 1][6]);
-                lock_guard<mutex> lock72(mtx_stm_vision_objects_image_camera2[y + 1][7]);
-                lock_guard<mutex> lock73(mtx_stm_vision_objects_image_camera2[y + 1][8]);
-                lock_guard<mutex> lock74(mtx_stm_vision_objects_image_camera2[y + 1][9]);
-                lock_guard<mutex> lock75(mtx_stm_vision_objects_image_camera2[y + 1][10]);
-                lock_guard<mutex> lock76(mtx_stm_vision_objects_image_camera2[y + 1][11]);
-                lock_guard<mutex> lock77(mtx_stm_vision_objects_image_camera2[y + 1][12]);
-                lock_guard<mutex> lock78(mtx_stm_vision_objects_image_camera2[y + 1][13]);
-                lock_guard<mutex> lock79(mtx_stm_vision_objects_image_camera2[y + 1][14]);
-                lock_guard<mutex> lock80(mtx_stm_vision_objects_image_camera2[y + 1][15]);
-                lock_guard<mutex> lock81(mtx_stm_vision_objects_image_camera2[y + 1][16]);
-                lock_guard<mutex> lock82(mtx_stm_vision_objects_image_camera2[y + 1][17]);
-                lock_guard<mutex> lock83(mtx_stm_vision_objects_image_camera2[y + 1][18]);
-                lock_guard<mutex> lock84(mtx_stm_vision_objects_image_camera2[y + 1][19]);
-                lock_guard<mutex> lock85(mtx_stm_vision_objects_image_camera2[y + 1][20]);
-                lock_guard<mutex> lock86(mtx_stm_vision_objects_image_camera2[y + 1][21]);
-                lock_guard<mutex> lock87(mtx_stm_vision_objects_image_camera2[y + 1][22]);
-                lock_guard<mutex> lock88(mtx_stm_vision_objects_image_camera2[y + 1][23]);
-                lock_guard<mutex> lock89(mtx_stm_vision_objects_image_camera2[y + 1][24]);
-                lock_guard<mutex> lock90(mtx_stm_vision_objects_image_camera2[y + 1][25]);
-                lock_guard<mutex> lock91(mtx_stm_vision_objects_image_camera2[y + 1][26]);
-                lock_guard<mutex> lock92(mtx_stm_vision_objects_image_camera2[y + 1][27]);
-                lock_guard<mutex> lock93(mtx_stm_vision_objects_image_camera2[y + 1][28]);
-                lock_guard<mutex> lock94(mtx_stm_vision_objects_image_camera2[y + 1][29]);
-                lock_guard<mutex> lock95(mtx_stm_vision_objects_image_camera2[y + 1][30]);
-                lock_guard<mutex> lock96(mtx_stm_vision_objects_image_camera2[y + 1][31]);
-                lock_guard<mutex> lock97(mtx_stm_vision_objects_image_camera2[y + 1][32]);
-                lock_guard<mutex> lock98(mtx_stm_vision_objects_image_camera2[y + 1][33]);
-                lock_guard<mutex> lock99(mtx_stm_vision_objects_image_camera2[y + 1][34]);
-                lock_guard<mutex> lock100(mtx_stm_vision_objects_image_camera2[y + 1][35]);
-                lock_guard<mutex> lock101(mtx_stm_vision_objects_image_camera2[y + 1][36]);
-                lock_guard<mutex> lock102(mtx_stm_vision_objects_image_camera2[y + 1][37]);
-                lock_guard<mutex> lock103(mtx_stm_vision_objects_image_camera2[y + 1][38]);
-                lock_guard<mutex> lock104(mtx_stm_vision_objects_image_camera2[y + 1][39]);
-                lock_guard<mutex> lock105(mtx_stm_vision_objects_image_camera2[y + 1][40]);
-                lock_guard<mutex> lock106(mtx_stm_vision_objects_image_camera2[y + 1][41]);
-                lock_guard<mutex> lock107(mtx_stm_vision_objects_image_camera2[y + 1][42]);
-                lock_guard<mutex> lock108(mtx_stm_vision_objects_image_camera2[y + 1][43]);
-                lock_guard<mutex> lock109(mtx_stm_vision_objects_image_camera2[y + 1][44]);
-                lock_guard<mutex> lock110(mtx_stm_vision_objects_image_camera2[y + 1][45]);
-                lock_guard<mutex> lock111(mtx_stm_vision_objects_image_camera2[y + 1][46]);
-                lock_guard<mutex> lock112(mtx_stm_vision_objects_image_camera2[y + 1][47]);
-                lock_guard<mutex> lock113(mtx_stm_vision_objects_image_camera2[y + 1][48]);
-                lock_guard<mutex> lock114(mtx_stm_vision_objects_image_camera2[y + 1][49]);
-                lock_guard<mutex> lock115(mtx_stm_vision_objects_image_camera2[y + 1][50]);
-                lock_guard<mutex> lock116(mtx_stm_vision_objects_image_camera2[y + 1][51]);
-                lock_guard<mutex> lock117(mtx_stm_vision_objects_image_camera2[y + 1][52]);
-                lock_guard<mutex> lock118(mtx_stm_vision_objects_image_camera2[y + 1][53]);
-                lock_guard<mutex> lock119(mtx_stm_vision_objects_image_camera2[y + 1][54]);
-                lock_guard<mutex> lock120(mtx_stm_vision_objects_image_camera2[y + 1][55]);
-                lock_guard<mutex> lock121(mtx_stm_vision_objects_image_camera2[y + 1][56]);
-                lock_guard<mutex> lock122(mtx_stm_vision_objects_image_camera2[y + 1][57]);
-                lock_guard<mutex> lock123(mtx_stm_vision_objects_image_camera2[y + 1][58]);
-                lock_guard<mutex> lock124(mtx_stm_vision_objects_image_camera2[y + 1][59]);
-                lock_guard<mutex> lock125(mtx_stm_vision_objects_image_camera2[y + 1][60]);
-                lock_guard<mutex> lock126(mtx_stm_vision_objects_image_camera2[y + 1][61]);
-                lock_guard<mutex> lock127(mtx_stm_vision_objects_image_camera2[y + 1][62]);
-                lock_guard<mutex> lock128(mtx_stm_vision_objects_image_camera2[y + 1][63]);
-                lock_guard<mutex> lock129(mtx_stm_vision_objects_image_camera2[y + 1][64]);
-                stm_vision_objects_image_camera2[y][0] = stm_vision_objects_image_camera2[y + 1][0];
-                stm_vision_objects_image_camera2[y][1] = stm_vision_objects_image_camera2[y + 1][1];
-                stm_vision_objects_image_camera2[y][2] = stm_vision_objects_image_camera2[y + 1][2];
-                stm_vision_objects_image_camera2[y][3] = stm_vision_objects_image_camera2[y + 1][3];
-                stm_vision_objects_image_camera2[y][4] = stm_vision_objects_image_camera2[y + 1][4];
-                stm_vision_objects_image_camera2[y][5] = stm_vision_objects_image_camera2[y + 1][5];
-                stm_vision_objects_image_camera2[y][6] = stm_vision_objects_image_camera2[y + 1][6];
-                stm_vision_objects_image_camera2[y][7] = stm_vision_objects_image_camera2[y + 1][7];
-                stm_vision_objects_image_camera2[y][8] = stm_vision_objects_image_camera2[y + 1][8];
-                stm_vision_objects_image_camera2[y][9] = stm_vision_objects_image_camera2[y + 1][9];
-                stm_vision_objects_image_camera2[y][10] = stm_vision_objects_image_camera2[y + 1][0];
-                stm_vision_objects_image_camera2[y][11] = stm_vision_objects_image_camera2[y + 1][11];
-                stm_vision_objects_image_camera2[y][12] = stm_vision_objects_image_camera2[y + 1][12];
-                stm_vision_objects_image_camera2[y][13] = stm_vision_objects_image_camera2[y + 1][13];
-                stm_vision_objects_image_camera2[y][14] = stm_vision_objects_image_camera2[y + 1][14];
-                stm_vision_objects_image_camera2[y][15] = stm_vision_objects_image_camera2[y + 1][15];
-                stm_vision_objects_image_camera2[y][16] = stm_vision_objects_image_camera2[y + 1][16];
-                stm_vision_objects_image_camera2[y][17] = stm_vision_objects_image_camera2[y + 1][17];
-                stm_vision_objects_image_camera2[y][18] = stm_vision_objects_image_camera2[y + 1][18];
-                stm_vision_objects_image_camera2[y][19] = stm_vision_objects_image_camera2[y + 1][19];
-                stm_vision_objects_image_camera2[y][20] = stm_vision_objects_image_camera2[y + 1][20];
-                stm_vision_objects_image_camera2[y][21] = stm_vision_objects_image_camera2[y + 1][21];
-                stm_vision_objects_image_camera2[y][22] = stm_vision_objects_image_camera2[y + 1][22];
-                stm_vision_objects_image_camera2[y][23] = stm_vision_objects_image_camera2[y + 1][23];
-                stm_vision_objects_image_camera2[y][24] = stm_vision_objects_image_camera2[y + 1][24];
-                stm_vision_objects_image_camera2[y][25] = stm_vision_objects_image_camera2[y + 1][25];
-                stm_vision_objects_image_camera2[y][26] = stm_vision_objects_image_camera2[y + 1][26];
-                stm_vision_objects_image_camera2[y][27] = stm_vision_objects_image_camera2[y + 1][27];
-                stm_vision_objects_image_camera2[y][28] = stm_vision_objects_image_camera2[y + 1][28];
-                stm_vision_objects_image_camera2[y][29] = stm_vision_objects_image_camera2[y + 1][29];
-                stm_vision_objects_image_camera2[y][30] = stm_vision_objects_image_camera2[y + 1][30];
-                stm_vision_objects_image_camera2[y][31] = stm_vision_objects_image_camera2[y + 1][31];
-                stm_vision_objects_image_camera2[y][32] = stm_vision_objects_image_camera2[y + 1][32];
-                stm_vision_objects_image_camera2[y][33] = stm_vision_objects_image_camera2[y + 1][33];
-                stm_vision_objects_image_camera2[y][34] = stm_vision_objects_image_camera2[y + 1][34];
-                stm_vision_objects_image_camera2[y][35] = stm_vision_objects_image_camera2[y + 1][35];
-                stm_vision_objects_image_camera2[y][36] = stm_vision_objects_image_camera2[y + 1][36];
-                stm_vision_objects_image_camera2[y][37] = stm_vision_objects_image_camera2[y + 1][37];
-                stm_vision_objects_image_camera2[y][38] = stm_vision_objects_image_camera2[y + 1][38];
-                stm_vision_objects_image_camera2[y][39] = stm_vision_objects_image_camera2[y + 1][39];
-                stm_vision_objects_image_camera2[y][40] = stm_vision_objects_image_camera2[y + 1][40];
-                stm_vision_objects_image_camera2[y][41] = stm_vision_objects_image_camera2[y + 1][41];
-                stm_vision_objects_image_camera2[y][42] = stm_vision_objects_image_camera2[y + 1][42];
-                stm_vision_objects_image_camera2[y][43] = stm_vision_objects_image_camera2[y + 1][43];
-                stm_vision_objects_image_camera2[y][44] = stm_vision_objects_image_camera2[y + 1][44];
-                stm_vision_objects_image_camera2[y][45] = stm_vision_objects_image_camera2[y + 1][45];
-                stm_vision_objects_image_camera2[y][46] = stm_vision_objects_image_camera2[y + 1][46];
-                stm_vision_objects_image_camera2[y][47] = stm_vision_objects_image_camera2[y + 1][47];
-                stm_vision_objects_image_camera2[y][48] = stm_vision_objects_image_camera2[y + 1][48];
-                stm_vision_objects_image_camera2[y][49] = stm_vision_objects_image_camera2[y + 1][49];
-                stm_vision_objects_image_camera2[y][50] = stm_vision_objects_image_camera2[y + 1][50];
-                stm_vision_objects_image_camera2[y][51] = stm_vision_objects_image_camera2[y + 1][51];
-                stm_vision_objects_image_camera2[y][52] = stm_vision_objects_image_camera2[y + 1][52];
-                stm_vision_objects_image_camera2[y][53] = stm_vision_objects_image_camera2[y + 1][53];
-                stm_vision_objects_image_camera2[y][54] = stm_vision_objects_image_camera2[y + 1][54];
-                stm_vision_objects_image_camera2[y][55] = stm_vision_objects_image_camera2[y + 1][55];
-                stm_vision_objects_image_camera2[y][56] = stm_vision_objects_image_camera2[y + 1][56];
-                stm_vision_objects_image_camera2[y][57] = stm_vision_objects_image_camera2[y + 1][57];
-                stm_vision_objects_image_camera2[y][58] = stm_vision_objects_image_camera2[y + 1][58];
-                stm_vision_objects_image_camera2[y][59] = stm_vision_objects_image_camera2[y + 1][59];
-                stm_vision_objects_image_camera2[y][60] = stm_vision_objects_image_camera2[y + 1][60];
-                stm_vision_objects_image_camera2[y][61] = stm_vision_objects_image_camera2[y + 1][61];
-                stm_vision_objects_image_camera2[y][62] = stm_vision_objects_image_camera2[y + 1][62];
-                stm_vision_objects_image_camera2[y][63] = stm_vision_objects_image_camera2[y + 1][63];
-                stm_vision_objects_image_camera2[y][64] = stm_vision_objects_image_camera2[y + 1][64];
-            }
-            lock_guard<mutex> lock(mtx_stm_vision_objects_image_camera2[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_objects_image_camera2[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_objects_image_camera2[999][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_objects_image_camera2[999][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_objects_image_camera2[999][4]);
-            lock_guard<mutex> lock5(mtx_stm_vision_objects_image_camera2[999][5]);
-            lock_guard<mutex> lock6(mtx_stm_vision_objects_image_camera2[999][6]);
-            lock_guard<mutex> lock7(mtx_stm_vision_objects_image_camera2[999][7]);
-            lock_guard<mutex> lock8(mtx_stm_vision_objects_image_camera2[999][8]);
-            lock_guard<mutex> lock9(mtx_stm_vision_objects_image_camera2[999][9]);
-            lock_guard<mutex> lock10(mtx_stm_vision_objects_image_camera2[999][10]);
-            lock_guard<mutex> lock11(mtx_stm_vision_objects_image_camera2[999][11]);
-            lock_guard<mutex> lock12(mtx_stm_vision_objects_image_camera2[999][12]);
-            lock_guard<mutex> lock13(mtx_stm_vision_objects_image_camera2[999][13]);
-            lock_guard<mutex> lock14(mtx_stm_vision_objects_image_camera2[999][14]);
-            lock_guard<mutex> lock15(mtx_stm_vision_objects_image_camera2[999][15]);
-            lock_guard<mutex> lock16(mtx_stm_vision_objects_image_camera2[999][16]);
-            lock_guard<mutex> lock17(mtx_stm_vision_objects_image_camera2[999][17]);
-            lock_guard<mutex> lock18(mtx_stm_vision_objects_image_camera2[999][18]);
-            lock_guard<mutex> lock19(mtx_stm_vision_objects_image_camera2[999][19]);
-            lock_guard<mutex> lock20(mtx_stm_vision_objects_image_camera2[999][20]);
-            lock_guard<mutex> lock21(mtx_stm_vision_objects_image_camera2[999][21]);
-            lock_guard<mutex> lock22(mtx_stm_vision_objects_image_camera2[999][22]);
-            lock_guard<mutex> lock23(mtx_stm_vision_objects_image_camera2[999][23]);
-            lock_guard<mutex> lock24(mtx_stm_vision_objects_image_camera2[999][24]);
-            lock_guard<mutex> lock25(mtx_stm_vision_objects_image_camera2[999][25]);
-            lock_guard<mutex> lock26(mtx_stm_vision_objects_image_camera2[999][26]);
-            lock_guard<mutex> lock27(mtx_stm_vision_objects_image_camera2[999][27]);
-            lock_guard<mutex> lock28(mtx_stm_vision_objects_image_camera2[999][28]);
-            lock_guard<mutex> lock29(mtx_stm_vision_objects_image_camera2[999][29]);
-            lock_guard<mutex> lock30(mtx_stm_vision_objects_image_camera2[999][30]);
-            lock_guard<mutex> lock31(mtx_stm_vision_objects_image_camera2[999][31]);
-            lock_guard<mutex> lock32(mtx_stm_vision_objects_image_camera2[999][32]);
-            lock_guard<mutex> lock33(mtx_stm_vision_objects_image_camera2[999][33]);
-            lock_guard<mutex> lock34(mtx_stm_vision_objects_image_camera2[999][34]);
-            lock_guard<mutex> lock35(mtx_stm_vision_objects_image_camera2[999][35]);
-            lock_guard<mutex> lock36(mtx_stm_vision_objects_image_camera2[999][36]);
-            lock_guard<mutex> lock37(mtx_stm_vision_objects_image_camera2[999][37]);
-            lock_guard<mutex> lock38(mtx_stm_vision_objects_image_camera2[999][38]);
-            lock_guard<mutex> lock39(mtx_stm_vision_objects_image_camera2[999][39]);
-            lock_guard<mutex> lock40(mtx_stm_vision_objects_image_camera2[999][40]);
-            lock_guard<mutex> lock41(mtx_stm_vision_objects_image_camera2[999][41]);
-            lock_guard<mutex> lock42(mtx_stm_vision_objects_image_camera2[999][42]);
-            lock_guard<mutex> lock43(mtx_stm_vision_objects_image_camera2[999][43]);
-            lock_guard<mutex> lock44(mtx_stm_vision_objects_image_camera2[999][44]);
-            lock_guard<mutex> lock45(mtx_stm_vision_objects_image_camera2[999][45]);
-            lock_guard<mutex> lock46(mtx_stm_vision_objects_image_camera2[999][46]);
-            lock_guard<mutex> lock47(mtx_stm_vision_objects_image_camera2[999][47]);
-            lock_guard<mutex> lock48(mtx_stm_vision_objects_image_camera2[999][48]);
-            lock_guard<mutex> lock49(mtx_stm_vision_objects_image_camera2[999][49]);
-            lock_guard<mutex> lock50(mtx_stm_vision_objects_image_camera2[999][50]);
-            lock_guard<mutex> lock51(mtx_stm_vision_objects_image_camera2[999][51]);
-            lock_guard<mutex> lock52(mtx_stm_vision_objects_image_camera2[999][52]);
-            lock_guard<mutex> lock53(mtx_stm_vision_objects_image_camera2[999][53]);
-            lock_guard<mutex> lock54(mtx_stm_vision_objects_image_camera2[999][54]);
-            lock_guard<mutex> lock55(mtx_stm_vision_objects_image_camera2[999][55]);
-            lock_guard<mutex> lock56(mtx_stm_vision_objects_image_camera2[999][56]);
-            lock_guard<mutex> lock57(mtx_stm_vision_objects_image_camera2[999][57]);
-            lock_guard<mutex> lock58(mtx_stm_vision_objects_image_camera2[999][58]);
-            lock_guard<mutex> lock59(mtx_stm_vision_objects_image_camera2[999][59]);
-            lock_guard<mutex> lock60(mtx_stm_vision_objects_image_camera2[999][60]);
-            lock_guard<mutex> lock61(mtx_stm_vision_objects_image_camera2[999][61]);
-            lock_guard<mutex> lock62(mtx_stm_vision_objects_image_camera2[999][62]);
-            lock_guard<mutex> lock63(mtx_stm_vision_objects_image_camera2[999][63]);
-            lock_guard<mutex> lock64(mtx_stm_vision_objects_image_camera2[999][64]);
-            stm_vision_objects_image_camera2[999][0] = image_location;
-            stm_vision_objects_image_camera2[999][1] = image_hash;
-            stm_vision_objects_image_camera2[999][2] = image_time;
-            stm_vision_objects_image_camera2[999][3] = object_detection_image;
-            stm_vision_objects_image_camera2[999][4] = object_detection_image_hash;
-            stm_vision_objects_image_camera2[999][5] = object_detection_image_time;
-            stm_vision_objects_image_camera2[999][6] = class1;
-            stm_vision_objects_image_camera2[999][7] = class1_x;
-            stm_vision_objects_image_camera2[999][8] = class1_width;
-            stm_vision_objects_image_camera2[999][9] = class1_y;
-            stm_vision_objects_image_camera2[999][10] = class1_height;
-            stm_vision_objects_image_camera2[999][11] = class1_score;
-            stm_vision_objects_image_camera2[999][12] = class2;
-            stm_vision_objects_image_camera2[999][13] = class2_x;
-            stm_vision_objects_image_camera2[999][14] = class2_width;
-            stm_vision_objects_image_camera2[999][15] = class2_y;
-            stm_vision_objects_image_camera2[999][16] = class2_height;
-            stm_vision_objects_image_camera2[999][17] = class2_score;
-            stm_vision_objects_image_camera2[999][18] = class3;
-            stm_vision_objects_image_camera2[999][19] = class3_x;
-            stm_vision_objects_image_camera2[999][20] = class3_width;
-            stm_vision_objects_image_camera2[999][21] = class3_y;
-            stm_vision_objects_image_camera2[999][22] = class3_height;
-            stm_vision_objects_image_camera2[999][23] = class3_score;
-            stm_vision_objects_image_camera2[999][24] = class4;
-            stm_vision_objects_image_camera2[999][25] = class4_x;
-            stm_vision_objects_image_camera2[999][26] = class4_width;
-            stm_vision_objects_image_camera2[999][27] = class4_y;
-            stm_vision_objects_image_camera2[999][28] = class4_height;
-            stm_vision_objects_image_camera2[999][29] = class4_score;
-            stm_vision_objects_image_camera2[999][30] = class5;
-            stm_vision_objects_image_camera2[999][31] = class5_x;
-            stm_vision_objects_image_camera2[999][32] = class5_width;
-            stm_vision_objects_image_camera2[999][33] = class5_y;
-            stm_vision_objects_image_camera2[999][34] = class5_height;
-            stm_vision_objects_image_camera2[999][35] = class5_score;
-            stm_vision_objects_image_camera2[999][36] = class6;
-            stm_vision_objects_image_camera2[999][37] = class6_x;
-            stm_vision_objects_image_camera2[999][38] = class6_width;
-            stm_vision_objects_image_camera2[999][39] = class6_y;
-            stm_vision_objects_image_camera2[999][40] = class6_height;
-            stm_vision_objects_image_camera2[999][41] = class6_score;
-            stm_vision_objects_image_camera2[999][42] = class7;
-            stm_vision_objects_image_camera2[999][43] = class7_x;
-            stm_vision_objects_image_camera2[999][44] = class7_width;
-            stm_vision_objects_image_camera2[999][45] = class7_y;
-            stm_vision_objects_image_camera2[999][46] = class7_height;
-            stm_vision_objects_image_camera2[999][47] = class7_score;
-            stm_vision_objects_image_camera2[999][48] = class8;
-            stm_vision_objects_image_camera2[999][49] = class8_x;
-            stm_vision_objects_image_camera2[999][50] = class8_width;
-            stm_vision_objects_image_camera2[999][51] = class8_y;
-            stm_vision_objects_image_camera2[999][52] = class8_height;
-            stm_vision_objects_image_camera2[999][53] = class8_score;
-            stm_vision_objects_image_camera2[999][54] = class9;
-            stm_vision_objects_image_camera2[999][55] = class9_x;
-            stm_vision_objects_image_camera2[999][56] = class9_width;
-            stm_vision_objects_image_camera2[999][57] = class9_y;
-            stm_vision_objects_image_camera2[999][58] = class9_height;
-            stm_vision_objects_image_camera2[999][59] = class9_score;
-            stm_vision_objects_image_camera2[999][60] = class10_x;
-            stm_vision_objects_image_camera2[999][61] = class10_width;
-            stm_vision_objects_image_camera2[999][62] = class10_y;
-            stm_vision_objects_image_camera2[999][63] = class10_height;
-            stm_vision_objects_image_camera2[999][64] = class10_score;
-            break;
-        }
-    }
+    // _Actions::GetCurrentAction();
+}
+
+void _ShortTermMemory::stm_action3_text_funct()
+{
+    // _Actions::GetCurrentAction();
+}
+
+void _ShortTermMemory::stm_vision_objects_image_path_funct()
+{
+
 }
 
 void _ShortTermMemory::stm_vision_actions_image_path_funct()
@@ -1297,63 +290,14 @@ void _ShortTermMemory::stm_vision_actions_image_path_funct()
 
 }
 
-//void _ShortTermMemory::stm_vision_objects_text_funct()
-//{
-//
-//}
-
-void _ShortTermMemory::stm_vision_analysis_funct(string image_location, string image_hash, string image_time, string image_analysis, string image_analysis_time)
+void _ShortTermMemory::stm_vision_objects_text_funct()
 {
-    for (int x = 0; x < 1000; x++)
-    {
-        if (stm_vision_camera1[x][0].empty())
-        {
-            lock_guard<mutex> lock(mtx_stm_vision_camera1[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera1[x][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera1[x][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera1[x][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_camera1[x][4]);
-            stm_vision_camera1[x][0] = image_location;
-            stm_vision_camera1[x][1] = image_hash;
-            stm_vision_camera1[x][2] = image_time;
-            stm_vision_camera1[x][3] = image_analysis;
-            stm_vision_camera1[x][4] = image_analysis_time;
-            break;
-        }
-        if (!stm_vision_camera1[x][0].empty() && x == 999)
-        {
-            for (int y = 0; y < 999; y++)
-            {
-                lock_guard<mutex> lock(mtx_stm_vision_camera1[y][0]);
-                lock_guard<mutex> lock1(mtx_stm_vision_camera1[y][1]);
-                lock_guard<mutex> lock2(mtx_stm_vision_camera1[y][2]);
-                lock_guard<mutex> lock3(mtx_stm_vision_camera1[y][3]);
-                lock_guard<mutex> lock4(mtx_stm_vision_camera1[y][4]);
-                lock_guard<mutex> lock5(mtx_stm_vision_camera1[y + 1][0]);
-                lock_guard<mutex> lock6(mtx_stm_vision_camera1[y + 1][1]);
-                lock_guard<mutex> lock7(mtx_stm_vision_camera1[y + 1][2]);
-                lock_guard<mutex> lock8(mtx_stm_vision_camera1[y + 1][3]);
-                lock_guard<mutex> lock9(mtx_stm_vision_camera1[y + 1][4]);
-                stm_vision_camera1[y][0] = stm_vision_camera1[y + 1][0];
-                stm_vision_camera1[y][1] = stm_vision_camera1[y + 1][1];
-                stm_vision_camera1[y][2] = stm_vision_camera1[y + 1][2];
-                stm_vision_camera1[y][3] = stm_vision_camera1[y + 1][3];
-                stm_vision_camera1[y][4] = stm_vision_camera1[y + 1][4];
 
-            }
-            lock_guard<mutex> lock(mtx_stm_vision_camera1[999][0]);
-            lock_guard<mutex> lock1(mtx_stm_vision_camera1[999][1]);
-            lock_guard<mutex> lock2(mtx_stm_vision_camera1[999][2]);
-            lock_guard<mutex> lock3(mtx_stm_vision_camera1[999][3]);
-            lock_guard<mutex> lock4(mtx_stm_vision_camera1[999][4]);
-            stm_vision_camera1[999][0] = image_location;
-            stm_vision_camera1[999][1] = image_hash;
-            stm_vision_camera1[999][2] = image_time;
-            stm_vision_camera1[999][3] = image_analysis;
-            stm_vision_camera1[999][4] = image_analysis_time;
-            break;
-        }
-    }
+}
+
+void _ShortTermMemory::stm_vision_analysis_text_funct()
+{
+
 }
 
 void _ShortTermMemory::stm_typing_text_funct()
@@ -2310,35 +1254,25 @@ void _ShortTermMemory::ClearShortTermMemory()
 {
     for (int x = 0; x < 1000; x++)
     {
-        for (int y = 0; y < 65; y++)
-        {
-            stm_vision_objects_image_camera1[x][y].clear();
-            stm_vision_objects_image_camera2[x][y].clear();
-        }
-
-        for (int y = 0; y < 4; y++)
-        {
-            stm_vision_camera1[x][y].clear();
-            stm_vision_camera2[x][y].clear();
-            stm_vision_analysis_camera1[x][y].clear();
-            stm_vision_analysis_camera2[x][y].clear();
-        }
-
-        for (int y = 0; y < 3; y++)
-        {
-            stm_sound[x][y].clear();
-            stm_reading[x][y].clear();
-        }
-
         for (int y = 0; y < 2; y++)
         {
-            //stm_speech_dialogue[x][y].clear();
-            //stm_action1_text[x][y].clear();
-            //stm_action2_text[x][y].clear();
-            //stm_action3_text[x][y].clear();
+            lock_guard<mutex> lock(stm);
+            stm_vision_path_camera1[x][y].clear();
+            stm_vision_path_camera2[x][y].clear();
+            stm_sound_path[x][y].clear();
+            stm_speech_dialogue[x][y].clear();
+            stm_action1_text[x][y].clear();
+            stm_action2_text[x][y].clear();
+            stm_action3_text[x][y].clear();
+            stm_reading_text[x][y].clear();
             stm_algebra_text[x][y].clear();
-            //stm_vision_objects_text_camera1[x][y].clear();
-            //stm_vision_objects_text_camera2[x][y].clear();
+            stm_reading_image[x][y].clear();
+            stm_vision_objects_image_path_camera1[x][y].clear();
+            stm_vision_objects_image_path_camera2[x][y].clear();
+            stm_vision_objects_text_camera1[x][y].clear();
+            stm_vision_objects_text_camera2[x][y].clear();
+            stm_vision_analysis_text_camera1[x][y].clear();
+            stm_vision_analysis_text_camera2[x][y].clear();
             stm_typing_text[x][y].clear();
             stm_Reference_pos_gps_north[x][y].clear();
             stm_Reference_pos_gps_west[x][y].clear();
@@ -2358,7 +1292,7 @@ void _ShortTermMemory::ClearShortTermMemory()
 
 // This function is for listening for an action to search memory for a word, date/time, concept
 //     TODO: Get keywords to call this funciton
-void _ShortTermMemory::MemorySearch(string text)
+void _ShortTermMemory::MemorySearch(string* text)
 {
     // 1. Create event listener for a memory search
 
@@ -2394,6 +1328,8 @@ void _ShortTermMemory::STMSoundStringRecall()
 {
 
 }
+
+
 
 // The following function gets statistical word information stored in short term memory
 //  Invokation: This function will run at all times. It will input all text elements in short term memory an count the words and place them into a variable

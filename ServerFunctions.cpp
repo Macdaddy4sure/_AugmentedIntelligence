@@ -14,16 +14,16 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Server Functions.h"
-#include "Database Functions.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Server Functions.hpp"
+#include "Database Functions.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -34,7 +34,7 @@ void StoreObject()
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
 
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_RES* result;
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();

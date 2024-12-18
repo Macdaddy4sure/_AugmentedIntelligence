@@ -14,11 +14,11 @@
 	limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Database Functions.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Database Functions.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -144,47 +144,54 @@ void _Settings::Settings()
 		cout << "| 19. Enable/Disable Camera 1                            |" << endl;
 		cout << "| 20. Enable/Disable Camera 2                            |" << endl;
 		cout << "| 21. Enable/Disable Microphone 1                        |" << endl;
-		cout << "| 23. Enable/Disable Speech Recognition                  |" << endl;
-		cout << "| 24. Enable/Disable Computer Use                        |" << endl;
-		cout << "| 25. Enable/Disable Computer Monitor Recognition        |" << endl;
-		cout << "| 26. Enable/Disable Computer Owned Recognition          |" << endl;
-		cout << "| 27. Enable/Disable Reading                             |" << endl;
-		cout << "| 28. Enable/Disable Fallacy Checking                    |" << endl;
-		cout << "| 29. Set Visual Memory Directory                        |" << endl;
-		cout << "| 30. Set Sound Memory Directory                         |" << endl;
-		cout << "| 31. Set Working Memory Limit                           |" << endl;
-		cout << "| 32. Set Working Memory Location                        |" << endl;
-		cout << "| 33. Set Short Term Memory Limit                        |" << endl;
-		cout << "| 34. Set Short Term Memory Directory                    |" << endl;
-		cout << "| 35. Set Long Term Memory Limit                         |" << endl;
-		cout << "| 36. Set Long Term Memory Directory                     |" << endl;
-		cout << "| 37. Set CUDA Accelleration Remote Hostname             |" << endl;
-		cout << "| 38. Set CUDA Accelleration Remote Cores                |" << endl;
-		cout << "| 39. Set Tensor Accelleration Remote Hostname           |" << endl;
-		cout << "| 40. Set Tensor Accelleration Remote Cores              |" << endl;
-		cout << "| 41. Tensorflow Saved Model Location                    |" << endl;
-		cout << "| 42. Tensorflow Model Labels                            |" << endl;
-		cout << "| 43. Set FFMPEG Location                                |" << endl;
-		cout << "| 44. Set Camera 1 Device                                |" << endl;
-		cout << "| 45. Set Camera 1 FPS                                   |" << endl;
-		cout << "| 46. Set Camera 1 Resolution                            |" << endl;
-		cout << "| 47. Set Camera 2 Device                                |" << endl;
-		cout << "| 48. Set Camera 2 FPS                                   |" << endl;
-		cout << "| 49. Set Camera 2 Resolution                            |" << endl;
-		cout << "| 50. Set Microphone 1 Device                            |" << endl;
-		cout << "| 51. Set Microphone 2 Device                            |" << endl;
-		cout << "| 52. Set Sound Codec                                    |" << endl;
-		cout << "| 53. Set Sound Bitrate                                  |" << endl;
-		cout << "| 54. Set Sound Sample Rate                              |" << endl;
-		cout << "| 55. Set Sound Channels                                 |" << endl;
-		cout << "| 56. Set Sound Bits Per Channel                         |" << endl;
-		cout << "| 57. Speech Commands Activation Keyword                 |" << endl;
-		cout << "| 58. Speech Commands Terminator Keyword                 |" << endl;
-		cout << "| 59. Enable/Disable News Watching Scraper               |" << endl;
-		cout << "| 60. Enable/Disable Actions Detction                    |" << endl;
-		cout << "| 61. Enable/Disable Needs Detection                     |" << endl;
-		cout << "| 62. Enable/Disable Navigation Detection                |" << endl;
-		cout << "| 63. Enable/Disable Social Needs Detection              |" << endl;
+		cout << "| 22. Enable/Disable Speech Recognition                  |" << endl;
+		cout << "| 23. Enable/Disable Computer Use                        |" << endl;
+		cout << "| 24. Enable/Disable Computer Monitor Recognition        |" << endl;
+		cout << "| 25. Enable/Disable Computer Owned Recognition          |" << endl;
+		cout << "| 26. Enable/Disable Reading                             |" << endl;
+		cout << "| 27. Enable/Disable Reading Fallacy Checking            |" << endl;
+		cout << "| 28. Enable/Disable Listening Fallacy Checking          |" << endl;
+		cout << "| 29. Enable/Disable Listening Bias Checking             |" << endl;
+		cout << "| 30. Enable/Disable Listening Literature Device Checking|" << endl;
+		cout << "| 31. Enable/Disable Listening Axiom Checking            |" << endl;
+		cout << "| 32. Enable/Disable Listening Abuse Checking            |" << endl;
+		cout << "| 33. Enable/Disable Listening Law Checking              |" << endl;
+		cout << "| 34. Enable/Disable Listening Dictionary Checking       |" << endl;
+		cout << "| 35. Set Visual Memory Directory                        |" << endl;
+		cout << "| 36. Set Sound Memory Directory                         |" << endl;
+		cout << "| 37. Set Working Memory Limit                           |" << endl;
+		cout << "| 38. Set Working Memory Location                        |" << endl;
+		cout << "| 39. Set Short Term Memory Limit                        |" << endl;
+		cout << "| 40. Set Short Term Memory Directory                    |" << endl;
+		cout << "| 41. Set Long Term Memory Limit                         |" << endl;
+		cout << "| 42. Set Long Term Memory Directory                     |" << endl;
+		cout << "| 43. Set CUDA Accelleration Remote Hostname             |" << endl;
+		cout << "| 44. Set CUDA Accelleration Remote Cores                |" << endl;
+		cout << "| 45. Set Tensor Accelleration Remote Hostname           |" << endl;
+		cout << "| 46. Set Tensor Accelleration Remote Cores              |" << endl;
+		cout << "| 47. FFmpeg Location                                    |" << endl;
+		cout << "| 48. Tensorflow Saved Model Location                    |" << endl;
+		cout << "| 49. Tensorflow Model Labels                            |" << endl;
+		cout << "| 50. Set Camera 1 Device                                |" << endl;
+		cout << "| 51. Set Camera 1 FPS                                   |" << endl;
+		cout << "| 52. Set Camera 1 Resolution                            |" << endl;
+		cout << "| 53. Set Camera 2 Device                                |" << endl;
+		cout << "| 54. Set Camera 2 FPS                                   |" << endl;
+		cout << "| 55. Set Camera 2 Resolution                            |" << endl;
+		cout << "| 56. Set Microphone 1 Device                            |" << endl;
+		cout << "| 57. Set Sound Codec                                    |" << endl;
+		cout << "| 58. Set Sound Bitrate                                  |" << endl;
+		cout << "| 59. Set Sound Sample Rate                              |" << endl;
+		cout << "| 60. Set Sound Channels                                 |" << endl;
+		cout << "| 61. Set Sound Bits Per Channel                         |" << endl;
+		cout << "| 62. Set Sound Recording Interval                       |" << endl;
+		cout << "| 63. Speech Commands Activation Keyword                 |" << endl;
+		cout << "| 64. Speech Commands Terminator Keyword                 |" << endl;
+		cout << "| 65. Enable/Disable News Watching Scraper               |" << endl;
+		cout << "| 66. Enable/Disable Actions Detction                    |" << endl;
+		cout << "| 67. Enable/Disable Needs Detection                     |" << endl;
+		cout << "| 68. Enable/Disable Navigation Detection                |" << endl;
+		cout << "| 69. Enable/Disable Social Needs Detection              |" << endl;
 		cout << "----------------------------------------------------------" << endl;
 		cout << "| 0. Back to Main Menu                                   |" << endl;
 		cout << "----------------------------------------------------------" << endl;
@@ -307,9 +314,37 @@ void _Settings::Settings()
 		else
 			cout << "Reading: False" << endl;
 		if (reading_fallacy_check)
-			cout << "Fallacy Checking: True" << endl;
+			cout << "Reading Fallacy Checking: True" << endl;
 		else
-			cout << "Fallacy Checking: False" << endl;
+			cout << "Reading Fallacy Checking: False" << endl;
+		if (listening_fallacy_checking)
+			cout << "Listening Fallacy Checking: True" << endl;
+		else
+			cout << "Listening Fallacy Checking: False" << endl;
+		if (listening_bias_checking)
+			cout << "Listening Bias Checking: True" << endl;
+		else
+			cout << "Listening Bias Checking: False" << endl;
+		if (listening_literature_device_checking)
+			cout << "Listening Literature Device Checking: True" << endl;
+		else
+			cout << "Listening Literature Device Checking: False" << endl;
+		if (listening_axiom_checking)
+			cout << "Listening Axiom Checking: True" << endl;
+		else
+			cout << "Listening Axiom Checking: False" << endl;
+		if (listening_abuse_checking)
+			cout << "Listening Abuse Checking: True" << endl;
+		else
+			cout << "Listening Abuse Checking: False" << endl;
+		if (listening_law_checking)
+			cout << "Listening Law Checking: True" << endl;
+		else
+			cout << "Listening Law Checking: False" << endl;
+		if (listening_dictionary_checking)
+			cout << "Listening Dictionary Checking: True" << endl;
+		else
+			cout << "Listening Dictionary Checking: False" << endl;
 		cout << "Visual Memory Location: " << vision_memory_directory << endl;
 		cout << "Sound Memory Location: " << sound_directory << endl;
 		cout << "Working Memory Limit: " << working_memory_limit << " MB" << endl;
@@ -322,6 +357,8 @@ void _Settings::Settings()
 		cout << "CUDA Acelleration Remote Cores: " << cuda_accelleration_remote_cores << endl;
 		cout << "Tensor Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
 		cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
+		cout << "Tensorflow Object Detection Model: " << tensorflow_model << endl;
+		cout << "Tensorflow Object Detection Labels: " << tensorflow_labels << endl;
 		cout << "FFMpeg Location: " << ffmpeg_location << endl;
 		cout << "Camera 1 Device: " << camera1 << endl;
 		cout << "Camera 1 FPS: " << camera1_fps << endl;
@@ -336,6 +373,7 @@ void _Settings::Settings()
 		cout << "Microphone Sample Rate: " << sound_sample_rate << " Hz" << endl;
 		cout << "Microphone Channels: " << sound_channels << endl;
 		cout << "Microphone Bits Per Sample: " << sound_bits_per_sample << endl;
+		cout << "Microphone Recording Interval: " << sound_recording_interval << " seconds" << endl;
 		cout << "Speech Commands Activation: " << speech_commands_activation << endl;
 		cout << "Speech Commands Terminator: " << speech_commands_terminator << endl;
 		cout << "Transcription Server Hostname: " << whisper_hostname << endl;
@@ -569,7 +607,7 @@ void _Settings::Settings()
 
 		//	_Settings::SaveSettingsFile();
 		//}
-		else if (input == "23")
+		else if (input == "22")
 		{
 			if (!speech_recognition)
 				speech_recognition = true;
@@ -578,7 +616,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "24")
+		else if (input == "23")
 		{
 			if (!computer_use)
 				computer_use = true;
@@ -587,7 +625,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "25")
+		else if (input == "24")
 		{
 			if (!computer_monitor_recognition)
 				computer_monitor_recognition = true;
@@ -596,7 +634,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "26")
+		else if (input == "25")
 		{
 			if (!computer_owned_recognition)
 				computer_owned_recognition = true;
@@ -605,7 +643,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "27")
+		else if (input == "26")
 		{
 			if (!reading)
 				reading = true;
@@ -614,7 +652,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "28")
+		else if (input == "27")
 		{
 			if (!reading_fallacy_check)
 				reading_fallacy_check = true;
@@ -623,7 +661,70 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
+		else if (input == "28")
+		{
+			if (!listening_fallacy_checking)
+				listening_fallacy_checking = true;
+			else
+				listening_fallacy_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
 		else if (input == "29")
+		{
+			if (!listening_bias_checking)
+				listening_bias_checking = true;
+			else
+				listening_bias_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "30")
+		{
+			if (!listening_literature_device_checking)
+				listening_literature_device_checking = true;
+			else
+				listening_literature_device_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "31")
+		{
+			if (!listening_axiom_checking)
+				listening_axiom_checking = true;
+			else
+				listening_axiom_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "32")
+		{
+			if (!listening_abuse_checking)
+				listening_abuse_checking = true;
+			else
+				listening_abuse_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "33")
+		{
+			if (!listening_law_checking)
+				listening_law_checking = true;
+			else
+				listening_law_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "34")
+		{
+			if (!listening_dictionary_checking)
+				listening_dictionary_checking = true;
+			else
+				listening_dictionary_checking = false;
+
+			_Settings::SaveSettingsFile();
+		}
+		else if (input == "35")
 		{
 			while (!boolean2)
 			{
@@ -644,7 +745,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "30")
+		else if (input == "36")
 		{
 			while (!boolean2)
 			{
@@ -665,7 +766,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "31")
+		else if (input == "37")
 		{
 			while (!boolean2)
 			{
@@ -687,7 +788,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "32")
+		else if (input == "38")
 		{
 			while (!boolean2)
 			{
@@ -707,7 +808,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "33")
+		else if (input == "39")
 		{
 			while (!boolean2)
 			{
@@ -727,7 +828,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "34")
+		else if (input == "40")
 		{
 			while (!boolean2)
 			{
@@ -747,7 +848,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "35")
+		else if (input == "41")
 		{
 			while (!boolean2)
 			{
@@ -768,7 +869,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "36")
+		else if (input == "42")
 		{
 			while (!boolean2)
 			{
@@ -788,7 +889,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "37")
+		else if (input == "43")
 		{
 			while (!boolean2)
 			{
@@ -808,7 +909,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "38")
+		else if (input == "44")
 		{
 			while (!boolean2)
 			{
@@ -828,7 +929,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "39")
+		else if (input == "45")
 		{
 			while (!boolean2)
 			{
@@ -848,7 +949,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "40")
+		else if (input == "46")
 		{
 			while (!boolean2)
 			{
@@ -868,7 +969,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "41")
+		else if (input == "47")
 		{
 			while (!boolean2)
 			{
@@ -887,8 +988,48 @@ void _Settings::Settings()
 					boolean2 = true;
 				}
 			}
+			}
+		else if (input == "48")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Tensorflow Saved Model Location" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					tensorflow_model = input2;
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
 		}
-		else if (input == "42")
+		else if (input == "49")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Tensorflow Saved Model Labels" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					tensorflow_labels = input2;
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "50")
 		{
 			while (!boolean2)
 			{
@@ -908,7 +1049,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "43")
+		else if (input == "51")
 		{
 			while (!boolean2)
 			{
@@ -928,7 +1069,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "44")
+		else if (input == "52")
 		{
 			while (!boolean2)
 			{
@@ -948,7 +1089,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "45")
+		else if (input == "53")
 		{
 			while (!boolean2)
 			{
@@ -968,7 +1109,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "46")
+		else if (input == "54")
 		{
 			while (!boolean2)
 			{
@@ -988,7 +1129,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "47")
+		else if (input == "55")
 		{
 			while (!boolean2)
 			{
@@ -1008,7 +1149,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "48")
+		else if (input == "56")
 		{
 			while (!boolean2)
 			{
@@ -1028,7 +1169,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		//else if (input == "49")
+		//else if (input == "56")
 		//{
 		//	while (!boolean2)
 		//	{
@@ -1048,7 +1189,7 @@ void _Settings::Settings()
 		//		}
 		//	}
 		//}
-		else if (input == "50")
+		else if (input == "57")
 		{
 			while (!boolean2)
 			{
@@ -1068,7 +1209,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "51")
+		else if (input == "58")
 		{
 			while (!boolean2)
 			{
@@ -1088,7 +1229,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "52")
+		else if (input == "59")
 		{
 			while (!boolean2)
 			{
@@ -1108,7 +1249,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "53")
+		else if (input == "60")
 		{
 			while (!boolean2)
 			{
@@ -1128,7 +1269,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "54")
+		else if (input == "61")
 		{
 			while (!boolean2)
 			{
@@ -1148,7 +1289,27 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "55")
+		else if (input == "62")
+		{
+			while (!boolean2)
+			{
+				system("cls");
+
+				cout << endl;
+				cout << "Sound Recording Interval" << endl;
+				cout << endl;
+				cout << "Your Selection: ";
+				getline(cin, input2);
+
+				if (input2 != "")
+				{
+					sound_recording_interval = stoi(input2);
+					_Settings::SaveSettingsFile();
+					boolean2 = true;
+				}
+			}
+		}
+		else if (input == "63")
 		{
 			while (!boolean2)
 			{
@@ -1168,7 +1329,7 @@ void _Settings::Settings()
 				}
 			}
 		}
-		else if (input == "56")
+		else if (input == "64")
 		{
 			while (!boolean2)
 			{
@@ -1187,8 +1348,8 @@ void _Settings::Settings()
 					boolean2 = true;
 				}
 			}
-			}
-		else if (input == "57")
+		}
+		else if (input == "65")
 		{
 			if (!news_watching)
 				news_watching = true;
@@ -1197,7 +1358,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "58")
+		else if (input == "66")
 		{
 			if (!action_detection)
 				action_detection = true;
@@ -1206,7 +1367,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "59")
+		else if (input == "67")
 		{
 			if (!speech_recognition)
 				needs_detection = true;
@@ -1215,7 +1376,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "60")
+		else if (input == "68")
 		{
 			if (!navigation_detection)
 				navigation_detection = true;
@@ -1224,7 +1385,7 @@ void _Settings::Settings()
 
 			_Settings::SaveSettingsFile();
 		}
-		else if (input == "61")
+		else if (input == "69")
 		{
 			if (!social_needs_detection)
 				social_needs_detection = true;
@@ -4283,7 +4444,8 @@ bool _Settings::GetEthicsCheckEnabled()
 
 string _Settings::GetTensorRemoteCores()
 {
-
+	string temp;
+	return temp;
 }
 
 bool _Settings::GetObjectDetectionCUDAEnabled()

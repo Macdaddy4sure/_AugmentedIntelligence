@@ -15,21 +15,13 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Scrapers.hpp"
-#include "Working-Memory.hpp"
+#include "SpeechSynthesis.hpp"
 #include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
-#include "Scrapers.hpp"
+#include "Working-Memory.hpp"
 
 using namespace std;
 
-// Purpose: Download news articles and opinon news shows from internet and NLU them
-// 
-void _Scrapers::NewsWatchingScraper()
+void _SpeechSynthesis::TextToSpeech(string text)
 {
 
 }

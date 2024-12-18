@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,21 +15,5 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Scrapers.hpp"
-#include "Working-Memory.hpp"
-#include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
-#include "Scrapers.hpp"
 
 using namespace std;
-
-// Purpose: Download news articles and opinon news shows from internet and NLU them
-// 
-void _Scrapers::NewsWatchingScraper()
-{
-
-}

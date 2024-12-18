@@ -14,11 +14,11 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "QA.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Settings.h"
+#include "AugmentedIntelligence.hpp"
+#include "QA.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Settings.hpp"
 
 using namespace std;
 

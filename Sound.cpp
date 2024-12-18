@@ -14,20 +14,21 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Sound.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Database Functions.h"
-#include "Mathematics.h"
-#include "NLP.h"
-#include "Reference.h"
-#include "Speech Recognition.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Time.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Sound.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Database Functions.hpp"
+#include "Mathematics.hpp"
+#include "NLP.hpp"
+#include "Reference.hpp"
+#include "Speech Commands.hpp"
+#include "Speech Recognition.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Time.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -39,13 +40,14 @@ void _Sound::Sound()
     //const int numChannels = 2;
     //const int bitsPerSample = 24;
     //const int seconds = 5;
-    const int recordTime = 5; // Record for 5 seconds
+    //const int recordTime = 5; // Record for 5 seconds
     const PaSampleFormat sampleFormat = paFloat32;
     std::vector<float> recordedSamples;
     string command;
     string filename;
     string transcription;
     string sound_detection;
+    string image_hash;
     //sound_directory = _Settings::GetSoundDirectory();
     ostringstream oss;
 
@@ -69,17 +71,18 @@ void _Sound::Sound()
         // Use chrono to accurately measure time for recording duration
         auto startTime = std::chrono::high_resolution_clock::now();
         bool recording = true;
+
         while (recording)
         {
             auto currentTime = std::chrono::high_resolution_clock::now();
             auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
-            if (elapsed >= recordTime) 
+            if (elapsed >= sound_recording_interval)
             {
                 recording = false;
             }
         }
 
-        //// Record for a few seconds
+        // Record for a few seconds
         //Pa_Sleep(seconds * 1000);
 
         err = Pa_CloseStream(stream);
@@ -87,6 +90,7 @@ void _Sound::Sound()
 
         Pa_Terminate();
 
+        filename.clear();
         filename = sound_directory.c_str();
         filename += "/";
         filename += current_time.c_str();
@@ -102,6 +106,8 @@ void _Sound::Sound()
         }
         outFile.close();
 
+        image_hash = _Utilities::getHash(filename);
+
         //Debug
         //std::cout << "Recording finished." << std::endl;
 
@@ -109,7 +115,13 @@ void _Sound::Sound()
         {
             // Whisper transcription
             transcription = _SpeechRecognition::SpeechRecognition(filename);
-            cout << "transcription: " << transcription << endl; // Debug
+            cout << "Transcription: " << transcription << endl; // Debug
+
+            if (speech_commands && transcription != "")
+            {
+                string* words = _Utilities::String2Words(transcription);
+                _SpeechCommands::SpeechCommands(words);
+            }
         }
         if (sound_recognition)
         {
@@ -118,7 +130,7 @@ void _Sound::Sound()
             sound_detection = "NULL";
         }
 
-        _Sound::MySQL_Sound(filename, current_time, transcription, sound_detection);
+        _Sound::MySQL_Sound(filename, current_time, transcription, sound_detection, image_hash);
 
         if (sound_memory)
         {
@@ -140,10 +152,10 @@ void _Sound::Sound()
                 {
                     for (int y = 0; y < 999; y++)
                     {
-                        //lock_guard<mutex> lock(mtx_stm_sound_path[y][0]);
-                        //lock_guard<mutex> lock2(mtx_stm_sound_path[y][1]);
-                        //lock_guard<mutex> lock3(mtx_stm_sound_path[y + 1][0]);
-                        //lock_guard<mutex> lock4(mtx_stm_sound_path[y + 1][1]);
+                        lock_guard<mutex> lock(mtx_stm_sound_path[y][0]);
+                        lock_guard<mutex> lock2(mtx_stm_sound_path[y][1]);
+                        lock_guard<mutex> lock3(mtx_stm_sound_path[y + 1][0]);
+                        lock_guard<mutex> lock4(mtx_stm_sound_path[y + 1][1]);
                         stm_sound_path[y][0] = stm_sound_path[y + 1][0];
                         stm_sound_path[y][1] = stm_sound_path[y + 1][1];
                         stm_sound_path[y][2] = stm_sound_path[y + 1][2];
@@ -165,7 +177,7 @@ void _Sound::Sound()
 }
 
 // The following function will upadte the MySQL database with raw sound information
-void _Sound::MySQL_Sound(string filename, string current_time, string transcription, string sound_recognition)
+void _Sound::MySQL_Sound(string filename, string current_time, string transcription, string sound_recognition, string image_hash)
 {
     MYSQL* conn;
     MYSQL_RES* result;
@@ -192,12 +204,12 @@ void _Sound::MySQL_Sound(string filename, string current_time, string transcript
         // Create the table if it does not exist
         sql1 = "CREATE TABLE IF NOT EXISTS `";
         sql1 += table_name.c_str();
-        sql1 += "`(filelocation TEXT, date TEXT, transcription TEXT, sound_recognition TEXT)";
+        sql1 += "`(date TEXT, filelocation TEXT, transcription TEXT, sound_recognition TEXT, image_hash TEXT)";
         mysql_query(conn, sql1.c_str());
 
         sql2 = "INSERT INTO `";
         sql2 += table_name.c_str();
-        sql2 += "`(date, filelocation, transcription, sound_recognition) VALUES(\"";
+        sql2 += "`(date, filelocation, transcription, sound_recognition, image_hash) VALUES(\"";
         sql2 += current_date.c_str();
         sql2 += "\", \"";
         sql2 += filename.c_str();
@@ -205,6 +217,8 @@ void _Sound::MySQL_Sound(string filename, string current_time, string transcript
         sql2 += transcription.c_str();
         sql2 += "\", \"";
         sql2 += sound_recognition.c_str();
+        sql2 += "\", \"";
+        sql2 += image_hash.c_str();
         sql2 += "\");";
         mysql_query(conn, sql2.c_str());
     }
@@ -435,7 +449,7 @@ int _Sound::RecordCallback(const void* inputBuffer, void* outputBuffer,
 
 string _Sound::SoundRecognition(string wav_location)
 {
-    string model_path = "D:/_test3_audio/saved_model"; // Make this into a setting...
+    string model_path = "D:/_test3_audio/saved_model"; // Make this into a setting... Done
     string labelsPath = "D:/_test3_audio/saved_model/assets/labels.csv";
 
     std::vector<float> audioSamples = _Sound::loadWavFile(wav_location);

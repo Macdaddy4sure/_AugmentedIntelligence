@@ -15,21 +15,49 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Scrapers.hpp"
-#include "Working-Memory.hpp"
-#include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
-#include "Scrapers.hpp"
+#include "Surfing.hpp"
 
 using namespace std;
 
-// Purpose: Download news articles and opinon news shows from internet and NLU them
-// 
-void _Scrapers::NewsWatchingScraper()
+void _Surfing::Surfing()
 {
 
+}
+
+void _Surfing::DuckDive()
+{
+
+}
+
+void _Surfing::BodySurfing()
+{
+
+}
+
+bool _Surfing::OverUnder(int WavesSet, double WaveHeight)
+{
+    return false;
+}
+
+void _Surfing::Dive()
+{
+
+}
+
+void _Surfing::SetTracking()
+{
+
+}
+
+// Depth perception? Eyes focal length?
+double _Surfing::getWaveDistance()
+{
+    double temp;
+    return temp;
+}
+
+double _Surfing::getWaveHeight()
+{
+    double temp;
+    return temp;
 }

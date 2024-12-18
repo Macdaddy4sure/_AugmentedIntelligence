@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,19 +14,20 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Mathematics.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Time.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Mathematics.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Time.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
+using namespace cv;
 
 // This function will update the MySQL database
 void _Utilities::UpdateMySQL()
@@ -37,20 +38,23 @@ void _Utilities::UpdateMySQL()
 // This function will use intelligence to create a summary of what the user is reading
 string _Utilities::CreateSummary(string data)
 {
-
+    string temp;
+    return temp;
 }
 
 // This function will generate a random number
 int _Utilities::GenerateRandomNumber(int low, int high)
 {
-
+    int random;
+    return random;
 }
 
 // This function will take in a string array from vision and sort the array alphabetically
 //  Sound command = "Sort the following array alphabetically"
 string* _Utilities::StringArraySorter(string* data)
 {
-
+    string* temp = new string[10];
+    return temp;
 }
 
 // This function finds the RGB values of wherr the camera is directly looking at
@@ -132,6 +136,8 @@ void _LongTermMemory::LongTermMemoryNames()
 string _Utilities::ImageSequenceFFMpeg(string current_date, string duration_previous)
 {
     // ffmpeg -i image -%03d.png video.mp4
+    string temp;
+    return temp;
 }
 
 // The following function will search long term memory for male and female names
@@ -555,7 +561,17 @@ string _Utilities::FixWikiTableName(string title)
 
 string* _Utilities::sortLines(string outText, string* recognition)
 {
+    return nullptr;
+}
 
+string* _Utilities::RemovePunctuationArr(string* words)
+{
+    return nullptr;
+}
+
+string* _Utilities::RemovePunctuationString(string sentence)
+{
+    return nullptr;
 }
 
 string _Utilities::ReturnPunctuation(string* words)
@@ -590,6 +606,412 @@ string _Utilities::ReturnPunctuation(string* words)
     }
 
     return "false";
+}
+
+int _Utilities::getDatatypeUsed(string datatype)
+{
+    if (datatype == "wm_vision_path_camera1")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_path_camera1[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_path_camera2")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_path_camera2[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_sound_path")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_sound_path[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    //if (datatype == "wm_speech_dialogue")
+    //{
+    //    for (int x = 0; x < 1000; x++)
+    //    {
+    //        if (wm_speech_dialogue[x][0] == "")
+    //        {
+    //            return x - 1;
+    //        }
+    //    }
+    //}
+    if (datatype == "wm_action1_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_action1_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_action2_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_action2_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_action3_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_action3_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_text_identification")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_text_identification[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_reading_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_reading_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_reading_image")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_reading_image[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_algebra_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_algebra_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_objects_image_path_camera1")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_objects_image_path_camera1[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_objects_image_path_camera2")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_objects_image_path_camera2[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_actions_image_path_camera1")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_actions_image_path_camera1[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_actions_image_path_camera2")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_actions_image_path_camera2[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_objects_text_camera1")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_objects_text_camera1[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_objects_text_camera2")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_objects_text_camera2[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_analysis_text_camera1")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_analysis_text_camera1[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_vision_analysis_text_camera2")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_vision_analysis_text_camera2[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_typing_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_typing_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_Reference_pos_gps_north")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_Reference_pos_gps_north[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_Reference_pos_gps_west")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_Reference_pos_gps_west[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_Reference_pos_gps_image")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_Reference_pos_gps_image[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_gps_north_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_gps_north_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_gps_west_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_gps_west_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_gps_elevation_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_gps_elevation_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_x")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_x[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_y")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_y[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_pos_z")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_pos_z[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_simple_text")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_simple_text[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_simple_image")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_simple_image[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_llm_prompt_history")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_llm_prompt_history[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_llm_response")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_llm_response[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikipedia")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikipedia[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikisimple")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikisimple[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikiquote")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikiquote[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikisource")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikisource[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikihow")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikihow[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_wikibooks")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_wikibooks[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+    if (datatype == "wm_stackexchange")
+    {
+        for (int x = 0; x < 1000; x++)
+        {
+            if (wm_stackexchange[x][0] == "")
+            {
+                return x - 1;
+            }
+        }
+    }
+
+    return 0;
 }
 
 // A utility function to swap two elements 
@@ -855,7 +1277,7 @@ double* _Utilities::VectorSum(double* vector_sum, double* vector)
     double temp;
     double temp2;
 
-    for (int x = 0; x <= 300; x++)
+    for (int x = 0; x <= sizeof(vector) / sizeof(vector[0]); x++)
     {
         temp = vector_sum[x];
         temp2 = vector[x];
@@ -870,7 +1292,7 @@ double* _Utilities::VectorAverage(double* vector_sum, int word_count)
 {
     double temp;
 
-    for (int x = 0; x <= 300; x++)
+    for (int x = 0; x <= sizeof(vector_sum) / sizeof(vector_sum[0]); x++)
     {
         temp = vector_sum[x];
         temp = temp / word_count;
@@ -880,9 +1302,18 @@ double* _Utilities::VectorAverage(double* vector_sum, int word_count)
     return vector_sum;
 }
 
+// Callback function to capture the response data
+size_t _Utilities::WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp)
+{
+    size_t realSize = size * nmemb;
+    userp->append(static_cast<char*>(contents), realSize);
+    return realSize;
+}
+
+
 string _Utilities::DictionarySpellCheck(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL* conn2;
     MYSQL_ROW row;
     MYSQL_RES* result;
@@ -892,6 +1323,7 @@ string _Utilities::DictionarySpellCheck(string word)
     string mysql_password = _Settings::GetMySQLPassword();
     string table = "entries";
     string sql1;
+    string corrected;
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
@@ -902,7 +1334,16 @@ string _Utilities::DictionarySpellCheck(string word)
         mysql_query(conn, sql1.c_str());
         result = mysql_store_result(conn);
     }
+
+    return corrected;
 }
+
+cv::Mat _Utilities::String2Mat(string image_location)
+{
+    cv::Mat image = cv::imread(image_location);
+    return image;
+}
+
 
 //string _Utilities::fixQuoteFederal(string input)
 //{
@@ -944,35 +1385,55 @@ void _Utilities::PrintLicense()
     
 }
 
-//string _Utilities::getHash(string filename)
-//{
-//    /*ifstream fp(filename.c_str());
-//
-//    constexpr const std::size_t buffer_size{ 1 << 12 };
-//    char buffer[buffer_size];
-//
-//    unsigned char hash[SHA256_DIGEST_LENGTH] = { 0 };
-//
-//    SHA256_CTX ctx;
-//    SHA256_Init(&ctx);
-//
-//    while (fp.good())
-//    {
-//        fp.read(buffer, buffer_size);
-//        SHA256_Update(&ctx, buffer, fp.gcount());
-//    }
-//
-//    SHA256_Final(hash, &ctx);
-//    fp.close();
-//
-//    std::ostringstream os;
-//    os << std::hex << std::setfill('0');
-//
-//    for (int i = 0; i < SHA256_DIGEST_LENGTH; ++i)
-//    {
-//        os << std::setw(2) << static_cast<unsigned int>(hash[i]);
-//    }
-//
-//    return os.str();*/
-//}
+string _Utilities::getHash(string filename)
+{
+    std::ifstream file(filename.c_str(), std::ifstream::binary);
+    cout << "filename: " << filename << endl;
 
+    if (!file.is_open())
+    {
+        throw std::runtime_error("Cannot open file: " + filename);
+    }
+
+    SHA256_CTX sha256;
+    SHA256_Init(&sha256);
+
+    const int bufSize = 16384; // Buffer size (you can adjust this)
+    char* buffer = new char[bufSize];
+    while (file.good())
+    {
+        file.read(buffer, bufSize);
+        SHA256_Update(&sha256, buffer, file.gcount());
+    }
+    delete[] buffer;
+
+    unsigned char hash[SHA256_DIGEST_LENGTH];
+    SHA256_Final(hash, &sha256);
+
+    std::stringstream ss;
+    for (int i = 0; i < SHA256_DIGEST_LENGTH; i++) {
+        ss << std::hex << std::setw(2) << std::setfill('0') << (int)hash[i];
+    }
+
+    return ss.str();
+}
+
+string _Utilities::base64_encode(const string& input)
+{
+    BIO* bmem, * b64;
+    BUF_MEM* bptr;
+
+    b64 = BIO_new(BIO_f_base64());
+    bmem = BIO_new(BIO_s_mem());
+    b64 = BIO_push(b64, bmem);
+    BIO_set_flags(b64, BIO_FLAGS_BASE64_NO_NL);
+
+    BIO_write(b64, input.c_str(), input.length());
+    BIO_flush(b64);
+    BIO_get_mem_ptr(b64, &bptr);
+
+    std::string result(bptr->data, bptr->length);
+    BIO_free_all(b64);
+
+    return result;
+}

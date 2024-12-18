@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,17 +14,17 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Writing.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Writing.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -33,5 +33,5 @@ using namespace std;
 //            Get vision data to call this function
 void _NLP::Writing()
 {
-    // This one is quite challenging
+    // This one is challenging
 }

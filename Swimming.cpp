@@ -15,21 +15,63 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Scrapers.hpp"
+#include "Swimming.hpp"
 #include "Working-Memory.hpp"
-#include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
 #include "Utilities.hpp"
-#include "Scrapers.hpp"
 
 using namespace std;
 
-// Purpose: Download news articles and opinon news shows from internet and NLU them
-// 
-void _Scrapers::NewsWatchingScraper()
+void _Swimming::EggBeater()
+{
+
+}
+
+void _Swimming::Crawl()
+{
+
+}
+
+void _Swimming::CrawlFlipTurn()
+{
+
+}
+
+void _Swimming::BreastStroke()
+{
+
+}
+
+void _Swimming::BreastStrokeTurn()
+{
+
+}
+
+void _Swimming::BackStroke()
+{
+
+}
+
+void _Swimming::BackStrokeTurn()
+{
+
+}
+
+void _Swimming::ElementaryBackstroke()
+{
+
+}
+
+void _Swimming::Butterfly()
+{
+
+}
+
+void _Swimming::ButterflyTurn()
+{
+
+}
+
+void _Swimming::Dive()
 {
 
 }

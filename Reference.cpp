@@ -14,13 +14,13 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Reference.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Settings.h"
-#include "Variables.h"
+#include "AugmentedIntelligence.hpp"
+#include "Reference.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Settings.hpp"
+#include "Variables.hpp"
 
 using namespace std;
 
@@ -95,7 +95,7 @@ string* _Reference::init_lists()
     string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
-    string* lists_temp;
+    string* lists_temp = new string[1000];
 
     lists = mysql_init(0);
     lists = mysql_real_connect(lists, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
