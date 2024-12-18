@@ -15,3 +15,5 @@
 */
 
 #include "AugmentedIntelligence.hpp"
+
+using namespace std;

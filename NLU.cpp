@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,17 +14,20 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Fallacies.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Large Language Models.hpp"
+#include "Parsers.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Fallacy.hpp"
+#include "Bias.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
@@ -242,14 +245,77 @@ using namespace std;
 // Rule F relates to limitation of liability actions in relation to vessel owners.
 // Rule G deals with forfeiture actions in rem arising from federal statute.
 
-double* _NLU::getDictionaryVector(string word)
+// Function to get a summary of the given text
+string _NLU::CreateSummary(string text)
 {
-    MYSQL* conn;
+    string model = "llama3";
+    string prompt = "Create a summary based on the given text: " + text;
+    string response = _LLM::OllamaAPI(model, prompt, "NULL");
+    response = _Parsers::LLM::LLama3Parse(response);
+    return response;
+}
+
+// The goal is to iterate through the entire OpenSource Dictionary checking if the definition matches the input text
+string* _NLU::DictionaryDefinitionCheck(string text)
+{
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    string sql1;
+    string model = "llama3";
+    string word;
+    string word_type;
+    string definition;
+    string prompt;
+    string response;
+    string* words_return = new string[100];
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        sql1 = "SELECT * FROM entries;";
+        mysql_query(conn, sql1.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            definition = row[2];
+            prompt = "Check if the following definition matches the text and limit the response to yes or no: " + definition + ". " + text;
+            response = _LLM::OllamaAPI(model, prompt, "NULL");
+            response = _Parsers::LLM::LLama3Parse(response);
+            string* words = _Utilities::String2Words(response);
+            words = _Utilities::RemovePunctuationArr(words);
+            words = _Utilities::ArrayOfStringsToLowercase(words);
+
+            for (int x = 0; x < sizeof(words); x++)
+            {
+                if (words[x] == "yes")
+                {
+                    // Find the first available position in memory
+                    for (int y = 0; y < sizeof(words); y++)
+                    {
+                        if (words_return[y].empty())
+                        {
+                            words_return[y] = word;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+        return words_return;
+    }
+}
+
+double* _NLU::getDictionaryVector(string word)
+{
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string vector_string;
     string sql1;
     string word_type;
@@ -257,7 +323,7 @@ double* _NLU::getDictionaryVector(string word)
     string vector;
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
 
     if (conn)
     {
@@ -282,22 +348,21 @@ double* _NLU::getDictionaryVector(string word)
 //
 //}
 
-double* _NLU::getSentenceVectors(string sentence)
+double* _NLU::getSentenceVectors(string* sentence)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string sql1;
-    string* words_sentence = _Utilities::String2Words(sentence);
-    size_t size = sizeof(words_sentence);
+    size_t size = sizeof(sentence);
     double* sentence_vector = new double[size];
 
     if (conn)
     {
-        for (int x = 0; x <= sizeof(words_sentence); x++)
+        for (int x = 0; x <= sizeof(sentence); x++)
         {
             sql1 = "SELECT * FROM entries2;";
             mysql_query(conn, sql1.c_str());
@@ -305,37 +370,39 @@ double* _NLU::getSentenceVectors(string sentence)
 
             while (row = mysql_fetch_row(result))
             {
-                if (_Utilities::toLowerWord(words_sentence[x]) == _Utilities::toLowerWord(row[0]))
+                if (_Utilities::toLowerWord(sentence[x]) == _Utilities::toLowerWord(row[0]))
                 {
                     double* parsed_vector = _Utilities::ParseVector(row[3]);
                     sentence_vector = _NLU::VectorAddition(sentence_vector, parsed_vector);
+                    return sentence_vector;
                 }
             }
         }
     }
+
+    return nullptr;
 }
 
-//__global__ double* _NLU::CUDA::getSentenceVectors(string sentence)
+//__global__ double* _NLU::CUDA::getSentenceVectors(string* sentence)
 //{
 //
 //}
 
-double* _NLU::getSentenceVectorsAdditive(string sentence)
+double* _NLU::getSentenceVectorsAdditive(string* sentence)
 {
-    MYSQL* conn;
+    MYSQL* conn ;
     MYSQL_ROW row;
     MYSQL_RES* result;
-    string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_database = "dictionary";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string sql1;
-    string* words_sentence = _Utilities::String2Words(sentence);
-    size_t size = sizeof(words_sentence);
+    size_t size = sizeof(sentence);
     double* sentence_vector = new double[size];
 
     if (conn)
     {
-        for (int x = 0; x <= sizeof(words_sentence); x++)
+        for (int x = 0; x <= sizeof(sentence); x++)
         {
             sql1 = "SELECT * FROM entries2;";
             mysql_query(conn, sql1.c_str());
@@ -343,29 +410,32 @@ double* _NLU::getSentenceVectorsAdditive(string sentence)
 
             while (row = mysql_fetch_row(result))
             {
-                if (_Utilities::toLowerWord(words_sentence[x]) == _Utilities::toLowerWord(row[0]))
+                if (_Utilities::toLowerWord(sentence[x]) == _Utilities::toLowerWord(row[0]))
                 {
                     double* parsed_vector = _Utilities::ParseVector(row[4]);
                     sentence_vector = _NLU::VectorAddition(sentence_vector, parsed_vector);
+                    return sentence_vector;
                 }
             }
         }
     }
+
+    return nullptr;
 }
 
-//__global__ double* _NLU::CUDA::getSentenceVectorsAdditive(string sentence)
+//__global__ double* _NLU::CUDA::getSentenceVectorsAdditive(string* sentence)
 //{
 //
 //}
 
 double* _NLU::getAdditiveVector(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string vector_string;
     string sql1;
     string word_type;
@@ -399,12 +469,12 @@ double* _NLU::getAdditiveVector(string word)
 
 double* _NLU::getVectorAdditiveAverage(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string vector_string;
     string sql1;
 
@@ -433,14 +503,14 @@ double* _NLU::getVectorAdditiveAverage(string word)
 //
 //}
 
-double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
+double* _NLU::getSentenceVectorsAdditiveAverage(string* sentence)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
 
     string vector_string;
     string sql1;
@@ -448,8 +518,8 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
     string word_type;
     string definition;
     string vector;
-    string* words_sentence = _Utilities::String2Words(sentence);
-    size_t size = sizeof(words_sentence);
+    //string* words_sentence = _Utilities::String2Words(sentence);
+    size_t size = sizeof(sentence);
     double* sentence_vector = new double[size];
 
     conn = mysql_init(0);
@@ -457,7 +527,7 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
 
     if (conn)
     {
-        for (int x = 0; x <= sizeof(words_sentence); x++)
+        for (int x = 0; x <= sizeof(sentence); x++)
         {
             sql1 = "SELECT * FROM entries2;";
             mysql_query(conn, sql1.c_str());
@@ -465,7 +535,7 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
 
             while (row = mysql_fetch_row(result))
             {
-                if (_Utilities::toLowerWord(words_sentence[x]) == _Utilities::toLowerWord(row[0]))
+                if (_Utilities::toLowerWord(sentence[x]) == _Utilities::toLowerWord(row[0]))
                 {
                     double* parsed_vector = _Utilities::ParseVector(row[3]);
                     sentence_vector = _NLU::VectorAddition(sentence_vector, parsed_vector);
@@ -477,14 +547,14 @@ double* _NLU::getSentenceVectorsAdditiveAverage(string sentence)
     }
 }
 
-double* _NLU::getAverageVectorSentence(string sentence)
+double* _NLU::getAverageVectorSentence(string* sentence)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
 
     string vector_string;
     string sql1;
@@ -492,8 +562,7 @@ double* _NLU::getAverageVectorSentence(string sentence)
     string word_type;
     string definition;
     string vector;
-    string* words_sentence = _Utilities::String2Words(sentence);
-    size_t size = sizeof(words_sentence);
+    size_t size = sizeof(sentence);
     double* sentence_vector = new double[size];
     double* sentence_average_vector = new double[300];
 
@@ -502,7 +571,7 @@ double* _NLU::getAverageVectorSentence(string sentence)
 
     if (conn)
     {
-        for (int x = 0; x <= sizeof(words_sentence); x++)
+        for (int x = 0; x <= sizeof(sentence); x++)
         {
             sql1 = "SELECT * FROM entries2;";
             mysql_query(conn, sql1.c_str());
@@ -510,7 +579,7 @@ double* _NLU::getAverageVectorSentence(string sentence)
 
             while (row = mysql_fetch_row(result))
             {
-                if (_Utilities::toLowerWord(words_sentence[x]) == _Utilities::toLowerWord(row[0]))
+                if (_Utilities::toLowerWord(sentence[x]) == _Utilities::toLowerWord(row[0]))
                 {
                     double* parsed_vector = _Utilities::ParseVector(row[3]);
                     sentence_vector = _NLU::VectorAddition(sentence_vector, parsed_vector);
@@ -527,7 +596,7 @@ double* _NLU::getAverageVectorSentence(string sentence)
     }
 }
 
-//__global__ double* _NLU::CUDA::getAverageVectorSentence(string sentence)
+//__global__ double* _NLU::CUDA::getAverageVectorSentence(string* sentence)
 //{
 //
 //}
@@ -556,14 +625,14 @@ double* _NLU::VectorAddition(double* vector1, double* vector2)
 //  words[x][7] = object_of_preposition
 string** getPOSTaggedArticle(string mysql_table, string mysql_database)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string mysql_hostname = _Settings::GetMySQLHostname();
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
     string sql1;
-    string** words;
+    string** words = new string*[100];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);

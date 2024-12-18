@@ -1,7 +1,5 @@
-#pragma once
-
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -16,77 +14,79 @@
     limitations under the License.
 */
 
-#include "Kinesthetics.h"
+#include "AugmentedIntelligence.hpp"
+#include "Kinesthetics.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
-float* _Kinesthetics::LeftEyeTracking()
-{
-
-}
-
-float _Kinesthetics::LeftSuperiorRectusTension()
-{
-
-}
-
-float _Kinesthetics::LeftLateralRectusTension()
-{
-
-}
-
-float _Kinesthetics::LeftInferiorObliqueTension()
-{
-
-}
-
-float _Kinesthetics::LeftInferiorRectusTension()
-{
-
-}
-
-float _Kinesthetics::LeftMedialRectusTension()
-{
-
-}
-
-bool _Kinesthetics::LeftEyeMuscleTension(float LeftSuperiorRectus, float LeftLeteralRectus, float LeftInferiorOblique, float LeftInferiorRectus, float leftMedialRectus)
-{
-
-}
-
-float* _Kinesthetics::RightEyeTracking()
-{
-
-}
-
-float _Kinesthetics::RightSuperiorRectusTension()
-{
-
-}
-
-float _Kinesthetics::RightLateralRectusTension()
-{
-
-}
-
-float _Kinesthetics::RightInferiorObliqueTension()
-{
-
-}
-
-float _Kinesthetics::RightInferiorRectusTension()
-{
-
-}
-
-float _Kinesthetics::RightMedialRectusTension()
-{
-
-}
-
-bool _Kinesthetics::RightEyeMuscleTension(float RightSuperiorRectus, float RightLeteralRectus, float RightInferiorOblique, float RightInferiorRectus, float RightMedialRectus)
-{
-
-}
-
+//bool _Kinesthetics::LeftEye::LeftEyeTracking(float &left_eye)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::getLeftSuperiorRectusTension(float &LeftSuperiorRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::getLeftLateralRectusTension(float &LeftLateralRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::getLeftInferiorObliqueTension(float &LeftInferiorObliqueTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::getLeftInferiorRectusTension(float &LeftInteriorRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::getLeftMedialRectusTension(float &LeftMedialRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::LeftEye::setLeftEyeMuscleTension(float LeftSuperiorRectus, float LeftLeteralRectus, float LeftInferiorOblique, float LeftInferiorRectus, float leftMedialRectus)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::RightEyeTracking(float &right_eye)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::getRightSuperiorRectusTension(float &RightSuperiorRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::getRightLateralRectusTension(float &RightLateralRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::getRightInferiorObliqueTension(float &RightInferiorObliqueTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::getRightInferiorRectusTension(float &RightInferiorRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::getRightMedialRectusTension(float &RightMedialRectusTension)
+//{
+//
+//}
+//
+//bool _Kinesthetics::RightEye::setRightEyeMuscleTension(float RightSuperiorRectus, float RightLeteralRectus, float RightInferiorOblique, float RightInferiorRectus, float RightMedialRectus)
+//{
+//
+//}

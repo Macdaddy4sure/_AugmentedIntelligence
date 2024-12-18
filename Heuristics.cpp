@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,23 +14,23 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Heuristics.h"
-#include "Gaming.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Heuristics.hpp"
+#include "Gaming.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 
 // The Problem Solving Process - Psychology For Dummies - Page 104
 // 1. Recognize that a problem exists
 // 2. Constructing a representation ofthe situation that includes the initial state of the problem and the eventual goal (a solution)
-// 2a. Would would the solution look like?
+// 2a. What would the solution look like?
 // 3. Generating and evaluating possible solutions
 // 4. Selecting a solution to attempt (hopefully there is wisdom available to narrow the list of solutions to test)
 // 5. Executing the solution and determining if it actually works (verification)
@@ -285,6 +285,110 @@ void _Heuristics::MusicHeuristic()
 }
 
 void _Heuristics::DrawingHeuristic()
+{
+
+}
+
+void _Heuristics::AffectHeuristic()
+{
+
+}
+
+void _Heuristics::AnchoringHeuristic()
+{
+
+}
+
+void _Heuristics::AvailabilityHeuristic()
+{
+
+}
+
+void _Heuristics::BalanceHeuristic()
+{
+
+}
+
+void _Heuristics::BaseRateHeuristic()
+{
+
+}
+
+void _Heuristics::CommonSenseHeuristic()
+{
+
+}
+
+void _Heuristics::ContagionHeuristic()
+{
+
+}
+
+void _Heuristics::DefaultHeuristic()
+{
+
+}
+
+void _Heuristics::EducatedGuessHeuristic()
+{
+
+}
+
+void _Heuristics::EffortHeuristic()
+{
+
+}
+
+void _Heuristics::EscalationOfCommitment()
+{
+
+}
+
+void _Heuristics::FairnessHeuristic()
+{
+
+}
+
+void _Heuristics::FamiliarityHeuristic()
+{
+
+}
+
+void _Heuristics::NaiveDiversification()
+{
+}
+
+void _Heuristics::PeakEndRule()
+{
+
+}
+
+void _Heuristics::RepresentativenessHeuristic()
+{
+
+}
+
+void _Heuristics::ScarcityHeuristic()
+{
+
+}
+
+void _Heuristics::SimulationHeuristic()
+{
+
+}
+
+void _Heuristics::SocialProof()
+{
+
+}
+
+void _Heuristics::WorkingBackwardHeuristic()
+{
+
+}
+
+void _Heuristics::ScientificMethod()
 {
 
 }

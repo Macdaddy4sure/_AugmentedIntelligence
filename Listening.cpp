@@ -15,14 +15,67 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Mind.hpp"
+#include "Listening.hpp"
+#include "Learning.hpp"
 #include "Working-Memory.hpp"
 #include "Short-Term Memory.hpp"
 #include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
+#include "Abuse.hpp"
+#include "Fallacy.hpp"
+#include "Bias.hpp"
+#include "LiteratureDevices.hpp"
+#include "Axioms.hpp"
 
 using namespace std;
 
+void _Listening::ActiveListening()
+{
+
+}
+
+void _Listening::PassiveListening()
+{
+
+}
+
+// Every 10 seconds check for fallacies
+void _Listening::FallacyChecking()
+{
+
+}
+
+void _Listening::BiasChecking()
+{
+
+}
+
+void _Listening::AxiomChecking()
+{
+
+}
+
+void _Listening::LiteratureDeviceChecking()
+{
+
+}
+
+void _Listening::ListeningAbuseChecking()
+{
+
+}
+
+void _Listening::ListeningLawChecking()
+{
+
+}
+
+void _Listening::CourtObjectionChecking()
+{
+
+}
+
+// Check if the word is new and get definitions if new
+void _Listening::DictionaryChecking()
+{
+
+}

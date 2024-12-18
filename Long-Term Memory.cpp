@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,16 +14,16 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "Neuralink.h"
-#include "EKG.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Neuralink.hpp"
+#include "EKG.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -310,12 +310,14 @@ void _LongTermMemory::LongTermMemoryRawSearchRight(string search)
 
 string _LongTermMemory::LongTermMemoryText(string search)
 {
-
+    string temp;
+    return temp;
 }
 
 string _LongTermMemory::LongTermMemoryText(string search, int year, int month, int day, int hour)
 {
-
+    string temp;
+    return temp;
 }
 
 // This function is designed to retrieve long term memories from the home server or datacenter
@@ -327,6 +329,7 @@ bool _LongTermMemory::LongTermMemoryRawSearchBoolean(string search)
     // 4. The client receives the boolean and informs the user
 
     MYSQL* conn = mysql_init(NULL);
+    return false;
 }
 
 // This function is designed to retrieve long term memories from the home server or datacenter

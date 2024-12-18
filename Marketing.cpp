@@ -15,14 +15,5 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Mind.hpp"
-#include "Working-Memory.hpp"
-#include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
 
 using namespace std;
-

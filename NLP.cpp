@@ -1,5 +1,5 @@
 ﻿/*
-    Copyright(c) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,12 +14,12 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "NLP.h"
-#include "Database Functions.h"
-#include "Utilities.h"
-#include "MySQL.h"
-#include "Settings.h"
+#include "AugmentedIntelligence.hpp"
+#include "NLP.hpp"
+#include "Database Functions.hpp"
+#include "Utilities.hpp"
+//#include "MySQL.hpp"
+#include "Settings.hpp"
 
 using namespace std;
 
@@ -757,7 +757,7 @@ using namespace std;
 // Purpose: Input a word and return the word types of the word from the dictionary
 string* _NLP::getWordTypes(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string sql1;
@@ -809,7 +809,7 @@ string* _NLP::getWordTypes(string word)
 // Purpose: Input a word and return the word types of the word from the dictionary
 string* _NLP::getDefinitions(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string sql1;
@@ -914,162 +914,162 @@ string _NLP::getSpecialType(string word, string word_type)
 // 25. Curly close bracket
 // 26. Backslash
 // 27. Bar
-string* _NLP::returnWords(string sentence)
-{
-    string words[100];
-    int count = 0;
-
-    for (int x = 0; sentence[x] != ' '; x++)
-    {
-        if (sentence[x] == '.')
-        {
-            words[count] = '.';
-            count++;
-        }
-        else if (sentence[x] == ',')
-        {
-            words[count] = ',';
-            count++;
-        }
-        else if (sentence[x] == ':')
-        {
-            words[count] = ':';
-            count++;
-        }
-        else if (sentence[x] == ';')
-        {
-            words[count] = ';';
-            count++;
-        }
-        else if (sentence[x] == '\"')
-        {
-            words[count] = '\"';
-            count++;
-        }
-        else if (sentence[x] == '\'')
-        {
-            words[count] = '\'';
-            count++;
-        }
-        else if (sentence[x] == '-')
-        {
-            words[count] = '-';
-            count++;
-        }
-        else if (sentence[x] == '(')
-        {
-            words[count] = '(';
-            count++;
-        }
-        else if (sentence[x] == ')')
-        {
-            words[count] = ')';
-            count++;
-        }
-        else if (sentence[x] == '[')
-        {
-            words[count] = '[';
-            count++;
-        }
-        else if (sentence[x] == ']')
-        {
-            words[count] = ']';
-            count++;
-        }
-        else if (sentence[x] == '/')
-        {
-            words[count] = '/';
-            count++;
-        }
-        else if (sentence[x] == '+')
-        {
-            words[count] = '+';
-            count++;
-        }
-        else if (sentence[x] == '@')
-        {
-            words[count] = '@';
-            count++;
-        }
-        else if (sentence[x] == '#')
-        {
-            words[count] = '#';
-            count++;
-        }
-        else if (sentence[x] == '$')
-        {
-            words[count] = '$';
-            count++;
-        }
-        else if (sentence[x] == '%')
-        {
-            words[count] = '%';
-            count++;
-        }
-        else if (sentence[x] == '^')
-        {
-            words[count] = '^';
-            count++;
-        }
-        else if (sentence[x] == '*')
-        {
-            words[count] = '*';
-            count++;
-        }
-        else if (sentence[x] == '_')
-        {
-            words[count] = '_';
-            count++;
-        }
-        else if (sentence[x] == '=')
-        {
-            words[count] = '=';
-            count++;
-        }
-        else if (sentence[x] == '>')
-        {
-            words[count] = '>';
-            count++;
-        }
-        else if (sentence[x] == '<')
-        {
-            words[count] = '<';
-            count++;
-        }
-        else if (sentence[x] == '{')
-        {
-            words[count] = '{';
-            count++;
-        }
-        else if (sentence[x] == '}')
-        {
-            words[count] = '}';
-            count++;
-        }
-        else if (sentence[x] == '\\')
-        {
-            words[count] = '\\';
-            count++;
-        }
-        else if (sentence[x] == '|')
-        {
-            words[count] = '|';
-            count++;
-        }
-        else if (sentence[x] != ' ')
-        {
-            words[count] += sentence[x];
-        }
-
-        if (sentence[x + 1] == ' ')
-        {
-            x++;
-            count++;
-        }
-    }
-
-    return words;
-}
+//string* _NLP::returnWords(string* sentence)
+//{
+//    //string words[100];
+//    //int count = 0;
+//
+//    //for (int x = 0; sentence[x] != ' '; x++)
+//    //{
+//    //    if (sentence[x] == '.')
+//    //    {
+//    //        words[count] = '.';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == ',')
+//    //    {
+//    //        words[count] = ',';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == ':')
+//    //    {
+//    //        words[count] = ':';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == ';')
+//    //    {
+//    //        words[count] = ';';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '\"')
+//    //    {
+//    //        words[count] = '\"';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '\'')
+//    //    {
+//    //        words[count] = '\'';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '-')
+//    //    {
+//    //        words[count] = '-';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '(')
+//    //    {
+//    //        words[count] = '(';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == ')')
+//    //    {
+//    //        words[count] = ')';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '[')
+//    //    {
+//    //        words[count] = '[';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == ']')
+//    //    {
+//    //        words[count] = ']';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '/')
+//    //    {
+//    //        words[count] = '/';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '+')
+//    //    {
+//    //        words[count] = '+';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '@')
+//    //    {
+//    //        words[count] = '@';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '#')
+//    //    {
+//    //        words[count] = '#';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '$')
+//    //    {
+//    //        words[count] = '$';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '%')
+//    //    {
+//    //        words[count] = '%';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '^')
+//    //    {
+//    //        words[count] = '^';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '*')
+//    //    {
+//    //        words[count] = '*';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '_')
+//    //    {
+//    //        words[count] = '_';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '=')
+//    //    {
+//    //        words[count] = '=';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '>')
+//    //    {
+//    //        words[count] = '>';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '<')
+//    //    {
+//    //        words[count] = '<';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '{')
+//    //    {
+//    //        words[count] = '{';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '}')
+//    //    {
+//    //        words[count] = '}';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '\\')
+//    //    {
+//    //        words[count] = '\\';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] == '|')
+//    //    {
+//    //        words[count] = '|';
+//    //        count++;
+//    //    }
+//    //    else if (sentence[x] != ' ')
+//    //    {
+//    //        words[count] += sentence[x];
+//    //    }
+//
+//    //    if (sentence[x + 1] == ' ')
+//    //    {
+//    //        x++;
+//    //        count++;
+//    //    }
+//    //}
+//
+//    //return words;
+//}
 
 string _NLP::getVerb(string* words, string* compiled_word_types)
 {
@@ -1383,7 +1383,7 @@ string _NLP::isNumber(string word)
 
 string _NLP::isPreposition(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -1680,13 +1680,14 @@ string _NLP::getObjectofPreposition(string* words, string* compiled_word_types)
     return object_preposition;
 }
 
-string _NLP::getWordTypesDisambiguation(string word, string special_type, string* word_types)
+string* _NLP::getWordTypesDisambiguation(string word, string special_type, string* word_types)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_table = "entries";
     string sql1;
+    string* disambiguation = new string[10];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
@@ -1710,15 +1711,18 @@ string _NLP::getWordTypesDisambiguation(string word, string special_type, string
         std::this_thread::sleep_for(std::chrono::milliseconds(10));
         mysql_close(conn);
     }
+
+    return disambiguation;
 }
 
-string _NLP::getDefinitionsDisambiguation(string word, string word_type, string* definitions)
+string* _NLP::getDefinitionsDisambiguation(string word, string word_type, string* definitions)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_table = "entries";
     string sql1;
+    string* disambiguation = new string[10];
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
@@ -1733,7 +1737,7 @@ string _NLP::getDefinitionsDisambiguation(string word, string word_type, string*
 
         while (row = mysql_fetch_row(result1))
         {
-
+            return disambiguation;
         }
     }
     else
@@ -2258,6 +2262,7 @@ string* _NLP::getIndependentClause(string* words, string* compiled_word_types)
     //string* subject = _NLP::getSubject(words, compiled_word_types);
     //string verb = _NLP::getVerb(words, compiled_word_types);
     //string* predicate = _NLP::getPredicate(words, compiled_word_types);
+    string* independent_clause;
     string* exploded_sentence = _Utilities::WordsArrPunctuationExplode(words);
     string sentence = _Utilities::StringArray2String(words);
     string temp;
@@ -2299,7 +2304,7 @@ string* _NLP::getIndependentClause(string* words, string* compiled_word_types)
         }
     }
 
-    //return independent_clause;
+    return independent_clause;
 }
 
 // A dependent clause, also known as a subordinate clause, is a group of words that also contains a subject and a verb, but unlike an independent clause, it cannot stand alone as a complete sentence because it does not express a complete thought.Dependent clauses rely on an independent clause to form a complete sentence by adding additional information.They often begin with subordinating conjunctions such as because, since, which, although, or when.
@@ -3134,6 +3139,7 @@ string* _NLP::getPrepositionalPhraseDangling(string* words, string* compiled_wor
 // 2. Tense
 bool _NLP::isPresentTense(string word)
 {
+
     return false;
 }
 
@@ -3144,6 +3150,41 @@ bool _NLP::isPresentTenseSentence(string* words, string* compiled_word_types)
 
 bool _NLP::isPastTense(string word)
 {
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    string query;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        query = "SELECT * FROM entries";
+        mysql_query(conn, query.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            if (_Utilities::toLowerWord(row[0]) == _Utilities::toLowerWord(word))
+            {
+                string word_type_test = row[1];
+                string* word_type_arr = _Utilities::String2Words(word_type_test);
+
+                for (int x = 0; x <= sizeof(word_type_arr); x++)
+                {
+                    if (word_type_arr[x] == "p." && word_type_arr[x + 1] == "pr.")
+                    {
+                        return true;
+                    }
+                }
+
+                mysql_close(conn);
+                return false;
+            }
+        }
+    }
+    mysql_close(conn);
     return false;
 }
 
@@ -3284,11 +3325,85 @@ bool _NLP::isReportedSpeechSentence(string* words, string* compiled_word_types)
 // 7. Declension
 bool _NLP::isPlural(string word)
 {
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    string query;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        query = "SELECT * FROM entries";
+        mysql_query(conn, query.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            if (_Utilities::toLowerWord(row[0]) == _Utilities::toLowerWord(word))
+            {
+                string word_type_test = row[1];
+                string* word_type_arr = _Utilities::String2Words(word_type_test);
+
+                for (int x = 0; x <= sizeof(word_type_arr); x++)
+                {
+                    if (word_type_arr[x] == "pl.")
+                    {
+                        return true;
+                    }
+                }
+
+                mysql_close(conn);
+                return false;
+            }
+        }
+    }
+    mysql_close(conn);
     return false;
 }
 
 bool _NLP::isPluralSentence(string* words, string* compiled_word_types)
 {
+    // Check if the words in the sentence are plural
+    MYSQL* conn = nullptr;
+    MYSQL_ROW row;
+    MYSQL_RES* result;
+    string query;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_dictionary_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        query = "SELECT * FROM entries";
+        mysql_query(conn, query.c_str());
+        result = mysql_store_result(conn);
+
+        while (row = mysql_fetch_row(result))
+        {
+            for (int x = 0; x < sizeof(words); x++)
+            {
+                if (_Utilities::toLowerWord(row[0]) == _Utilities::toLowerWord(words[x]))
+                {
+                    string word_type_test = row[1];
+                    string* word_type_arr = _Utilities::String2Words(word_type_test);
+
+                    for (int x = 0; x <= sizeof(word_type_arr); x++)
+                    {
+                        if (word_type_arr[x] == "pl.")
+                        {
+                            return true;
+                        }
+                    }
+
+                    mysql_close(conn);
+                    return false;
+                }
+            }
+        }
+    }
+    mysql_close(conn);
     return false;
 }
 
@@ -3314,7 +3429,7 @@ string* _NLP::getGenderNouns(string* words, string* compiled_word_types)
 
 bool _NLP::isOtherAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3343,7 +3458,7 @@ bool _NLP::isOtherAdverb(string word)
 
 bool _NLP::isOtherAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3372,7 +3487,7 @@ bool _NLP::isOtherAdjective(string word)
 
 bool _NLP::isOtherVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3401,7 +3516,7 @@ bool _NLP::isOtherVerb(string word)
 
 bool _NLP::isOtherPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3430,7 +3545,7 @@ bool _NLP::isOtherPronoun(string word)
 
 bool _NLP::isOtherNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3459,7 +3574,7 @@ bool _NLP::isOtherNoun(string word)
 
 bool _NLP::isCommonNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3488,7 +3603,7 @@ bool _NLP::isCommonNoun(string word)
 
 bool _NLP::isProperNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3517,7 +3632,7 @@ bool _NLP::isProperNoun(string word)
 
 bool _NLP::isFirstName(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3546,7 +3661,7 @@ bool _NLP::isFirstName(string word)
 
 bool _NLP::isLastName(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3575,7 +3690,7 @@ bool _NLP::isLastName(string word)
 
 bool _NLP::isBrandName(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3604,7 +3719,7 @@ bool _NLP::isBrandName(string word)
 
 bool _NLP::isAppellations(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3633,7 +3748,7 @@ bool _NLP::isAppellations(string word)
 
 bool _NLP::isJobTitle(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3662,7 +3777,7 @@ bool _NLP::isJobTitle(string word)
 
 bool _NLP::isFamilialRole(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3693,7 +3808,7 @@ bool _NLP::isFamilialRole(string word)
 // Search for nouns of address
 bool _NLP::isNounAddress(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3723,7 +3838,7 @@ bool _NLP::isNounAddress(string word)
 // Definition: 
 bool _NLP::isConcreteNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3753,7 +3868,7 @@ bool _NLP::isConcreteNoun(string word)
 // Definition: 
 bool _NLP::isAbstractNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3783,7 +3898,7 @@ bool _NLP::isAbstractNoun(string word)
 // Definition: 
 bool _NLP::isCountableNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3813,7 +3928,7 @@ bool _NLP::isCountableNoun(string word)
 // Definition: 
 bool _NLP::isUncountableNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3843,7 +3958,7 @@ bool _NLP::isUncountableNoun(string word)
 // Definition: 
 bool _NLP::isCollectiveNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3873,7 +3988,7 @@ bool _NLP::isCollectiveNoun(string word)
 // Definition: 
 bool _NLP::isCompoundNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3903,7 +4018,7 @@ bool _NLP::isCompoundNoun(string word)
 // Definition: 
 bool _NLP::isCreatingNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3933,7 +4048,7 @@ bool _NLP::isCreatingNoun(string word)
 // Definition: 
 bool _NLP::isPersonalNumberPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3963,7 +4078,7 @@ bool _NLP::isPersonalNumberPronoun(string word)
 // Definition: 
 bool _NLP::isPossessivePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -3993,7 +4108,7 @@ bool _NLP::isPossessivePronoun(string word)
 // Definition: 
 bool _NLP::isPersonalPersonPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4023,7 +4138,7 @@ bool _NLP::isPersonalPersonPronoun(string word)
 // Definition: 
 bool _NLP::isPersonalGenderPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4053,7 +4168,7 @@ bool _NLP::isPersonalGenderPronoun(string word)
 // Definition: 
 bool _NLP::isPersonalCasePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4083,7 +4198,7 @@ bool _NLP::isPersonalCasePronoun(string word)
 // Definition: 
 bool _NLP::isPersonalReflexivePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4113,7 +4228,7 @@ bool _NLP::isPersonalReflexivePronoun(string word)
 // Definition: 
 bool _NLP::isIntensivePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4142,7 +4257,7 @@ bool _NLP::isIntensivePronoun(string word)
 // Definition: 
 bool _NLP::isIndefinitePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4172,7 +4287,7 @@ bool _NLP::isIndefinitePronoun(string word)
 // Definition: 
 bool _NLP::isDemonstrativePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4202,7 +4317,7 @@ bool _NLP::isDemonstrativePronoun(string word)
 // Definition: 
 bool _NLP::isInterogativePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4232,7 +4347,7 @@ bool _NLP::isInterogativePronoun(string word)
 // Definition: 
 bool _NLP::isRelativePronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4262,7 +4377,7 @@ bool _NLP::isRelativePronoun(string word)
 // Definition: 
 bool _NLP::isReciprocalPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4292,7 +4407,7 @@ bool _NLP::isReciprocalPronoun(string word)
 // Definition: 
 bool _NLP::isDummyPronoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4321,7 +4436,7 @@ bool _NLP::isDummyPronoun(string word)
 
 bool _NLP::isInterjectionSwear(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4350,7 +4465,7 @@ bool _NLP::isInterjectionSwear(string word)
 
 bool _NLP::isEmotiveInterjections(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4379,7 +4494,7 @@ bool _NLP::isEmotiveInterjections(string word)
 
 bool _NLP::isCognitiveInterjections(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4408,7 +4523,7 @@ bool _NLP::isCognitiveInterjections(string word)
 
 bool _NLP::isVolitiveInterjections(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4437,7 +4552,7 @@ bool _NLP::isVolitiveInterjections(string word)
 
 bool _NLP::isPreDeterminer(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4466,7 +4581,7 @@ bool _NLP::isPreDeterminer(string word)
 
 bool _NLP::isDefiniteArticle(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4495,7 +4610,7 @@ bool _NLP::isDefiniteArticle(string word)
 
 bool _NLP::isIndefiniteArticle(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4535,7 +4650,7 @@ bool _NLP::isNumberDigits(string word)
 // Definition: 
 bool _NLP::isFiniteVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4565,7 +4680,7 @@ bool _NLP::isFiniteVerb(string word)
 // Definition: 
 bool _NLP::isInfinitiveVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4595,7 +4710,7 @@ bool _NLP::isInfinitiveVerb(string word)
 // Definition: 
 bool _NLP::isTransitiveVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4624,7 +4739,7 @@ bool _NLP::isTransitiveVerb(string word)
 
 bool _NLP::isIntransitiveVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4654,7 +4769,7 @@ bool _NLP::isIntransitiveVerb(string word)
 // Definition: 
 bool _NLP::isRegularVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4684,7 +4799,7 @@ bool _NLP::isRegularVerb(string word)
 // Definition: 
 bool _NLP::isIrregularVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4714,7 +4829,7 @@ bool _NLP::isIrregularVerb(string word)
 // Definition: 
 bool _NLP::isPrimaryAuxiliaryVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4744,7 +4859,7 @@ bool _NLP::isPrimaryAuxiliaryVerb(string word)
 // Definition: 
 bool _NLP::isSemiModalAuxiliaryVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4774,7 +4889,7 @@ bool _NLP::isSemiModalAuxiliaryVerb(string word)
 // Definition: 
 bool _NLP::isParticiple(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4804,7 +4919,7 @@ bool _NLP::isParticiple(string word)
 // Definition: 
 bool _NLP::isActionVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4834,7 +4949,7 @@ bool _NLP::isActionVerb(string word)
 // Definition: 
 bool _NLP::isStativeVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4864,7 +4979,7 @@ bool _NLP::isStativeVerb(string word)
 // Definition: 
 bool _NLP::isLinkingVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4894,7 +5009,7 @@ bool _NLP::isLinkingVerb(string word)
 // Definition: 
 bool _NLP::isLightVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4923,7 +5038,7 @@ bool _NLP::isLightVerb(string word)
 // Definition: 
 bool _NLP::isPhrasalVerbs(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4953,7 +5068,7 @@ bool _NLP::isPhrasalVerbs(string word)
 // Definition: 
 bool _NLP::isConditionalVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -4983,7 +5098,7 @@ bool _NLP::isConditionalVerb(string word)
 // Definition: 
 bool _NLP::isCausativeVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5013,7 +5128,7 @@ bool _NLP::isCausativeVerb(string word)
 // Definition: 
 bool _NLP::isFactiveVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5043,7 +5158,7 @@ bool _NLP::isFactiveVerb(string word)
 // Definition: 
 bool _NLP::isReflexiveVerb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5073,7 +5188,7 @@ bool _NLP::isReflexiveVerb(string word)
 // Definition: 
 bool _NLP::isAttributiveAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5103,7 +5218,7 @@ bool _NLP::isAttributiveAdjective(string word)
 // Definition: 
 bool _NLP::isPredicativeAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5133,7 +5248,7 @@ bool _NLP::isPredicativeAdjective(string word)
 // Definition: 
 bool _NLP::isProperAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5163,7 +5278,7 @@ bool _NLP::isProperAdjective(string word)
 // Definition: 
 bool _NLP::isCollectiveAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5193,7 +5308,7 @@ bool _NLP::isCollectiveAdjective(string word)
 // Definition: 
 bool _NLP::isDemonstrativeAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5223,7 +5338,7 @@ bool _NLP::isDemonstrativeAdjective(string word)
 // Definition: 
 bool _NLP::isInterrogativeAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5253,7 +5368,7 @@ bool _NLP::isInterrogativeAdjective(string word)
 // Definition: 
 bool _NLP::isNominalAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5283,7 +5398,7 @@ bool _NLP::isNominalAdjective(string word)
 // Definition: 
 bool _NLP::isCompoundAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5313,7 +5428,7 @@ bool _NLP::isCompoundAdjective(string word)
 // Definition: 
 bool _NLP::isOrderAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5343,7 +5458,7 @@ bool _NLP::isOrderAdjective(string word)
 // Definition: 
 bool _NLP::isComparativeAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5373,7 +5488,7 @@ bool _NLP::isComparativeAdjective(string word)
 // Definition: 
 bool _NLP::isSuperlativeAdjective(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5403,7 +5518,7 @@ bool _NLP::isSuperlativeAdjective(string word)
 // Definition: 
 bool _NLP::isAdverbTime(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5433,7 +5548,7 @@ bool _NLP::isAdverbTime(string word)
 // Definition: 
 bool _NLP::isAdverbPlace(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5463,7 +5578,7 @@ bool _NLP::isAdverbPlace(string word)
 // Definition: 
 bool _NLP::isAdverbManner(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5493,7 +5608,7 @@ bool _NLP::isAdverbManner(string word)
 // Definition: 
 bool _NLP::isAdverbDegree(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5523,7 +5638,7 @@ bool _NLP::isAdverbDegree(string word)
 // Definition: 
 bool _NLP::isMitigator(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5553,7 +5668,7 @@ bool _NLP::isMitigator(string word)
 // Definition: 
 bool _NLP::isIntensifier(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5583,7 +5698,7 @@ bool _NLP::isIntensifier(string word)
 // Definition: 
 bool _NLP::isAdverbFrequency(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5613,7 +5728,7 @@ bool _NLP::isAdverbFrequency(string word)
 // Definition: 
 bool _NLP::isAdverbPurpose(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5643,7 +5758,7 @@ bool _NLP::isAdverbPurpose(string word)
 // Definition: 
 bool _NLP::isAdverbFocusing(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5673,7 +5788,7 @@ bool _NLP::isAdverbFocusing(string word)
 // Definition: 
 bool _NLP::isAdverbNegative(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5703,7 +5818,7 @@ bool _NLP::isAdverbNegative(string word)
 // Definition: 
 bool _NLP::isAdverbConjunctive(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5733,7 +5848,7 @@ bool _NLP::isAdverbConjunctive(string word)
 // Definition: 
 bool _NLP::isAdverbEvaluative(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5763,7 +5878,7 @@ bool _NLP::isAdverbEvaluative(string word)
 // Definition: 
 bool _NLP::isAdverbViewpoint(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5793,7 +5908,7 @@ bool _NLP::isAdverbViewpoint(string word)
 // Definition: 
 bool _NLP::isAdverbRelative(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5823,7 +5938,7 @@ bool _NLP::isAdverbRelative(string word)
 // Definition: 
 bool _NLP::isAdverbialNoun(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5853,7 +5968,7 @@ bool _NLP::isAdverbialNoun(string word)
 // Definition: 
 bool _NLP::isRegularAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5883,7 +5998,7 @@ bool _NLP::isRegularAdverb(string word)
 // Definition: 
 bool _NLP::isIrregularAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5913,7 +6028,7 @@ bool _NLP::isIrregularAdverb(string word)
 // Definition: 
 bool _NLP::isComparativeAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5943,7 +6058,7 @@ bool _NLP::isComparativeAdverb(string word)
 // Definition: 
 bool _NLP::isSuperlativeAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -5973,7 +6088,7 @@ bool _NLP::isSuperlativeAdverb(string word)
 // Definition: 
 bool _NLP::isOrderAdverb(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6006,7 +6121,7 @@ bool _NLP::isOrderAdverb(string word)
 // Definition: 
 bool _NLP::isPrepositionwithNouns(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6036,7 +6151,7 @@ bool _NLP::isPrepositionwithNouns(string word)
 // Definition: 
 bool _NLP::isPrepositionalwithVerbs(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6066,7 +6181,7 @@ bool _NLP::isPrepositionalwithVerbs(string word)
 // Definition: 
 bool _NLP::isPrepositionalwithAdjectives(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6096,7 +6211,7 @@ bool _NLP::isPrepositionalwithAdjectives(string word)
 // Definition: 
 bool _NLP::isCoordinativeConjunction(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6126,7 +6241,7 @@ bool _NLP::isCoordinativeConjunction(string word)
 // Definition: 
 bool _NLP::isCorrelativeConjunction(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6156,7 +6271,7 @@ bool _NLP::isCorrelativeConjunction(string word)
 // Definition: 
 bool _NLP::isSubordinatingConjunctions(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6186,7 +6301,7 @@ bool _NLP::isSubordinatingConjunctions(string word)
 // Definition: 
 bool _NLP::isParticles(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6216,7 +6331,7 @@ bool _NLP::isParticles(string word)
 // Definition: 
 bool _NLP::isDeterminers(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6246,7 +6361,7 @@ bool _NLP::isDeterminers(string word)
 // Definition: 
 bool _NLP::isPossessiveDeterminer(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6276,7 +6391,7 @@ bool _NLP::isPossessiveDeterminer(string word)
 // Definition: 
 bool _NLP::isGerund(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -6306,7 +6421,7 @@ bool _NLP::isGerund(string word)
 // Definition: 
 bool _NLP::isInterjections(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result;
     string query;
@@ -7956,12 +8071,12 @@ bool _NLP::isPresentSimplePositive(string* words)
 
 string* _NLP::QueryDatabaseWordTypes(string word)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string sql1;
     string tableName = "entries";
     string* wordtypes = new string[10];
@@ -7999,12 +8114,12 @@ string* _NLP::QueryDatabaseWordTypes(string word)
 
 string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* result1;
     string mysql_database = "dictionary";
-    string mysql_username = "root";
-    string mysql_password = "Anaheim92801%";
+    //string mysql_username = "root";
+    //string mysql_password = "Anaheim92801%";
     string sql1;
     string tableName = "entries";
     string* definitions = new string[20];
@@ -8051,7 +8166,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 // 1. Call with a word and return all word types and definitions
 //__global__ void wordSearchTypesDefinitions(string database, string table, string word, int num_rows, char* word_types, char* definitions)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;
@@ -8102,7 +8217,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 //// 2. Call with a word and word type and return all definitions of the type
 //__global__ void wordSearchOneTypeDefinitions(string database, string table, string word, char* word_type, int num_rows, char* definitions)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;
@@ -8150,7 +8265,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 //// 3. Call the definition of the word and return the word and word type
 //__global__ void wordSearchDefinitionWord(string database, string table, string definition, int num_rows, char* word, char* word_type)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;
@@ -8198,7 +8313,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 //// 4. Call to return all definitions and word types for every word in a sentence
 //__global__ void wordSearch(string database, string table, string word, string word_type, int num_rows, char* definitions)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;
@@ -8268,7 +8383,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 // 5. Call to search for the subject of a given sentence
 //__global__ void wordSearchSubject(string database, string table, string* words[], string word_type, string subject_template, int num_rows, char* temp)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;
@@ -8473,7 +8588,7 @@ string* _NLP::QueryDatabaseDefinitions(string word, string* wordTypes)
 // 6. Call to search for the predicate of the sentence
 //__global__ void wordSearchPredicate(string database, string table, string* words[], string word_type, int num_rows, char* temp)
 //{
-//    MYSQL* conn;
+//    MYSQL* conn = nullptr;
 //    MYSQL_ROW row;
 //    MYSQL_RES* result;
 //    string query;

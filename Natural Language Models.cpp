@@ -14,5 +14,4 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Natural Language Models.h"
+#include "AugmentedIntelligence.hpp"

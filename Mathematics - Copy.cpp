@@ -16,8 +16,6 @@
 
 #include "AugmentedIntelligence.hpp"
 #include "Mathematics.hpp"
-#include "Large Language Models.hpp"
-#include "Parsers.hpp"
 #include "Working-Memory.hpp"
 #include "Short-Term Memory.hpp"
 #include "Long-Term Memory.hpp"
@@ -95,13 +93,6 @@ void _Math::ArithmeticParse(string transcription)
     string words[10];
     string num_name1;
     string num_name2;
-
-    auto entry = time(nullptr);
-    auto tm1 = *localtime(&entry);
-
-    ostringstream oss;
-    oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
-    string current_date = oss.str();
 
     // Search the string for words
     for (int y = 0; y <= transcription.length(); y++)
@@ -792,7 +783,7 @@ void _Math::ArithmeticParse(string transcription)
             if (!degrees)
             {
                 result = 1 / atan(number1);
-                _Math::Math2MySQL(table_name, transcription, number1, number2, operation, result);
+                Math2MySQL(table_name, transcription, number1, number2, operation, result);
             }
         }
         // Check for hyperbolic sine
@@ -1155,34 +1146,6 @@ void _Math::ArithmeticParseVision(string vision)
     }
 }
 
-string _Math::ManualMathPrompt()
-{
-    string input[3];
-    string model = "llama3";
-    string prompt = "Solve the following equation: ";
-
-    cout << "ManualMathPrompt" << endl;
-    cout << "Enter a semi-colon on a single line when done (';') at a maximum of three lines!" << endl;
-    cout << endl;
-
-    for (int x = 0; x < 3; x++)
-    {
-        cout << "Line " << x + 1 << ": ";
-        getline(cin, input[x]);
-
-        if (!input[x].empty())
-        {
-            prompt += "Line " + x + 1;
-            prompt += ": ";
-            prompt += input[x];
-        }
-    }
-
-    string response = _LLM::OllamaAPI(model, prompt, "NULL");
-    response = _Parsers::LLM::LLama3Parse(response);
-    return response;
-}
-
 // This function will solve Algebra problems
 void _Math::AlgebraParse(string recognition)
 {
@@ -1356,45 +1319,28 @@ int _Math::NumberName(string number)
 // This function will save all math operations toa MySQL database for a log
 void _Math::Math2MySQL(string table, string data, double number1, double number2, string operation, double result)
 {
-    MYSQL* conn;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+
+    MYSQL* conn = nullptr;
     MYSQL_RES* result1;
     string mysql_username = _Settings::GetMySQLUsername();
     string mysql_password = _Settings::GetMySQLPassword();
+    ostringstream query1;
     string sql1;
-    string mysql_database = "Math";
+    string database1 = "MathLog";
     string table_name = table;
-
-    auto t = std::time(nullptr);
-    auto tm = *std::localtime(&t);
     ostringstream oss;
+
     oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
-    string current_date = oss.str();
+    auto date = oss.str();
 
     conn = mysql_init(0);
-    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_database.c_str(), 3306, NULL, 0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), database1.c_str(), 3306, NULL, 0);
+    result1 = mysql_use_result(conn);
 
-    if (conn)
-    {
-        sql1 = "INSERT INTO `";
-        sql1 += table_name.c_str();
-        sql1 += "`(current_date, data, number1, number2, operation, result) VALUES(\"";
-        sql1 += current_date.c_str();
-        sql1 += "\", \"";
-        sql1 += data.c_str();
-        sql1 += "\", \"";
-        sql1 += to_string(number1);
-        sql1 += "\", \"";
-        sql1 += to_string(number2);
-        sql1 += "\", \"";
-        sql1 += operation.c_str();
-        sql1 += "\", \"";
-        sql1 += to_string(result);
-        sql1 += "\");";
-    }
-    else
-    {
-
-    }
+    query1 << "INSERT INTO " << table_name << "(date, data, number1, number2, operation, result) VALUES(" << date << ", " << data << ", " << number1 << ", " << number2 << ", " << operation << ", " << result << ");";
+    sql1 = query1.str();
 
     mysql_query(conn, sql1.c_str());
 }

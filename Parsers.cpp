@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,18 +14,19 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Parsers.h"
-#include "Database Functions.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
+#include "AugmentedIntelligence.hpp"
+#include "Parsers.hpp"
+#include "Database Functions.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "Large Language Models.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Utilities.hpp"
 
 using namespace std;
 using namespace filesystem;
@@ -328,4 +329,64 @@ void _Parsers::HTMLParser(string html_file)
 void _Parsers::XMLParser(string xml_file)
 {
 
+}
+
+string _Parsers::SpeechRecognitionParse(string JSON)
+{
+    // Parse the JSON string
+    auto json = nlohmann::json::parse(JSON);
+
+    // Extract data and format as text
+    std::string text_output;
+    text_output += json["text"].get<std::string>();
+
+    return text_output;
+}
+
+string _Parsers::LLM::LLama3Parse(string JSON)
+{
+    // Parse the JSON string
+    auto json = nlohmann::json::parse(JSON);
+
+    // Extract data and format as text
+    std::string text_output;
+    text_output += json["response"].get<std::string>();
+
+    return text_output;
+}
+
+string _Parsers::LLM::CodeLLamaParse(string JSON)
+{
+    // Parse the JSON string
+    auto json = nlohmann::json::parse(JSON);
+
+    // Extract data and format as text
+    std::string text_output;
+    text_output += json["response"].get<std::string>();
+
+    return text_output;
+}
+
+string _Parsers::LLM::LLavaParse(string JSON)
+{
+    // Parse the JSON string
+    auto json = nlohmann::json::parse(JSON);
+
+    // Extract data and format as text
+    std::string text_output;
+    text_output += json["response"].get<std::string>();
+
+    return text_output;
+}
+
+string _Parsers::LLM::LLama2UncensoredParse(string JSON)
+{
+    // Parse the JSON string
+    auto json = nlohmann::json::parse(JSON);
+
+    // Extract data and format as text
+    std::string text_output;
+    text_output += json["response"].get<std::string>();
+
+    return text_output;
 }
