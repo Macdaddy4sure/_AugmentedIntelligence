@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -14,5 +14,5 @@
     limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Prediction.h"
+#include "AugmentedIntelligence.hpp"
+#include "Prediction.hpp"

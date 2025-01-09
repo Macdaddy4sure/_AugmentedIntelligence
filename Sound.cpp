@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -26,80 +26,51 @@
 #include "Speech Commands.hpp"
 #include "Speech Recognition.hpp"
 #include "Variables.hpp"
+//#include "Whisper.hpp"
 #include "Settings.hpp"
 #include "Time.hpp"
 #include "Utilities.hpp"
 
 using namespace std;
 
-// TODO: Cut record every 5 seconds
+RtAudio abc;
+_Sound obj1;
+
+// TODO: Cut record every x seconds
 // This funnction will listen through the microphone and save raw sound data then upload to MySQL Database
 void _Sound::Sound()
 {
-    //const int sampleRate = 48000;
-    //const int numChannels = 2;
-    //const int bitsPerSample = 24;
-    //const int seconds = 5;
-    //const int recordTime = 5; // Record for 5 seconds
-    const PaSampleFormat sampleFormat = paFloat32;
-    std::vector<float> recordedSamples;
     string command;
     string filename;
     string transcription;
     string sound_detection;
     string image_hash;
     //sound_directory = _Settings::GetSoundDirectory();
-    ostringstream oss;
+    
+    int numSamples = 0;
 
     while (true)
     {
+        ostringstream oss;
         auto t = std::time(nullptr);
         auto tm = *std::localtime(&t);
         oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
         string current_time = oss.str();
 
-        PaError err = Pa_Initialize();
-        if (err != paNoError) return;
-
-        PaStream* stream;
-        err = Pa_OpenDefaultStream(&stream, sound_channels, 0, sampleFormat, sound_sample_rate, paFramesPerBufferUnspecified, _Sound::RecordCallback, &recordedSamples);
-        if (err != paNoError) return;
-
-        err = Pa_StartStream(stream);
-        if (err != paNoError) return;
-
-        // Use chrono to accurately measure time for recording duration
-        auto startTime = std::chrono::high_resolution_clock::now();
-        bool recording = true;
-
-        while (recording)
-        {
-            auto currentTime = std::chrono::high_resolution_clock::now();
-            auto elapsed = std::chrono::duration_cast<std::chrono::seconds>(currentTime - startTime).count();
-            if (elapsed >= sound_recording_interval)
-            {
-                recording = false;
-            }
-        }
-
-        // Record for a few seconds
-        //Pa_Sleep(seconds * 1000);
-
-        err = Pa_CloseStream(stream);
-        if (err != paNoError) return;
-
-        Pa_Terminate();
+        _Sound::get_audio(sound_recording_interval);
 
         filename.clear();
         filename = sound_directory.c_str();
         filename += "/";
         filename += current_time.c_str();
         filename += "_output.wav";
+        cout << "Test: " << filename << endl;
 
         // Write to WAV file
         std::ofstream outFile(filename.c_str(), std::ios::binary);
-        WriteWAVHeader(outFile, sound_sample_rate, sound_bits_per_sample, sound_channels, recordedSamples.size());
-        for (float sample : recordedSamples)
+        WriteWAVHeader(outFile, sound_sample_rate, sound_bits_per_sample, sound_channels, obj1.pcmf32_cur.size());
+
+        for (float sample : obj1.pcmf32_cur)
         {
             int16_t intSample = static_cast<int16_t>(sample * 32767);
             outFile.write(reinterpret_cast<const char*>(&intSample), sizeof(intSample));
@@ -109,19 +80,18 @@ void _Sound::Sound()
         image_hash = _Utilities::getHash(filename);
 
         //Debug
-        //std::cout << "Recording finished." << std::endl;
+        std::cout << "Recording finished." << std::endl;
 
         if (speech_recognition_enable)
         {
             // Whisper transcription
-            transcription = _SpeechRecognition::SpeechRecognition(filename);
-            cout << "Transcription: " << transcription << endl; // Debug
+            string transcription = _SpeechRecognition::SpeechRecognition2(obj1.pcmf32_cur);
+            transcription = _Utilities::ParseTranscription(transcription);
 
-            if (speech_commands && transcription != "")
-            {
-                string* words = _Utilities::String2Words(transcription);
-                _SpeechCommands::SpeechCommands(words);
-            }
+            if (transcription != "")
+                cout << "Transcription TEST: " << transcription << endl; // Debug
+
+            obj1.pcmf32_cur.clear();
         }
         if (sound_recognition)
         {
@@ -150,7 +120,7 @@ void _Sound::Sound()
                 }
                 if (stm_sound_path[x][0] != "" && x == 999)
                 {
-                    for (int y = 0; y < 999; y++)
+                    for (int y = 0; y < 1000; y++)
                     {
                         lock_guard<mutex> lock(mtx_stm_sound_path[y][0]);
                         lock_guard<mutex> lock2(mtx_stm_sound_path[y][1]);
@@ -173,6 +143,10 @@ void _Sound::Sound()
                 }
             }
         }
+
+        obj1.pcmf32_cur.clear();
+        current_time.clear();
+        oss.clear();
     }
 }
 
@@ -223,6 +197,35 @@ void _Sound::MySQL_Sound(string filename, string current_time, string transcript
         mysql_query(conn, sql2.c_str());
     }
 }
+
+//// Define a function to handle audio data from the microphone stream
+//void microphoneStreamHandler(int16_t* audioData, int sampleRate, int numSamples)
+//{
+//    // Perform speech recognition on the streamed audio data
+//    std::string textResult;
+//    float confidence;
+//    whisper::RecognitionOptions options;
+//    whisper::recognize(whisper, audioData, sampleRate, numSamples, options, &textResult, &confidence);
+//
+//    // Print out the result
+//    std::cout << "Text: " << textResult << ", Confidence: " << confidence << std::endl;
+//}
+//
+//// Define a PortAudio callback function to handle microphone stream data
+//static int microphoneCallback(const void* inputBuffer, void* outputBuffer,
+//    unsigned long framesPerBuffer,
+//    const PaStreamCallbackTimeInfo* timeInfo,
+//    PaStreamCallbackFlags statusFlags,
+//    void* userData)
+//{
+//    // Retrieve the audio data from the microphone buffer
+//    int16_t* audioData = (int16_t*)inputBuffer;
+//
+//    // Call the handler function with the retrieved audio data
+//    microphoneStreamHandler(audioData, 16000, framesPerBuffer * 2);
+//
+//    return paContinue;
+//}
 
 // This function will recall sound, recognition, and both memory an x amount of minutes or seconds
 //  1. Get the current time
@@ -361,6 +364,35 @@ void _Sound::RecallSoundMemory(int search_years, int search_months, int search_d
     return;
 }
 
+// Get audio data from the microphone
+void _Sound::get_audio(int seconds)
+{
+    RtAudio::StreamParameters inputParams;
+
+    // Initialize input stream parameters
+    inputParams.deviceId = microphone2_device_id; // Microphone (HyperX SoloCast)
+    inputParams.nChannels = 1; // Mono is default, stereo is set for ^^
+    inputParams.firstChannel = 0;
+
+    unsigned int bufferFrames = 256;
+
+    // Open the audio device for recording
+    abc.openStream(nullptr, &inputParams, RTAUDIO_FLOAT32, sound_sample_rate, &bufferFrames,
+        _Sound::audioCallback, nullptr);
+
+    abc.startStream();
+
+    // Wait for the desired amount of audio data
+    while (obj1.numSamples < sound_sample_rate * seconds)
+    { // Wait for x seconds of audio data
+        //cout << "numSamples: " << obj1.numSamples << endl;
+    }
+
+    obj1.numSamples = 0;
+    abc.stopStream();
+    abc.closeStream();
+}
+
 // Function to combine WAV Files and return the destination of the file
 string _Sound::CombineWAV(string* wav_files, string sound_directory)
 {
@@ -429,22 +461,24 @@ void _Sound::WriteWAVHeader(std::ofstream& file, int sampleRate, int bitsPerSamp
     file.write(reinterpret_cast<const char*>(&header), sizeof(header));
 }
 
-// PortAudio callback function
-int _Sound::RecordCallback(const void* inputBuffer, void* outputBuffer,
-    unsigned long framesPerBuffer,
-    const PaStreamCallbackTimeInfo* timeInfo,
-    PaStreamCallbackFlags statusFlags,
-    void* userData)
+// Callback function for RtAudio stream
+int _Sound::audioCallback(void* outputBuffer, void* inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void* userdata)
 {
-    std::vector<float>* recordedSamples = static_cast<std::vector<float>*>(userData);
-    const float* input = static_cast<const float*>(inputBuffer);
+    // Copy the audio data into the vector
+    float* buffer = (float*)inputBuffer;
 
-    for (unsigned long i = 0; i < framesPerBuffer; ++i)
+    for (unsigned int i = 0; i < nBufferFrames; i++)
     {
-        recordedSamples->push_back(*input++);
+        obj1.pcmf32_cur.push_back(buffer[i]);
+
+        // Convert to 16-bit signed integer and store in a separate vector
+        //short buffer_16bit = static_cast<short>(buffer[i] * 32767.0f); // Scale to -1..1 range, then multiply by max value for 16-bit signed int
+        //pcm_s16.push_back(buffer_16bit);
     }
 
-    return paContinue;
+    obj1.numSamples += nBufferFrames;
+
+    return 0; // Return 0 to continue streaming
 }
 
 string _Sound::SoundRecognition(string wav_location)
@@ -453,7 +487,7 @@ string _Sound::SoundRecognition(string wav_location)
     string labelsPath = "D:/_test3_audio/saved_model/assets/labels.csv";
 
     std::vector<float> audioSamples = _Sound::loadWavFile(wav_location);
-    int sampleRate = 44100;
+    int sampleRate = 48000;
 
     TF_Tensor* audio_tensor = _Sound::ImportWaveformAsTensor(audioSamples, sound_sample_rate);
 

@@ -15,26 +15,12 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Smart Phone.hpp"
+#include "Photography.hpp"
+#include "Large Language Models.hpp"
 #include "Working-Memory.hpp"
 #include "Short-Term Memory.hpp"
 #include "Long-Term Memory.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
+#include "Parsers.hpp"
 #include "Utilities.hpp"
 
 using namespace std;
-
-// PURPOSE: Gather data from screen captures from personal computer coupled with definitions of computer processes for general use
-//	1. Create native client app for private computers
-//	2. Send screen captures to client
-//	3. Get application information from the Java app
-//	4. Use TensorFlow to identify text in apps
-//	5. Invoke Tesseract to read the text
-//	6. Send the strings to short term memory
-
-void _SmartPhone::SmartPhone()
-{
-
-}

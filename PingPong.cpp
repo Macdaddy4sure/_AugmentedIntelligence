@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,16 +15,6 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-#include "Mods.hpp"
-#include "Working-Memory.hpp"
-#include "Short-Term Memory.hpp"
-#include "Long-Term Memory.hpp"
-#include "NLP.hpp"
-#include "NLU.hpp"
-#include "Reference.hpp"
-#include "Variables.hpp"
-#include "Settings.hpp"
-#include "Utilities.hpp"
 
 using namespace std;
 

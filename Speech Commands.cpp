@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -69,7 +69,7 @@
 #include "Smell.hpp"
 #include "Social.hpp"
 #include "Sound.hpp"
-#include "Speaking.hpp"
+#include "Speech.hpp"
 #include "Speech Recognition.hpp"
 #include "Speech Commands.hpp"
 #include "Sports.hpp"
@@ -97,7 +97,7 @@ using namespace std;
 //  SearchWikipedia(string title)                           | Search Wikipedia for x_article                               | Easy
 //  SearchWiktionary()                                      | Search Wikitionary for definition                            | Easy
 //  SearchWiktionary()
-//  Speaking()                                              | ???                                                          | Intermediate (Calls to long and short term memory to find words to speak)
+//  Speech()                                                | ???                                                          | Intermediate (Calls to long and short term memory to find words to speak)
 //  MemorySearch()                                          | Search memory for memories containing dogs                   | Easy (Calls to long term and short term memory to search)
 //  Reading()                                               | ??? Should be a visual trigger                               | Intermediate (Requires short term memory, imagine, text synchronization)
 //  Writing()                                               | ??? Shoulkd be a visual trigger                              | Intermediate
@@ -113,7 +113,7 @@ using namespace std;
 //
 // Commands for transcription
 //  1. Can you repeat that please?
-//      a. Test if the transcription contains ords that were not caught by whispe. Also check if the person is looking at you and words are being missed.
+//      a. Test if the transcription contains words that were not caught by whispe. Also check if the person is looking at you and words are being missed.
 //  2. Resume action command
 //  3. Break from current action command?
 //  4. Break from object command?
@@ -137,19 +137,19 @@ void _SpeechCommands::SpeechCommands(string* words)
     oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
     current_date = oss.str();
 
+    //string* words_temp = new string[1000];
+
     // Remove punctuation
     string* words_temp = _Utilities::RemovePunctuationArr(words);
 
     // Check for keywords_temp to call functions
     for (int j = 0; j <= sizeof(words_temp); j++)
     {
-        temp_word = words_temp[j];
-
-        if (isdigit((temp_word[j])) || words_temp[j] == "absolute" || words_temp[j] == "modulus" || words_temp[j] == "square" || words_temp[j] == "third" || words_temp[j] == "factorial" || words_temp[j] == "log" || words_temp[j] == "natural" || words_temp[j] == "sine" || words_temp[j] == "cosine" || words_temp[j] == "tangent" || words_temp[j] == "secant" || words_temp[j] == "cosecant" || words_temp[j] == "cotangent" || words_temp[j] == "arcsine" || words_temp[j] == "arcosine" || words_temp[j] == "arctangent" || words_temp[j] == "arcsecant" || words_temp[j] == "arccosecant" || words_temp[j] == "arccotangent" || words_temp[j] == "hyperbolic" || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "sine") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cosine") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "tangent") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cosecant") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "secant") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cotangent"))
+        if (words_temp[j] == "absolute" || words_temp[j] == "modulus" || words_temp[j] == "square" || words_temp[j] == "third" || words_temp[j] == "factorial" || words_temp[j] == "log" || words_temp[j] == "natural" || words_temp[j] == "sine" || words_temp[j] == "cosine" || words_temp[j] == "tangent" || words_temp[j] == "secant" || words_temp[j] == "cosecant" || words_temp[j] == "cotangent" || words_temp[j] == "arcsine" || words_temp[j] == "arcosine" || words_temp[j] == "arctangent" || words_temp[j] == "arcsecant" || words_temp[j] == "arccosecant" || words_temp[j] == "arccotangent" || words_temp[j] == "hyperbolic" || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "sine") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cosine") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "tangent") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cosecant") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "secant") || (words_temp[j] == "area" && words_temp[j + 1] == "hyperbolic" && words_temp[j + 2] == "cotangent"))
         {
             //_Math::ArithmeticParse(text);
         }
-        else if (words_temp[j] == "working" && words_temp[j + 1] == "memory" && working_memory_enabled)
+        if (words_temp[j] == "working" && words_temp[j + 1] == "memory" && working_memory_enabled)
         {
             if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "seconds")
             {
@@ -1148,7 +1148,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -2145,7 +2145,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "seconds")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "seconds" && words_temp[j + 9] == "")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -3142,7 +3142,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && words_temp[j + 7] == "")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -4139,7 +4139,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && words_temp[j + 9] == "")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -5136,7 +5136,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -6133,7 +6133,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "seconds" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "seconds" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -6345,7 +6345,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -6557,7 +6557,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "and" && isdigit(stoi(words_temp[j + 8])) && words_temp[j + 9] == "seconds" && words_temp[j + 10] == "of" && words_temp[j + 11] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "and" && isdigit(stoi(words_temp[j + 8])) && words_temp[j + 9] == "seconds" && words_temp[j + 10] == "of" && words_temp[j + 11] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -6769,7 +6769,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && words_temp[j + 7] == "of" && words_temp[j + 8] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -6981,7 +6981,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && words_temp[j + 9] == "of" && words_temp[j + 10] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && words_temp[j + 9] == "of" && words_temp[j + 10] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -7193,7 +7193,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds" && words_temp[j + 11] == "of" && words_temp[j + 12] == "vision")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds" && words_temp[j + 11] == "of" && words_temp[j + 12] == "vision")
             {
                 string temp_stm_vision_path_camera1[1000][2];
                 string temp_stm_vision_path_camera2[1000][2];
@@ -7405,7 +7405,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "seconds" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "seconds" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7494,7 +7494,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7582,7 +7582,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "seconds" && words_temp[j + 9] == "of" && words_temp[j + 10] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "minutes" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "seconds" && words_temp[j + 9] == "of" && words_temp[j + 10] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7671,7 +7671,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && words_temp[j + 7] == "of" && words_temp[j + 8] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7759,7 +7759,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && words_temp[j + 9] == "of" && words_temp[j + 10] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && words_temp[j + 9] == "of" && words_temp[j + 10] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7848,7 +7848,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds" && words_temp[j + 11] == "of" && words_temp[j + 12] == "sound")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "the" && words_temp[j + 4] == "last" && isdigit(stoi(words_temp[j + 5])) && words_temp[j + 6] == "hours" && isdigit(stoi(words_temp[j + 7])) && words_temp[j + 8] == "minutes" && isdigit(stoi(words_temp[j + 9])) && words_temp[j + 10] == "seconds" && words_temp[j + 11] == "of" && words_temp[j + 12] == "sound")
             {
                 string temp_stm_sound_path[1000][2];
                 string temp_stm_speech_dialogue[1000][2];
@@ -7939,7 +7939,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     //}
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikipedia" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikipedia" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -7977,7 +7977,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikisimple" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikisimple" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8015,7 +8015,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikihow" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikihow" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8053,7 +8053,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }                    
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikiquote" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikiquote" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8091,7 +8091,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikisource" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikisource" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8129,7 +8129,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikibooks" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "wikibooks" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8167,7 +8167,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "stackexchange" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "stackexchange" && words_temp[j + 4] == "article" && words_temp[j + 5] != "")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 4;
@@ -8205,7 +8205,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "book" && words_temp[j + 4] != "")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "book" && words_temp[j + 4] != "")
             {
                 string title = words_temp[j + 4];
                 if (words_temp[j + 5] != "")
@@ -8365,11 +8365,11 @@ void _SpeechCommands::SpeechCommands(string* words)
                     cout << "No matches found..." << endl;
                 }
             }
-            else if (words_temp[j + 2] == "add" && words_temp[j + 3] == "bible")
+            if (words_temp[j + 2] == "add" && words_temp[j + 3] == "bible")
             {
                 //_DatabaseFunctions::BibleVerseSearch();
             }
-            else if (words_temp[j + 2] == "print" && words_temp[j + 3] == "data" && words_temp[j + 4] == "members")
+            if (words_temp[j + 2] == "print" && words_temp[j + 3] == "data" && words_temp[j + 4] == "members")
             {
                 int vision_path_camera1 = _Utilities::getDatatypeUsed("wm_vision_path_camera1");
                 cout << "Camera 1 Images: " << vision_path_camera1 << "of 1000." << endl;
@@ -8452,11 +8452,11 @@ void _SpeechCommands::SpeechCommands(string* words)
                 int stackexchange = _Utilities::getDatatypeUsed("wm_stackexchange");
                 cout << "Stackexchange Articles: " << stackexchange << "of 1000." << endl;
             }
-            else if (words_temp[j + 2] == "print" && words_temp[j + 3] == "")
+            if (words_temp[j + 2] == "print" && words_temp[j + 3] == "")
             {
                 // To do: Select individual Data members and give option to delete
             }
-            else if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image")
+            if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image")
             {
                 // 1. Get the most updated image in memory
                 for (int n = 999; n >= 0; n--)
@@ -8492,7 +8492,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image" && words_temp[j + 4] == "method" && words_temp[j + 5] == "two")
+            if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image" && words_temp[j + 4] == "method" && words_temp[j + 5] == "two")
             {
                 // 1. Get the most updated image in memory
                 for (int n = 999; n >= 0; n--)
@@ -8528,7 +8528,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image" && words_temp[j + 4] == "method" && words_temp[j + 5] == "three")
+            if (words_temp[j + 2] == "read" && words_temp[j + 3] == "image" && words_temp[j + 4] == "method" && words_temp[j + 5] == "three")
             {
                 // 1. Get the most updated image in memory
                 for (int n = 999; n >= 0; n--)
@@ -8564,11 +8564,11 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
                 }
-            else if (words_temp[j + 2] == "clear")
+            if (words_temp[j + 2] == "clear")
             {
                 _WorkingMemory::ClearWorkingMemory();
             }
-            else if (words_temp[j + 2] == "close" || words_temp[j + 2] == "shutdown")
+            if (words_temp[j + 2] == "close" || words_temp[j + 2] == "shutdown")
             {
                 exit(0);
             }
@@ -8577,22 +8577,22 @@ void _SpeechCommands::SpeechCommands(string* words)
                 // No duration was specified, add it all!
             }
         }
-        else if (words_temp[j] == "long" && words_temp[j + 1] == "term" && words_temp[j + 2] == "memory" && long_term_memory_enabled)
+        if (words_temp[j] == "long" && words_temp[j + 1] == "term" && words_temp[j + 2] == "memory" && long_term_memory_enabled)
         {
             if (words_temp[j + 3] == "add" && words_temp[j + 4] == "wikipedia" && words_temp[j + 5] == "article" && words_temp[j + 6] != "")
             {
 
             }
-            else if (words_temp[j + 3] == "add" && words_temp[j + 4] == "wikisimple" && words_temp[j + 5] == "article" && words_temp[j + 6] != "")
+            if (words_temp[j + 3] == "add" && words_temp[j + 4] == "wikisimple" && words_temp[j + 5] == "article" && words_temp[j + 6] != "")
             {
 
             }
-            else if (words_temp[j + 3] == "add" && words_temp[j + 4] == "wikihow" && words_temp[j + 6] == "article" && words_temp[j + 7] != "")
+            if (words_temp[j + 3] == "add" && words_temp[j + 4] == "wikihow" && words_temp[j + 6] == "article" && words_temp[j + 7] != "")
             {
 
             }
         }
-        else if (words_temp[j] == "search")
+        if (words_temp[j] == "search")
         {
             if (words_temp[j + 1] == "wikipedia")
             {
@@ -8630,7 +8630,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 1] == "wikisimple")
+            if (words_temp[j + 1] == "wikisimple")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 2;
@@ -8666,7 +8666,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 1] == "wikihow")
+            if (words_temp[j + 1] == "wikihow")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 2;
@@ -8702,7 +8702,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 1] == "wikiquote")
+            if (words_temp[j + 1] == "wikiquote")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 2;
@@ -8738,7 +8738,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 1] == "wikisource")
+            if (words_temp[j + 1] == "wikisource")
             {
                 // Find the number of words are past the 'article' keyword
                 size_t size = sizeof(words_temp) - 2;
@@ -8774,7 +8774,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     }
                 }
             }
-            else if (words_temp[j + 1] == "books" && words_temp[j + 2] != "list")
+            if (words_temp[j + 1] == "books" && words_temp[j + 2] != "list")
             {
                 // There are several databases for books in MySQL
                 // 1. books
@@ -8963,7 +8963,7 @@ void _SpeechCommands::SpeechCommands(string* words)
 
                 // Send the completed strings to the awareness?
             }
-            else if (words_temp[j + 1] == "dictionary")
+            if (words_temp[j + 1] == "dictionary")
             {
                 // There are several tables in the dictionary database
                 // 1. entries
@@ -8988,7 +8988,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                     // Throw exception
                 }
             }
-            else if (words_temp[j + 1] == "vector")
+            if (words_temp[j + 1] == "vector")
             {
                 // 1. GloveVectors
                 // 2. vectors
@@ -9011,31 +9011,31 @@ void _SpeechCommands::SpeechCommands(string* words)
                     {
                         word_type = "v.";
                     }
-                    else if (word_type == "noun")
+                    if (word_type == "noun")
                     {
                         word_type = "n.";
                     }
-                    else if (word_type == "pronoun")
+                    if (word_type == "pronoun")
                     {
                         word_type = "pron.";
                     }
-                    else if (word_type == "adjective")
+                    if (word_type == "adjective")
                     {
                         word_type = "a.";
                     }
-                    else if (word_type == "preposition")
+                    if (word_type == "preposition")
                     {
                         word_type = "prep.";
                     }
-                    else if (word_type == "adverb")
+                    if (word_type == "adverb")
                     {
                         word_type = "adv.";
                     }
-                    else if (word_type == "superlative")
+                    if (word_type == "superlative")
                     {
                         word_type = "super.";
                     }
-                    else if (word_type == "imperative")
+                    if (word_type == "imperative")
                     {
                         word_type = "imp.";
                     }
@@ -9051,14 +9051,14 @@ void _SpeechCommands::SpeechCommands(string* words)
                     // Throw exception
                 }
             }
-            else if (words_temp[j + 1] == "list")
+            if (words_temp[j + 1] == "list")
             {
                 // There are two databases with lists.
                 // 1. Lists
                 // 2. Dictionary
             }
         }
-        else if (words_temp[j] == "create" && words_temp[j + 1] == "prompt" && words_temp[j + 2] == "for" && words_temp[j + 3] != "" && words_temp[j + 4] != "")
+        if (words_temp[j] == "create" && words_temp[j + 1] == "prompt" && words_temp[j + 2] == "for" && words_temp[j + 3] != "" && words_temp[j + 4] != "")
         {
             size_t size = sizeof(words_temp) - 4;
             string model = words_temp[j + 3];
@@ -9155,23 +9155,23 @@ void _SpeechCommands::SpeechCommands(string* words)
         {
             string result = _Math::ManualMathPrompt();
         }
-        else if (words_temp[j] == "geometry" && words_temp[j + 1] == "calculate")
+        if (words_temp[j] == "geometry" && words_temp[j + 1] == "calculate")
         {
             string result = _Math::ManualMathPrompt();
         }
-        else if (words_temp[j] == "trigonometry" && words_temp[j + 1] == "calculate")
+        if (words_temp[j] == "trigonometry" && words_temp[j + 1] == "calculate")
         {
             string result = _Math::ManualMathPrompt();
         }
-        else if (words_temp[j] == "calculus" && words_temp[j + 1] == "calculate")
+        if (words_temp[j] == "calculus" && words_temp[j + 1] == "calculate")
         {
             string result = _Math::ManualMathPrompt();
         }
-        else if (words_temp[j] == "statistics" && words_temp[j + 1] == "calculate")
+        if (words_temp[j] == "statistics" && words_temp[j + 1] == "calculate")
         {
             //_Math::StatisticsParse(text);
         }
-        else if (words_temp[j] == "create" && words_temp[j + 1] == "deductive" && words_temp[j + 2] == "argument")
+        if (words_temp[j] == "create" && words_temp[j + 1] == "deductive" && words_temp[j + 2] == "argument")
         {
             string text = "";
 
@@ -9196,7 +9196,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "create" && words_temp[j + 1] == "inductive" && words_temp[j + 2] == "argument")
+        if (words_temp[j] == "create" && words_temp[j + 1] == "inductive" && words_temp[j + 2] == "argument")
         {
             string text = "";
 
@@ -9225,7 +9225,7 @@ void _SpeechCommands::SpeechCommands(string* words)
         {
             //_Math::UnitConversions(text);
         }
-        else if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && !words_temp[j + 2].empty() && words_temp[j + 3] == "seconds")
+        if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && !words_temp[j + 2].empty() && words_temp[j + 3] == "seconds")
         {
             // Check for fallacy in working_memory datamembers, reading, dialogue, writing
             // 1. Get the time now
@@ -9282,7 +9282,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && words_temp[j + 2] == "working" && words_temp[j + 3] == "memory")
+        if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && words_temp[j + 2] == "working" && words_temp[j + 3] == "memory")
         {
             string text;
 
@@ -9316,7 +9316,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && words_temp[j + 2] == "text")
+        if (words_temp[j] == "fallacy" && words_temp[j + 1] == "check" && words_temp[j + 2] == "text")
         {
             string text;
 
@@ -9338,7 +9338,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 cout << current_date << " Fallacy: " << fallacy << endl;
             }
         }
-        else if (words_temp[j] == "bias" && words_temp[j + 1] == "check" && !words_temp[j + 2].empty() && words_temp[j + 3] == "seconds")
+        if (words_temp[j] == "bias" && words_temp[j + 1] == "check" && !words_temp[j + 2].empty() && words_temp[j + 3] == "seconds")
         {
             // Check for fallacy in working_memory datamembers, reading, dialogue, writing
             // 1. Get the time now
@@ -9384,7 +9384,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "bias" && words_temp[j + 1] == "check" && words_temp[j + 2] == "working" && words_temp[j + 3] == "memory")
+        if (words_temp[j] == "bias" && words_temp[j + 1] == "check" && words_temp[j + 2] == "working" && words_temp[j + 3] == "memory")
         {
             string text;
 
@@ -9411,7 +9411,7 @@ void _SpeechCommands::SpeechCommands(string* words)
         // 2. Dialogue
         // 3. Writing
         // 4. Reading
-        else if (words_temp[j] == "translate" && words_temp[j + 1] == "to" && words_temp[j + 2] == "english" && words_temp[j + 3] == "from" && words_temp[j + 4] == "dialogue")
+        if (words_temp[j] == "translate" && words_temp[j + 1] == "to" && words_temp[j + 2] == "english" && words_temp[j + 3] == "from" && words_temp[j + 4] == "dialogue")
         {
             string text = "";
 
@@ -9450,7 +9450,7 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "translate" && words_temp[j + 1] == "to" && words_temp[j + 2] == "english")
+        if (words_temp[j] == "translate" && words_temp[j + 1] == "to" && words_temp[j + 2] == "english")
         {
             string text = "";
 
@@ -9485,22 +9485,964 @@ void _SpeechCommands::SpeechCommands(string* words)
                 }
             }
         }
-        else if (words_temp[j] == "find" && words_temp[j + 1] == "object" && words_temp[j + 2] != "")
+        if (words_temp[j] == "find" && words_temp[j + 1] == "object" && words_temp[j + 2] != "")
         {
             _DatabaseFunctions::FindObject(words_temp[j + 3]);
         }
-        else if (words_temp[j] == "where" && words_temp[j + 1] == "is" && words_temp[j + 2] == "it")
+        if (words_temp[j] == "where" && words_temp[j + 1] == "is" && words_temp[j + 2] == "it")
         {
             _DatabaseFunctions::FindObject(words_temp[j + 3]);
         }
-        else if (words_temp[j] == "part" && words_temp[j + 1] == "of" && words[j + 2] == "speech" && words_temp[j + 2] == "tag")
+        if (words_temp[j] == "part" && words_temp[j + 1] == "of" && words[j + 2] == "speech" && words_temp[j + 2] == "tag")
         {
 
+        }
+        if (words_temp[j] == "reading" && (words_temp[j + 1] == "mode" || words_temp[j + 1] == ""))
+        {
+            //_Reading::TextIdentification();
+        }
+        if (words_temp[j] == "add" && words_temp[j + 1] == "to" && words_temp[j + 2] == "string" && words_temp[j + 3] != "")
+        {
+            string temp_string = "";
+
+            for (int x = j + 3; x <= sizeof(words_temp); x++)
+            {
+                temp_string += words_temp[x];
+                temp_string += " ";
+            }
+
+            for (int y = 999; y >= 0; y--)
+            {
+                if (!wm_simple_text[y][0].empty() && wm_simple_text[y + 1][0].empty())
+                {
+                    wm_simple_text[y + 1][0] += temp_string;
+                    wm_simple_text[y + 1][1] = current_date;
+                }
+            }
+        }
+        if (words_temp[j] == "get" && words_temp[j + 1] == "setting")
+        {
+            if (words_temp[j + 2] == "awareness" && words_temp[j + 3] == "")
+            {
+                if (awareness_interface)
+                    cout << "Setting: awareness_interface: True" << endl;
+                else
+                    cout << "Setting: awareness_interface: false" << endl;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "")
+            {
+                if (cuda_accelleration)
+                    cout << "Setting: CUDA: Enabled" << endl;
+                else
+                    cout << "Setting: CUDA: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "")
+            {
+                if (cuda_accelleration_remote_enabled)
+                    cout << "Setting: CUDA Remote: Enabled" << endl;
+                else
+                    cout << "Setting: CUDA Remote: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "hostname")
+            {
+                cout << "Setting: CUDA Remote Hostname: " << cuda_accelleration_remote_hostname << endl;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "cores")
+            {
+                cout << "Setting: CUDA Remote Cores: " << cuda_accelleration_remote_cores << endl;
+            }
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "")
+            {
+                if (tensor_accelleration)
+                    cout << "Setting: Tensor Core Accelleration: Enabled" << endl;
+                else
+                    cout << "Setting: Tensor Core Accelleration: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "")
+            {
+                if (tensor_accelleration_remote_enabled)
+                    cout << "Setting: Tensor Core Accelleration Remote: Enabled" << endl;
+                else
+                    cout << "Setting: Tensor Core Accelleration Remote: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "hostname")
+            {
+                cout << "Setting: Tensor Core Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
+            }
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "cores")
+            {
+                cout << "Setting: Tensor Core Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
+            }
+            if (words_temp[j + 2] == "working" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (working_memory_enabled)
+                    cout << "Setting: Working Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Working Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "working" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "limit")
+            {
+                cout << "Setting: Working Memory Limit: " << working_memory_limit << endl;
+            }
+            if (words_temp[j + 2] == "short" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "")
+            {
+                if (short_term_memory_enabled)
+                    cout << "Setting: Short Term Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Short Term Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "short" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "limit")
+            {
+                if (short_term_memory_limit != "")
+                    cout << "Setting: Short Term Memory Limit: " << short_term_memory_limit << endl;
+                else
+                    cout << "Setting: Short Term Memory Limit: " << short_term_memory_limit << endl;
+            }
+            if (words_temp[j + 2] == "long" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "")
+            {
+                if (long_term_memory_enabled)
+                    cout << "Setting: Long Term Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Long Term Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "long" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "limit")
+            {
+                cout << "Setting: Long Term Memory Limit: " << long_term_memory_limit << endl;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (speech_memory_enabled)
+                    cout << "Setting: Speech Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Speech Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "")
+            {
+                if (vision_object_detection)
+                    cout << "Setting: Vision Object Detection: Enabled" << endl;
+                else
+                    cout << "Setting: Vision Object Detection: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "remote")
+            {
+                if (vision_object_detection_server)
+                    cout << "Setting: Vision Object Detection Server: Enabled" << endl;
+                else
+                    cout << "Setting: Vision Object Detection Server: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "hostname")
+            {
+                cout << "Setting: Vision Object Detection Hostname: " << vision_object_detection_server_hostname << endl;
+            }
+            if (words_temp[j + 2] == "tensorflow" && words_temp[j + 3] == "model" && words_temp[j + 4] == "")
+            {
+                cout << "Setting: Tensorflow Model: " << tensorflow_model << endl;
+            }
+            if (words_temp[j + 2] == "tensorflow" && words_temp[j + 3] == "labels" && words_temp[j + 4] == "")
+            {
+                cout << "Setting: Tensorflow Labels: " << tensorflow_labels << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "model" && words_temp[j + 4] == "")
+            {
+                cout << "Setting: Whisper Model: " << whisper_model << endl;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "reasoning" && words_temp[j + 4] == "")
+            {
+                if (visual_reasoning)
+                    cout << "Setting: Visual Reasoning: Enabled" << endl;
+                else
+                    cout << "Setting: Visual Reasoning: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "reasoning" && words_temp[j + 4] == "model")
+            {
+                cout << "Setting: Visual Reasoning Model: " << visual_reasoning_model << endl;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (visual_memory)
+                    cout << "Setting: Visual Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Visual Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "directory")
+            {
+                cout << "Setting: Visual Memory Directory: " << vision_memory_directory << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "")
+            {
+                if (camera1_enabled)
+                    cout << "Setting: Camera 1: Enabled" << endl;
+                else
+                    cout << "Setting: Camera 2: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "fps" && words_temp[j + 5] == "")
+            {
+                cout << "Setting: Camera 1 FPS: " << camera1_fps << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "height")
+            {
+                cout << "Setting: Camera 1 Resolution Height: " << camera1_resolution_height << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "width")
+            {
+                cout << "Setting: Camera 1 Resolution Width: " << camera1_resolution_width << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "")
+            {
+                if (camera2_enabled)
+                    cout << "Setting: Camera 2: Enabled" << endl;
+                else
+                    cout << "Setting: Camera 2: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "fps")
+            {
+                cout << "Setting: Camera 2 FPS: " << camera2_fps << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "height" && words_temp[j + 6] == "")
+            {
+                cout << "Setting: Camera 2 Resolution Height: " << camera2_resolution_height << endl;
+            }
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "width" && words_temp[j + 6] == "")
+            {
+                cout << "Setting: Camera 2 Resolution Width: " << camera2_resolution_width << endl;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "commands")
+            {
+                if (speech_commands)
+                    cout << "Setting: Speech Commands: Enabled" << endl;
+                else
+                    cout << "Setting: Speech Commands: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "commands")
+            {
+                if (action_commands)
+                    cout << "Setting: Action Commands: Enabled" << endl;
+                else
+                    cout << "Setting: Action Commands: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "commands")
+            {
+                if (vision_commands)
+                    cout << "Setting: Vision Commands: Enabled" << endl;
+                else
+                    cout << "Setting: Vision Commands: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "phone" && words_temp[j + 3] == "commands")
+            {
+                if (phone_commands)
+                    cout << "Setting: Phone Commands: Enabled" << endl;
+                else
+                    cout << "Setting: Phone Commands: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "thinking")
+            {
+                if (visual_thinking)
+                    cout << "Setting: Visual Thinking: Enabled" << endl;
+                else
+                    cout << "Setting: Visual Thinking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "computer" && words_temp[j + 3] == "use")
+            {
+                if (computer_use)
+                    cout << "Setting: Computer Use: Enabled" << endl;
+                else
+                    cout << "Setting: Computer Use: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "reading" && words_temp[j + 3] == "")
+            {
+                if (reading)
+                    cout << "Setting: Reading: Enabled" << endl;
+                else
+                    cout << "Setting: Reading: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (sound_memory)
+                    cout << "Setting: Sound Memory: Enabled" << endl;
+                else
+                    cout << "Setting: Sound Memory: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "recognition" && words_temp[j + 4] == "")
+            {
+                if (speech_recognition)
+                    cout << "Setting: Speech Recognition: Enabled" << endl;
+                else
+                    cout << "Setting: Speech Recognition: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "recognition" && words_temp[j + 4] == "")
+            {
+                if (sound_recognition)
+                    cout << "Setting: Sound Recognition: Enabled" << endl;
+                else
+                    cout << "Setting: Sound Recognition: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "directory" && words_temp[j + 4] == "")
+            {
+                cout << "Setting: Sound Directory: " << sound_directory << endl;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "reasoning")
+            {
+                if (sound_reasoning)
+                    cout << "Setting: Sound Reasoning: Enabled" << endl;
+                else
+                    cout << "Setting: Sound Reasoning: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "reading" && words_temp[j + 3] == "reasoning")
+            {
+                if (reading_reasoning)
+                    cout << "Setting: Reading Reasoning: Enabled" << endl;
+                else
+                    cout << "Setting: Reading Reasoning: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "reasoning")
+            {
+                if (speech_reasoning)
+                    cout << "Setting: Speech Reasoning: Enabled" << endl;
+                else
+                    cout << "Setting: Speech Reasoning: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "news" && words_temp[j + 3] == "watching")
+            {
+                if (news_watching)
+                    cout << "Setting: News Watching: Enabled" << endl;
+                else
+                    cout << "Setting: News Watching: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "commands")
+            {
+                if (action_commands)
+                    cout << "Setting: Action Commands: Enabled" << endl;
+                else
+                    cout << "Setting: Action Commands: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "detection")
+            {
+                if (action_detection)
+                    cout << "Setting: Action Detection: Enabled" << endl;
+                else
+                    cout << "Setting: Action Detection: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "needs" && words_temp[j + 3] == "detection")
+            {
+                if (needs_detection)
+                    cout << "Setting: Needs Detection: Enabled" << endl;
+                else
+                    cout << "Setting: Needs Detection: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "navigation")
+            {
+                if (navigation_detection)
+                    cout << "Setting: Navigation Detection: Enabled" << endl;
+                else
+                    cout << "Setting: Navigation Detection: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "fallacy" && words_temp[j + 4] == "checking")
+            {
+                if (listening_fallacy_checking)
+                    cout << "Setting: Listening Fallacy Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Fallacy Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "bias" && words_temp[j + 4] == "checking")
+            {
+                if (listening_bias_checking)
+                    cout << "Setting: Listening Bias Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Bias Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "literature" && words_temp[j + 4] == "devices")
+            {
+                if (listening_literature_device_checking)
+                    cout << "Setting: Literature Device Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Literature Device Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "axioms")
+            {
+                if (listening_axiom_checking)
+                    cout << "Setting: Axiom Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Axiom Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "abuse")
+            {
+                if (listening_abuse_checking)
+                    cout << "Setting: Listening Abuse Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Abuse Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "law")
+            {
+                if (listening_law_checking)
+                    cout << "Setting: Listening Law Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Law Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "dictionary")
+            {
+                if (listening_dictionary_checking)
+                    cout << "Setting: Listening Dictionary Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Dictionary Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "server")
+            {
+                if (listening_dictionary_checking)
+                    cout << "Setting: Listening Dictionary Checking: Enabled" << endl;
+                else
+                    cout << "Setting: Listening Dictionary Checking: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "hostname")
+            {
+                cout << "Setting: FTP Hostname: " << ftp_hostname << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "username")
+            {
+                cout << "Setting: FTP Username: " << ftp_username << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "password")
+            {
+                cout << "Setting: FTP Password: " << ftp_password << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "vision" && words_temp[j + 4] == "directory")
+            {
+                cout << "Setting: FTP Vision Directory: " << ftp_vision_directory << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "sound" && words_temp[j + 4] == "directory")
+            {
+                cout << "Setting: FTP Sound Directory: " << ftp_sound_directory << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "vision" && words_temp[j + 4] == "storage" && words_temp[j + 5] == "limit")
+            {
+                cout << "Setting: FTP Vision Storage Limit: " << ftp_vision_storage_limit << endl;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "sound" && words_temp[j + 4] == "storage" && words_temp[j + 5] == "limit")
+            {
+                cout << "Setting: FTP Sound Storage Limit: " << ftp_sound_storage_limit << endl;
+            }
+            if (words_temp[j + 2] == "computer" && words_temp[j + 3] == "hostname")
+            {
+                cout << "Setting: Computer Hostname: " << computer_hostname << endl;
+            }
+            if (words_temp[j + 2] == "computer" && words_temp[j + 3] == "username")
+            {
+                cout << "Setting: Computer Username: " << computer_username << endl;
+            }
+            if (words_temp[j + 2] == "computer" && words_temp[j + 3] == "password")
+            {
+                cout << "Setting: Computer Password: " << computer_password << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "hostname")
+            {
+                cout << "Setting: MySQL Hostname: " << mysql_hostname << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "username")
+            {
+                cout << "Setting: MySQL Username: " << mysql_username << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "password")
+            {
+                cout << "Setting: MySQL Password: " << mysql_password << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "vision" && words_temp[j + 4] == "database")
+            {
+                cout << "Setting: MySQL Vision Database: " << mysql_vision_database << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "sound" && words_temp[j + 4] == "database")
+            {
+                cout << "Setting: MySQL Sound Database: " << mysql_sound_database << endl;
+            }
+            if (words_temp[j + 2] == "mysql" && words_temp[j + 3] == "dictionary" && words_temp[j + 4] == "database")
+            {
+                cout << "Setting: MySQL Dictionary Database: " << mysql_dictionary_database << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "hostname")
+            {
+                cout << "Setting: MySQL Remote Hostname: " << remote_mysql_hostname << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "username")
+            {
+                cout << "Setting: MySQL Remote Username: " << remote_mysql_username << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "password")
+            {
+                cout << "Setting: MySQL Remote Password: " << remote_mysql_password << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "working" && words_temp[j + 5] == "memory" && words_temp[j + 6] == "database")
+            {
+                cout << "Setting: MySQL Remote Working Memory Database: " << remote_mysql_working_memory_database << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "short" && words_temp[j + 5] == "term" && words_temp[j + 6] == "memory" && words_temp[j + 7] == "database")
+            {
+                cout << "Setting: MySQL Remote MySQL Short Term Memory Database: " << remote_mysql_short_term_memory_database << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "long" && words_temp[j + 5] == "term" && words_temp[j + 6] == "memory" && words_temp[j + 7] == "database")
+            {
+                cout << "Setting: MySQL Remote Long Term Memory Database: " << remote_mysql_long_term_memory_database << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "dictionary" && words_temp[j + 5] == "database")
+            {
+                cout << "Setting: MySQL Remote Dictionary Database: " << remote_mysql_dictionary_database << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "destination" && words_temp[j + 5] == "database" && words_temp[j + 6] == "words")
+            {
+                cout << "Setting: MySQL Remote Wikipedia POS Tag Words Database: " << remote_mysql_destination_database_words << endl;
+            }
+            if (words_temp[j + 2] == "remote" && words_temp[j + 3] == "mysql" && words_temp[j + 4] == "destination" && words_temp[j + 5] == "database" && words_temp[j + 6] == "sentences")
+            {
+                cout << "Setting: MySQL Remote Wikipedia POS Tag Sentences Database: " << remote_mysql_destination_database_sentences << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "server" && words_temp[j + 4] != "")
+            {
+                if (whisper_server_enabled)
+                    cout << "Setting: Whisper Server: Enabled" << endl;
+                else
+                    cout << "Setting: Whisper Server: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "hostname")
+            {
+                cout << "Setting: MySQL Remote Wikipedia POS Tag Sentences Database: " << remote_mysql_destination_database_sentences << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "username")
+            {
+                cout << "Setting: Whisper Username: " << whisper_username << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "password")
+            {
+                cout << "Setting: Whisper Password: " << whisper_password << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "model")
+            {
+                cout << "Setting: Whisper Model: " << whisper_model << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "prompt" && words_temp[j + 4] == "seconds")
+            {
+                cout << "Setting: Whisper Prompt Seconds: " << whisper_prompt_seconds << endl;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "command" && words_temp[j + 4] == "seconds")
+            {
+                cout << "Setting: Whisper Command Prompt Seconds: " << whisper_command_seconds << endl;
+            }
+            if (words_temp[j + 2] == "driving" && words_temp[j + 3] == "enabled")
+            {
+                if (driving_enabled)
+                    cout << "Setting: Driving: Enabled" << endl;
+                else
+                    cout << "Setting: Driving: Disabled" << endl;
+            }
+            if (words_temp[j + 2] == "driving" && words_temp[j + 3] == "head" && words_temp[j + 4] == "position")
+            {
+                cout << "Setting: Driving Head Position: " << driving_head_position << endl;
+            }
+            if (words_temp[j + 2] == "driving" && words_temp[j + 3] == "left" && words_temp[j + 4] == "mirror")
+            {
+                cout << "Setting: Driving Left Mirror Position: " << driving_left_mirror << endl;
+            }
+            if (words_temp[j + 2] == "driving" && words_temp[j + 3] == "right" && words_temp[j + 5] == "mirror")
+            {
+                cout << "Setting: Driving Right Mirror Position: " << driving_right_mirror << endl;
+            }
+            if (words_temp[j + 2] == "driving" && words_temp[j + 3] == "center" && words_temp[j + 5] == "mirror")
+            {
+                cout << "Setting: Driving Center Mirror Position: " << driving_center_mirror << endl;
+            }
+        }
+        else if ((words_temp[j] == "set" || words_temp[j] == "change") && words_temp[j + 1] == "setting")
+        {
+            if (words_temp[j + 2] == "awareness" && words_temp[j + 3] == "")
+            {
+                if (awareness_interface)
+                    awareness_interface = false;
+                else
+                    awareness_interface = true;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "")
+            {
+                if (cuda_accelleration)
+                    cuda_accelleration = false;
+                else
+                    cuda_accelleration = true;
+            }
+            if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "")
+            {
+                if (cuda_accelleration_remote_enabled)
+                    cuda_accelleration_remote_enabled = false;
+                else
+                    cuda_accelleration_remote_enabled = true;
+            }
+            //if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "hostname")
+            //{
+            //    cout << "Setting: CUDA Remote Hostname: " << cuda_accelleration_remote_hostname << endl;
+            //}
+            //if (words_temp[j + 2] == "cuda" && words_temp[j + 3] == "remote" && words_temp[j + 4] == "cores")
+            //{
+            //    cout << "Setting: CUDA Remote Cores: " << cuda_accelleration_remote_cores << endl;
+            //}
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "")
+            {
+                if (tensor_accelleration)
+                    tensor_accelleration = false;
+                else
+                    tensor_accelleration = true;
+            }
+            if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "")
+            {
+                if (tensor_accelleration_remote_enabled)
+                    tensor_accelleration_remote_enabled = false;
+                else
+                    tensor_accelleration_remote_enabled = true;
+            }
+            //if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "hostname")
+            //{
+            //    cout << "Setting: Tensor Core Accelleration Remote Hostname: " << tensor_accelleration_remote_hostname << endl;
+            //}
+            //if (words_temp[j + 2] == "tensor" && words_temp[j + 3] == "cores" && words_temp[j + 4] == "remote" && words_temp[j + 5] == "cores")
+            //{
+            //    cout << "Setting: Tensor Core Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
+            //}
+            if (words_temp[j + 2] == "working" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (working_memory_enabled)
+                    working_memory_enabled = false;
+                else
+                    working_memory_enabled = true;
+            }
+            //if (words_temp[j + 2] == "working" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "limit")
+            //{
+            //    cout << "Setting: Working Memory Limit: " << working_memory_limit << endl;
+            //}
+            if (words_temp[j + 2] == "short" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "")
+            {
+                if (short_term_memory_enabled)
+                    short_term_memory_enabled = false;
+                else
+                    short_term_memory_enabled = true;
+            }
+            //if (words_temp[j + 2] == "short" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "limit")
+            //{
+            //    cout << "Setting: Short Term Memory Limit: " << short_term_memory_limit << endl;
+            //}
+            if (words_temp[j + 2] == "long" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "")
+            {
+                if (long_term_memory_enabled)
+                    long_term_memory_enabled = false;
+                else
+                    long_term_memory_enabled = true;
+            }
+            //if (words_temp[j + 2] == "long" && words_temp[j + 3] == "term" && words_temp[j + 4] == "memory" && words_temp[j + 5] == "limit")
+            //{
+            //    cout << "Setting: Long Term Memory Limit: " << long_term_memory_limit << endl;
+            //}
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (speech_memory_enabled)
+                    speech_memory_enabled = false;
+                else
+                    speech_memory_enabled = true;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "")
+            {
+                if (vision_object_detection)
+                    vision_object_detection = false;
+                else
+                    vision_object_detection = true;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "remote")
+            {
+                if (vision_object_detection_server)
+                    vision_object_detection_server = false;
+                else
+                    vision_object_detection_server = true;
+            }
+            //if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "object" && words_temp[j + 4] == "detection" && words_temp[j + 5] == "hostname")
+            //{
+            //    cout << "Setting: Vision Object Detection Hostname: " << vision_object_detection_server_hostname << endl;
+            //}
+            //if (words_temp[j + 2] == "tensorflow" && words_temp[j + 3] == "model" && words_temp[j + 4] == "")
+            //{
+            //    cout << "Setting: Tensorflow Model: " << tensorflow_model << endl;
+            //}
+            //if (words_temp[j + 2] == "tensorflow" && words_temp[j + 3] == "labels" && words_temp[j + 4] == "")
+            //{
+            //    cout << "Setting: Tensorflow Labels: " << tensorflow_labels << endl;
+            //}
+            //if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "model" && words_temp[j + 4] == "")
+            //{
+            //    cout << "Setting: Whisper Model: " << whisper_model << endl;
+            //}
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "reasoning" && words_temp[j + 4] == "")
+            {
+                if (visual_reasoning)
+                    visual_reasoning = false;
+                else
+                    visual_reasoning = true;
+            }
+            //if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "reasoning" && words_temp[j + 4] == "model")
+            //{
+            //    cout << "Setting: Visual Reasoning Model: " << visual_reasoning_model << endl;
+            //}
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (visual_memory)
+                    visual_memory = false;
+                else
+                    visual_memory = true;
+            }
+            //if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "directory")
+            //{
+            //    cout << "Setting: Visual Memory Directory: " << vision_memory_directory << endl;
+            //}
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "")
+            {
+                if (camera1_enabled)
+                    camera1_enabled = false;
+                else
+                    camera1_enabled = true;
+            }
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "fps" && words_temp[j + 5] == "")
+            //{
+            //    cout << "Setting: Camera 1 FPS: " << camera1_fps << endl;
+            //}
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "height")
+            //{
+            //    cout << "Setting: Camera 1 Resolution Height: " << camera1_resolution_height << endl;
+            //}
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "one" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "width")
+            //{
+            //    cout << "Setting: Camera 1 Resolution Width: " << camera1_resolution_width << endl;
+            //}
+            if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "")
+            {
+                if (camera2_enabled)
+                    camera2_enabled = false;
+                else
+                    camera2_enabled = true;
+            }
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "fps")
+            //{
+            //    cout << "Setting: Camera 2 FPS: " << camera2_fps << endl;
+            //}
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "height" && words_temp[j + 6] == "")
+            //{
+            //    cout << "Setting: Camera 2 Resolution Height: " << camera2_resolution_height << endl;
+            //}
+            //if (words_temp[j + 2] == "camera" && words_temp[j + 3] == "two" && words_temp[j + 4] == "resolution" && words_temp[j + 5] == "width" && words_temp[j + 6] == "")
+            //{
+            //    cout << "Setting: Camera 2 Resolution Width: " << camera2_resolution_width << endl;
+            //}
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "commands")
+            {
+                if (speech_commands)
+                    speech_commands = false;
+                else
+                    speech_commands = true;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "commands")
+            {
+                if (action_commands)
+                    action_commands = false;
+                else
+                    action_commands = true;
+            }
+            if (words_temp[j + 2] == "vision" && words_temp[j + 3] == "commands")
+            {
+                if (vision_commands)
+                    vision_commands = false;
+                else
+                    vision_commands = true;
+            }
+            if (words_temp[j + 2] == "phone" && words_temp[j + 3] == "commands")
+            {
+                if (phone_commands)
+                    phone_commands = false;
+                else
+                    phone_commands = true;
+            }
+            if (words_temp[j + 2] == "visual" && words_temp[j + 3] == "thinking")
+            {
+                if (visual_thinking)
+                    visual_thinking = false;
+                else
+                    visual_thinking = true;
+            }
+            if (words_temp[j + 2] == "computer" && words_temp[j + 3] == "use")
+            {
+                if (computer_use)
+                    computer_use = false;
+                else
+                    computer_use = true;
+            }
+            if (words_temp[j + 2] == "reading" && words_temp[j + 3] == "")
+            {
+                if (reading)
+                    reading = false;
+                else
+                    reading = true;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "memory" && words_temp[j + 4] == "")
+            {
+                if (sound_memory)
+                    sound_memory = false;
+                else
+                    sound_memory = true;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "recognition" && words_temp[j + 4] == "")
+            {
+                if (speech_recognition)
+                    speech_recognition = false;
+                else
+                    speech_recognition = true;
+            }
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "recognition" && words_temp[j + 4] == "")
+            {
+                if (sound_recognition)
+                    sound_recognition = false;
+                else
+                    sound_recognition = true;
+            }
+            //if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "directory" && words_temp[j + 4] == "")
+            //{
+            //    cout << "Setting: Sound Directory: " << sound_directory << endl;
+            //}
+            if (words_temp[j + 2] == "sound" && words_temp[j + 3] == "reasoning")
+            {
+                if (sound_reasoning)
+                    sound_reasoning = false;
+                else
+                    sound_reasoning = true;
+            }
+            if (words_temp[j + 2] == "reading" && words_temp[j + 3] == "reasoning")
+            {
+                if (reading_reasoning)
+                    reading_reasoning = false;
+                else
+                    reading_reasoning = true;
+            }
+            if (words_temp[j + 2] == "speech" && words_temp[j + 3] == "reasoning")
+            {
+                if (speech_reasoning)
+                    speech_reasoning = false;
+                else
+                    speech_reasoning = true;
+            }
+            if (words_temp[j + 2] == "news" && words_temp[j + 3] == "watching")
+            {
+                if (news_watching)
+                    news_watching = false;
+                else
+                    news_watching = true;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "commands")
+            {
+                if (action_commands)
+                    action_commands = false;
+                else
+                    action_commands = true;
+            }
+            if (words_temp[j + 2] == "action" && words_temp[j + 3] == "detection")
+            {
+                if (action_detection)
+                    action_detection = false;
+                else
+                    action_detection = true;
+            }
+            if (words_temp[j + 2] == "needs" && words_temp[j + 3] == "detection")
+            {
+                if (needs_detection)
+                    needs_detection = false;
+                else
+                    needs_detection = true;
+            }
+            if (words_temp[j + 2] == "navigation")
+            {
+                if (navigation_detection)
+                    navigation_detection = false;
+                else
+                    navigation_detection = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "fallacy" && words_temp[j + 4] == "checking")
+            {
+                if (listening_fallacy_checking)
+                    listening_fallacy_checking = false;
+                else
+                    listening_fallacy_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "bias" && words_temp[j + 4] == "checking")
+            {
+                if (listening_bias_checking)
+                    listening_bias_checking = false;
+                else
+                    listening_bias_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "literature" && words_temp[j + 4] == "devices")
+            {
+                if (listening_literature_device_checking)
+                    listening_literature_device_checking = false;
+                else
+                    listening_literature_device_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "axioms")
+            {
+                if (listening_axiom_checking)
+                    listening_axiom_checking = false;
+                else
+                    listening_axiom_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "abuse")
+            {
+                if (listening_abuse_checking)
+                    listening_abuse_checking = false;
+                else
+                    listening_abuse_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "law")
+            {
+                if (listening_law_checking)
+                    listening_law_checking = false;
+                else
+                    listening_law_checking = true;
+            }
+            if (words_temp[j + 2] == "listening" && words_temp[j + 3] == "dictionary")
+            {
+                if (listening_dictionary_checking)
+                    listening_dictionary_checking = false;
+                else
+                    listening_dictionary_checking = true;
+            }
+            if (words_temp[j + 2] == "ftp" && words_temp[j + 3] == "enabled")
+            {
+                if (ftp_enabled)
+                    ftp_enabled = false;
+                else
+                    ftp_enabled = true;
+            }
+            if (words_temp[j + 2] == "llm" && words_temp[j + 3] == "server")
+            {
+                if (llm_server_enabled)
+                    llm_server_enabled = false;
+                else
+                    llm_server_enabled = true;
+            }
+            if (words_temp[j + 2] == "whisper" && words_temp[j + 3] == "server")
+            {
+                if (whisper_server_enabled)
+                    whisper_server_enabled = false;
+                else
+                    whisper_server_enabled = true;
+            }
+            if (words_temp[j + 2] == "driving")
+            {
+                if (driving_enabled)
+                    driving_enabled = false;
+                else
+                    driving_enabled = true;
+            }
         }
         else
         {
             // This command has not been implemented yet
-            return;
+            //return;
         }
     }
 }
+

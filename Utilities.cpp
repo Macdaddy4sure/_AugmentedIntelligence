@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -29,11 +29,46 @@ using namespace std;
 using namespace filesystem;
 using namespace cv;
 
-// This function will update the MySQL database
-void _Utilities::UpdateMySQL()
-{
-
-}
+std::unordered_map<std::string, std::string> numWordMap = {
+    {"zero", "0"},
+    {"one", "1"},
+    {"two", "2"},
+    {"three", "3"},
+    {"four", "4"},
+    {"five", "5"},
+    {"six", "6"},
+    {"seven", "7"},
+    {"eight", "8"},
+    {"nine", "9"},
+    {"ten", "10"},
+    {"eleven", "11"},
+    {"twelve", "12"},
+    {"thirteen", "13"},
+    {"fourteen", "14"},
+    {"fifteen", "15"},
+    {"sixteen", "16"},
+    {"seventeen", "17"},
+    {"eighteen", "18"},
+    {"nineteen", "19"},
+    {"twenty", "20"},
+    {"thirty", "30"},
+    {"forty", "40"},
+    {"fifty", "50"},
+    {"sixty", "60"},
+    {"seventy", "70"},
+    {"eighty", "80"},
+    {"ninety", "90"},
+    {"one hundred", "100"},
+    {"two hundred", "200"},
+    {"three hundred", "300"},
+    {"four hundred", "400"},
+    {"five hundred", "500"},
+    {"six hundred", "600"},
+    {"seven hundred", "700"},
+    {"eight hundred", "800"},
+    {"nine hundred", "900"},
+    {"one thousand", "1000"}
+};
 
 // This function will use intelligence to create a summary of what the user is reading
 string _Utilities::CreateSummary(string data)
@@ -1188,48 +1223,43 @@ string* _Utilities::String2Sentences(string input)
     return sentences;
 }
 
-// Purpose: Separate sentences into individual words
+/**
+ * Removes punctuation from a string and splits it into words.
+ *
+ * @param input  The input string to process.
+ * @param output A vector of strings where the processed words will be stored.
+ */
 string* _Utilities::String2Words(string input)
 {
-    string temp;
-    int count1 = 0;
-    int count = 0;
+    // Create a copy of the input string
+    std::string str = input;
 
-    for (int y = 0; y <= input.length(); y++)
-    {
-        if (isspace(input[y]))
-        {
-            count1++;
-        }
-        if (input[y] == '.' || input[y] == '?' || input[y] == '!')
-        {
-            count1++;
+    // Remove punctuation from the string
+    str.erase(std::remove_if(str.begin(), str.end(),
+        [](char c) { return !std::isalnum(c) && !std::isspace(c); }),
+        str.end());
+
+    // Count the number of words in the string
+    int wordCount = 0;
+    for (int i = 0; i < str.size(); ++i) {
+        if (str[i] == ' ') {
+            ++wordCount;
         }
     }
 
-    string* words = new string[count1];
+    // Allocate memory for the output array
+    std::string* output = new std::string[wordCount + 1];
 
-    for (int x = 0; x <= input.length(); x++)
+    // Split the string into words and store them in the output array
+    std::istringstream iss(str);
+    int index = 0;
+
+    while (iss >> output[index])
     {
-        if (x == 0)
-        {
-            words[count] = input[x];
-        }
-        else if (isspace(input[x]))
-        {
-            count++;
-        }
-        else if (input[x] == '.' || input[x] == '?' || input[x] == '!')
-        {
-            words[count] += input[x];
-        }
-        else
-        {
-            words[count] += input[x];
-        }
+        ++index;
     }
 
-    return words;
+    return output;
 }
 
 string _Utilities::Vector2String(double* vector)
@@ -1302,6 +1332,570 @@ double* _Utilities::VectorAverage(double* vector_sum, int word_count)
     return vector_sum;
 }
 
+// TODO:
+// 1. Make all characters lowercase
+// 2. Remove the following words that contain '[]'
+string _Utilities::ParsePrompt(const string input)
+{
+    string temp = "";
+
+    for (int x = 0; x < input.length(); x++)
+    {
+        if (input[x] == '[' && input[x + 1] == 'B' && input[x + 2] == 'L' && input[x + 3] == 'A' && input[x + 4] == 'N' && input[x + 5] == 'K' && input[x + 6] == '_' && input[x + 7] == 'A' && input[x + 8] == 'U' && input[x + 9] == 'D' && input[x + 10] == 'I' && input[x + 11] == 'O' && input[x + 12] == ']')
+        {
+            x += 13;
+        }
+        if (ispunct(input[x]))
+        {
+
+        }
+        else
+        {
+            temp += tolower(input[x]);
+        }
+    }
+
+    return temp;
+}
+
+bool _Utilities::PromptRecognize(const string prompt)
+{
+    std::istringstream iss(prompt);
+    std::string word;
+
+    while (iss >> word)
+    {
+        if (word == speech_commands_activation)
+        {
+            return true;  // Found a match
+        }
+    }
+
+    return false;  // No match found
+}
+
+string _Utilities::ParseTranscription(string input)
+{
+    string temp = "";
+
+    for (int x = 0; x < input.length(); x++)
+    {
+        if (input[x] == '[' && input[x + 1] == 'B' && input[x + 2] == 'L' && input[x + 3] == 'A' && input[x + 4] == 'N' && input[x + 5] == 'K' && input[x + 6] == '_' && input[x + 7] == 'A' && input[x + 8] == 'U' && input[x + 9] == 'D' && input[x + 10] == 'I' && input[x + 11] == 'O' && input[x + 12] == ']')
+        {
+            x += 13;
+        }
+        else
+        {
+            temp += input[x];
+        }
+    }
+
+    return temp;
+}
+
+bool _Utilities::CommandTerminatorRecognize(const string command)
+{
+    std::istringstream iss(command);
+    std::string word;
+
+    while (iss >> word)
+    {
+        if (word == speech_commands_terminator)
+        {
+            return true;  // Found a match
+        }
+    }
+
+    return false;  // No match found
+}
+
+string _Utilities::CommandParse(const string command)
+{
+    //std::istringstream iss(command);
+    std::string word;
+    std::string output;
+
+    for (int x = 0; x < command.length(); x++)
+    {
+        if (command[x] == 'a' && command[x + 1] == 'b' && command[x + 2] == 's' && command[x + 3] == 'o' && command[x + 4] == 'l' && command[x + 5] == 'u' && command[x + 6] == 't' && command[x + 7] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 9; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 9; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'm' && command[x + 1] == 'o' && command[x + 2] == 'd' && command[x + 3] == 'u' && command[x + 4] == 'l' && command[x + 5] == 'u' && command[x + 6] == 's')
+        {
+            string number = "";
+
+            for (int y = x; y <= 8; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 8; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 's' && command[x + 1] == 'q' && command[x + 2] == 'u' && command[x + 3] == 'a' && command[x + 4] == 'r' && command[x + 5] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 7; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 7; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'c' && command[x + 1] == 'u' && command[x + 2] == 'b' && command[x + 3] == 'e' && command[x + 4] == 'd')
+        {
+            string number = "";
+
+            for (int y = x; y <= 6; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 6; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'f' && command[x + 1] == 'a' && command[x + 2] == 'c' && command[x + 3] == 't' && command[x + 4] == 'o' && command[x + 5] == 'r' && command[x + 6] == 'i' && command[x + 7] == 'a' && command[x + 8] == 'l')
+        {
+            string number = "";
+
+            for (int y = x; y <= 10; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 9; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'l' && command[x + 1] == 'o' && command[x + 2] == 'g' && command[x + 3] == 'a' && command[x + 4] == 'r' && command[x + 5] == 'i' && command[x + 6] == 't' && command[x + 7] == 'h' && command[x + 8] == 'm')
+        {
+            string number = "";
+
+            for (int y = x; y <= 10; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 10; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 's' && command[x + 1] == 'i' && command[x + 2] == 'n' && command[x + 3] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 5; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 5; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'c' && command[x + 1] == 'o' && command[x + 2] == 's' && command[x + 3] == 'i' && command[x + 4] == 'n' && command[x + 5] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 7; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 7; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 't' && command[x + 1] == 'a' && command[x + 2] == 'n' && command[x + 3] == 'g' && command[x + 4] == 'e' && command[x + 5] == 'n' && command[x + 6] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 8; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 8; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'c' && command[x + 1] == 'o' && command[x + 2] == 's' && command[x + 3] == 'e' && command[x + 4] == 'c' && command[x + 5] == 'a' && command[x + 6] == 'n' && command[x + 7] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 9; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 9; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 's' && command[x + 1] == 'e' && command[x + 2] == 'c' && command[x + 3] == 'a' && command[x + 4] == 'n' && command[x + 5] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 7; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 7; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'c' && command[x + 1] == 'o' && command[x + 2] == 't' && command[x + 3] == 'a' && command[x + 4] == 'n' && command[x + 5] == 'g' && command[x + 6] == 'e' && command[x + 7] == 'n' && command[x + 8] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 10; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 10; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 's' && command[x + 12] == 'i' && command[x + 13] == 'n' && command[x + 14] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 16; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 16; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 'c' && command[x + 12] == 'o' && command[x + 13] == 's' && command[x + 14] == 'i' && command[x + 15] == 'n' && command[x + 16] == 'e')
+        {
+            string number = "";
+
+            for (int y = x; y <= 18; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 18; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 't' && command[x + 12] == 'a' && command[x + 13] == 'n' && command[x + 14] == 'g' && command[x + 15] == 'e' && command[x + 16] == 'n' && command[x + 17] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 19; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 19; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 's' && command[x + 12] == 'e' && command[x + 13] == 'c' && command[x + 14] == 'a' && command[x + 15] == 'n' && command[x + 16] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 18; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 18; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 'c' && command[x + 12] == 'o' && command[x + 13] == 's' && command[x + 14] == 'e' && command[x + 15] == 'c' && command[x + 16] == 'a' && command[x + 17] == 'n' && command[x + 18] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 20; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 20; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'h' && command[x + 1] == 'y' && command[x + 2] == 'p' && command[x + 3] == 'e' && command[x + 4] == 'r' && command[x + 5] == 'b' && command[x + 6] == 'o' && command[x + 7] == 'l' && command[x + 8] == 'i' && command[x + 9] == 'c' && command[x + 10] == ' ' && command[x + 11] == 'c' && command[x + 12] == 'o' && command[x + 13] == 't' && command[x + 14] == 'a' && command[x + 15] == 'n' && command[x + 16] == 'g' && command[x + 17] == 'e' && command[x + 18] == 'n' && command[x + 19] == 't')
+        {
+            string number = "";
+
+            for (int y = x; y <= 21; y++)
+            {
+                output += command[y];
+            }
+
+            for (int y = x + 21; y <= command.length(); y++)
+            {
+                number += command[y];
+            }
+
+            output += _Utilities::convertNumberWords(number);
+        }
+        if (command[x] == 'a' && command[x + 1] == 'd' && command[x + 2] == 'd' && command[x + 3] == ' ' && command[x + 4] == 't' && command[x + 5] == 'h' && command[x + 6] == 'e' && command[x + 7] == ' ' && command[x + 8] == 'l' && command[x + 9] == 'a' && command[x + 10] == 's' && command[x + 11] == 't')
+        {
+            for (int y = x + 13; y < command.length(); y++)
+            {
+                // The next word should be a number
+                string number = "";
+                string number2 = "";
+                string number3 = "";
+
+                // 1. Get every word up until seconds
+                if (command[y] == 's' && command[y + 1] == 'e' && command[y + 2] == 'c' && command[y + 3] == 'o' && command[y + 4] == 'n' && command[y + 5] == 'd' && command[y + 6] == 's')
+                {
+                    output += _Utilities::convertNumberWords(number);
+                    break;
+                }
+                else if (command[y] == 'm' && command[y + 1] == 'i' && command[y + 2] == 'n' && command[y + 3] == 'u' && command[y + 4] == 't' && command[y + 5] == 'e' && command[y + 6] == 's')
+                {
+                    // 2. Test if the following contains seconds
+
+                    for (int z = y + 8; z < command.length(); z++)
+                    {
+                        if (command[z] == 's' && command[z + 1] == 'e' && command[z + 2] == 'c' && command[z + 3] == 'o' && command[z + 4] == 'n' && command[z + 5] == 'd' && command[z + 6] == 's')
+                        {
+                            output += _Utilities::convertNumberWords(number2);
+                            break;
+                        }
+                        else
+                        {
+                            number2 += command[z];
+                        }
+                    }
+                }
+                else if (command[y] == 'h' && command[y + 1] == 'o' && command[y + 2] == 'u' && command[y + 3] == 'r' && command[y + 4] == 's')
+                {
+                    // 2. Check if the following contains minutes
+
+                    for (int z = y + 6; z < command.length(); z++)
+                    {
+                        if (command[z] == 'm' && command[z + 1] == 'i' && command[z + 2] == 'n' && command[z + 3] == 'u' && command[z + 4] == 't' && command[z + 5] == 'e' && command[z + 6] == 's')
+                        {
+                            // 3. Check if the following contains seconds
+                            output += _Utilities::convertNumberWords(number2);
+
+                            for (int a = z + 8; a < command.length(); a++)
+                            {
+                                if (command[a] == 's' && command[a + 1] == 'e' && command[a + 2] == 'c' && command[a + 3] == 'o' && command[a + 4] == 'n' && command[a + 5] == 'd' && command[a + 6] == 's')
+                                {
+                                    output += _Utilities::convertNumberWords(number3);
+                                    break;
+                                }
+                                else
+                                {
+                                    number3 += command[a];
+                                }
+                            }
+                        }
+                        else
+                        {
+                            number2 += command[z];
+                        }
+                    }
+                }
+                else
+                {
+                    number += command[y];
+                }
+            }
+        }
+        if (command[x] == 'c' && command[x + 1] == 'r' && command[x + 2] == 'e' && command[x + 3] == 'a' && command[x + 4] == 't' && command[x + 5] == 'e' && command[x + 6] == ' ' && command[x + 7] == 'p' && command[x + 8] == 'r' && command[x + 9] == 'o' && command[x + 10] == 'm' && command[x + 11] == 'p' && command[x + 12] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'c' && command[x + 1] == 'r' && command[x + 2] == 'e' && command[x + 3] == 'a' && command[x + 4] == 't' && command[x + 5] == 'e' && command[x + 6] == ' ' && command[x + 7] == 'd' && command[x + 8] == 'e' && command[x + 9] == 'd' && command[x + 10] == 'u' && command[x + 11] == 'c' && command[x + 12] == 't' && command[x + 13] == 'i' && command[x + 14] == 'v' && command[x + 15] == 'e' && command[x + 16] == ' ' && command[x + 17] == 'a' && command[x + 18] == 'r' && command[x + 19] == 'g' && command[x + 20] == 'u' && command[x + 21] == 'm' && command[x + 22] == 'e' && command[x + 23] == 'n' && command[x + 24] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'c' && command[x + 1] == 'r' && command[x + 2] == 'e' && command[x + 3] == 'a' && command[x + 4] == 't' && command[x + 5] == 'e' && command[x + 6] == ' ' && command[x + 7] == 'i' && command[x + 8] == 'n' && command[x + 9] == 'd' && command[x + 10] == 'u' && command[x + 11] == 'c' && command[x + 12] == 't' && command[x + 13] == 'i' && command[x + 14] == 'v' && command[x + 15] == 'e' && command[x + 16] == ' ' && command[x + 17] == 'a' && command[x + 18] == 'r' && command[x + 19] == 'g' && command[x + 20] == 'u' && command[x + 21] == 'm' && command[x + 22] == 'e' && command[x + 23] == 'n' && command[x + 24] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'f' && command[x + 1] == 'a' && command[x + 2] == 'l' && command[x + 3] == 'l' && command[x + 4] == 'a' && command[x + 5] == 'c' && command[x + 6] == 'y' && command[x + 7] == ' ' && command[x + 8] == 'c' && command[x + 9] == 'h' && command[x + 10] == 'e' && command[x + 11] == 'c' && command[x + 12] == 'k' && command[x + 13] == ' ' && command[x + 14] == 'w' && command[x + 15] == 'o' && command[x + 16] == 'r' && command[x + 17] == 'k' && command[x + 18] == 'i' && command[x + 19] == 'n' && command[x + 20] == 'g' && command[x + 21] == ' ' && command[x + 22] == 'm' && command[x + 23] == 'e' && command[x + 24] == 'm' && command[x + 25] == 'o' && command[x + 26] == 'r' && command[x + 27] == 'y')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'f' && command[x + 1] == 'a' && command[x + 2] == 'l' && command[x + 3] == 'l' && command[x + 4] == 'a' && command[x + 5] == 'c' && command[x + 6] == 'y' && command[x + 7] == ' ' && command[x + 8] == 'c' && command[x + 9] == 'h' && command[x + 10] == 'e' && command[x + 11] == 'c' && command[x + 12] == 'k' && command[x + 13] == ' ' && command[x + 14] == 's' && command[x + 15] == 'i' && command[x + 16] == 'm' && command[x + 17] == 'p' && command[x + 18] == 'l' && command[x + 19] == 'e' && command[x + 20] == ' ' && command[x + 21] == 't' && command[x + 22] == 'e' && command[x + 23] == 'x' && command[x + 24] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'b' && command[x + 1] == 'i' && command[x + 2] == 'a' && command[x + 3] == 's' && command[x + 4] == ' ' && command[x + 5] == 'c' && command[x + 6] == 'h' && command[x + 7] == 'e' && command[x + 8] == 'c' && command[x + 9] == 'k' && command[x + 10] == ' ' && command[x + 11] == 's' && command[x + 12] == 'i' && command[x + 13] == 'm' && command[x + 14] == 'p' && command[x + 15] == 'l' && command[x + 16] == 'e' && command[x + 17] == ' ' && command[x + 18] == 't' && command[x + 19] == 'e' && command[x + 20] == 'x' && command[x + 21] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 't' && command[x + 1] == 'r' && command[x + 2] == 'a' && command[x + 3] == 'n' && command[x + 4] == 's' && command[x + 5] == 'l' && command[x + 6] == 'a' && command[x + 7] == 't' && command[x + 8] == 'e' && command[x + 9] == ' ' && command[x + 10] == 't' && command[x + 11] == 'o' && command[x + 12] == ' ' && command[x + 13] == 'e' && command[x + 14] == 'n' && command[x + 15] == 'g' && command[x + 16] == 'l' && command[x + 17] == 'i' && command[x + 18] == 's' && command[x + 19] == 'h' && command[x + 20] == ' ' && command[x + 21] == 'f' && command[x + 22] == 'r' && command[x + 23] == 'o' && command[x + 24] == 'm' && command[x + 25] == ' ' && command[x + 26] == 'd' && command[x + 27] == 'i' && command[x + 28] == 'a' && command[x + 29] == 'l' && command[x + 30] == 'o' && command[x + 31] == 'g' && command[x + 32] == 'u' && command[x + 33] == 'e')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 't' && command[x + 1] == 'r' && command[x + 2] == 'a' && command[x + 3] == 'n' && command[x + 4] == 's' && command[x + 5] == 'l' && command[x + 6] == 'a' && command[x + 7] == 't' && command[x + 8] == 'e' && command[x + 9] == ' ' && command[x + 10] == 't' && command[x + 11] == 'o' && command[x + 12] == ' ' && command[x + 13] == 'e' && command[x + 14] == 'n' && command[x + 15] == 'g' && command[x + 16] == 'l' && command[x + 17] == 'i' && command[x + 18] == 's' && command[x + 19] == 'h' && command[x + 20] == ' ' && command[x + 21] == 's' && command[x + 22] == 'i' && command[x + 23] == 'm' && command[x + 24] == 'p' && command[x + 25] == 'l' && command[x + 26] == 'e' && command[x + 27] == ' ' && command[x + 28] == 't' && command[x + 29] == 'e' && command[x + 30] == 'x' && command[x + 31] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+        if (command[x] == 'f' && command[x + 1] == 'i' && command[x + 2] == 'n' && command[x + 3] == 'd' && command[x + 4] == ' ' && command[x + 5] == 'o' && command[x + 6] == 'b' && command[x + 7] == 'j' && command[x + 8] == 'e' && command[x + 9] == 'c' && command[x + 10] == 't')
+        {
+            for (int y = x; y <= command.length(); y++)
+            {
+                output += command[y];
+            }
+        }
+    }
+
+    return output;
+}
+
+/**
+ * Converts number words to digits in a given string.
+ *
+ * @param str The input string that may contain number words.
+ * @return A new string with number words replaced by their digit values.
+ */
+std::string _Utilities::convertNumberWords(const std::string& str)
+{
+    std::string result = str;
+    for (const auto& pair : numWordMap)
+    {
+        size_t pos = 0;
+        while ((pos = result.find(pair.first, pos)) != std::string::npos)
+        {
+            result.replace(pos, pair.first.length(), pair.second);
+            pos += pair.second.length();
+        }
+    }
+    return result;
+}
+
+void _Utilities::PlayTone()
+{
+    RtAudio dac;
+
+    RtAudio::StreamParameters params;
+    params.deviceId = dac.getDefaultOutputDevice();
+    params.nChannels = 1; // Mono
+    params.firstChannel = 0;
+    int duration = 500;
+
+    unsigned int bufferFrames = 256;
+    dac.openStream(&params, nullptr, RTAUDIO_FLOAT32, 44100.0f, &bufferFrames, _Utilities::audioCallback);
+
+    dac.startStream();
+
+    //std::this_thread::sleep_for(std::chrono::milliseconds(duration));
+
+    dac.stopStream();
+}
+
+int _Utilities::audioCallback(void *outputBuffer, void *inputBuffer, unsigned int nframes, double streamTime, RtAudioStreamStatus status, void* userdata)
+{
+    float* buffer = (float*)outputBuffer;
+    const float frequency = 1000.0f; // Frequency of the tone
+    const float sampleRate = 48000.0f; // Sample rate
+    const float volume = 0.5f; // Volume
+
+    for (unsigned int i = 0; i < nframes * 2; ++i) {
+        buffer[i] = sin(2.0f * M_PI * frequency * streamTime + (float)i / sampleRate) * volume;
+    }
+
+    return 0; // Return 0 to continue streaming
+}
+
 // Callback function to capture the response data
 size_t _Utilities::WriteCallback(void* contents, size_t size, size_t nmemb, std::string* userp)
 {
@@ -1309,7 +1903,6 @@ size_t _Utilities::WriteCallback(void* contents, size_t size, size_t nmemb, std:
     userp->append(static_cast<char*>(contents), realSize);
     return realSize;
 }
-
 
 string _Utilities::DictionarySpellCheck(string word)
 {
@@ -1343,7 +1936,6 @@ cv::Mat _Utilities::String2Mat(string image_location)
     cv::Mat image = cv::imread(image_location);
     return image;
 }
-
 
 //string _Utilities::fixQuoteFederal(string input)
 //{

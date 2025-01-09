@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -529,9 +529,9 @@ using namespace std;
 // Subtract two time array pointers and return the resulting time pointer array
 long* _Time::TimeSubtract(long* long_arr1, long* long_arr2)
 {
-    long long_arr1_seconds = _Time::ConvertToSeconds(long_arr1[5], long_arr1[4], long_arr1[3], long_arr1[2], long_arr1[1], long_arr1[0]);
-    long long_arr2_seconds = _Time::ConvertToSeconds(long_arr2[5], long_arr2[4], long_arr2[3], long_arr2[2], long_arr2[1], long_arr2[0]);
-    long result = long_arr1_seconds - long_arr2_seconds;
+    long long long_arr1_seconds = _Time::ConvertToSeconds(long_arr1[5], long_arr1[4], long_arr1[3], long_arr1[2], long_arr1[1], long_arr1[0]);
+    long long long_arr2_seconds = _Time::ConvertToSeconds(long_arr2[5], long_arr2[4], long_arr2[3], long_arr2[2], long_arr2[1], long_arr2[0]);
+    long long result = long_arr1_seconds - long_arr2_seconds;
     long* result_arr = _Time::ConvertLongTimeToArr(NULL, NULL, NULL, NULL, NULL, result);
     return result_arr;
 }
@@ -839,9 +839,9 @@ long long _Time::ConvertDateToSeconds(string date)
     return seconds;
 }
 
-long _Time::ConvertToSeconds(long years, long months, long days, long hours, long minutes, long seconds)
+long long _Time::ConvertToSeconds(long years, long months, long days, long hours, long minutes, long seconds)
 {
-    long seconds_return;
+    long long seconds_return;
 
     // Get the number of seconds of the current date
     seconds_return = years * 31536000;
@@ -873,17 +873,34 @@ long _Time::ConvertToSeconds(long years, long months, long days, long hours, lon
 //
 //}
 //
-//string _Time::ConvertLongToDate(long years, long months, long days, long hours, long minutes, long seconds)
-//{
-//
-//}
-//
-//string _Time::ConvertLongArrToDate(long* longArr)
-//{
-//
-//}
 
-long* _Time::ConvertLongTimeToArr(long years, long months, long days, long hours, long minutes, long seconds)
+string _Time::ConvertLongToDate(long years, long months, long days, long hours, long minutes, long seconds)
+{
+    string temp = "";
+    long* long_arr = _Time::ConvertLongTimeToArr(years, months, days, hours, minutes, seconds);
+    temp += to_string(long_arr[3]);
+    temp += "-";
+    temp += to_string(long_arr[4]);
+    temp += "-";
+    temp += to_string(long_arr[5]);
+    temp += "_";
+    temp += to_string(long_arr[2]);
+    temp += "-";
+    temp += to_string(long_arr[1]);
+    temp += "-";
+    temp += to_string(long_arr[0]);
+
+    return temp;
+}
+
+string _Time::ConvertLongArrToDate(long* longArr)
+{
+    string temp = "";
+    //long* long_arr = _Time::ConvertLongTimeToArr(years, months, days, hours, minutes, seconds);
+    return temp;
+}
+
+long* _Time::ConvertLongTimeToArr(long years, long months, long days, long hours, long minutes, long long seconds)
 {
     long* TimeArr = new long[7];
 
