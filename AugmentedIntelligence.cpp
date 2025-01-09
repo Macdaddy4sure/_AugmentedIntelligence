@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -55,12 +55,13 @@
 #include "Speech Commands.hpp"
 #include "Social.hpp"
 #include "Sound.hpp"
-#include "Speaking.hpp"
+#include "Speech.hpp"
 #include "Speech Recognition.hpp"
 #include "Time.hpp"
 #include "Typing.hpp"
 #include "Variables.hpp"
 #include "Vision.hpp"
+#include "Whisper.hpp"
 #include "WikiMedia.hpp"
 #include "Working-Memory.hpp"
 #include "Writing.hpp"
@@ -71,7 +72,8 @@ using namespace std;
 using namespace filesystem;
 
 /*
-    TODO: Create a way to backup and flash all of Short Term Memory
+    TODO: Create a function for converting the long_time array to a date string
+    Create a function converting long times to a date string
 */
 
 // Intelligence According to Psychology For Dummies - Page 110
@@ -128,20 +130,21 @@ bool vision_object_detection_cuda = false;
 bool vision_object_detection_server = false;
 string vision_object_detection_server_hostname = "";
 bool visual_reasoning = false;
+string visual_reasoning_model;
 bool visual_memory = true;
 string vision_memory_directory = "D:/visual_memory";
 string camera1 = "Depstech webcam";
 bool camera1_enabled = true;
 int camera1_fps = 10;
-string camera1_resolution = "3840x2160";
-int camera1_resolution_width = 3840;
-int camera1_resolution_height = 2160;
+string camera1_resolution = "1920x1080";
+int camera1_resolution_width = 1920;
+int camera1_resolution_height = 1080;
 string camera2 = "Depstech Webcam";
 bool camera2_enabled = false;
 int camera2_fps = 10;
-string camera2_resolution = "3840x2160";
-int camera2_resolution_width = 3840;
-int camera2_resolution_height = 2160;
+string camera2_resolution = "1920x1080";
+int camera2_resolution_width = 1920;
+int camera2_resolution_height = 1080;
 bool computer_use = true;
 bool computer_monitor_recognition = true;
 bool reading = true;
@@ -154,9 +157,7 @@ string sound_directory = "D:/sound_memory";
 string sound_codec = "flac";
 string sound_bitrate = "1000";
 string speech_directory = "D:/speech_directory/";
-string microphone1_device_name;
-bool microphone1_enable = true;
-int sound_sample_rate = 48000;
+int sound_sample_rate = 16000;
 int sound_channels = 1;
 int sound_bits_per_sample = 16;
 int sound_recording_interval = 5;
@@ -169,28 +170,25 @@ bool phone_commands = true;
 bool visual_thinking = true;
 bool speech_lie_detection = true;
 string short_term_memory_time = "1000";
-bool sound_memory_enabled = true;
-string tensorflow_model = "C:/_AugmentedIntelligence/tensorflow_models/coco_object_detection/saved_model";
+string tensorflow_model = "C:/_AugmentedIntelligence/tensorflow_models/coco_object_detection2/saved_model/";
 string tensorflow_labels = "C:/_AugmentedIntelligence/tensorflow_models/coco_object_detection/coco.names";
 bool vision_object_detection_remote_enabled = false;
-//bool microphone1_enabled = true;
-//bool microphone1_enable = true;
-//string microphone1_device = "Microphone (Depstech webcam MIC)";
-//string microphone1_device_name = "Microphone (Depstech webcam MIC)";
-//bool microphone2_enabled = false;
-//string microphone2_device_name = "";
+bool microphone1_enabled = true;
+string microphone1_device_name = "Microphone (Logitech USB Microphone)";
+int microphone1_device_id = 135;
+bool microphone2_enabled = true;
+string microphone2_device_name = "Microphone (HyperX SoloCast)";
+int microphone2_device_id = 136;
 bool computer_owned_recognition = "";
 string ffmpeg_location = "";
-//bool microphone2_enable = false;
-//string microphone2_device = "";
 bool sound_reasoning = false;
 bool reading_reasoning = true;
-bool speaking_reasoning = false;
+bool speech_reasoning = false;
 string working_memory_location = "D:/working_memory/";
 string short_term_memory_location = "D:/short_term_memory/";
 string long_term_memory_location = "D:/long_term_memory/";
 bool news_watching = false;
-bool actions_watching = false;
+//bool action_commands = false;
 bool action_detection = false;
 bool needs_detection = false;
 bool navigation_detection = false;
@@ -209,7 +207,7 @@ bool listening_dictionary_checking = false;
 
 // FTP Settings
 bool ftp_enabled = true;
-string ftp_hostname = "ftp://macdaddy4sure.com";
+string ftp_hostname = "ftp://macdaddy4sure.ai";
 string ftp_username = "Tyler";
 string ftp_password = "Bellflower90706%";
 string ftp_vision_directory = "/MARS_AI/vision_memory/";
@@ -238,33 +236,36 @@ string mysql_destination_database_words = "wikipedia_pos_tagged_words";
 string mysql_destination_database_sentences = "wikipedia_pos_tagged_sentences";
 
 // Remote MySQL Settings
-string Remote_mysql_hostname = "localhost";
-string Remote_mysql_username = "root";
-string Remote_mysql_password = "Bellflower90706%";
-string Remote_mysql_vision_database = "vision";
-string Remote_mysql_sound_database = "sound";
-string Remote_mysql_speech_database = "speech";
-string Remote_mysql_working_memory_database = "working_memory";
-string Remote_mysql_short_term_memory_database = "short_term_memory";
-string Remote_mysql_long_term_memory_database = "long_term_memory";
-string Remote_mysql_dictionary_database = "dictionary";
-string Remote_mysql_destination_database_words = "wikipedia_pos_tagged_words";
-string Remote_mysql_destination_database_sentences = "wikipedia_pos_tagged_sentences";
+string remote_mysql_hostname = "localhost";
+string remote_mysql_username = "root";
+string remote_mysql_password = "Bellflower90706%";
+string remote_mysql_vision_database = "vision";
+string remote_mysql_sound_database = "sound";
+string remote_mysql_speech_database = "speech";
+string remote_mysql_working_memory_database = "working_memory";
+string remote_mysql_short_term_memory_database = "short_term_memory";
+string remote_mysql_long_term_memory_database = "long_term_memory";
+string remote_mysql_dictionary_database = "dictionary";
+string remote_mysql_destination_database_words = "wikipedia_pos_tagged_words";
+string remote_mysql_destination_database_sentences = "wikipedia_pos_tagged_sentences";
 
 // LLM Server
 string speech_commands_activation = "machina";
-string speech_commands_terminator = "bellum";
+string speech_commands_terminator = "confractus";
 bool llm_server_enabled = true;
 string llm_hostname = "http://localhost:11436/api/generate";
 string llm_username = "Tyler";
 string llm_password = "Anaheim92801$";
-string llm_model = "";
+string llm_model = "llama3.3:latest";
 
 // Whisper Server Settings
 bool whisper_server_enabled = true;
 string whisper_hostname = "http://localhost:4999/transcribe";
 string whisper_username = "Tyler";
 string whisper_password = "Anaheim92801$";
+string whisper_model = "C:/_AugmentedIntelligence/whisper_models/ggml-base.bin";
+int whisper_prompt_seconds = 7;
+int whisper_command_seconds = 10;
 //int mic_sample_rate = 48000;
 //int mic_num_channels = 2;
 //int mic_bits_per_sample = 16;
@@ -479,10 +480,10 @@ int main()
             cout << "Reading Reasoning: True" << endl;
         else
             cout << "Reading Reasoning: False" << endl;
-        if (speaking_reasoning)
-            cout << "Speaking Reasoning: True" << endl;
+        if (speech_reasoning)
+            cout << "Speech Reasoning: True" << endl;
         else
-            cout << "Speaking Reasoning: False" << endl;
+            cout << "Speech Reasoning: False" << endl;
         if (camera1_enabled)
             cout << "Camera 1 Enabled: True" << endl;
         else
@@ -491,14 +492,14 @@ int main()
             cout << "Camera 2 Enabled: True" << endl;
         else
             cout << "Camera 2 Enabled: False" << endl;
-        if (microphone1_enable)
+        if (microphone1_enabled)
             cout << "Microphone 1 Enabled: True" << endl;
         else
             cout << "Microphone 1 Enabled: False" << endl;
-        //if (microphone2_enable)
-        //    cout << "Microphone 2 Enabled: True" << endl;
-        //else
-        //    cout << "Microphone 2 Enabled: False" << endl;
+        if (microphone2_enabled)
+            cout << "Microphone 2 Enabled: True" << endl;
+        else
+            cout << "Microphone 2 Enabled: False" << endl;
         if (speech_recognition)
             cout << "Speech Recognition: True" << endl;
         else
@@ -565,6 +566,7 @@ int main()
         cout << "Tensor Accelleration Remote Cores: " << tensor_accelleration_remote_cores << endl;
         cout << "Tensorflow Object Detection Model: " << tensorflow_model << endl;
         cout << "Tensorflow Object Detection Labels: " << tensorflow_labels << endl;
+        cout << "Whisper Model: " << whisper_model << endl;
         cout << "FFMpeg Location: " << ffmpeg_location << endl;
         cout << "Camera 1 Device: " << camera1 << endl;
         cout << "Camera 1 FPS: " << camera1_fps << endl;
@@ -573,7 +575,9 @@ int main()
         cout << "Camera 2 FPS: " << camera2_fps << endl;
         cout << "Camera 2 Resolution: " << camera2_resolution << endl;
         cout << "Microphone 1 Device: " << microphone1_device_name << endl;
-        //cout << "Microphone 2 Device: " << microphone2_device_name << endl;
+        cout << "Microphone 1 Device ID: " << microphone1_device_id << endl;
+        cout << "Microphone 2 Device: " << microphone2_device_name << endl;
+        cout << "Microphone 2 Device ID: " << microphone2_device_id << endl;
         cout << "Microphone Codec: " << sound_codec << endl;
         cout << "Microphone Bitrate: " << sound_bitrate << " Kb/s" << endl;
         cout << "Microphone Sample Rate: " << sound_sample_rate << " Hz" << endl;
@@ -595,10 +599,10 @@ int main()
             cout << "News Watching: True" << endl;
         else
             cout << "News Watching: False" << endl;
-        if (actions_watching)
-            cout << "Actions Watching: True" << endl;
+        if (action_commands)
+            cout << "Action Commands: True" << endl;
         else
-            cout << "Actions Watching: False" << endl;
+            cout << "Action Commands: False" << endl;
         if (needs_detection)
             cout << "Needs Detection: True" << endl;
         else
@@ -689,14 +693,19 @@ void _AI::InitThreads()
         std::thread vision(_Vision::Vision);
         vision.std::thread::detach();
     }
-    if (sound_memory_enabled)
+    if (sound_memory)
     {
         // Debug
         //_Sound::Sound();
 
         // Actual implementation
-        std::thread sound(_Sound::Sound);
+        thread sound(_Sound::Sound);
         sound.std::thread::detach();
+    }
+    if (speech_commands)
+    {
+        std::thread whisper_asr(_Whisper::Whisper);
+        whisper_asr.std::thread::detach();
     }
     if (listening_fallacy_checking)
     {
@@ -725,11 +734,6 @@ void _AI::InitThreads()
     if (reading)
     {
 
-    }
-    if (speech_commands)
-    {
-        //std::thread speech_commands(_SpeechCommands::SpeechCommands);
-        //speech_commands.std::thread::detach();
     }
     if (ftp_enabled)
     {

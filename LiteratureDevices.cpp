@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -1070,7 +1070,7 @@ bool _LiteratureDevices::isSituationalIrony(string text)
 bool _LiteratureDevices::isSoliloquy(string text)
 {
     string model = "llama3";
-    string device_definition = "The act of a character speaking to themselves so as to reveal their thoughts to the audience.";
+    string device_definition = "The act of a character Speech to themselves so as to reveal their thoughts to the audience.";
     string prompt = "Check if the following literature device matches the following and limit the response to yes or no: " + device_definition + ". " + text;
     string response = _LLM::OllamaAPI(model, prompt, "NULL");
     response = _Parsers::LLM::LLama3Parse(response);
