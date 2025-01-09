@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -564,6 +564,38 @@
 #include <helper_cuda.h>
 #include <sstream>
 #include <algorithm>
+#include <common.h>
+#include <common-sdl.h>
+#include <whisper.h>
+#include <ggml-cpu.h>
+#include <ggml.h>
+#include <ggml-alloc.h>
+#include <ggml-backend.h>
+#include <grammar-parser.h>
+//#include <SDL3/SDL.h>
+//#include <SDL3/SDL_audio.h>
+//#include <SDL3/SDL_hints.h>
+//#include <SDL3/SDL_atomic.h>
+#include <RtAudio.h>
+#include <dr_wav.h>
+#include <codecvt>
+#include <locale>
+#include <fvad.h>
+#include <regex>
+#include <random>
+#include <functional>
+#include <utility>
+#include <stdexcept>
+#include <exception>
+#include <cstdint>
+#include <cwchar>
+#include <map>
+#include <set>
+#include <cstdarg>
+#include <cstring>
+#include <cmath>
+#include <cassert>
+#include <atomic>
 #include <cctype>
 #include <chrono>
 #include <cmath>
@@ -639,6 +671,10 @@ extern "C" {
 #include <curl/curlver.h>
 #include <curl/easy.h>
 #include <curl/system.h>
+#include <libavformat/avformat.h>
+#include <libavcodec/avcodec.h>
+#include <libswscale/swscale.h>
+#include <stb_image.h>
 }
 
 #pragma comment(lib, "avformat.lib")
