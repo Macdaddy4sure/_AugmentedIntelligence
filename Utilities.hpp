@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -71,6 +71,14 @@ public:
     static int getDatatypeUsed(string datatype);
     static string base64_encode(const string& input);
     static cv::Mat String2Mat(string image_location);
+    static string ParsePrompt(string input);
+    static bool PromptRecognize(string prompt);
+    static bool CommandTerminatorRecognize(const string command);
+    static string CommandParse(const string command);
+    static std::string convertNumberWords(const std::string& str);
+    static void PlayTone();
+    static int audioCallback(void* outputBuffer, void* inputBuffer, unsigned int framesPerBuffer, double streamTime, RtAudioStreamStatus status, void* userdata);
+    static string ParseTranscription(string input);
     //static void resize_image_max_len(const cv::Mat& image, cv::Mat& resized_image, float& ratio_h, float& ratio_w, int max_side_len);
     //static void resize_image_fix_height(const cv::Mat& image, cv::Mat& resized_image, float& ratio, int fixed_height);
     //static void pad_image_width(const cv::Mat& image, cv::Mat& padded_image, int target_width);

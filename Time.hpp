@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -34,15 +34,15 @@ public:
     static int GetMinutes(string date);
     static int GetSeconds(string date);
     static long long ConvertDateToSeconds(string date);
-    static long ConvertToSeconds(long years, long months, long days, long hours, long minutes, long seconds);
-    static long* ConvertLongTimeToArr(long years, long months, long days, long hours, long minutes, long seconds);
+    static long long ConvertToSeconds(long years, long months, long days, long hours, long minutes, long seconds);
+    static long* ConvertLongTimeToArr(long years, long months, long days, long hours, long minutes, long long seconds);
     static int GetDaysMonth(int year, int month);
     static bool isLeapYear(int year);
     //static string* GetDurationTimeDate(string date_begin, string date_end);
     //static long* GetDurationLongs(string date_begin, string date_end);
     //static string ConvertSecondsToDate(long long seconds);
-    //static string ConvertLongToDate(long years, long months, long days, long hours, long minutes, long seconds);
-    //static string ConvertLongArrToDate(long long* longArrDate);
+    static string ConvertLongToDate(long years, long months, long days, long hours, long minutes, long seconds);
+    static string ConvertLongArrToDate(long* longArr);
     //static long* GetDurationToLongArr(string date_begin, string date_end);
 };
 

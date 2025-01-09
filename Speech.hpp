@@ -20,13 +20,10 @@
 
 using namespace std;
 
-class _Photography
+class _Speech
 {
 public:
-
-    class Terms
-    {
-    public:
-
-    };
+    static string SpeechQueueWord(string word);
+    static string SpeechQueueSentence(string* word);
+    // Text to speech engine?
 };

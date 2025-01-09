@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -158,7 +158,9 @@ extern bool vision_object_detection_server;
 extern string vision_object_detection_server_hostname;
 extern string tensorflow_model;
 extern string tensorflow_labels;
+extern string whisper_model;
 extern bool visual_reasoning;
+extern string visual_reasoning_model;
 extern bool visual_memory;
 extern string vision_memory_directory;
 extern string camera1;
@@ -191,7 +193,7 @@ extern string sound_directory;
 extern string sound_codec;
 extern string sound_bitrate;
 extern string speech_directory;
-extern bool microphone1_enable;
+extern bool microphone1_enabled;
 extern string microphone1_device_name;
 extern int sound_sample_rate;
 extern int sound_channels;
@@ -200,28 +202,30 @@ extern bool speech_recognition_enable;
 extern int sound_recording_interval;
 extern bool speech_lie_detection;
 extern string short_term_memory_time;
-extern bool sound_memory_enabled;
+extern bool sound_memory;
 //extern string speech_activation_keyword;
 //extern string speech_terminator_keyword;
 extern bool vision_object_detection_remote_enabled;
-//extern bool microphone1_enabled;
-//extern string microphone1_device_name;
-//extern bool microphone2_enabled;
-//extern string microphone2_device_name;
+extern bool microphone1_enabledd;
+extern string microphone1_device_name;
+extern int microphone1_device_id;
+extern bool microphone2_enabled;
+extern string microphone2_device_name;
+extern int microphone2_device_id;
 extern bool computer_owned_recognition;
 extern string ffmpeg_location;
-//extern bool microphone1_enable;
+//extern bool microphone1_enabled;
 //extern string microphone1_device;
 //extern bool microphone2_enable;
 //extern string microphone2_device;
 extern bool sound_reasoning;
 extern bool reading_reasoning;
-extern bool speaking_reasoning;
+extern bool speech_reasoning;
 extern string working_memory_location;
 extern string short_term_memory_location;
 extern string long_term_memory_location;
 extern bool news_watching;
-extern bool actions_watching;
+extern bool action_commands;
 extern bool action_detection;
 extern bool needs_detection;
 extern bool navigation_detection;
@@ -268,11 +272,27 @@ extern string mysql_dictionary_database;
 extern string mysql_destination_database_words;
 extern string mysql_destination_database_sentences;
 
+// Remote MySQL Settings
+extern string remote_mysql_hostname;
+extern string remote_mysql_username;
+extern string remote_mysql_password;
+extern string remote_mysql_vision_database;
+extern string remote_mysql_sound_database;
+extern string remote_mysql_speech_database;
+extern string remote_mysql_working_memory_database;
+extern string remote_mysql_long_term_memory_database;
+extern string remote_mysql_short_term_memory_database;
+extern string remote_mysql_dictionary_database;
+extern string remote_mysql_destination_database_words;
+extern string remote_mysql_destination_database_sentences;
+
 // Whisper Server Settings
 extern bool whisper_server_enabled;
 extern string whisper_hostname;
 extern string whisper_username;
 extern string whisper_password;
+extern int whisper_prompt_seconds;
+extern int whisper_command_seconds;
 //extern int mic_sample_rate;
 //extern int mic_num_channels;
 //extern int mic_bits_per_sample;
@@ -287,3 +307,7 @@ extern string llm_password;
 
 // Driving Settings
 extern bool driving_enabled;
+extern float driving_head_position;
+extern float driving_left_mirror;
+extern float driving_right_mirror;
+extern float driving_center_mirror;

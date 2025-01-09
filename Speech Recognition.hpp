@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -42,6 +42,7 @@
  */
 
 #include "AugmentedIntelligence.hpp"
+#include "Whisper.hpp"
 
 using namespace std;
 
@@ -50,5 +51,8 @@ class _SpeechRecognition
 public:
     static string SpeechRecognition(string wav_file);
     //static string RecognizeFile(string file);
+    static string SpeechRecognition2(vector<float> pcmf32_cur);
+    static std::string transcribe(whisper_context* ctx, const whisper_params& params, const std::vector<float>& pcmf32, const std::string& grammar_rule, float& logprob_min, float& logprob_sum, int& n_tokens, int64_t& t_ms);
+    static void get_audio(int seconds);
 };
 

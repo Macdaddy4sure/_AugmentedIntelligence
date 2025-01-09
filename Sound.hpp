@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -20,21 +20,28 @@
 
 using namespace std;
 
+// command-line parameters
 class _Sound
 {
 public:
     static void Sound();
+    static int Sound2();
     static void MySQL_Sound(string filename, string current_time, string transcription, string sound_recognition, string image_hash);
     //static void SpeechCommand(string* words);
     static void RecallSoundMemory(int search_years, int search_months, int search_days, int search_hours, int search_minutes, int search_seconds, int duration_years, int duration_months, int duration_days, int duration_hours, int duration_minutes, int duration_seconds, string& encoded_filename, string& transcription, string& sound_recognition);
     static string CombineWAV(string* wav_files, string sound_directory);
     static void WriteWAVHeader(std::ofstream& file, int sampleRate, int bitsPerSample, int numChannels, uint32_t numSamples);
+    static int audioCallback(void* outputBuffer, void* inputBuffer, unsigned int nBufferFrames, double streamTime, RtAudioStreamStatus status, void* userdata);
     static int RecordCallback(const void* inputBuffer, void* outputBuffer, unsigned long framesPerBuffer, const PaStreamCallbackTimeInfo* timeInfo, PaStreamCallbackFlags statusFlags, void* userData);
     static string SoundRecognition(string wav_location);
     //static void RunSession(TF_Session* session, TF_Graph* graph, TF_Status* status, TF_SessionOptions* options, TF_Tensor* waveform_tensor, string labelsPath);
     static TF_Tensor* ImportWaveformAsTensor(const vector<float>& audioSamples, int sampleRate);
     static vector<float> loadWavFile(string filename);
     static std::string* LoadClassLabels(const std::string& filePath);
+    static void get_audio(int seconds);
+
+    vector<float> pcmf32_cur;
+    int numSamples;
 };
 
 // WAV Header structure

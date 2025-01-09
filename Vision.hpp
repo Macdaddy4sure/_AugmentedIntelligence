@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2024 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -48,6 +48,12 @@ public:
     static vector<vector<string>> ObjectDetectionBalls(Mat frame);
     static vector<vector<string>> ObjectDetectionTrash(Mat frame);
     static vector<vector<string>> ObjectDetectionUnknown(Mat frame);
+    static void OpenImage(string image_location, int duration_milliseconds);
+    static void OpenImage(string image_location);
+    static void OpenImages(string* frames, int duration_milliseconds);
+    static void EncodeStillFrames(string start_date, int duration_seconds);
+    static vector<string> GetTimeStillFrames(long long long_time, int duration_seconds);
+    static string EncodeVideo(const std::vector<std::string>& imagePaths, string& audioPath, string& outputFilePath);
     //static string** ObjectDetection(Mat frame);
     static cv::Mat PreprocessImage(const std::string& imagePath, int targetWidth, int targetHeight);
     static TF_Tensor* MatToTensor(const cv::Mat& frame);
@@ -56,7 +62,6 @@ public:
     static std::vector<float> ExtractScores(TF_Tensor* scoresTensor);
     static std::vector<int> ExtractClassIds(TF_Tensor* classesTensor);
     static std::string* LoadLabels(const std::string& labelFilePath);
-
 
 private:
     //static void TextDetection();
