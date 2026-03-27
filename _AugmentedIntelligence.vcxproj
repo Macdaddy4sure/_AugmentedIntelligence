@@ -1,0 +1,705 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>17.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{4e733278-dff6-4755-8b44-ff55bb75ce6b}</ProjectGuid>
+    <RootNamespace>AugmentedIntelligence</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>false</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+    <Import Project="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v13.0\extras\visual_studio_integration\MSBuildExtensions\CUDA 13.0.props" />
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
+      <AdditionalIncludeDirectories>C:\Program Files\MySQL\MySQL Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.5\include;C:\Program Files\NVIDIA GPU Computing Toolkit\cuda-samples\Common;D:\_AugmentedIntelligence\_src\7\_AugmentedIntelligence_v4.5\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Connector C++ 9.0\lib64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn8-static.lib;archive.lib;bz2.lib;gif.lib;iconv.lib;charset.lib;jpeg.lib;libpng16.lib;libwebpmux.lib;libxml2.lib;lz4.lib;lzma.lib;openjp2.lib;libssl.lib;libcrypto.lib;libmysql.lib;leptonica-1.81.1.lib;tesseract52.lib;tiff.lib;turbojpeg.lib;webp.lib;webpdecoder.lib;webpdemux.lib;zlib.lib;libcurl.lib;Ws2_32.lib;crypt32.lib;Wldap32.lib;Crypt32.lib;opencv_world490.lib;opencv_world490d.lib;tensorflow.lib;sndfile.lib;portaudio.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>false</IntrinsicFunctions>
+      <SDLCheck>false</SDLCheck>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;_SILENCE_ALL_CXX23_DEPRECATION_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>C:\Program Files\MySQL\MySQL Connector C++ 8.0\include;C:\Program Files\MySQL\MySQL Server 8.0\include;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.5\include;C:\Program Files\NVIDIA GPU Computing Toolkit\cuda-samples\Common;D:\_AugmentedIntelligence\_src\7\_AugmentedIntelligence_v4.5 - LLM2 - Typed Commands\include;D:\_AugmentedIntelligence\_src\7\_AugmentedIntelligence_v4.5 - LLM2 - Typed Commands\include\bazel-tensorflow\bazel-out\x64_windows-opt\bin\tensorflow\include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+      <LanguageStandard_C>stdclatest</LanguageStandard_C>
+      <Optimization>Disabled</Optimization>
+      <InlineFunctionExpansion>Disabled</InlineFunctionExpansion>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>C:\Program Files\MySQL\MySQL Connector C++ 9.0\lib64;E:\vcpkg\vcpkg\installed\x64-windows\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>mysqlcppconn8-static.lib;archive.lib;bz2.lib;gif.lib;iconv.lib;charset.lib;jpeg.lib;libpng16.lib;libwebpmux.lib;libxml2.lib;lz4.lib;lzma.lib;openjp2.lib;libssl.lib;libcrypto.lib;libmysql.lib;python312.lib;lua.lib;leptonica-1.81.1.lib;tesseract55.lib;tiff.lib;turbojpeg.lib;webp.lib;webpdecoder.lib;webpdemux.lib;zlib.lib;libcurl.lib;Ws2_32.lib;crypt32.lib;Wldap32.lib;Crypt32.lib;opencv_world490.lib;opencv_world490d.lib;tensorflow.lib;sndfile.lib;avcodec.lib;avdevice.lib;avfilter.lib;avformat.lib;avutil.lib;swresample.lib;swscale.lib;ggml.lib;ggml-base.lib;ggml-cpu.lib;quirc.lib;whisper.lib;common.lib;rtaudio.lib;boost_python311-vc143-mt-x64-1_86.lib;lua54.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <StackReserveSize>104857600</StackReserveSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="Abuse.hpp" />
+    <ClInclude Include="Acting.hpp" />
+    <ClInclude Include="Actions.hpp" />
+    <ClInclude Include="AdobeAcrobat.hpp" />
+    <ClInclude Include="AdobeAfterEffects.hpp" />
+    <ClInclude Include="AdobeAnimate.hpp" />
+    <ClInclude Include="AdobeAudition.hpp" />
+    <ClInclude Include="AdobeBridge.hpp" />
+    <ClInclude Include="AdobeDreamweaver.hpp" />
+    <ClInclude Include="AdobeFlash.hpp" />
+    <ClInclude Include="AdobeIllustrator.hpp" />
+    <ClInclude Include="AdobeInDesign.hpp" />
+    <ClInclude Include="AdobeLightroom.hpp" />
+    <ClInclude Include="AdobeMediaEncoder.hpp" />
+    <ClInclude Include="AdobePhotoshop.hpp" />
+    <ClInclude Include="AdobePremierePro.hpp" />
+    <ClInclude Include="AerospaceEngineering.hpp" />
+    <ClInclude Include="Algebra.hpp" />
+    <ClInclude Include="Analysis.hpp" />
+    <ClInclude Include="Argument.hpp" />
+    <ClInclude Include="ArtificialIntelligence.hpp" />
+    <ClInclude Include="Attraction.hpp" />
+    <ClInclude Include="AugmentedIntelligence.hpp" />
+    <ClInclude Include="AVX-512.hpp" />
+    <ClInclude Include="Awareness.hpp" />
+    <ClInclude Include="Axioms.hpp" />
+    <ClInclude Include="Ball.hpp" />
+    <ClInclude Include="Baseball.hpp" />
+    <ClInclude Include="Bash.hpp" />
+    <ClInclude Include="Basketball.hpp" />
+    <ClInclude Include="Batch.hpp" />
+    <ClInclude Include="Beauty.hpp" />
+    <ClInclude Include="BeingState.hpp" />
+    <ClInclude Include="Bias.hpp" />
+    <ClInclude Include="Bicycle.hpp" />
+    <ClInclude Include="Billiards.hpp" />
+    <ClInclude Include="Biology.hpp" />
+    <ClInclude Include="Botany.hpp" />
+    <ClInclude Include="Business.hpp" />
+    <ClInclude Include="Button.hpp" />
+    <ClInclude Include="Buttons.hpp" />
+    <ClInclude Include="C++.hpp" />
+    <ClInclude Include="Calculus.hpp" />
+    <ClInclude Include="Calendar.hpp" />
+    <ClInclude Include="Camping.hpp" />
+    <ClInclude Include="Chemistry.hpp" />
+    <ClInclude Include="Chess.hpp" />
+    <ClInclude Include="Chores.hpp" />
+    <ClInclude Include="Citations.hpp" />
+    <ClInclude Include="CivilEngineering.hpp" />
+    <ClInclude Include="College.hpp" />
+    <ClInclude Include="CollegeAlgebra.hpp" />
+    <ClInclude Include="ComputationalLinguistics.hpp" />
+    <ClInclude Include="ComputerHardware.hpp" />
+    <ClInclude Include="Computers.hpp" />
+    <ClInclude Include="ComputerScience.hpp" />
+    <ClInclude Include="Cooking.hpp" />
+    <ClInclude Include="Coping.hpp" />
+    <ClInclude Include="Corrections.hpp" />
+    <ClInclude Include="Counting.hpp" />
+    <ClInclude Include="Cryptography.hpp" />
+    <ClInclude Include="CUDA.hpp" />
+    <ClInclude Include="Dance.hpp" />
+    <ClInclude Include="Darts.hpp" />
+    <ClInclude Include="Database Functions.hpp" />
+    <ClInclude Include="Dating.hpp" />
+    <ClInclude Include="Defense.hpp" />
+    <ClInclude Include="DifferentialEquations.hpp" />
+    <ClInclude Include="Directions.hpp" />
+    <ClInclude Include="Directives.hpp" />
+    <ClInclude Include="Directories.hpp" />
+    <ClInclude Include="Dislikes.hpp" />
+    <ClInclude Include="Drawing.hpp" />
+    <ClInclude Include="DrinkingGames.hpp" />
+    <ClInclude Include="Driving.hpp" />
+    <ClInclude Include="Eating.hpp" />
+    <ClInclude Include="Ecology.hpp" />
+    <ClInclude Include="Economics.hpp" />
+    <ClInclude Include="EKG.hpp" />
+    <ClInclude Include="ElectricalEngineering.hpp" />
+    <ClInclude Include="Empathy.hpp" />
+    <ClInclude Include="Encryption.hpp" />
+    <ClInclude Include="Engineering.hpp" />
+    <ClInclude Include="Ethics.hpp" />
+    <ClInclude Include="Executive Functions.hpp" />
+    <ClInclude Include="Fallacy.hpp" />
+    <ClInclude Include="Farming.hpp" />
+    <ClInclude Include="Feel.hpp" />
+    <ClInclude Include="FFMpeg.hpp" />
+    <ClInclude Include="Finance.hpp" />
+    <ClInclude Include="Football.hpp" />
+    <ClInclude Include="FTPClient.hpp" />
+    <ClInclude Include="FTPSettings.hpp" />
+    <ClInclude Include="GameTheory.hpp" />
+    <ClInclude Include="Gaming.hpp" />
+    <ClInclude Include="Generate.hpp" />
+    <ClInclude Include="Geography.hpp" />
+    <ClInclude Include="Geology.hpp" />
+    <ClInclude Include="Geometry.hpp" />
+    <ClInclude Include="Goals.hpp" />
+    <ClInclude Include="Golf.hpp" />
+    <ClInclude Include="Google.hpp" />
+    <ClInclude Include="grammar-parser.hpp" />
+    <ClInclude Include="Grammar.hpp" />
+    <ClInclude Include="GraphTheory.hpp" />
+    <ClInclude Include="Hands.hpp" />
+    <ClInclude Include="Heuristics.hpp" />
+    <ClInclude Include="HighSchool.hpp" />
+    <ClInclude Include="History.hpp" />
+    <ClInclude Include="Home Database.hpp" />
+    <ClInclude Include="How.hpp" />
+    <ClInclude Include="Humor.hpp" />
+    <ClInclude Include="Hunting.hpp" />
+    <ClInclude Include="Instinct.hpp" />
+    <ClInclude Include="Internet.hpp" />
+    <ClInclude Include="Intimacy.hpp" />
+    <ClInclude Include="Introspection.hpp" />
+    <ClInclude Include="Intuition.hpp" />
+    <ClInclude Include="Java.hpp" />
+    <ClInclude Include="Keyboard.hpp" />
+    <ClInclude Include="Kinesthetics.hpp" />
+    <ClInclude Include="LabelSemantics.hpp" />
+    <ClInclude Include="Large Language Models.hpp" />
+    <ClInclude Include="Law.hpp" />
+    <ClInclude Include="Leadership.hpp" />
+    <ClInclude Include="Learning.hpp" />
+    <ClInclude Include="Lecture.hpp" />
+    <ClInclude Include="Likes.hpp" />
+    <ClInclude Include="LinearAlgebra.hpp" />
+    <ClInclude Include="Listening.hpp" />
+    <ClInclude Include="Listing.hpp" />
+    <ClInclude Include="LiteratureDevices.hpp" />
+    <ClInclude Include="Logic.hpp" />
+    <ClInclude Include="Long-Term Memory.hpp" />
+    <ClInclude Include="Marijuana.hpp" />
+    <ClInclude Include="Marketing.hpp" />
+    <ClInclude Include="Mathematics.hpp" />
+    <ClInclude Include="Mating.hpp" />
+    <ClInclude Include="MechanicalEngineering.hpp" />
+    <ClInclude Include="Medicine.hpp" />
+    <ClInclude Include="MicrosoftAccess.hpp" />
+    <ClInclude Include="MicrosoftExcel.hpp" />
+    <ClInclude Include="MicrosoftOneNote.hpp" />
+    <ClInclude Include="MicrosoftOutlook.hpp" />
+    <ClInclude Include="MicrosoftPowerpoint.hpp" />
+    <ClInclude Include="MicrosoftWord.hpp" />
+    <ClInclude Include="Mind.hpp" />
+    <ClInclude Include="MineCraft.hpp" />
+    <ClInclude Include="Modes.hpp" />
+    <ClInclude Include="Mods.hpp" />
+    <ClInclude Include="Money.hpp" />
+    <ClInclude Include="Morality.hpp" />
+    <ClInclude Include="Motorcycle.hpp" />
+    <ClInclude Include="MountainBiking.hpp" />
+    <ClInclude Include="Mouse.hpp" />
+    <ClInclude Include="Music.hpp" />
+    <ClInclude Include="MySQL Settings.hpp" />
+    <ClInclude Include="Nautical.hpp" />
+    <ClInclude Include="Navigation.hpp" />
+    <ClInclude Include="Needs.hpp" />
+    <ClInclude Include="Network.hpp" />
+    <ClInclude Include="Networking.hpp" />
+    <ClInclude Include="NetworkingClient.hpp" />
+    <ClInclude Include="NetworkingServer.hpp" />
+    <ClInclude Include="NeuraLink.hpp" />
+    <ClInclude Include="Neuroanatomy.hpp" />
+    <ClInclude Include="NewWords.hpp" />
+    <ClInclude Include="NLP.hpp" />
+    <ClInclude Include="NLU.hpp" />
+    <ClInclude Include="NumberTheory.hpp" />
+    <ClInclude Include="Objections.hpp" />
+    <ClInclude Include="Objective.hpp" />
+    <ClInclude Include="Opera.hpp" />
+    <ClInclude Include="Operations.hpp" />
+    <ClInclude Include="Paintball.hpp" />
+    <ClInclude Include="Parenting.hpp" />
+    <ClInclude Include="Parsers.hpp" />
+    <ClInclude Include="Passion.hpp" />
+    <ClInclude Include="Passwords.hpp" />
+    <ClInclude Include="Pathfinding.hpp" />
+    <ClInclude Include="Pattern Recognition.hpp" />
+    <ClInclude Include="Perception.hpp" />
+    <ClInclude Include="PersonalCare.hpp" />
+    <ClInclude Include="Personality.hpp" />
+    <ClInclude Include="Philosophy.hpp" />
+    <ClInclude Include="Photography.hpp" />
+    <ClInclude Include="Physics.hpp" />
+    <ClInclude Include="Pinball.hpp" />
+    <ClInclude Include="PingPong.hpp" />
+    <ClInclude Include="Planning.hpp" />
+    <ClInclude Include="Play.hpp" />
+    <ClInclude Include="Poetry.hpp" />
+    <ClInclude Include="Poker.hpp" />
+    <ClInclude Include="PoliticalScience.hpp" />
+    <ClInclude Include="Politics.hpp" />
+    <ClInclude Include="Prediction.hpp" />
+    <ClInclude Include="Pride.hpp" />
+    <ClInclude Include="Probability.hpp" />
+    <ClInclude Include="ProbabilityAndStatistics.hpp" />
+    <ClInclude Include="ProblemSolving.hpp" />
+    <ClInclude Include="Programming.hpp" />
+    <ClInclude Include="Property.hpp" />
+    <ClInclude Include="Psychiatry.hpp" />
+    <ClInclude Include="Psychology.hpp" />
+    <ClInclude Include="Python.hpp" />
+    <ClInclude Include="QA.hpp" />
+    <ClInclude Include="Qualitative Reasoning.hpp" />
+    <ClInclude Include="Quantitative Reasoning.hpp" />
+    <ClInclude Include="Questions.hpp" />
+    <ClInclude Include="Quilting.hpp" />
+    <ClInclude Include="Reading.hpp" />
+    <ClInclude Include="Reason.hpp" />
+    <ClInclude Include="Recycle.hpp" />
+    <ClInclude Include="Reference.hpp" />
+    <ClInclude Include="RemindersCool.hpp" />
+    <ClInclude Include="Rhetoric.hpp" />
+    <ClInclude Include="Rule.hpp" />
+    <ClInclude Include="Running.hpp" />
+    <ClInclude Include="Salesmanship.hpp" />
+    <ClInclude Include="Scrapers.hpp" />
+    <ClInclude Include="ScubaDiving.hpp" />
+    <ClInclude Include="Sculpting.hpp" />
+    <ClInclude Include="Semantics.hpp" />
+    <ClInclude Include="Server Functions.hpp" />
+    <ClInclude Include="Settings.hpp" />
+    <ClInclude Include="Sewing.hpp" />
+    <ClInclude Include="Short-Term Memory.hpp" />
+    <ClInclude Include="SignificantOther.hpp" />
+    <ClInclude Include="Skate.hpp" />
+    <ClInclude Include="Sleep.hpp" />
+    <ClInclude Include="Smart Phone.hpp" />
+    <ClInclude Include="Smell.hpp" />
+    <ClInclude Include="Soccer.hpp" />
+    <ClInclude Include="Social.hpp" />
+    <ClInclude Include="Sound.hpp" />
+    <ClInclude Include="Speech.hpp" />
+    <ClInclude Include="Speech Commands.hpp" />
+    <ClInclude Include="Speech Recognition.hpp" />
+    <ClInclude Include="SpeechSynthesis.hpp" />
+    <ClInclude Include="Sports.hpp" />
+    <ClInclude Include="Stare.hpp" />
+    <ClInclude Include="Statistics.hpp" />
+    <ClInclude Include="Stocks.hpp" />
+    <ClInclude Include="Strategy.hpp" />
+    <ClInclude Include="StructuralEngineering.hpp" />
+    <ClInclude Include="Study.hpp" />
+    <ClInclude Include="Sudoku.hpp" />
+    <ClInclude Include="Summary.hpp" />
+    <ClInclude Include="Surfing.hpp" />
+    <ClInclude Include="Survival.hpp" />
+    <ClInclude Include="Swimming.hpp" />
+    <ClInclude Include="Tennis.hpp" />
+    <ClInclude Include="Tensorflow.hpp" />
+    <ClInclude Include="TexasHoldem.hpp" />
+    <ClInclude Include="TextSpeak.hpp" />
+    <ClInclude Include="Theatre.hpp" />
+    <ClInclude Include="Thought.hpp" />
+    <ClInclude Include="Time.hpp" />
+    <ClInclude Include="Translation.hpp" />
+    <ClInclude Include="Trigonometry.hpp" />
+    <ClInclude Include="TV.hpp" />
+    <ClInclude Include="Typing.hpp" />
+    <ClInclude Include="Utilities.hpp" />
+    <ClInclude Include="Values.hpp" />
+    <ClInclude Include="Variables.hpp" />
+    <ClInclude Include="Vision.hpp" />
+    <ClInclude Include="Visual.hpp" />
+    <ClInclude Include="Volleyball.hpp" />
+    <ClInclude Include="Walking.hpp" />
+    <ClInclude Include="Watching.hpp" />
+    <ClInclude Include="WaterPolo.hpp" />
+    <ClInclude Include="Whisper.hpp" />
+    <ClInclude Include="Who.hpp" />
+    <ClInclude Include="Why.hpp" />
+    <ClInclude Include="WikiMedia.hpp" />
+    <ClInclude Include="Wisdom.hpp" />
+    <ClInclude Include="WoodWorking.hpp" />
+    <ClInclude Include="Working-Memory.hpp" />
+    <ClInclude Include="WorldView.hpp" />
+    <ClInclude Include="WoT.hpp" />
+    <ClInclude Include="Writing.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Abuse.cpp" />
+    <ClCompile Include="Acting.cpp" />
+    <ClCompile Include="Actions.cpp" />
+    <ClCompile Include="AdobeAcrobat.cpp" />
+    <ClCompile Include="AdobeAfterEffects.cpp" />
+    <ClCompile Include="AdobeBridge.cpp" />
+    <ClCompile Include="AdobeDreamWeaver.cpp" />
+    <ClCompile Include="AdobeIllustrator.cpp" />
+    <ClCompile Include="AdobeInDesign.cpp" />
+    <ClCompile Include="AdobeMediaEncoder.cpp" />
+    <ClCompile Include="AdobePhotoshop.cpp" />
+    <ClCompile Include="AdobePremierePro.cpp" />
+    <ClCompile Include="AerospaceEngineering.cpp" />
+    <ClCompile Include="Algebra.cpp" />
+    <ClCompile Include="Analysis.cpp" />
+    <ClCompile Include="Argument.cpp" />
+    <ClCompile Include="ArtificialIntelligence.cpp" />
+    <ClCompile Include="Attraction.cpp" />
+    <ClCompile Include="AugmentedIntelligence.cpp" />
+    <ClCompile Include="AVX-512.cpp" />
+    <ClCompile Include="Awareness.cpp" />
+    <ClCompile Include="Axioms.cpp" />
+    <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="Baseball.cpp" />
+    <ClCompile Include="Bash.cpp" />
+    <ClCompile Include="Basketball.cpp" />
+    <ClCompile Include="Batch.cpp" />
+    <ClCompile Include="Beauty.cpp" />
+    <ClCompile Include="BeingState.cpp" />
+    <ClCompile Include="Bias.cpp" />
+    <ClCompile Include="Bicycle.cpp" />
+    <ClCompile Include="Billiards.cpp" />
+    <ClCompile Include="Biology.cpp" />
+    <ClCompile Include="Botany.cpp" />
+    <ClCompile Include="Business.cpp" />
+    <ClCompile Include="Button.cpp" />
+    <ClCompile Include="Buttons.cpp" />
+    <ClCompile Include="C++.cpp" />
+    <ClCompile Include="Calculus.cpp" />
+    <ClCompile Include="Calendar.cpp" />
+    <ClCompile Include="Camping.cpp" />
+    <ClCompile Include="Chemistry.cpp" />
+    <ClCompile Include="Chess.cpp" />
+    <ClCompile Include="Chores.cpp" />
+    <ClCompile Include="Citations.cpp" />
+    <ClCompile Include="CivilEngineering.cpp" />
+    <ClCompile Include="Cognition.cpp" />
+    <ClCompile Include="College.cpp" />
+    <ClCompile Include="CollegeAlgebra.cpp" />
+    <ClCompile Include="ComputerHardware.cpp" />
+    <ClCompile Include="Computers.cpp" />
+    <ClCompile Include="ComputerScience.cpp" />
+    <ClCompile Include="Cooking.cpp" />
+    <ClCompile Include="Coping.cpp" />
+    <ClCompile Include="Counting.cpp" />
+    <ClCompile Include="Cryptography.cpp" />
+    <ClCompile Include="CUDA.cpp" />
+    <ClCompile Include="Dance.cpp" />
+    <ClCompile Include="Darts.cpp" />
+    <ClCompile Include="Database Functions.cpp" />
+    <ClCompile Include="Dating.cpp" />
+    <ClCompile Include="Defense.cpp" />
+    <ClCompile Include="DifferentialEquations.cpp" />
+    <ClCompile Include="Directions.cpp" />
+    <ClCompile Include="Directives.cpp" />
+    <ClCompile Include="Directories.cpp" />
+    <ClCompile Include="Dislikes.cpp" />
+    <ClCompile Include="Drawing.cpp" />
+    <ClCompile Include="DrinkingGames.cpp" />
+    <ClCompile Include="Driving.cpp" />
+    <ClCompile Include="Eating.cpp" />
+    <ClCompile Include="Ecology.cpp" />
+    <ClCompile Include="Economics.cpp" />
+    <ClCompile Include="EKG.cpp" />
+    <ClCompile Include="ElectricalEngineering.cpp" />
+    <ClCompile Include="Empathy.cpp" />
+    <ClCompile Include="Encryption.cpp" />
+    <ClCompile Include="Engineering.cpp" />
+    <ClCompile Include="Ethics.cpp" />
+    <ClCompile Include="Executive Functions.cpp" />
+    <ClCompile Include="Fallacy.cpp" />
+    <ClCompile Include="Farming.cpp" />
+    <ClCompile Include="Feel.cpp" />
+    <ClCompile Include="FFMpeg.cpp" />
+    <ClCompile Include="Finance.cpp" />
+    <ClCompile Include="Football.cpp" />
+    <ClCompile Include="FTPClient.cpp" />
+    <ClCompile Include="GameTheory.cpp" />
+    <ClCompile Include="Gaming.cpp" />
+    <ClCompile Include="Generate.cpp" />
+    <ClCompile Include="Geography.cpp" />
+    <ClCompile Include="Geology.cpp" />
+    <ClCompile Include="Geometry.cpp" />
+    <ClCompile Include="Goals.cpp" />
+    <ClCompile Include="Golf.cpp" />
+    <ClCompile Include="Google.cpp" />
+    <ClCompile Include="grammar-parser.cpp" />
+    <ClCompile Include="Grammar.cpp" />
+    <ClCompile Include="GraphTheory.cpp" />
+    <ClCompile Include="Hands.cpp" />
+    <ClCompile Include="Heuristics.cpp" />
+    <ClCompile Include="HighSchool.cpp" />
+    <ClCompile Include="Home Database.cpp" />
+    <ClCompile Include="How.cpp" />
+    <ClCompile Include="Humor.cpp" />
+    <ClCompile Include="Hunting.cpp" />
+    <ClCompile Include="Initialization.cpp" />
+    <ClCompile Include="Instinct.cpp" />
+    <ClCompile Include="Internet.cpp" />
+    <ClCompile Include="Intimacy.cpp" />
+    <ClCompile Include="Introspection.cpp" />
+    <ClCompile Include="Intuition.cpp" />
+    <ClCompile Include="Java.cpp" />
+    <ClCompile Include="Keyboard.cpp" />
+    <ClCompile Include="Kinesthetics.cpp" />
+    <ClCompile Include="LabelSemantics.cpp" />
+    <ClCompile Include="Large Language Models.cpp" />
+    <ClCompile Include="Law.cpp" />
+    <ClCompile Include="Leadership.cpp" />
+    <ClCompile Include="Learning.cpp" />
+    <ClCompile Include="Lecture.cpp" />
+    <ClCompile Include="Likes.cpp" />
+    <ClCompile Include="LinearAlgebra.cpp" />
+    <ClCompile Include="Listening.cpp" />
+    <ClCompile Include="Listing.cpp" />
+    <ClCompile Include="LiteratureDevices.cpp" />
+    <ClCompile Include="Logic.cpp" />
+    <ClCompile Include="Long-Term Memory.cpp" />
+    <ClCompile Include="Marketing.cpp" />
+    <ClCompile Include="Mathematics.cpp" />
+    <ClCompile Include="Mating.cpp" />
+    <ClCompile Include="MechanicalEngineering.cpp" />
+    <ClCompile Include="Medicine.cpp" />
+    <ClCompile Include="MicrosoftAccess.cpp" />
+    <ClCompile Include="MicrosoftExcel.cpp" />
+    <ClCompile Include="MicrosoftOneNote.cpp" />
+    <ClCompile Include="MicrosoftOutlook.cpp" />
+    <ClCompile Include="MicrosoftWord.cpp" />
+    <ClCompile Include="Mind.cpp" />
+    <ClCompile Include="MineCraft.cpp" />
+    <ClCompile Include="Modes.cpp" />
+    <ClCompile Include="Mods.cpp" />
+    <ClCompile Include="Money.cpp" />
+    <ClCompile Include="Morality.cpp" />
+    <ClCompile Include="Motorcycle.cpp" />
+    <ClCompile Include="MountainBiking.cpp" />
+    <ClCompile Include="Mouse.cpp" />
+    <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Nautical.cpp" />
+    <ClCompile Include="Navigation.cpp" />
+    <ClCompile Include="Needs.cpp" />
+    <ClCompile Include="Network.cpp" />
+    <ClCompile Include="Networking.cpp" />
+    <ClCompile Include="NetworkingClient.cpp" />
+    <ClCompile Include="NetworkingServer.cpp" />
+    <ClCompile Include="NeuralLink.cpp" />
+    <ClCompile Include="Neuroanatomy.cpp" />
+    <ClCompile Include="NewWords.cpp" />
+    <ClCompile Include="NLP.cpp" />
+    <ClCompile Include="NLU.cpp" />
+    <ClCompile Include="NumberTheory.cpp" />
+    <ClCompile Include="Objections.cpp" />
+    <ClCompile Include="Objective.cpp" />
+    <ClCompile Include="Opera.cpp" />
+    <ClCompile Include="Paintball.cpp" />
+    <ClCompile Include="Parenting.cpp" />
+    <ClCompile Include="Parsers.cpp" />
+    <ClCompile Include="Passion.cpp" />
+    <ClCompile Include="Passwords.cpp" />
+    <ClCompile Include="Pathfinding.cpp" />
+    <ClCompile Include="Pattern Recognition.cpp" />
+    <ClCompile Include="Perception.cpp" />
+    <ClCompile Include="PersonalCare.cpp" />
+    <ClCompile Include="Personality.cpp" />
+    <ClCompile Include="Philosophy.cpp" />
+    <ClCompile Include="Photography.cpp" />
+    <ClCompile Include="Physics.cpp" />
+    <ClCompile Include="Pinball.cpp" />
+    <ClCompile Include="PingPong.cpp" />
+    <ClCompile Include="Planning.cpp" />
+    <ClCompile Include="Play.cpp" />
+    <ClCompile Include="Poker.cpp" />
+    <ClCompile Include="Poetry.cpp" />
+    <ClCompile Include="PoliticalScience.cpp" />
+    <ClCompile Include="Politics.cpp" />
+    <ClCompile Include="Prediction.cpp" />
+    <ClCompile Include="Pride.cpp" />
+    <ClCompile Include="Probability.cpp" />
+    <ClCompile Include="ProbabilityAndStatistics.cpp" />
+    <ClCompile Include="ProblemSolving.cpp" />
+    <ClCompile Include="Programming.cpp" />
+    <ClCompile Include="Property.cpp" />
+    <ClCompile Include="Psychiatry.cpp" />
+    <ClCompile Include="Psychology.cpp" />
+    <ClCompile Include="Python.cpp" />
+    <ClCompile Include="QA.cpp" />
+    <ClCompile Include="Qualitative Reasoning.cpp" />
+    <ClCompile Include="Quantitative Reasoning.cpp" />
+    <ClCompile Include="Questions.cpp" />
+    <ClCompile Include="Quilting.cpp" />
+    <ClCompile Include="Reading.cpp" />
+    <ClCompile Include="Reason.cpp" />
+    <ClCompile Include="Recycle.cpp" />
+    <ClCompile Include="Reference.cpp" />
+    <ClCompile Include="RemindersCool.cpp" />
+    <ClCompile Include="Rhetoric.cpp" />
+    <ClCompile Include="Rule.cpp" />
+    <ClCompile Include="Running.cpp" />
+    <ClCompile Include="Salsemanship.cpp" />
+    <ClCompile Include="Scrapers.cpp" />
+    <ClCompile Include="ScubaDiving.cpp" />
+    <ClCompile Include="Sculpting.cpp" />
+    <ClCompile Include="Semantics.cpp" />
+    <ClCompile Include="ServerFunctions.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Sewing.cpp" />
+    <ClCompile Include="Short-Term Memory.cpp" />
+    <ClCompile Include="SignificantOther.cpp" />
+    <ClCompile Include="Skate.cpp" />
+    <ClCompile Include="Sleep.cpp" />
+    <ClCompile Include="Smart Phone.cpp" />
+    <ClCompile Include="Smell.cpp" />
+    <ClCompile Include="Soccer.cpp" />
+    <ClCompile Include="Social.cpp" />
+    <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Speech.cpp" />
+    <ClCompile Include="Speech Commands.cpp" />
+    <ClCompile Include="SpeechRecognition.cpp" />
+    <ClCompile Include="SpeechSynthesis.cpp" />
+    <ClCompile Include="Sports.cpp" />
+    <ClCompile Include="Stare.cpp" />
+    <ClCompile Include="Statistics.cpp" />
+    <ClCompile Include="Stocks.cpp" />
+    <ClCompile Include="Strategy.cpp" />
+    <ClCompile Include="StructuralEngineering.cpp" />
+    <ClCompile Include="Study.cpp" />
+    <ClCompile Include="Sudoku.cpp" />
+    <ClCompile Include="Summary.cpp" />
+    <ClCompile Include="Surfing.cpp" />
+    <ClCompile Include="Survival.cpp" />
+    <ClCompile Include="Swimming.cpp" />
+    <ClCompile Include="Tennis.cpp" />
+    <ClCompile Include="Tensorflow.cpp" />
+    <ClCompile Include="TexasHoldem.cpp" />
+    <ClCompile Include="TextSpeak.cpp" />
+    <ClCompile Include="Theatre.cpp" />
+    <ClCompile Include="Thought.cpp" />
+    <ClCompile Include="Time.cpp" />
+    <ClCompile Include="Translation.cpp" />
+    <ClCompile Include="Trigonometry.cpp" />
+    <ClCompile Include="TV.cpp" />
+    <ClCompile Include="Typing.cpp" />
+    <ClCompile Include="Utilities.cpp" />
+    <ClCompile Include="Validation.cpp" />
+    <ClCompile Include="Values.cpp" />
+    <ClCompile Include="Vision.cpp" />
+    <ClCompile Include="Visual.cpp" />
+    <ClCompile Include="Volleyball.cpp" />
+    <ClCompile Include="Walking.cpp" />
+    <ClCompile Include="Watching.cpp" />
+    <ClCompile Include="WaterPolo.cpp" />
+    <ClCompile Include="Whisper.cpp" />
+    <ClCompile Include="Who.cpp" />
+    <ClCompile Include="Why.cpp" />
+    <ClCompile Include="WikiMedia.cpp" />
+    <ClCompile Include="Wisdom.cpp" />
+    <ClCompile Include="WoodWorking.cpp" />
+    <ClCompile Include="Working-Memory.cpp" />
+    <ClCompile Include="WorldView.cpp" />
+    <ClCompile Include="WoT.cpp" />
+    <ClCompile Include="Writing.cpp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 13.0.targets" />
+  </ImportGroup>
+</Project>

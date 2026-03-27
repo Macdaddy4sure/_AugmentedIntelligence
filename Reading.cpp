@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -39,13 +39,19 @@
 #include "Long-Term Memory.hpp"
 #include "NLP.hpp"
 #include "NLU.hpp"
+#include "Objections.hpp"
 #include "Large Language Models.hpp"
+#include "LiteratureDevices.hpp"
 #include "Parsers.hpp"
+#include "Fallacy.hpp"
+#include "Bias.hpp"
 #include "Learning.hpp"
 #include "Reference.hpp"
 #include "Variables.hpp"
 #include "Settings.hpp"
+#include "Thought.hpp"
 #include "Utilities.hpp"
+#include "Time.hpp"
 #include "Vision.hpp"
 
 using namespace std;
@@ -60,6 +66,23 @@ struct word
     string glosses1;
     string tags;
 };
+
+void _Reading::ReadingInit()
+{
+    // 0. Why to read? lol
+    // 1. What should I read? What kind of concepts? Critical reading, Fiction reading, Non fiction
+    // 2. Start top left corner of book to the bottom right of each page creating a 2D rectangle
+    // 3. How to read? Scanning? OCR? Neural Networks?
+    //      a. _Reading::TextIdentification(string image);
+    //      b. _Reading::Reading(mat img);
+    //      c. _Reading::Reading2(Mat img);
+    // 4. Part of Speech tagging?
+    // 5. Reading analysis
+    // 6. Reading fallacy checking
+    // 7. Reading bias checking
+
+    // 1. void _Reading::ReadingFallacyChecking()
+}
 
 // The following function will use OpenCV to identify text strings through camera 1, camera 2 or both
 string _Reading::TextIdentification(string image)
@@ -140,36 +163,160 @@ string _Reading::TextIdentification(string image)
 
         tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
         tess.Recognize(0);
-        output = tess.GetUTF8Text();
-        _Reading::MySQLReadingRAW(output, image);
+        output += tess.GetUTF8Text();
+		output += "\n";
+    }
 
-        for (int x = 0; x < 1000; x++)
+    std::cout << "Detected Text: " << output << std::endl;
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
         {
-            if (stm_reading_text[x][0] == "")
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = output;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (!stm_reading_text[x][0].empty() && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
             {
-                lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-                lock_guard<mutex> lock2(mtx_stm_reading_text[x][1]);
-                stm_reading_text[x][0] = output;
-                stm_reading_text[x][1] = current_time;
-            }
-            if (!stm_reading_text[x][0].empty() && x == 999)
-            {
-                for (int y = 0; y < 1000; y++)
+                if (y != 999)
                 {
-                    lock_guard<mutex> lock(mtx_stm_reading_text[y][0]);
-                    lock_guard<mutex> lock2(mtx_stm_reading_text[y][1]);
-                    lock_guard<mutex> lock3(mtx_stm_reading_text[y + 1][0]);
-                    lock_guard<mutex> lock4(mtx_stm_reading_text[y + 1][1]);
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
                     stm_reading_text[y][0] = stm_reading_text[y + 1][0];
                     stm_reading_text[y][1] = stm_reading_text[y + 1][1];
                 }
-                lock_guard<mutex> lock(mtx_stm_reading_text[999][0]);
-                lock_guard<mutex> lock2(mtx_stm_reading_text[999][1]);
-                lock_guard<mutex> lock3(mtx_stm_reading_text[999][0]);
-                lock_guard<mutex> lock4(mtx_stm_reading_text[999][1]);
-                stm_reading_text[999][0] = output;
-                stm_reading_text[999][1] = current_time;
             }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
+            stm_reading_text[999][0] = output;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    return output;
+}
+
+// Overloaded function for input of a Mat object
+string _Reading::TextIdentification(Mat image)
+{
+    TessBaseAPI tess;
+    string output;
+    string current_time;
+    ostringstream oss;
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    //Mat large = imread(image);
+    Mat rgb;
+
+    // downsample and use it for processing
+    pyrDown(image, rgb);
+    pyrDown(rgb, rgb);
+    Mat small;
+    cvtColor(rgb, small, CV_BGR2GRAY);
+
+    // morphological gradient
+    Mat grad;
+    Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
+
+    // binarize
+    Mat bw;
+    threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
+
+    // connect horizontally oriented regions
+    Mat connected;
+    morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
+    morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
+
+    // find contours
+    Mat mask = Mat::zeros(bw.size(), CV_8UC1);
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+
+    // filter contours
+    for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
+    {
+        Rect rect = boundingRect(contours[idx]);
+        Mat maskROI(mask, rect);
+        maskROI = Scalar(0, 0, 0);
+
+        // fill the contour
+        drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
+
+        RotatedRect rrect = minAreaRect(contours[idx]);
+        double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
+
+        Scalar color;
+        int thickness = 1;
+
+        // assume at lwest 25% of the area is filled if it contains text
+        if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
+        {
+            thickness = 2;
+            color = Scalar(0, 255, 0);
+        }
+        else
+        {
+            thickness = 1;
+            color = Scalar(0, 0, 255);
+        }
+
+        Point2f pts[100];
+        rrect.points(pts);
+
+        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
+        tess.Recognize(0);
+        output = tess.GetUTF8Text();
+    }
+
+    std::cout << "Detected Text: " << output << std::endl;
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = output;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (!stm_reading_text[x][0].empty() && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
+            stm_reading_text[999][0] = output;
+            stm_reading_text[999][1] = current_time;
         }
     }
 
@@ -216,8 +363,8 @@ string _Reading::Reading(Mat img)
     {
         if (stm_reading_text[x][0] == "")
         {
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock2(mtx_stm_reading_text[x][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
             stm_reading_text[x][0] = text;
             stm_reading_text[x][1] = current_time;
         }
@@ -227,25 +374,22 @@ string _Reading::Reading(Mat img)
             {
                 if (y != 999)
                 {
-                    lock_guard<mutex> lock(mtx_stm_reading_text[y][0]);
-                    lock_guard<mutex> lock2(mtx_stm_reading_text[y][1]);
-                    lock_guard<mutex> lock3(mtx_stm_reading_text[y + 1][0]);
-                    lock_guard<mutex> lock4(mtx_stm_reading_text[y + 1][1]);
+                //    //lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                //    //lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                //    //lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                //    //lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
                     stm_reading_text[y][0] = stm_reading_text[y + 1][0];
                     stm_reading_text[y][1] = stm_reading_text[y + 1][1];
                 }
             }
-            lock_guard<mutex> lock(mtx_stm_reading_text[999][0]);
-            lock_guard<mutex> lock2(mtx_stm_reading_text[999][1]);
-            lock_guard<mutex> lock3(mtx_stm_reading_text[999][0]);
-            lock_guard<mutex> lock4(mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
             stm_reading_text[999][0] = text;
             stm_reading_text[999][1] = current_time;
         }
     }
-
-    // Clean up
-    ocr.End();
 
     return text;
 }
@@ -287,8 +431,8 @@ string _Reading::Reading(string filelocation)
     {
         if (stm_reading_text[x][0] == "")
         {
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
             stm_reading_text[x][0] = text;
             stm_reading_text[x][1] = current_time;
         }
@@ -298,16 +442,16 @@ string _Reading::Reading(string filelocation)
             {
                 if (y != 999)
                 {
-                    lock_guard<mutex> lock(mtx_stm_reading_text[y][0]);
-                    lock_guard<mutex> lock1(mtx_stm_reading_text[y][1]);
-                    lock_guard<mutex> lock2(mtx_stm_reading_text[y + 1][0]);
-                    lock_guard<mutex> lock3(mtx_stm_reading_text[y + 1][1]);
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][1]);
                     stm_reading_text[y][0] = stm_reading_text[y + 1][0];
                     stm_reading_text[y][1] = stm_reading_text[y + 1][1];
                 }
             }
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
             stm_reading_text[999][0] = text;
             stm_reading_text[999][1] = current_time;
         }
@@ -354,8 +498,8 @@ string _Reading::Reading2(Mat img)
     {
         if (stm_reading_text[x][0] == "")
         {
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
             stm_reading_text[x][0] = output;
             stm_reading_text[x][1] = current_time;
         }
@@ -365,16 +509,16 @@ string _Reading::Reading2(Mat img)
             {
                 if (y != 999)
                 {
-                    lock_guard<mutex> lock(mtx_stm_reading_text[y][0]);
-                    lock_guard<mutex> lock1(mtx_stm_reading_text[y][1]);
-                    lock_guard<mutex> lock2(mtx_stm_reading_text[y + 1][0]);
-                    lock_guard<mutex> lock3(mtx_stm_reading_text[y + 1][1]);
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][1]);
                     stm_reading_text[y][0] = stm_reading_text[y + 1][0];
                     stm_reading_text[y][1] = stm_reading_text[y + 1][1];
                 }
             }
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
             stm_reading_text[999][0] = output;
             stm_reading_text[999][1] = current_time;
         }
@@ -387,57 +531,177 @@ string _Reading::Reading2(Mat img)
 
 string _Reading::OllamaReading(string filelocation)
 {
-    string current_time;
-    ostringstream oss;
+    string start_time;
+    string end_time;
+    stringstream oss;
 
-    auto now = std::chrono::system_clock::now();
-    // Convert to a time_t object, representing system time in seconds since the epoch
-    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
-    // Convert to local time
-    std::tm* now_tm = std::localtime(&now_time_t);
+    auto entry = time(nullptr);
+    auto tm1 = *localtime(&entry);
 
-    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
-    current_time = oss.str();
+    oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
+    start_time = oss.str();
 
-    string model = "image";
-    string prompt = "Read text from the attached image and return only the text:";
-    string image_base64 = _Utilities::base64_encode(filelocation);
-    string json = _LLM::OllamaAPI(model, prompt, image_base64);
-    string response = _Parsers::LLM::LLama3Parse(json);
+    string model = llm_model_image;
+    string prompt = "Read text from the attached image and output only the text: ";
+    //string image_base64 = _Utilities::base64_encode(filelocation);
+    string response = _LLM2::OllamaAPI(model, prompt, filelocation);
+    response = _Parsers::LLM::json_parser(response);
+    _WorkingMemory::wm_llm_history_funct(prompt, response);
+
+    // Calculate the duration of the command being executed
+    oss.clear();
+    auto entry2 = time(nullptr);
+    auto tm2 = *localtime(&entry2);
+
+    oss << put_time(&tm2, "%d-%m-%Y_%H-%M-%S");
+    end_time = oss.str();
+
+    long long llm_duration = _Time::GetDuration(start_time, end_time);
+
+    // Encrypt all information while sitting in the database??? YES
+    // todo: Save llm data to database
+    //string encrypted = _Encryption::aesEncrypt(response);
+
+    _Thought::Thought2SQL(model, prompt, response, "NULL", "NULL", to_string(llm_duration));
 
     _Reading::MySQLReadingRAW(response, filelocation);
 
     for (int x = 0; x < 1000; x++)
     {
-        if (stm_reading_text[x][0] == "")
+        if (wm_reading_text[x][0] == "")
         {
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
-            stm_reading_text[x][0] = response;
-            stm_reading_text[x][1] = current_time;
+            ////lock_guard<mutex> lock(//mtx_wm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_wm_reading_text[x][1]);
+            wm_reading_text[x][0] = response;
+            wm_reading_text[x][1] = start_time;
         }
-        if (stm_reading_text[x][0] != "" && x == 999)
+        if (wm_reading_text[x][0] != "" && x == 999)
         {
             for (int y = 0; y < 1000; y++)
             {
                 if (y != 999)
                 {
-                    lock_guard<mutex> lock(mtx_stm_reading_text[y][0]);
-                    lock_guard<mutex> lock1(mtx_stm_reading_text[y][1]);
-                    lock_guard<mutex> lock2(mtx_stm_reading_text[y + 1][0]);
-                    lock_guard<mutex> lock3(mtx_stm_reading_text[y + 1][1]);
-                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
-                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                    ////lock_guard<mutex> lock(//mtx_wm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_wm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_wm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_wm_reading_text[y + 1][1]);
+                    wm_reading_text[y][0] = wm_reading_text[y + 1][0];
+                    wm_reading_text[y][1] = wm_reading_text[y + 1][1];
                 }
             }
-            lock_guard<mutex> lock(mtx_stm_reading_text[x][0]);
-            lock_guard<mutex> lock1(mtx_stm_reading_text[x][1]);
-            stm_reading_text[999][0] = response;
-            stm_reading_text[999][1] = current_time;
+            ////lock_guard<mutex> lock(//mtx_wm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_wm_reading_text[x][1]);
+            wm_reading_text[999][0] = response;
+            wm_reading_text[999][1] = start_time;
         }
     }
 
     return response;
+}
+
+
+
+// Create a function to check if reading text already exists in STM
+
+// Creae a function to check if the user is looking at text in the current camera feed
+bool _Reading::DetectText()
+{
+	string image_path;
+    int filled = 0;
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_vision_path_camera1[x][0] != "")
+        {
+			image_path = stm_vision_path_camera1[x][0];
+		}
+    }
+
+    // Convert the first image in the vector to a Mat object
+    //Mat img = imdecode(image[0], IMREAD_COLOR);
+
+    //if (img.empty()) {
+    //    cerr << "Error: Could not decode image." << endl;
+    //    return false;
+    //}
+
+    //// Create a TextDetector object
+    //Ptr<text::TextDetector> textDetector = text::createStatisticalParaTextDetector();
+
+    //// Detect text in the image
+    //vector<Rect> boxes;
+    //vector<string> words;
+    //vector<float> confidences;
+
+    //textDetector->detect(img, boxes, words, confidences);
+
+    //// Check if any text was detected
+    //if (!boxes.empty()) {
+    //    return true;
+    //}
+    //else {
+    //    return false;
+    //}
+
+    // Use OpenCV to detect text in the current camera feed
+    // If text is detected, return true
+    // If no text is detected, return false
+	return false;
+}
+
+void _Reading::ReadingMode()
+{
+
+}
+
+// Function to read text from an image after cropping its middle part
+string _Reading::ReadTextFromImageMiddle(const string& fileLocation, int cropWidth, int cropHeight)
+{
+    // Read the image using OpenCV
+    cv::Mat image = cv::imread(fileLocation);
+    string llm = llm_model;
+
+    if (image.empty()) {
+        cout << "Error: Unable to read the image." << endl;
+        return "";
+    }
+
+    // Crop the middle of the image
+    cv::Mat croppedImage = _Reading::CropMiddle(image, cropWidth, cropHeight);
+
+    // Save the cropped image to a temporary file
+    string tempFileLocation = "temp_cropped_image.png";
+    cv::imwrite(tempFileLocation, croppedImage);
+
+    // Read text from the cropped image using _Reading::OllamaReading function
+    string response = _LLM2::OllamaAPI(llm, "Read text from the attached image and output only the text: ", tempFileLocation);
+
+	std::remove(tempFileLocation.c_str()); // Clean up the temporary file
+
+	return response;
+}
+
+// Function to crop the middle of an image
+cv::Mat _Reading::CropMiddle(const cv::Mat& image, int width, int height)
+{
+    // Calculate the coordinates for cropping
+    int x = (image.cols - width) / 2;
+    int y = (image.rows - height) / 2;
+
+    // Crop the image
+    return image(cv::Rect(x, y, width, height));
+}
+
+bool _Reading::ReadingTextExists(string text)
+{
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == text)
+        {
+            return true;
+        }
+    }
+    return false;
 }
 
 void _Reading::MySQLReadingRAW(string reading, string image_location)
@@ -582,6 +846,475 @@ void _Reading::SentenceAnalysis(string raw_recognition, string imagePath)
         }
     }
 }
+
+void _Reading::ReadingFallacyChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> fallacies = _Fallacy::FallacyCheck(text);
+
+            if (fallacies[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(fallacies) / sizeof(fallacies[0]); z++)
+                {
+                    if (fallacies[z] != "")
+                        cout << fallacies[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingBiasChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> bias_terms = _Bias::BiasCheck(text);
+
+            if (bias_terms[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(bias_terms) / sizeof(bias_terms[0]); z++)
+                {
+                    if (bias_terms[z] != "")
+                        cout << bias_terms[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingAxiomChecking()
+{
+
+}
+
+void _Reading::LiteratureDeviceChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> literature = _LiteratureDevices::LiteratureDevicesCheck(text);
+
+            if (literature[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(literature) / sizeof(literature[0]); z++)
+                {
+                    if (literature[z] != "")
+                        cout << literature[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingAbuseChecking()
+{
+
+}
+
+void _Reading::ReadingLawChecking()
+{
+
+}
+
+void _Reading::ReadingCourtObjectionChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> objections = _Objections::ObjectionsClassification(text);
+
+            if (objections[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(objections) / sizeof(objections[0]); z++)
+                {
+                    if (objections[z] != "")
+                        cout << objections[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingDictionaryChecking()
+{
+
+}
+
+void _Reading::ReadingAerospaceEngineering()
+{
+
+}
+
+void _Reading::ReadingAlgebra()
+{
+
+}
+
+void _Reading::ReadingArtificialIntelligence()
+{
+
+}
+
+void _Reading::ReadingBASH()
+{
+
+}
+
+void _Reading::ReadingBATCH()
+{
+
+}
+
+void _Reading::ReadingBeauty()
+{
+
+}
+
+void _Reading::ReadingBiology()
+{
+
+}
+
+void _Reading::ReadingBotany()
+{
+
+}
+
+void _Reading::ReadingCPP()
+{
+
+}
+
+void _Reading::ReadingCalculus()
+{
+
+}
+
+void _Reading::ReadingChemistry()
+{
+
+}
+
+void _Reading::ReadingCivilEngineering()
+{
+
+}
+
+void _Reading::ReadingCollegeAlgebra()
+{
+
+}
+
+void _Reading::ReadingComputerScience()
+{
+
+}
+
+void _Reading::ReadingCryptography()
+{
+
+}
+
+void _Reading::ReadingDance()
+{
+
+}
+
+void _Reading::ReadingDifferentialEquations()
+{
+
+}
+
+void _Reading::ReadingEcology()
+{
+
+}
+
+void _Reading::ReadingEconomics()
+{
+
+}
+
+void _Reading::ReadingElectricalEngineering()
+{
+
+}
+
+void _Reading::ReadingEngineering()
+{
+
+}
+
+void _Reading::ReadingEthics()
+{
+
+}
+
+void _Reading::ReadingGameTheory()
+{
+
+}
+
+void _Reading::ReadingGeography()
+{
+
+}
+
+void _Reading::ReadingGeology()
+{
+
+}
+
+void _Reading::ReadingGeometry()
+{
+
+}
+
+void _Reading::ReadingGraphTheory()
+{
+
+}
+
+void _Reading::ReadingInternet()
+{
+
+}
+
+void _Reading::ReadingJava()
+{
+
+}
+
+void _Reading::ReadingLinearAlgebra()
+{
+
+}
+
+void _Reading::ReadingLogic()
+{
+
+}
+
+void _Reading::ReadingMarketing()
+{
+
+}
+
+void _Reading::ReadingMechanicalEngineering()
+{
+
+}
+
+void _Reading::ReadingMedicine()
+{
+
+}
+
+void _Reading::ReadingNautical()
+{
+
+}
+
+void _Reading::ReadingNetworking()
+{
+
+}
+
+void _Reading::ReadingPoetry()
+{
+
+}
+
+void _Reading::ReadingPhilosophy()
+{
+
+}
+
+void _Reading::ReadingPhysics()
+{
+
+}
+
+void _Reading::ReadingPoliticalScience()
+{
+
+}
+
+void _Reading::ReadingProbabilityAndStatistics()
+{
+
+}
+
+void _Reading::ReadingProgramming()
+{
+
+}
+
+void _Reading::ReadingPsychiatry()
+{
+
+}
+
+void _Reading::ReadingPsychology()
+{
+
+}
+
+void _Reading::ReadingSales()
+{
+
+}
+
+void _Reading::ReadingStocks()
+{
+
+}
+
+void _Reading::ReadingStructuralEngineering()
+{
+
+}
+
+void _Reading::ReadingTheatre()
+{
+
+}
+
+void _Reading::ReadingTrigonometry()
+{
+
+}
+
+void _Reading::ReadingWoodWorking()
+{
+
+}
+
+void _Reading::ReadingWriting()
+{
+
+}
+
+
 
 // This function is to check for an equation from tesseract input
 void _Reading::CheckForEquation(string tesseract_input)

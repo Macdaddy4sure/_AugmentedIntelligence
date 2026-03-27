@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -23,6 +23,8 @@ using namespace std;
 class _WaterPolo
 {
 public:
+    static void WaterPoloInit();
+    static vector<string> WaterPoloClassification(string text);
 
     class Terms
     {
@@ -164,6 +166,5 @@ public:
         static string Wing(string text);
         static string YellowCard(string text);
         static string Zone(string text);
-
     };
 };
