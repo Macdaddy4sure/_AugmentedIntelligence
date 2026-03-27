@@ -1,7 +1,7 @@
 #pragma once
 
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -562,15 +562,30 @@
 #include <cuda_runtime.h>
 #include <helper_functions.h>
 #include <helper_cuda.h>
+#include <openssl/aes.h>
 #include <sstream>
 #include <algorithm>
 #include <common.h>
 #include <common-sdl.h>
 #include <whisper.h>
+#include <condition_variable>
+#include <queue>
 #include <ggml-cpu.h>
 #include <ggml.h>
 #include <ggml-alloc.h>
 #include <ggml-backend.h>
+#include <ggml-common.h>
+#include <ggml-cpp.h>
+#include <ggml-cpu.h>
+#include <lua.hpp>
+//#include <google/cloud/texttospeech/v1beta1/text_to_speech_client.h>
+//#include <grpc/grpc.h>
+//#include <grpc/support/time.h>
+//#include <Python.h>
+//#include <boost/python.hpp>
+//#include <pybind11/pybind11.h>
+//#include <espeak/speak_lib.h>
+//#include <model.h>
 #include <grammar-parser.h>
 //#include <SDL3/SDL.h>
 //#include <SDL3/SDL_audio.h>
@@ -581,11 +596,13 @@
 #include <codecvt>
 #include <locale>
 #include <fvad.h>
+#include <optional>
 #include <regex>
 #include <random>
 #include <functional>
 #include <utility>
 #include <stdexcept>
+#include <cassert>
 #include <exception>
 #include <cstdint>
 #include <cwchar>
@@ -594,31 +611,34 @@
 #include <cstdarg>
 #include <cstring>
 #include <cmath>
+#include <numeric>
 #include <cassert>
 #include <atomic>
 #include <cctype>
 #include <chrono>
-#include <cmath>
 #include <complex>
 #include <cstdlib>
+#include <climits>
 #include <ctime>
 #include <stdio.h>
 #include <fcntl.h>
+//#include <ldap.h>
+//#include <gssapi/gssapi.h>
 #include <string>
+//#include <lua.hpp>
+#include <immintrin.h>
+#include "tensorflow/cc/client/client_session.h"
+#include "tensorflow/cc/saved_model/loader.h"
+#include "tensorflow/cc/saved_model/tag_constants.h"
 #include <errno.h>
-#include <fcntl.h>
 #include <filesystem>
 #include <fstream>
 #include <io.h>
 #include <iomanip>
 #include <mutex>
 #include <mysql.h>
-//#include <Python.h>
 #include <queue>
-#include <random>
-#include <stdio.h>
 #include <stdlib.h>
-#include <stdexcept>
 #include <sys/stat.h>
 #include <sys/types.h>
 #include <thread>
@@ -627,14 +647,7 @@
 #include <windows.h>
 //#include <WinSock2.h>
 #include <assert.h>
-#include <errno.h>
 #include <math.h>
-#include <map>
-#include <regex>
-#include <cmath>
-#include <memory>
-#include <utility>
-#include <wtypes.h>
 #include <tesseract/baseapi.h>
 #include <leptonica/allheaders.h>
 #include <tensorflow/c/c_api.h>
@@ -647,8 +660,6 @@
 #include <opencv2/videoio.hpp>
 #include <opencv2/highgui.hpp>
 #include <opencv2/core.hpp>
-#include <opencv2/imgproc.hpp>
-#include <opencv2/highgui.hpp>
 #include <opencv2/imgproc/imgproc_c.h>
 //#include <torch/script.h>
 //#include <torch/torch.h>
@@ -658,6 +669,7 @@
 #include <portaudio.h>
 #include <nlohmann/json.hpp>
 #include <base64.h>
+//#include <boost/tokenizer.hpp>
 //#include <boost/asio.hpp>
 //#include <boost/asio/ssl.hpp>
 
@@ -690,7 +702,6 @@ extern "C" {
 //#include <boost/bind.hpp>
 //#include <boost/asio.hpp>
 
-
 //#define PY_SSIZE_T_CLEAN
 
 using namespace std;
@@ -699,7 +710,20 @@ class _AI
 {
 public:
     static void InitThreads();
+    static void TypingCommands();
     static void InitDatabases();
     static string getOsName();
 };
 
+struct Object
+{
+    string unique_id;
+    string class_name;
+    double x;
+    double box_width;
+    double y;
+    double box_height;
+    double distance;
+    double* velocity;
+    double* acceleration;
+};

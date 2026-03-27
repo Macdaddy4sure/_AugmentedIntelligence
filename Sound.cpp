@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -25,10 +25,12 @@
 #include "Reference.hpp"
 #include "Speech Commands.hpp"
 #include "Speech Recognition.hpp"
+#include "Parsers.hpp"
 #include "Variables.hpp"
 //#include "Whisper.hpp"
 #include "Settings.hpp"
 #include "Time.hpp"
+#include "Thought.hpp"
 #include "Utilities.hpp"
 
 using namespace std;
@@ -41,10 +43,11 @@ _Sound obj1;
 void _Sound::Sound()
 {
     string command;
-    string filename;
+    string sound_path;
+    string float_string;
     string transcription;
     string sound_detection;
-    string image_hash;
+    string analysis;
     //sound_directory = _Settings::GetSoundDirectory();
     
     int numSamples = 0;
@@ -59,90 +62,59 @@ void _Sound::Sound()
 
         _Sound::get_audio(sound_recording_interval);
 
-        filename.clear();
-        filename = sound_directory.c_str();
-        filename += "/";
-        filename += current_time.c_str();
-        filename += "_output.wav";
-        cout << "Test: " << filename << endl;
+        sound_path.clear();
+        sound_path = sound_directory.c_str();
+        sound_path += "/";
+        sound_path += current_time.c_str();
+        sound_path += "_output.wav";
+        //cout << "Test: " << sound_path << endl;
 
-        // Write to WAV file
-        std::ofstream outFile(filename.c_str(), std::ios::binary);
-        WriteWAVHeader(outFile, sound_sample_rate, sound_bits_per_sample, sound_channels, obj1.pcmf32_cur.size());
-
-        for (float sample : obj1.pcmf32_cur)
-        {
-            int16_t intSample = static_cast<int16_t>(sample * 32767);
-            outFile.write(reinterpret_cast<const char*>(&intSample), sizeof(intSample));
-        }
-        outFile.close();
-
-        image_hash = _Utilities::getHash(filename);
+        string sound_hash = _Utilities::getHash(sound_path);
+        //cout << "sound_hash: " << sound_hash << endl;
 
         //Debug
-        std::cout << "Recording finished." << std::endl;
+        //std::cout << "Recording finished." << std::endl;
 
-        if (speech_recognition_enable)
+        if (sound_memory)
+        {
+            // Write to WAV file
+            string float_string = _Utilities::wav_to_base64(sound_path);
+
+            std::ofstream outFile(sound_path.c_str(), std::ios::binary);
+            _Sound::WriteWAVHeader(outFile, sound_sample_rate, sound_bits_per_sample, sound_channels, obj1.pcmf32_cur.size());
+
+            for (float sample : obj1.pcmf32_cur)
+            {
+                int16_t intSample = static_cast<int16_t>(sample * 32767);
+                outFile.write(reinterpret_cast<const char*>(&intSample), sizeof(intSample));
+            }
+            outFile.close();
+        }
+        if (speech_recognition)
         {
             // Whisper transcription
-            string transcription = _SpeechRecognition::SpeechRecognition2(obj1.pcmf32_cur);
-            transcription = _Utilities::ParseTranscription(transcription);
-
-            if (transcription != "")
-                cout << "Transcription TEST: " << transcription << endl; // Debug
-
+            transcription = _SpeechRecognition::SpeechRecognition2(obj1.pcmf32_cur);
+            transcription = _Parsers::ParseTranscription(transcription);
+			cout << "Transcription: " << transcription << endl;
             obj1.pcmf32_cur.clear();
         }
         if (sound_recognition)
         {
             // Sound recognition that detects small sounds not transription
-            //sound_detection = _Sound::SoundRecognition(filename);
+            //sound_detection = _Sound::SoundRecognition(sound_path);
             sound_detection = "NULL";
         }
-
-        _Sound::MySQL_Sound(filename, current_time, transcription, sound_detection, image_hash);
-
-        if (sound_memory)
+        if (sound_analysis)
         {
-            for (int x = 0; x < 1000; x++)
-            {
-                if (stm_sound_path[x][0] == "")
-                {
-                    lock_guard<mutex> lock(mtx_stm_sound_path[x][0]);
-                    lock_guard<mutex> lock2(mtx_stm_sound_path[x][1]);
-                    lock_guard<mutex> lock3(mtx_stm_sound_path[x][2]);
-                    lock_guard<mutex> lock4(mtx_stm_sound_path[x][3]);
-                    stm_sound_path[x][0] = filename;
-                    stm_sound_path[x][1] = current_time;
-                    stm_sound_path[x][2] = transcription;
-                    stm_sound_path[x][3] = sound_detection;
-                    break;
-                }
-                if (stm_sound_path[x][0] != "" && x == 999)
-                {
-                    for (int y = 0; y < 1000; y++)
-                    {
-                        lock_guard<mutex> lock(mtx_stm_sound_path[y][0]);
-                        lock_guard<mutex> lock2(mtx_stm_sound_path[y][1]);
-                        lock_guard<mutex> lock3(mtx_stm_sound_path[y + 1][0]);
-                        lock_guard<mutex> lock4(mtx_stm_sound_path[y + 1][1]);
-                        stm_sound_path[y][0] = stm_sound_path[y + 1][0];
-                        stm_sound_path[y][1] = stm_sound_path[y + 1][1];
-                        stm_sound_path[y][2] = stm_sound_path[y + 1][2];
-                        stm_sound_path[y][3] = stm_sound_path[y + 1][3];
-                    }
-                    lock_guard<mutex> lock(mtx_stm_sound_path[999][0]);
-                    lock_guard<mutex> lock2(mtx_stm_sound_path[999][1]);
-                    lock_guard<mutex> lock3(mtx_stm_sound_path[999][2]);
-                    lock_guard<mutex> lock4(mtx_stm_sound_path[999][3]);
-                    stm_sound_path[999][0] = filename;
-                    stm_sound_path[999][1] = current_time;
-                    stm_sound_path[999][2] = transcription;
-                    stm_sound_path[999][3] = sound_detection;
-                    break;
-                }
-            }
+
         }
+
+		// Get the sound hash
+
+        _Sound::MySQL_Sound(sound_path, float_string, current_time, transcription, sound_detection, sound_hash, analysis);
+        //cout << "Saved: " << sound_path << endl;
+
+        _ShortTermMemory::stm_sound_path_funct(sound_path, float_string, transcription, sound_hash, current_time, sound_detection, analysis);
 
         obj1.pcmf32_cur.clear();
         current_time.clear();
@@ -150,8 +122,11 @@ void _Sound::Sound()
     }
 }
 
+// Recognitions of tones
+
+
 // The following function will upadte the MySQL database with raw sound information
-void _Sound::MySQL_Sound(string filename, string current_time, string transcription, string sound_recognition, string image_hash)
+void _Sound::MySQL_Sound(string filename, string float_string, string current_time, string transcription, string sound_recognition, string sound_hash, string analysis)
 {
     MYSQL* conn;
     MYSQL_RES* result;
@@ -168,7 +143,7 @@ void _Sound::MySQL_Sound(string filename, string current_time, string transcript
     oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
     current_date = oss.str();
 
-    string table_name = current_date;
+    string table_name = "microphone1";
 
     conn = mysql_init(0);
     conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_sound_database.c_str(), 3306, NULL, 0);
@@ -178,54 +153,28 @@ void _Sound::MySQL_Sound(string filename, string current_time, string transcript
         // Create the table if it does not exist
         sql1 = "CREATE TABLE IF NOT EXISTS `";
         sql1 += table_name.c_str();
-        sql1 += "`(date TEXT, filelocation TEXT, transcription TEXT, sound_recognition TEXT, image_hash TEXT)";
+        sql1 += "`(filelocation TEXT, float_string TEXT, date TEXT, transcription TEXT, sound_recognition TEXT, sound_hash TEXT)";
         mysql_query(conn, sql1.c_str());
 
         sql2 = "INSERT INTO `";
         sql2 += table_name.c_str();
-        sql2 += "`(date, filelocation, transcription, sound_recognition, image_hash) VALUES(\"";
-        sql2 += current_date.c_str();
-        sql2 += "\", \"";
+        sql2 += "`(filelocation, float_string, date, transcription, sound_recognition, sound_hash) VALUES(\"";
         sql2 += filename.c_str();
+        sql2 += "\", \"";
+        sql2 += "NULL";
+        sql2 += "\", \"";
+        sql2 += current_date.c_str();
         sql2 += "\", \"";
         sql2 += transcription.c_str();
         sql2 += "\", \"";
         sql2 += sound_recognition.c_str();
         sql2 += "\", \"";
-        sql2 += image_hash.c_str();
+        sql2 += sound_hash.c_str();
         sql2 += "\");";
+        //cout << "sql2: " << sql2.c_str() << endl;
         mysql_query(conn, sql2.c_str());
     }
 }
-
-//// Define a function to handle audio data from the microphone stream
-//void microphoneStreamHandler(int16_t* audioData, int sampleRate, int numSamples)
-//{
-//    // Perform speech recognition on the streamed audio data
-//    std::string textResult;
-//    float confidence;
-//    whisper::RecognitionOptions options;
-//    whisper::recognize(whisper, audioData, sampleRate, numSamples, options, &textResult, &confidence);
-//
-//    // Print out the result
-//    std::cout << "Text: " << textResult << ", Confidence: " << confidence << std::endl;
-//}
-//
-//// Define a PortAudio callback function to handle microphone stream data
-//static int microphoneCallback(const void* inputBuffer, void* outputBuffer,
-//    unsigned long framesPerBuffer,
-//    const PaStreamCallbackTimeInfo* timeInfo,
-//    PaStreamCallbackFlags statusFlags,
-//    void* userData)
-//{
-//    // Retrieve the audio data from the microphone buffer
-//    int16_t* audioData = (int16_t*)inputBuffer;
-//
-//    // Call the handler function with the retrieved audio data
-//    microphoneStreamHandler(audioData, 16000, framesPerBuffer * 2);
-//
-//    return paContinue;
-//}
 
 // This function will recall sound, recognition, and both memory an x amount of minutes or seconds
 //  1. Get the current time
@@ -258,9 +207,9 @@ void _Sound::RecallSoundMemory(int search_years, int search_months, int search_d
     long long sum_seconds_duration;
     long long sum_seconds_long;
     long long temp_seconds;
-    string* past_data = new string[4];
-    string* current_data = new string[4];
-    string* filenames = new string[1000];
+    vector<string> past_data(4);
+    vector<string> current_data(4);
+    vector<string> filenames(1000);
     //string output_directory = "D:/Temp/";
     
     bool caught = false;
@@ -374,7 +323,7 @@ void _Sound::get_audio(int seconds)
     inputParams.nChannels = 1; // Mono is default, stereo is set for ^^
     inputParams.firstChannel = 0;
 
-    unsigned int bufferFrames = 256;
+    unsigned int bufferFrames = 2048;
 
     // Open the audio device for recording
     abc.openStream(nullptr, &inputParams, RTAUDIO_FLOAT32, sound_sample_rate, &bufferFrames,
@@ -394,7 +343,7 @@ void _Sound::get_audio(int seconds)
 }
 
 // Function to combine WAV Files and return the destination of the file
-string _Sound::CombineWAV(string* wav_files, string sound_directory)
+string _Sound::CombineWAV(vector<string> wav_files, string sound_directory)
 {
     auto t = std::time(nullptr);
     auto tm = *std::localtime(&t);
@@ -412,16 +361,16 @@ string _Sound::CombineWAV(string* wav_files, string sound_directory)
     if (!(infile = sf_open(wav_files[0].c_str(), SFM_READ, &sfinfo)))
     {
         std::cerr << "Could not open input file: " << wav_files[0] << std::endl;
-        return NULL;
+        return "NULL";
     }
 
     // Create the output file with the same format as the input file
     if (!(outfile = sf_open(output_file.c_str(), SFM_WRITE, &sfinfo))) 
     {
-        return NULL;
+        return "NULL";
     }
 
-    std::vector<short> buffer(1024);
+    std::vector<short> buffer(2048);
     sf_count_t num_read;
 
     // Process each input file
@@ -430,7 +379,7 @@ string _Sound::CombineWAV(string* wav_files, string sound_directory)
         infile = sf_open(wav_files[x].c_str(), SFM_READ, &sfinfo);
         if (!infile)
         {
-            return NULL;
+            return "NULL";
         }
 
         // Read samples from input file and write them to output file
@@ -512,7 +461,7 @@ string _Sound::SoundRecognition(string wav_location)
     else
     {
         printf("Error loading model\n");
-        return NULL;
+        return "NULL";
     }
 
     // Run object detection model DEBUG
@@ -553,7 +502,7 @@ string _Sound::SoundRecognition(string wav_location)
     }
 
     // Load the human readable labels into memory
-    std::string* classLabels = _Sound::LoadClassLabels(labelsPath);
+    std::vector<string> classLabels = _Sound::LoadClassLabels(labelsPath);
 
     // Process the output tensors to extract scores, and class IDs
     // Assuming outputTensors[0] contains the scores tensor.
@@ -675,11 +624,11 @@ TF_Tensor* _Sound::ImportWaveformAsTensor(const std::vector<float>& audioSamples
     return tensor;
 }
 
-std::string* _Sound::LoadClassLabels(const std::string& filePath)
+std::vector<string> _Sound::LoadClassLabels(const std::string& filePath)
 {
     std::ifstream file(filePath);
     std::string line;
-    std::string* labels = new std::string[300];
+    std::vector<string> labels(300);
     int number = 0;
 
     while (std::getline(file, line))

@@ -1,7 +1,5 @@
-#pragma once
-
 /*
-    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
+    Copyright(C) 2026 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -17,20 +15,3 @@
 */
 
 #include "AugmentedIntelligence.hpp"
-
-using namespace std;
-
-class _Baseball
-{
-public:
-    static void Baseball();
-    static void Softball();
-    static void SlowPitchSoftball();
-    //static void throwBall(int hand, HandMovement& handPosition);
-
-    class Terms
-    {
-    public:
-
-    };
-};
