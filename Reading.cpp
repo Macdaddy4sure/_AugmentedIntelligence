@@ -1,5 +1,5 @@
 /*
-    Copyright(C) 2023 Tyler Crockett | Macdaddy4sure.com
+    Copyright(C) 2025 Tyler Crockett | Macdaddy4sure.ai
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,7 +15,7 @@
 */
 
 /*
-   Copyright Tesseract-OCR 2022
+   Copyright Tesseract-OCR 2024
    
    https://github.com/tesseract-ocr/tesseract/blob/master/LICENSE
 
@@ -32,23 +32,31 @@
    limitations under the License.
 */
 
-#include "AugmentedIntelligence.h"
-#include "Reading.h"
-#include "Working-Memory.h"
-#include "Short-Term Memory.h"
-#include "Long-Term Memory.h"
-#include "NLP.h"
-#include "NLU.h"
-#include "Learning.h"
-#include "Reference.h"
-#include "Variables.h"
-#include "Settings.h"
-#include "Utilities.h"
-#include "Vision.h"
+#include "AugmentedIntelligence.hpp"
+#include "Reading.hpp"
+#include "Working-Memory.hpp"
+#include "Short-Term Memory.hpp"
+#include "Long-Term Memory.hpp"
+#include "NLP.hpp"
+#include "NLU.hpp"
+#include "Objections.hpp"
+#include "Large Language Models.hpp"
+#include "LiteratureDevices.hpp"
+#include "Parsers.hpp"
+#include "Fallacy.hpp"
+#include "Bias.hpp"
+#include "Learning.hpp"
+#include "Reference.hpp"
+#include "Variables.hpp"
+#include "Settings.hpp"
+#include "Thought.hpp"
+#include "Utilities.hpp"
+#include "Time.hpp"
+#include "Vision.hpp"
 
 using namespace std;
-//using namespace tesseract;
-//using namespace cv;
+using namespace tesseract;
+using namespace cv;
 
 struct word
 {
@@ -59,86 +67,260 @@ struct word
     string tags;
 };
 
-// The following function will use OpenCV to identify text strings through camera 1, camera 2 or both
-void _Reading::TextIdentification(string image)
+void _Reading::ReadingInit()
 {
-    //TessBaseAPI tess;
-    //string output;
+    // 0. Why to read? lol
+    // 1. What should I read? What kind of concepts? Critical reading, Fiction reading, Non fiction
+    // 2. Start top left corner of book to the bottom right of each page creating a 2D rectangle
+    // 3. How to read? Scanning? OCR? Neural Networks?
+    //      a. _Reading::TextIdentification(string image);
+    //      b. _Reading::Reading(mat img);
+    //      c. _Reading::Reading2(Mat img);
+    // 4. Part of Speech tagging?
+    // 5. Reading analysis
+    // 6. Reading fallacy checking
+    // 7. Reading bias checking
+
+    // 1. void _Reading::ReadingFallacyChecking()
+}
+
+// The following function will use OpenCV to identify text strings through camera 1, camera 2 or both
+string _Reading::TextIdentification(string image)
+{
+    TessBaseAPI tess;
+    string output;
+    string current_time;
+    ostringstream oss;
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    Mat large = imread(image);
+    Mat rgb;
+
+    // downsample and use it for processing
+    pyrDown(large, rgb);
+    pyrDown(rgb, rgb);
+    Mat small;
+    cvtColor(rgb, small, CV_BGR2GRAY);
+
+    // morphological gradient
+    Mat grad;
+    Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
+
+    // binarize
+    Mat bw;
+    threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
+
+    // connect horizontally oriented regions
+    Mat connected;
+    morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
+    morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
+
+    // find contours
+    Mat mask = Mat::zeros(bw.size(), CV_8UC1);
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+
+    // filter contours
+    for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
+    {
+        Rect rect = boundingRect(contours[idx]);
+        Mat maskROI(mask, rect);
+        maskROI = Scalar(0, 0, 0);
+
+        // fill the contour
+        drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
+
+        RotatedRect rrect = minAreaRect(contours[idx]);
+        double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
+
+        Scalar color;
+        int thickness = 1;
+
+        // assume at lwest 25% of the area is filled if it contains text
+        if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
+        {
+            thickness = 2;
+            color = Scalar(0, 255, 0);
+        }
+        else
+        {
+            thickness = 1;
+            color = Scalar(0, 0, 255);
+        }
+
+        Point2f pts[100];
+        rrect.points(pts);
+
+        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
+        tess.Recognize(0);
+        output += tess.GetUTF8Text();
+		output += "\n";
+    }
+
+    std::cout << "Detected Text: " << output << std::endl;
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = output;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (!stm_reading_text[x][0].empty() && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
+            stm_reading_text[999][0] = output;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    return output;
+}
+
+// Overloaded function for input of a Mat object
+string _Reading::TextIdentification(Mat image)
+{
+    TessBaseAPI tess;
+    string output;
+    string current_time;
+    ostringstream oss;
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
     //Mat large = imread(image);
-    //Mat rgb;
+    Mat rgb;
 
-    //// downsample and use it for processing
-    //pyrDown(large, rgb);
-    //pyrDown(rgb, rgb);
-    //Mat small;
-    //cvtColor(rgb, small, CV_BGR2GRAY);
+    // downsample and use it for processing
+    pyrDown(image, rgb);
+    pyrDown(rgb, rgb);
+    Mat small;
+    cvtColor(rgb, small, CV_BGR2GRAY);
 
-    //// morphological gradient
-    //Mat grad;
-    //Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    //morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
+    // morphological gradient
+    Mat grad;
+    Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
+    morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
 
-    //// binarize
-    //Mat bw;
-    //threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
+    // binarize
+    Mat bw;
+    threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
 
-    //// connect horizontally oriented regions
-    //Mat connected;
-    //morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
-    //morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
+    // connect horizontally oriented regions
+    Mat connected;
+    morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
+    morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
 
-    //// find contours
-    //Mat mask = Mat::zeros(bw.size(), CV_8UC1);
-    //vector<vector<Point> > contours;
-    //vector<Vec4i> hierarchy;
-    //findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
+    // find contours
+    Mat mask = Mat::zeros(bw.size(), CV_8UC1);
+    vector<vector<Point> > contours;
+    vector<Vec4i> hierarchy;
+    findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
 
-    //// filter contours
-    //for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
-    //{
-    //    Rect rect = boundingRect(contours[idx]);
-    //    Mat maskROI(mask, rect);
-    //    maskROI = Scalar(0, 0, 0);
+    // filter contours
+    for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
+    {
+        Rect rect = boundingRect(contours[idx]);
+        Mat maskROI(mask, rect);
+        maskROI = Scalar(0, 0, 0);
 
-    //    // fill the contour
-    //    drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
+        // fill the contour
+        drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
 
-    //    RotatedRect rrect = minAreaRect(contours[idx]);
-    //    double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
+        RotatedRect rrect = minAreaRect(contours[idx]);
+        double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
 
-    //    Scalar color;
-    //    int thickness = 1;
+        Scalar color;
+        int thickness = 1;
 
-    //    // assume at lwest 25% of the area is filled if it contains text
-    //    if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
-    //    {
-    //        thickness = 2;
-    //        color = Scalar(0, 255, 0);
-    //    }
-    //    else
-    //    {
-    //        thickness = 1;
-    //        color = Scalar(0, 0, 255);
-    //    }
+        // assume at lwest 25% of the area is filled if it contains text
+        if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
+        {
+            thickness = 2;
+            color = Scalar(0, 255, 0);
+        }
+        else
+        {
+            thickness = 1;
+            color = Scalar(0, 0, 255);
+        }
 
-    //    Point2f pts[100];
-    //    rrect.points(pts);
+        Point2f pts[100];
+        rrect.points(pts);
 
-    //    for (int i = 0; i < 100; i++)
-    //    {
-    //        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
-    //        tess.Recognize(0);
-    //        output = tess.GetUTF8Text();
+        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
+        tess.Recognize(0);
+        output = tess.GetUTF8Text();
+    }
 
-    //        //stm_reading_text[1000][i][0] = output;
-    //        stm_reading_text[1000][i][1] = pts[i].x;
-    //        stm_reading_text[1000][i][2] = pts[i].y;
-    //        stm_reading_text[1000][i][3] = pts[(i + 1) % 4].x;
-    //        stm_reading_text[1000][i][4] = pts[(i + 1) % 4].y;
+    std::cout << "Detected Text: " << output << std::endl;
 
-    //        // Shift short term memory down
-    //    }
-    //}
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = output;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (!stm_reading_text[x][0].empty() && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
+            stm_reading_text[999][0] = output;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    return output;
 }
 
 // This function will be executed when the current action is for reading
@@ -146,199 +328,435 @@ void _Reading::TextIdentification(string image)
 //      TODO: Get keywords to call this function
 //      Get vision data to call this function
 // Use OpenCV to scan for text
-void _Reading::Reading()
+string _Reading::Reading(Mat img)
 {
-    
+    string current_time;
+    ostringstream oss;
+
+    // Convert image to grayscale
+    cv::Mat gray;
+    cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+
+    // Initialize Tesseract API
+    tesseract::TessBaseAPI ocr;
+    ocr.Init(nullptr, "eng", tesseract::OEM_LSTM_ONLY); // Initialize with English language
+    ocr.SetPageSegMode(tesseract::PSM_AUTO);
+
+    // Set image data to Tesseract
+    ocr.SetImage(gray.data, gray.cols, gray.rows, 1, gray.step);
+
+    // Run OCR
+    std::string text = ocr.GetUTF8Text();
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    std::cout << "Detected Text: " << text << std::endl;
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = text;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (!stm_reading_text[x][0].empty() && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                //    //lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                //    //lock_guard<mutex> lock2(//mtx_stm_reading_text[y][1]);
+                //    //lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][0]);
+                //    //lock_guard<mutex> lock4(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock2(//mtx_stm_reading_text[999][1]);
+            ////lock_guard<mutex> lock3(//mtx_stm_reading_text[999][0]);
+            ////lock_guard<mutex> lock4(//mtx_stm_reading_text[999][1]);
+            stm_reading_text[999][0] = text;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    return text;
 }
 
-// This function will crop the middle of the camera scanning for a period from the current word to the period. The function will check every few seconds
-// Reading ahead into memory?
-void _Utilities::Sentence2Memory()
+string _Reading::Reading(string filelocation)
+{
+    string current_time;
+    ostringstream oss;
+    Mat img = _Utilities::String2Mat(filelocation);
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    // Convert image to grayscale
+    cv::Mat gray;
+    cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+
+    // Initialize Tesseract API
+    tesseract::TessBaseAPI ocr;
+    ocr.Init(nullptr, "eng", tesseract::OEM_LSTM_ONLY); // Initialize with English language
+    ocr.SetPageSegMode(tesseract::PSM_AUTO);
+
+    // Set image data to Tesseract
+    ocr.SetImage(gray.data, gray.cols, gray.rows, 1, gray.step);
+
+    // Run OCR
+    std::string text = ocr.GetUTF8Text();
+    std::cout << "Detected Text: " << text << std::endl;
+
+    _Reading::MySQLReadingRAW(text, filelocation);
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = text;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (stm_reading_text[x][0] != "" && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[999][0] = text;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    // Clean up
+    ocr.End();
+    return text;
+}
+
+string _Reading::Reading2(Mat img)
+{
+    // Convert image to grayscale
+    cv::Mat gray;
+    cv::cvtColor(img, gray, cv::COLOR_BGR2GRAY);
+
+    string current_time;
+    ostringstream oss;
+
+    auto now = std::chrono::system_clock::now();
+    // Convert to a time_t object, representing system time in seconds since the epoch
+    std::time_t now_time_t = std::chrono::system_clock::to_time_t(now);
+    // Convert to local time
+    std::tm* now_tm = std::localtime(&now_time_t);
+
+    oss << std::put_time(now_tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    // Initialize Tesseract API
+    tesseract::TessBaseAPI ocr;
+    ocr.Init(nullptr, "eng", tesseract::OEM_LSTM_ONLY); // Initialize with English language
+    ocr.SetPageSegMode(tesseract::PSM_AUTO);
+
+    // Set image data to Tesseract
+    ocr.SetImage(gray.data, gray.cols, gray.rows, 1, gray.step);
+
+    // Run OCR
+    std::string output = ocr.GetUTF8Text();
+    std::cout << "Detected Text: " << output << std::endl;
+
+    _Reading::MySQLReadingRAW(output, "NULL");
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[x][0] = output;
+            stm_reading_text[x][1] = current_time;
+        }
+        if (stm_reading_text[x][0] != "" && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_stm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_stm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_stm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_stm_reading_text[y + 1][1]);
+                    stm_reading_text[y][0] = stm_reading_text[y + 1][0];
+                    stm_reading_text[y][1] = stm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_stm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_stm_reading_text[x][1]);
+            stm_reading_text[999][0] = output;
+            stm_reading_text[999][1] = current_time;
+        }
+    }
+
+    // Clean up
+    ocr.End();
+    return output;
+}
+
+string _Reading::OllamaReading(string filelocation)
+{
+    string start_time;
+    string end_time;
+    stringstream oss;
+
+    auto entry = time(nullptr);
+    auto tm1 = *localtime(&entry);
+
+    oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
+    start_time = oss.str();
+
+    string model = llm_model_image;
+    string prompt = "Read text from the attached image and output only the text: ";
+    //string image_base64 = _Utilities::base64_encode(filelocation);
+    string response = _LLM2::OllamaAPI(model, prompt, filelocation);
+    response = _Parsers::LLM::json_parser(response);
+    _WorkingMemory::wm_llm_history_funct(prompt, response);
+
+    // Calculate the duration of the command being executed
+    oss.clear();
+    auto entry2 = time(nullptr);
+    auto tm2 = *localtime(&entry2);
+
+    oss << put_time(&tm2, "%d-%m-%Y_%H-%M-%S");
+    end_time = oss.str();
+
+    long long llm_duration = _Time::GetDuration(start_time, end_time);
+
+    // Encrypt all information while sitting in the database??? YES
+    // todo: Save llm data to database
+    //string encrypted = _Encryption::aesEncrypt(response);
+
+    _Thought::Thought2SQL(model, prompt, response, "NULL", "NULL", to_string(llm_duration));
+
+    _Reading::MySQLReadingRAW(response, filelocation);
+
+    for (int x = 0; x < 1000; x++)
+    {
+        if (wm_reading_text[x][0] == "")
+        {
+            ////lock_guard<mutex> lock(//mtx_wm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_wm_reading_text[x][1]);
+            wm_reading_text[x][0] = response;
+            wm_reading_text[x][1] = start_time;
+        }
+        if (wm_reading_text[x][0] != "" && x == 999)
+        {
+            for (int y = 0; y < 1000; y++)
+            {
+                if (y != 999)
+                {
+                    ////lock_guard<mutex> lock(//mtx_wm_reading_text[y][0]);
+                    ////lock_guard<mutex> lock1(//mtx_wm_reading_text[y][1]);
+                    ////lock_guard<mutex> lock2(//mtx_wm_reading_text[y + 1][0]);
+                    ////lock_guard<mutex> lock3(//mtx_wm_reading_text[y + 1][1]);
+                    wm_reading_text[y][0] = wm_reading_text[y + 1][0];
+                    wm_reading_text[y][1] = wm_reading_text[y + 1][1];
+                }
+            }
+            ////lock_guard<mutex> lock(//mtx_wm_reading_text[x][0]);
+            ////lock_guard<mutex> lock1(//mtx_wm_reading_text[x][1]);
+            wm_reading_text[999][0] = response;
+            wm_reading_text[999][1] = start_time;
+        }
+    }
+
+    return response;
+}
+
+
+
+// Create a function to check if reading text already exists in STM
+
+// Creae a function to check if the user is looking at text in the current camera feed
+bool _Reading::DetectText()
+{
+	string image_path;
+    int filled = 0;
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_vision_path_camera1[x][0] != "")
+        {
+			image_path = stm_vision_path_camera1[x][0];
+		}
+    }
+
+    // Convert the first image in the vector to a Mat object
+    //Mat img = imdecode(image[0], IMREAD_COLOR);
+
+    //if (img.empty()) {
+    //    cerr << "Error: Could not decode image." << endl;
+    //    return false;
+    //}
+
+    //// Create a TextDetector object
+    //Ptr<text::TextDetector> textDetector = text::createStatisticalParaTextDetector();
+
+    //// Detect text in the image
+    //vector<Rect> boxes;
+    //vector<string> words;
+    //vector<float> confidences;
+
+    //textDetector->detect(img, boxes, words, confidences);
+
+    //// Check if any text was detected
+    //if (!boxes.empty()) {
+    //    return true;
+    //}
+    //else {
+    //    return false;
+    //}
+
+    // Use OpenCV to detect text in the current camera feed
+    // If text is detected, return true
+    // If no text is detected, return false
+	return false;
+}
+
+void _Reading::ReadingMode()
 {
 
+}
+
+// Function to read text from an image after cropping its middle part
+string _Reading::ReadTextFromImageMiddle(const string& fileLocation, int cropWidth, int cropHeight)
+{
+    // Read the image using OpenCV
+    cv::Mat image = cv::imread(fileLocation);
+    string llm = llm_model;
+
+    if (image.empty()) {
+        cout << "Error: Unable to read the image." << endl;
+        return "";
+    }
+
+    // Crop the middle of the image
+    cv::Mat croppedImage = _Reading::CropMiddle(image, cropWidth, cropHeight);
+
+    // Save the cropped image to a temporary file
+    string tempFileLocation = "temp_cropped_image.png";
+    cv::imwrite(tempFileLocation, croppedImage);
+
+    // Read text from the cropped image using _Reading::OllamaReading function
+    string response = _LLM2::OllamaAPI(llm, "Read text from the attached image and output only the text: ", tempFileLocation);
+
+	std::remove(tempFileLocation.c_str()); // Clean up the temporary file
+
+	return response;
+}
+
+// Function to crop the middle of an image
+cv::Mat _Reading::CropMiddle(const cv::Mat& image, int width, int height)
+{
+    // Calculate the coordinates for cropping
+    int x = (image.cols - width) / 2;
+    int y = (image.rows - height) / 2;
+
+    // Crop the image
+    return image(cv::Rect(x, y, width, height));
+}
+
+bool _Reading::ReadingTextExists(string text)
+{
+    for (int x = 0; x < 1000; x++)
+    {
+        if (stm_reading_text[x][0] == text)
+        {
+            return true;
+        }
+    }
+    return false;
+}
+
+void _Reading::MySQLReadingRAW(string reading, string image_location)
+{
+    MYSQL* conn;
+    string table_name = "ai_reading";
+    string temp_path;
+    string image_hash;
+    string object_detection_image_hash;
+    string current_date;
+    ostringstream oss;
+    string sql1;
+
+    conn = mysql_init(0);
+    conn = mysql_real_connect(conn, mysql_hostname.c_str(), mysql_username.c_str(), mysql_password.c_str(), mysql_vision_database.c_str(), 3306, NULL, 0);
+
+    if (conn)
+    {
+        if (image_location != "NULL")
+            image_hash = _Utilities::getHash(image_location);
+        else
+            image_hash = "NULL";
+
+        auto entry = time(nullptr);
+        auto tm1 = *localtime(&entry);
+
+        oss << put_time(&tm1, "%d-%m-%Y_%H-%M-%S");
+        current_date = oss.str();
+
+        sql1 = "INSERT INTO `";
+        sql1 += table_name;
+        // Classes cannot be saved at the moment, Tensorflow bug
+        sql1 += "`(reading, image_location, image_hash, current_date) VALUES(\"";
+        sql1 += reading.c_str();
+        sql1 += "\", \"";
+        sql1 += image_location.c_str();
+        sql1 += "\", \"";
+        sql1 += image_hash.c_str();
+        sql1 += "\", \"";
+        sql1 += current_date.c_str();
+        sql1 += "\");";
+        //cout << "sq1l: " << sql1 << endl;
+        mysql_query(conn, sql1.c_str());
+    }
 }
 
 void _Reading::TestIdentificationOpenCV()
 {
-    //float confThreshold = parser.get<float>("thr");
-    //float nmsThreshold = parser.get<float>("nms");
-    //int width = parser.get<int>("width");
-    //int height = parser.get<int>("height");
-    //int imreadRGB = parser.get<int>("RGBInput");
-    //String detModelPath = parser.get<String>("detModel");
-    //String recModelPath = parser.get<String>("recModel");
-    //String vocPath = parser.get<String>("vocabularyPath");
-
-    //if (!parser.check())
-    //{
-    //    parser.printErrors();
-    //    return 1;
-    //}
-
-    //// Load networks.
-    //CV_Assert(!detModelPath.empty() && !recModelPath.empty());
-    //TextDetectionModel_EAST detector(detModelPath);
-    //detector.setConfidenceThreshold(confThreshold)
-    //    .setNMSThreshold(nmsThreshold);
-
-    //TextRecognitionModel recognizer(recModelPath);
-
-    //// Load vocabulary
-    //CV_Assert(!vocPath.empty());
-    //std::ifstream vocFile;
-    //vocFile.open(samples::findFile(vocPath));
-    //CV_Assert(vocFile.is_open());
-    //String vocLine;
-    //std::vector<String> vocabulary;
-    //while (std::getline(vocFile, vocLine)) {
-    //    vocabulary.push_back(vocLine);
-    //}
-    //recognizer.setVocabulary(vocabulary);
-    //recognizer.setDecodeType("CTC-greedy");
-
-    //// Parameters for Recognition
-    //double recScale = 1.0 / 127.5;
-    //Scalar recMean = Scalar(127.5, 127.5, 127.5);
-    //Size recInputSize = Size(100, 32);
-    //recognizer.setInputParams(recScale, recInputSize, recMean);
-
-    //// Parameters for Detection
-    //double detScale = 1.0;
-    //Size detInputSize = Size(width, height);
-    //Scalar detMean = Scalar(123.68, 116.78, 103.94);
-    //bool swapRB = true;
-    //detector.setInputParams(detScale, detInputSize, detMean, swapRB);
-
-    //// Open a video file or an image file or a camera stream.
-    //VideoCapture cap;
-    //bool openSuccess = parser.has("input") ? cap.open(parser.get<String>("input")) : cap.open(0);
-    //CV_Assert(openSuccess);
-
-    //static const std::string kWinName = "EAST: An Efficient and Accurate Scene Text Detector";
-
-    //Mat frame;
-    //while (waitKey(1) < 0)
-    //{
-    //    cap >> frame;
-    //    if (frame.empty())
-    //    {
-    //        waitKey();
-    //        break;
-    //    }
-
-    //    std::cout << frame.size << std::endl;
-
-    //    // Detection
-    //    std::vector< std::vector<Point> > detResults;
-    //    detector.detect(frame, detResults);
-
-    //    if (detResults.size() > 0) {
-    //        // Text Recognition
-    //        Mat recInput;
-    //        if (!imreadRGB) {
-    //            cvtColor(frame, recInput, cv::COLOR_BGR2GRAY);
-    //        }
-    //        else {
-    //            recInput = frame;
-    //        }
-    //        std::vector< std::vector<Point> > contours;
-    //        for (uint i = 0; i < detResults.size(); i++)
-    //        {
-    //            const auto& quadrangle = detResults[i];
-    //            CV_CheckEQ(quadrangle.size(), (size_t)4, "");
-
-    //            contours.emplace_back(quadrangle);
-
-    //            std::vector<Point2f> quadrangle_2f;
-    //            for (int j = 0; j < 4; j++)
-    //                quadrangle_2f.emplace_back(quadrangle[j]);
-
-    //            Mat cropped;
-    //            _Utilities::fourPointsTransform(recInput, &quadrangle_2f[0], cropped);
-
-    //            std::string recognitionResult = recognizer.recognize(cropped);
-    //            std::cout << i << ": '" << recognitionResult << "'" << std::endl;
-
-    //            putText(frame, recognitionResult, quadrangle[3], FONT_HERSHEY_SIMPLEX, 1.5, Scalar(0, 0, 255), 2);
-    //        }
-    //        polylines(frame, contours, true, Scalar(0, 255, 0), 2);
-    //    }
-    //    imshow(kWinName, frame);
-    //}
+    
 }
 
 // This funciton will take a screenshot from what the user is looking at and will use tesseract to read what the user is looking at
 void _Reading::ReadingScreenshot(string filepath)
 {
-    //TessBaseAPI tess;
-    //Mat large = imread(filepath);
-    //Mat rgb;
-
-    //// downsample and use it for processing
-    //pyrDown(large, rgb);
-    //pyrDown(rgb, rgb);
-    //Mat small;
-    //cvtColor(rgb, small, CV_BGR2GRAY);
-
-    //// morphological gradient
-    //Mat grad;
-    //Mat morphKernel = getStructuringElement(MORPH_ELLIPSE, Size(3, 3));
-    //morphologyEx(small, grad, MORPH_GRADIENT, morphKernel);
-
-    //// binarize
-    //Mat bw;
-    //threshold(grad, bw, 0.0, 255.0, THRESH_BINARY | THRESH_OTSU);
-
-    //// connect horizontally oriented regions
-    //Mat connected;
-    //morphKernel = getStructuringElement(MORPH_RECT, Size(9, 1));
-    //morphologyEx(bw, connected, MORPH_CLOSE, morphKernel);
-
-    //// find contours
-    //Mat mask = Mat::zeros(bw.size(), CV_8UC1);
-    //vector<vector<Point> > contours;
-    //vector<Vec4i> hierarchy;
-    //findContours(connected, contours, hierarchy, CV_RETR_CCOMP, CV_CHAIN_APPROX_SIMPLE, Point(0, 0));
-
-    //// filter contours
-    //for (int idx = 0; idx >= 0; idx = hierarchy[idx][0])
-    //{
-    //    Rect rect = boundingRect(contours[idx]);
-    //    Mat maskROI(mask, rect);
-    //    maskROI = Scalar(0, 0, 0);
-
-    //    // fill the contour
-    //    drawContours(mask, contours, idx, Scalar(255, 255, 255), CV_FILLED);
-
-    //    RotatedRect rrect = minAreaRect(contours[idx]);
-    //    double r = (double)countNonZero(maskROI) / (rrect.size.width * rrect.size.height);
-
-    //    Scalar color;
-    //    int thickness = 1;
-
-    //    // assume at lwest 25% of the area is filled if it contains text
-    //    if (r > 0.25 && (rrect.size.height > 8 && rrect.size.width > 8))
-    //    {
-    //        thickness = 2;
-    //        color = Scalar(0, 255, 0);
-    //    }
-    //    else
-    //    {
-    //        thickness = 1;
-    //        color = Scalar(0, 0, 255);
-    //    }
-
-    //    Point2f pts[4];
-    //    rrect.points(pts);
-
-    //    for (int i = 0; i < 4; i++)
-    //    {
-    //        line(rgb, Point((int)pts[i].x, (int)pts[i].y), Point((int)pts[(i + 1) % 4].x, (int)pts[(i + 1) % 4].y), color, thickness);
-    //        tess.SetImage((uchar*)rgb.data, rgb.size().width, rgb.size().height, rgb.channels(), rgb.step1());
-    //        tess.Recognize(0);
-    //        string out = tess.GetUTF8Text();
-    //    }
-    //}
+    
 }
 
 // This function will get the current book and the page number and synchronize reading with text from the database
@@ -360,7 +778,7 @@ void _Reading::BookReadingSync(string search)
 //  5. Word designations, nouns, pronouns, verbs, transitive verbs, adjectives, adverbs, prepositions, conjunctions, interjections, direct object, prepositional phrase, articles
 void _Reading::SentenceAnalysis(string raw_recognition, string imagePath)
 {
-    MYSQL* conn;
+    MYSQL* conn = nullptr;
     MYSQL_ROW row;
     MYSQL_RES* res;
     string sql1;
@@ -429,8 +847,483 @@ void _Reading::SentenceAnalysis(string raw_recognition, string imagePath)
     }
 }
 
+void _Reading::ReadingFallacyChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> fallacies = _Fallacy::FallacyCheck(text);
+
+            if (fallacies[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(fallacies) / sizeof(fallacies[0]); z++)
+                {
+                    if (fallacies[z] != "")
+                        cout << fallacies[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingBiasChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> bias_terms = _Bias::BiasCheck(text);
+
+            if (bias_terms[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(bias_terms) / sizeof(bias_terms[0]); z++)
+                {
+                    if (bias_terms[z] != "")
+                        cout << bias_terms[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingAxiomChecking()
+{
+
+}
+
+void _Reading::LiteratureDeviceChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> literature = _LiteratureDevices::LiteratureDevicesCheck(text);
+
+            if (literature[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(literature) / sizeof(literature[0]); z++)
+                {
+                    if (literature[z] != "")
+                        cout << literature[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingAbuseChecking()
+{
+
+}
+
+void _Reading::ReadingLawChecking()
+{
+
+}
+
+void _Reading::ReadingCourtObjectionChecking()
+{
+    string current_time;
+    long long current_time_seconds = _Time::ConvertDateToSeconds(current_time);
+    string retrive_time;
+    long long retrive_time_seconds;
+    string text = "";
+
+    ostringstream oss;
+    auto t = std::time(nullptr);
+    auto tm = *std::localtime(&t);
+    oss << std::put_time(&tm, "%d-%m-%Y_%H-%M-%S");
+    current_time = oss.str();
+
+    for (int x = 999; x >= 0; x--)
+    {
+        if (stm_reading_text[x][0] != "")
+        {
+            retrive_time = stm_reading_text[x][1];
+            retrive_time_seconds = _Time::ConvertDateToSeconds(retrive_time);
+
+            if ((current_time_seconds - retrive_time_seconds) >= reading_seconds_interval)
+            {
+                for (int y = x; y <= 999; y++)
+                {
+                    if (stm_reading_text[y][0] != "")
+                    {
+                        text += stm_reading_text[y][1];
+                    }
+                }
+            }
+
+            vector<string> objections = _Objections::ObjectionsClassification(text);
+
+            if (objections[0] != "")
+            {
+                //cout << "Fallacy Reading: " << transcription << endl;
+
+                for (int z = 0; z <= sizeof(objections) / sizeof(objections[0]); z++)
+                {
+                    if (objections[z] != "")
+                        cout << objections[z] << endl;
+                }
+            }
+        }
+    }
+}
+
+void _Reading::ReadingDictionaryChecking()
+{
+
+}
+
+void _Reading::ReadingAerospaceEngineering()
+{
+
+}
+
+void _Reading::ReadingAlgebra()
+{
+
+}
+
+void _Reading::ReadingArtificialIntelligence()
+{
+
+}
+
+void _Reading::ReadingBASH()
+{
+
+}
+
+void _Reading::ReadingBATCH()
+{
+
+}
+
+void _Reading::ReadingBeauty()
+{
+
+}
+
+void _Reading::ReadingBiology()
+{
+
+}
+
+void _Reading::ReadingBotany()
+{
+
+}
+
+void _Reading::ReadingCPP()
+{
+
+}
+
+void _Reading::ReadingCalculus()
+{
+
+}
+
+void _Reading::ReadingChemistry()
+{
+
+}
+
+void _Reading::ReadingCivilEngineering()
+{
+
+}
+
+void _Reading::ReadingCollegeAlgebra()
+{
+
+}
+
+void _Reading::ReadingComputerScience()
+{
+
+}
+
+void _Reading::ReadingCryptography()
+{
+
+}
+
+void _Reading::ReadingDance()
+{
+
+}
+
+void _Reading::ReadingDifferentialEquations()
+{
+
+}
+
+void _Reading::ReadingEcology()
+{
+
+}
+
+void _Reading::ReadingEconomics()
+{
+
+}
+
+void _Reading::ReadingElectricalEngineering()
+{
+
+}
+
+void _Reading::ReadingEngineering()
+{
+
+}
+
+void _Reading::ReadingEthics()
+{
+
+}
+
+void _Reading::ReadingGameTheory()
+{
+
+}
+
+void _Reading::ReadingGeography()
+{
+
+}
+
+void _Reading::ReadingGeology()
+{
+
+}
+
+void _Reading::ReadingGeometry()
+{
+
+}
+
+void _Reading::ReadingGraphTheory()
+{
+
+}
+
+void _Reading::ReadingInternet()
+{
+
+}
+
+void _Reading::ReadingJava()
+{
+
+}
+
+void _Reading::ReadingLinearAlgebra()
+{
+
+}
+
+void _Reading::ReadingLogic()
+{
+
+}
+
+void _Reading::ReadingMarketing()
+{
+
+}
+
+void _Reading::ReadingMechanicalEngineering()
+{
+
+}
+
+void _Reading::ReadingMedicine()
+{
+
+}
+
+void _Reading::ReadingNautical()
+{
+
+}
+
+void _Reading::ReadingNetworking()
+{
+
+}
+
+void _Reading::ReadingPoetry()
+{
+
+}
+
+void _Reading::ReadingPhilosophy()
+{
+
+}
+
+void _Reading::ReadingPhysics()
+{
+
+}
+
+void _Reading::ReadingPoliticalScience()
+{
+
+}
+
+void _Reading::ReadingProbabilityAndStatistics()
+{
+
+}
+
+void _Reading::ReadingProgramming()
+{
+
+}
+
+void _Reading::ReadingPsychiatry()
+{
+
+}
+
+void _Reading::ReadingPsychology()
+{
+
+}
+
+void _Reading::ReadingSales()
+{
+
+}
+
+void _Reading::ReadingStocks()
+{
+
+}
+
+void _Reading::ReadingStructuralEngineering()
+{
+
+}
+
+void _Reading::ReadingTheatre()
+{
+
+}
+
+void _Reading::ReadingTrigonometry()
+{
+
+}
+
+void _Reading::ReadingWoodWorking()
+{
+
+}
+
+void _Reading::ReadingWriting()
+{
+
+}
+
+
+
 // This function is to check for an equation from tesseract input
 void _Reading::CheckForEquation(string tesseract_input)
+{
+
+}
+
+// Check if the word exists in the user's dictionary
+void _Reading::DictionaryChecking(string word)
 {
 
 }
