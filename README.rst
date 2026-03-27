@@ -105,4 +105,4 @@ For compiling and editing:
 2. Download and install Visual Studio 2022 Community
 3. Naviagate the Installation directory which should be under C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.41.34120
 4. Copy and paste everything in the ../include directory of _AugmentedIntelligence into the ../include directory of Visual Studio.
-5. Open Visual Studio 2022 and the _AugmentedIntelligence.slm file
+5. Open Visual Studio 2022 and the _AugmentedIntelligence.sln file
